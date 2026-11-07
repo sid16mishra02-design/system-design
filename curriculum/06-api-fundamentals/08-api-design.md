@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+One customer has a million orders, and a client asks to list them. Should one response contain everything? If you divide results into pages, how do equal creation times and concurrent inserts affect the next page? What must a continuation marker mean, and how do you stop a user changing it to read another customer’s orders?
+<!-- END INQUIRY -->
+
 ## Make the contract predictable
 
 Start with what clients need to do and the data they exchange. Then choose clear operations, validation rules, response formats, and failure behavior.

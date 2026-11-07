@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A product page repeatedly reads a slow database. You add a fast copy of its price. Later the database says ₹550 while the copy still says ₹500. Which price should checkout trust? How should a missing or outdated copy be refreshed? What happens when hundreds of readers miss together?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Caching
 
@@ -138,38 +144,19 @@ Here are some commonly used technologies for caching:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Cache-aside: hit, miss, and update](../../assets/animations/cache-aside.gif)
-
-</details>
+![Cache-aside: speed, stale copies, and recovery](../../assets/animations/cache-aside.gif)
 
 [Read the numbered steps](../../animations/cache-aside.md) · [View the still sequence](../../assets/animations/cache-aside-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Use it: speed repeated product reads
+A cache stores a reusable faster copy; the database remains authoritative in this example. With cache-aside, the application checks the cache, reads the database on a miss, then fills the cache. A hit is fast but may still be stale.
 
-Price in database: ₹500. Cache: ₹450. A fast cache hit can still be wrong. Cache-aside means the application checks the cache, loads the database on a miss, then fills the cache. The cache does not automatically know when the database changes.
+Choose a key containing every input affecting the answer, including tenant or user when relevant. After a successful write, update or invalidate old entries according to the required freshness policy. A TTL limits entry lifetime under its policy; it does not guarantee every reader observes the latest committed write. Trace concurrent readers and writers instead of assuming invalidation is race-free.
 
-```mermaid
-flowchart LR
-  A["Application"] --> C["Check cache"]
-  C -->|"hit"| H["Return cached value"]
-  C -->|"miss"| D["Application reads database"]
-  D --> F["Fill cache and return"]
-```
+For checkout, confirm the actual payable price rather than trusting a stale product-page copy. Cache product descriptions or expensive repeated queries only when their reuse and freshness requirements justify it. Coalesce duplicate loads or stagger expiry to avoid a database flood after a hot miss.
 
-### Apply and improve
-
-Cache data whose repeated reads justify the extra moving parts. Choose a key that includes every input affecting the result, including user or tenant identity where needed. Set a freshness policy: update or invalidate the old entry after a successful write, and use a TTL to bound some stale copies. A TTL alone does not guarantee immediate correctness.
-
-Measure hit rate, miss latency, cache memory, and database load. A high hit rate on cheap requests may matter less than caching an expensive frequently repeated query. Avoid flooding the database when many callers miss the same key; combine concurrent loads or stagger expiry when appropriate.
-
-Plan a cache outage and verify that authoritative writes remain correct. For checkout, confirm the actual payable price rather than trusting a potentially stale product-page copy.
-
-Self-check: what happens when the database update succeeds but invalidation fails?
+Measure important-key hit rates, cache memory, miss latency, stale results, and database load. Test a cache outage with bounded fallback concurrency: unlimited fallback can move the outage to the database. Caching improves repeated-read performance by accepting extra copies and coordination, not by making correctness automatic.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

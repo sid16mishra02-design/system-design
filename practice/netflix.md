@@ -2,6 +2,12 @@
 
 [← Schedule](../SCHEDULE.md) · [Design worksheet](../templates/DESIGN.md)
 
+## Try solving this first
+
+A viewer on a weak mobile connection and another on a fast TV connection select the same film. A million other viewers may join tonight. How would you prepare, locate, and deliver the bytes each player needs? What changes when bandwidth drops halfway through playback, and which work could have happened before anyone pressed Play?
+
+## Work through the design
+
 1. **Day 1:** Without a solution, define scope, functional requirements, and measurable constraints.
 2. **Day 2:** Estimate requests, storage, and bandwidth. Show units and assumptions. Define APIs and data entities.
 3. **Day 3:** Draw a complete request flow. Justify storage, cache, communication, and partition choices.
@@ -41,12 +47,7 @@ Fail an encoding worker halfway through a rendition. The job should be safely re
 <!-- BEGIN ANIMATION -->
 ## Watch the design in action
 
-<details>
-<summary>Open the looping request-flow animation</summary>
-
-![Design example: prepare video, then serve nearby](../assets/animations/case-netflix.gif)
-
-</details>
+![Video: prepare renditions, then serve media nearby](../assets/animations/case-netflix.gif)
 
 [Read the numbered steps](../animations/case-netflix.md) · [View the still sequence](../assets/animations/case-netflix-steps.png)
 <!-- END ANIMATION -->

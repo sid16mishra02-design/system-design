@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+An order commits, but its replica still shows yesterday's list. Which correctness promise held, and which reader-visible guarantee did not?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # ACID and BASE consistency models
 
@@ -61,30 +67,25 @@ On the other hand, planning around BASE limitations can sometimes be a major dis
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Two buyers, one remaining ticket](../../assets/animations/atomic-stock.gif)
-
-</details>
+![Transactions: two buyers and the final ticket](../../assets/animations/atomic-stock.gif)
 
 [Read the numbered steps](../../animations/atomic-stock.md) · [View the still sequence](../../assets/animations/atomic-stock-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Use it: choose guarantees for a particular operation
+ACID consistency preserves declared transaction invariants; distributed consistency describes what readers observe across copies. An ACID commit can coexist with lagging replicas.
 
-ACID consistency means a transaction preserves declared invariants. Distributed consistency describes what readers observe across copies. These are different uses of “consistency.” A database can support ACID transactions while an asynchronous read replica lags.
+For checkout, enforce stock and payment-related rules. Recommendations may permit briefly stale data. Specify the invariant, acceptable staleness, and failure response before choosing coordination, then measure its latency and availability costs.
 
-For checkout, enforce stock and payment-related rules explicitly. A recommendation list may tolerate briefly stale data. Do not infer either guarantee merely from a SQL or NoSQL label.
+Isolation levels differ: transactions can contend, and weaker levels need not appear serial. Eventual convergence requires working update and conflict-handling mechanisms, not merely a BASE label.
 
-### Apply and improve
+### Separate the questions hiding inside “consistent”
 
-State the invariant, acceptable staleness, and failure behavior. Use stronger coordination where correctness requires it, and measure the latency or availability cost. Eventual convergence requires the system's update and conflict-handling mechanisms to work.
+For a money transfer, you might require that the debit and credit commit together. That is a transaction invariant. For a profile update, you might ask whether a different replica immediately returns the new name. That is a question about visibility across copies. One database can provide atomic local transactions while replicas still lag.
 
-Isolation levels differ; transactions can contend, and weaker levels need not behave like serial execution.
+Avoid assigning one label to the entire product. Define guarantees for each operation. A stale recommendation may be acceptable; a duplicate withdrawal is not made acceptable by calling the architecture eventually consistent. Eventual updates need durable propagation, duplicate handling, and a conflict rule when writers can disagree.
 
-Self-check: can an order commit correctly while a replica still shows yesterday's list?
+Stronger coordination can increase latency or limit progress during failures. Weaker visibility moves some complexity into readers and recovery. **Check:** which invariant must never be violated, and which observation may be temporarily old?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

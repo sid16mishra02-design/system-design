@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+An order is saved, but a crash prevents shipping from hearing about it. What information must survive? Should checkout success mean shipping already finished?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Event-Driven Architecture (EDA)
 
@@ -73,28 +79,19 @@ Here are some widely used technologies for implementing event-driven architectur
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Independent subscribers need their own copy](../../assets/animations/pub-sub.gif)
-
-</details>
+![Pub/sub: one event, independent business reactions](../../assets/animations/pub-sub.gif)
 
 [Read the numbered steps](../../animations/pub-sub.md) · [View the still sequence](../../assets/animations/pub-sub-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### An action can finish before its reactions
+EDA lets consumers react after the initiating action commits. Save the order and an outbox event together; a relay publishes committed events. This closes the save-then-publish crash gap.
 
-The order service records an order; shipping reacts to OrderPlaced later. The customer can see “order accepted, shipping pending” while that work is unfinished.
+Give events identifiers and consumers duplicate-safe processing. Expect delay and reordering. Show shipping as pending until processed. Scale consumers using backlog age and downstream capacity; more workers cannot fix one overloaded database.
 
-### Apply it
+For example, storing OrderPlaced in an outbox row within the order transaction gives a relay something durable to find after a restart. Publication can repeat if the relay crashes after sending but before recording progress. The shipping consumer must therefore recognize repeated event identifiers where it writes its business result, not only in temporary memory.
 
-Coordinate recording the order and publishing its event, for example with a transactional outbox, so a crash does not leave an order with no event. Give events identifiers and consumers safe retry behavior. Expect delay and possible reordering.
-
-Scale consumers using backlog age and downstream capacity. More workers do not help if every worker waits on the same overloaded database.
-
-**Check:** how will the order page describe an unprocessed shipping event?
+An event states something that happened; it does not imply every reaction has completed. Record shipping progress separately and provide a way to retry or investigate failed processing. Queue depth alone is insufficient: observe the age of the oldest work and the useful processing rate. A continually growing delay means buffering is hiding a capacity or dependency problem.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

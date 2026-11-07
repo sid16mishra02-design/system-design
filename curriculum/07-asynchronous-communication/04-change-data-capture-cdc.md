@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+The product database commits a new price, but updating the search index fails. Repeated full scans are expensive, and independently writing both stores creates awkward failure cases. How could search learn about committed changes? After a pipeline restart, what if the same change appears again? How would you detect a destination falling far behind while retained change history keeps growing?
+<!-- END INQUIRY -->
+
 ## Turn database changes into downstream updates
 
 CDC observes changes in a database and makes them available to other systems. A common implementation reads the database's change log and produces insert, update, and delete records.
@@ -37,12 +43,7 @@ Test replay, connector downtime, a large initial snapshot, deletion, schema evol
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![CDC: a committed change reaches a read view](../../assets/animations/cdc.gif)
-
-</details>
+![CDC: capture commits, update views, and replay safely](../../assets/animations/cdc.gif)
 
 [Read the numbered steps](../../animations/cdc.md) · [View the still sequence](../../assets/animations/cdc-steps.png)
 <!-- END ANIMATION -->

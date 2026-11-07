@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Worker A starts a monthly report, pauses for a long time, then resumes. Meanwhile its ownership deadline passed, so worker B took over and saved a newer report. A now tries to overwrite that result. Did deadline expiry physically stop A? What must the protected storage check? Could a conditional write avoid needing this lock at all?
+<!-- END INQUIRY -->
+
 ## Coordinate work across processes carefully
 
 A distributed lock tries to give one participant temporary ownership of work shared across machines. A local language mutex only coordinates within its own process or runtime.
@@ -39,12 +45,7 @@ Pause an owner past expiry, disconnect it, race acquisitions, and resume old wor
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Lease expiry does not stop the old worker](../../assets/animations/fencing-token.gif)
-
-</details>
+![Fencing: make the protected resource reject stale owners](../../assets/animations/fencing-token.gif)
 
 [Read the numbered steps](../../animations/fencing-token.md) · [View the still sequence](../../assets/animations/fencing-token-steps.png)
 <!-- END ANIMATION -->

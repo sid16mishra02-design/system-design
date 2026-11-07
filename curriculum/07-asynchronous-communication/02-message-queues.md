@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A thousand uploads arrive together. Thumbnail generation is slower than upload acceptance. Where should unfinished jobs wait? A worker saves an image and crashes before reporting completion: should the replacement do the work again?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Message Queues
 
@@ -88,40 +94,25 @@ Following are some widely used message queues:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![A work queue can redeliver a job](../../assets/animations/work-queue.gif)
-
-</details>
+![Work queues: absorb bursts and survive worker crashes](../../assets/animations/work-queue.gif)
 
 [Read the numbered steps](../../animations/work-queue.md) · [View the still sequence](../../assets/animations/work-queue-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Smooth an uneven workload
+A work queue buffers jobs for competing consumers, letting uploads return while thumbnails remain pending. A queue absorbs a burst; it cannot fix a sustained arrival rate above processing capacity.
 
-A photo service receives 1,000 uploads in a burst. It puts thumbnail jobs in a queue so a bounded worker pool can process them without keeping upload requests open until every thumbnail finishes.
+Give each job a stable identifier and deterministic output key. A replacement can recognize complete output instead of creating conflicting duplicates. Acknowledge after durable completion, with explicit processing-timeout or visibility-lease behavior. Partial output needs a recovery rule too.
 
-```mermaid
-flowchart LR
-  Q["Thumbnail queue"] --> W["Worker writes thumbnail"]
-  W --> X["Crash before acknowledgement"]
-  X --> R["Job delivered again"]
-  R --> I["Reuse or verify existing output"]
-```
+At-least-once delivery permits repeated execution; one worker per delivery does not imply lifetime exactly-once processing. Increase worker count only while the image store and database have capacity. Bound retries and isolate repeatedly failing jobs. Watch oldest-job age and completion rate, not queue length alone.
 
-### Apply and improve it
+### Trace the acknowledgement gap
 
-Give each job a stable identifier and deterministic output key. Repeated jobs must be safe. Acknowledge after durable completion, with the failure and retry behavior explicitly defined. A timeout or visibility lease should match realistic processing time and support renewal where required.
+A worker receives an image-resizing job, stores the result, then crashes before acknowledging. The queue may offer the job again. A second worker cannot infer from delivery alone whether the first attempt completed its effect.
 
-Increase worker count only while the downstream image store and database have capacity. More consumers can otherwise increase failures. Batch cheap operations when worthwhile, bound retries, and isolate repeatedly failing jobs for investigation instead of cycling them forever.
+Use a stable job identity and an output or operation record that makes repeated execution safe. Decide how long a job can run before becoming eligible for redelivery, and how a live worker signals progress if the system supports it. Repeated failures need a bounded retry policy and an inspectable failure path rather than an infinite hot loop.
 
-Watch oldest-job age and processing rate. A queue absorbs a burst; it cannot make a permanently overloaded system catch up.
-
-At-least-once delivery permits repeats: one worker per delivery does not mean one lifetime execution.
-
-**Check:** if arrival rate stays above completion rate, what happens to waiting time?
+If arrivals exceed sustainable processing, a queue buys time but does not create capacity. Measure oldest-job age and the downstream bottleneck before adding workers. **Check:** what happens to your latency promise after an hour of overload, even if every job remains safely stored?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

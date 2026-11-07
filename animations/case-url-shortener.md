@@ -1,24 +1,37 @@
-# Design example: create and resolve a short URL
+# URL shortener: create, resolve, cache, and disable
 
 [← Animation index](README.md)
 
-This is one illustrative scenario, not a complete implementation or a simulation of all failure modes. The related lesson explains assumptions and tradeoffs.
+**Problem:** Create unique aliases and serve redirect-heavy traffic with explicit freshness and abuse rules.
 
-<details>
-<summary>Open the looping animation</summary>
+**Scenario:** A campaign link becomes viral, then its owner disables it.
 
-![Design example: create and resolve a short URL](../assets/animations/case-url-shortener.gif)
+The full system map stays visible as the highlighted path and component states change. Every stage lasts one second and the sequence repeats automatically. Values are illustrative; playback speed is not system timing.
 
-</details>
+![URL shortener: create, resolve, cache, and disable](../assets/animations/case-url-shortener.gif)
 
 ## Read the same sequence without motion
 
-1. Creation: validate the destination and allocate a short key with a collision policy.
-2. Persist K -> destination under a uniqueness rule before confirming creation.
-3. Resolution: a later request for K checks the fast lookup cache.
-4. On a miss, retrieve the mapping and fill the cache using a freshness policy.
-5. The service returns an HTTP redirect; the client requests the destination.
-6. Later cache hits reduce mapping reads; expiry, deletion, and abuse still need policies.
+1. **Define the write first.** The owner submits a destination to the creation API for validation. A short-link system needs a write contract, not only a fast redirect path.
+   Check ownership and input policy.; A short code is not authorization..
+2. **Propose and reserve a code.** The API gets a candidate and attempts a unique database insertion. The authoritative store must prevent two links from sharing one code.
+   Random generation can collide.; Do not overwrite an existing mapping..
+3. **Recover a collision.** A collision causes a new candidate attempt rather than corruption. Collision handling belongs on the creation path before a link is published.
+   Uniqueness is enforced atomically.; A check-then-write race is unsafe..
+4. **Publish the saved alias.** The successful database write lets the API return the alias to its owner. Return creation success only after the required persistence guarantee is satisfied.
+   The database owns the mapping.; Creation and redirect loads differ..
+5. **First redirect misses.** A visitor reaches the redirect service; the cache miss triggers a database lookup. A cache miss still consumes origin capacity and adds read latency.
+   Read mapping status, not URL alone.; Unknown codes need a defined response..
+6. **Respond without analytics.** The mapping is cached, the visitor is redirected, and analytics work is queued. Delayed analytics can stay off the redirect critical path when the product permits it.
+   Redirect does not await reporting.; Queue durability follows its contract..
+7. **Viral traffic reuses data.** Repeated visitors use the cached mapping instead of repeating every database read. At 20k requests/s and 95% hits, simplified database read load is 1k/s.
+   A hot key can overload a cache node.; Measure misses and tail latency..
+8. **Disable and invalidate.** The owner disables the link and the API invalidates the known cache entry. Server and browser caches need a deliberate policy for disablement freshness.
+   An origin change is not instant purge.; Existing client copies may persist..
+9. **Resolve against current state.** The next miss reads disabled state and returns an unavailable result. Optimize reload bursts without losing the mapping's correctness and abuse rules.
+   Coalesce concurrent popular-key loads.; Test updates and cache outage behavior..
+
+**Design tradeoff:** Caches reduce database reads but complicate editing, disabling, miss bursts, and client-side freshness.
 
 [View all states as still images](../assets/animations/case-url-shortener-steps.png)
 

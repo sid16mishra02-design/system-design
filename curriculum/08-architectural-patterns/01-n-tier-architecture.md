@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A shop's checkout slows while product pages remain responsive. Which responsibility needs extra capacity? What changes if the database runs on another machine?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # N-tier architecture
 
@@ -57,16 +63,12 @@ Below are some disadvantages of N-tier architecture:
 
 ## Make it concrete
 
-### Separate responsibilities and deployment
+Layers separate responsibilities; tiers separate deployed processes or machines. Browser, application server, and database form three tiers, not merely three folders.
 
-A shop has presentation, order rules, and persistence. These are logical layers. Browser → application server → database server is a three-tier deployment. Three code folders in one process are not automatically three network tiers.
+Keep order validation in the application and authoritative records in the database. Scale the measured bottleneck, not every tier equally. Fetch needed order lines in a bounded request instead of adding one network round trip per line. Network boundaries add latency and timeouts; independent deployment is not free.
 
-### Apply it
+Follow one purchase: the browser submits quantities, the application checks business rules, and the database commits authoritative changes. The response returns through those same boundaries. A database timeout can therefore leave the caller uncertain even though the database may have committed; safe retry behavior is still needed.
 
-Keep order validation in the application layer and authoritative data in the database. If page rendering becomes busy, you may scale that tier separately, while database capacity remains a separate constraint.
-
-Network boundaries add latency and failure modes. Avoid fetching each order line through a separate round trip; send a bounded request that retrieves the needed set. Measure which tier is saturated before adding instances.
-
-**Check:** which new call can time out after separating the database?
+If rendering is expensive, adding rendering capacity may help. If every instance waits for one slow database query, more application instances may increase the queue instead. Measure per-tier service time, resource use, and downstream waiting before deciding which tier to scale. Separate deployment when its isolation or scaling benefit justifies the extra operations.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

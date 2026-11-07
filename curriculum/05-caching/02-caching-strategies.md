@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Your product page uses a fast copy of database prices. A reader fetches ₹500, pauses, and later stores it after another request updates the database to ₹550 and removes the old copy. Which value might readers now see? Who should load missing values and update writes? When may a write be acknowledged if persistence happens later?
+<!-- END INQUIRY -->
+
 ## Decide who reads and who updates the copy
 
 A cache holds a faster copy of data whose authoritative version lives elsewhere.
@@ -46,12 +52,7 @@ Track hit rate, load on the original store, response latency, stale-value incide
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Cache-aside: hit, miss, and update](../../assets/animations/cache-aside.gif)
-
-</details>
+![Cache-aside: speed, stale copies, and recovery](../../assets/animations/cache-aside.gif)
 
 [Read the numbered steps](../../animations/cache-aside.md) · [View the still sequence](../../assets/animations/cache-aside-steps.png)
 <!-- END ANIMATION -->

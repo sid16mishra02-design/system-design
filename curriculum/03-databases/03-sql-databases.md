@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A customer's order-history screen becomes slow as the shop grows. What would you inspect before adding servers, and which data relationships must remain valid?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # SQL databases
 
@@ -49,16 +55,16 @@ Here are some commonly used relational databases:
 
 ## Make it concrete
 
-### Use it: orders with explicit relationships
+Customers, orders, and order items fit related tables. Keys identify rows; constraints reject invalid relationships or duplicate identifiers. Transactions group changes that must commit together.
 
-Model customers, orders, and order items as related tables. Keys identify rows; constraints can reject invalid relationships or duplicate identifiers. Transactions can group changes that must succeed together.
+Start with important queries. For a customer's newest orders, inspect a query plan and an index matching the filter and sort. Retrieve bounded results and only required columns. Keep transactions short to reduce contention, and parameterize input values. Relational structure does not make every query efficient.
 
-### Apply and improve
+### Turn the screen into queries
 
-Write the important queries first. For “this customer's newest orders,” consider an index matching the filter and sort, then inspect the query plan. Retrieve only required columns and a bounded number of rows. Keep transactions short to reduce contention, and use parameterized queries for input values.
+A customer's order-history screen needs that customer's latest orders, then the items belonging to those orders. Write those operations first. The data model should make ownership clear, while constraints protect relationships that the database can enforce. An order total and its line items may need to change within one transaction.
 
-Relational structure does not mean every query is automatically efficient.
+Now consider a report scanning every order from last year. It has a different access pattern from the interactive screen. An index designed for one customer's recent orders may not eliminate that scan. Check the plan and actual rows examined rather than assuming “SQL is slow.”
 
-Self-check: which database constraint expresses a rule that application checks alone might race to enforce?
+More indexes speed some reads but make inserts and updates maintain more structures. Start with the queries that matter, and measure before distributing the data across machines. **Check:** which correctness rule belongs in a constraint, and which business rule requires coordinated application work?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

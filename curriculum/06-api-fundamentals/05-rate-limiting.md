@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A search customer should receive at most 100 requests per second, but ten app servers each enforce that allowance locally. What could the customer actually send? How much burst traffic is acceptable, and what should happen when allowance runs out?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Rate Limiting
 
@@ -60,32 +66,17 @@ One way to avoid this problem is to use some sort of distributed locking mechani
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Token bucket: bursts have a limit](../../assets/animations/token-bucket.gif)
-
-</details>
+![Token bucket: protect shared search capacity](../../assets/animations/token-bucket.gif)
 
 [Read the numbered steps](../../animations/token-bucket.md) · [View the still sequence](../../assets/animations/token-bucket-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Choose what you are protecting
+Rate limiting bounds operation frequency to protect capacity or fairness. Ten independent allowances can multiply a supposed global limit. Define the identity key, interval, burst allowance, and whether accounting is per instance or coordinated globally. An IP-only rule can group unrelated users sharing a network.
 
-A public search API allows 100 requests per second per customer. This limits one customer's load. A separate global limit may protect the database when many customers become busy together. An IP-only limit can unfairly group users sharing a network.
+A token bucket spends tokens for requests: bucket capacity controls bursts; refill controls the sustained allowance. Fixed windows are simpler, but traffic near two window boundaries can arrive close together. Coordinate a global rule or deliberately partition its budget.
 
-Suppose ten application instances each allow 100 requests per second locally. A customer reaching all ten might get 1,000 requests per second. A global rule needs coordinated accounting or a deliberately partitioned budget.
-
-### Apply and tune it
-
-Choose a token bucket when controlled bursts are acceptable: capacity controls burst size, and refill controls the sustained allowance. A fixed window is simpler, but permits traffic on both sides of a window boundary to arrive close together.
-
-Return a clear throttling response and a useful retry instruction where appropriate. Clients should back off rather than immediately repeat the request. Monitor rejected requests, downstream saturation, and normal customer behavior before adjusting limits.
-
-Decide what happens when the limiter's shared store is unavailable. Allowing everything preserves access but risks overload; rejecting everything protects capacity but blocks legitimate users.
-
-**Check:** state the key, time interval, burst allowance, and failure policy before naming an algorithm.
+Return a clear throttling response and a useful retry instruction; clients should back off instead of immediately repeating. Measure rejected requests and downstream saturation before tuning. If shared accounting fails, allowing everything preserves access but risks overload; rejecting everything protects capacity but blocks legitimate requests. Choose that failure policy deliberately.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

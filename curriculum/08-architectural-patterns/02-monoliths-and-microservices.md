@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A shop's catalog team cannot release a small search change without coordinating a billing deployment. Catalog traffic also grows faster than checkout. Would splitting services solve both problems? What new failures could one order encounter? Which data should each team own?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Monoliths and Microservices
 
@@ -149,22 +155,14 @@ That's why it's essential to understand in-depth if your business _actually_ nee
 
 ## Make it concrete
 
-### Start with a boundary that solves a problem
+A monolith is one deployable application; microservices introduce independently deployed service boundaries. Clear modules still matter inside either design.
 
-An online shop can begin as one deployable application with catalog, orders, and billing modules. Clear module boundaries let developers reason about responsibilities even though deployment and many calls remain local.
+Measure expensive queries, synchronous work, and contention first. An index, cache, background job, or cleaner module may solve the problem without a service split. Extract a capability when independent scaling, release, or ownership benefits justify its cost. Avoid making every table a service.
 
-Suppose catalog reads become expensive while billing has independent compliance and release needs. Separating one of these capabilities may allow independent deployment or scaling. Splitting every table into a service would instead turn ordinary operations into a network coordination problem.
+For an order crossing billing and inventory, define intermediate states if reservation fails or payment is delayed. Local database transactions do not automatically span services. Assign authoritative data ownership, safe retries, deadlines, and compensation where needed. Services independently changing each other's tables preserve hidden coupling.
 
-### Work through an order
+Compare the intended release or scaling improvement against extra network latency, monitoring, operational burden, and partial failures. Trace context helps locate expensive cross-service calls; it does not repair an unclear ownership boundary.
 
-Inside a monolith, related order and stock changes might share a database transaction. After splitting services, an order may exist while inventory reservation fails or a payment result is delayed. Define intermediate states, retries, ownership, and compensation instead of assuming a cross-service transaction behaves like a local function call.
-
-### Improve the system you have
-
-First measure slow queries, expensive synchronous work, and resource contention. A cache, background job, index, or better module boundary may solve the problem without a service split. If splitting helps, extract a capability with clear data ownership and minimize chatty calls across its boundary.
-
-Give network calls deadlines, propagate trace context, and make retried operations safe. Do not let services independently change another service's tables while claiming independent ownership; that preserves hidden coupling.
-
-**Check:** name the concrete scaling, deployment, or ownership benefit, then list the new partial failures the split introduces.
+A useful extraction boundary should also answer who changes the schema, who handles an outage, and what contract other teams rely on. An independently deployed process with a shared hidden write dependency is not operational independence.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A shop must find orders by customer, update statuses, and reject impossible relationships. Which guarantees should the data manager enforce, and which workload should guide its design?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Databases and DBMS
 

@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+During a sale, checkout responds in 200 ms on average, yet some users wait over a second. An illustrative trace shows 30 ms of network travel, 70 ms of application work, and a 100 ms query. More users arrive each second. Would you buy bandwidth, add servers, change the query, or limit concurrency? Which measurement would tell you whether the change helped the customer's experience?
+<!-- END INQUIRY -->
+
 ## The three questions
 
 | Measure | Question it answers | Common units | Example |
@@ -88,12 +94,7 @@ At 100 megabits/second, dividing by eight gives a theoretical 12.5 megabytes/sec
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Find the slow part of a request](../../assets/animations/request-latency.gif)
-
-</details>
+![Latency: trace the complete request](../../assets/animations/request-latency.gif)
 
 [Read the numbered steps](../../animations/request-latency.md) · [View the still sequence](../../assets/animations/request-latency-steps.png)
 <!-- END ANIMATION -->

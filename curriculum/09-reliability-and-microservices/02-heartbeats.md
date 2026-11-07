@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A worker reports every five seconds, then sends nothing for twenty seconds. A replacement begins the same job, but the original worker later resumes and still believes it owns the work. Was the original worker necessarily dead? What should the monitor infer from silence? How would you prevent both workers from applying the same irreversible business effect?
+<!-- END INQUIRY -->
+
 ## A signal that a participant was recently reachable
 
 A heartbeat is a periodic “I am here” signal. Another component tracks the last signal and suspects trouble if no new signal arrives within a chosen timeout.
@@ -37,12 +43,7 @@ Test a real crash, packet delay, a network partition, a long process pause, and 
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Discovery data can become stale](../../assets/animations/discovery-heartbeat.gif)
-
-</details>
+![Discovery: find instances, detect suspicion, and route safely](../../assets/animations/discovery-heartbeat.gif)
 
 [Read the numbered steps](../../animations/discovery-heartbeat.md) · [View the still sequence](../../assets/animations/discovery-heartbeat-steps.png)
 <!-- END ANIMATION -->

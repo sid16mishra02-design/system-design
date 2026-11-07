@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A cache holds only three products. You insert A, B, and C, read A again, then need room for D. Which item would you remove, and why? Would your answer change if B had been read hundreds of times earlier? Does removing an old item for space also guarantee that retained prices are fresh?
+<!-- END INQUIRY -->
+
 ## What leaves when the cache is full?
 
 **Eviction** removes entries to make room. **Expiration** removes entries after an age limit, often a TTL, or time to live. Neither alone guarantees that a cached value is still correct after the original changes.
@@ -39,12 +45,7 @@ Compare hit rate, memory use, origin requests, miss latency, and the cost of tra
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![LRU and FIFO make different choices](../../assets/animations/cache-eviction.gif)
-
-</details>
+![Cache eviction: replay LRU and FIFO](../../assets/animations/cache-eviction.gif)
 
 [Read the numbered steps](../../animations/cache-eviction.md) · [View the still sequence](../../assets/animations/cache-eviction-steps.png)
 <!-- END ANIMATION -->

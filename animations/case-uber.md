@@ -1,24 +1,37 @@
-# Design example: near a rider does not mean available
+# Ride matching: fresh candidates are not reservations
 
 [← Animation index](README.md)
 
-This is one illustrative scenario, not a complete implementation or a simulation of all failure modes. The related lesson explains assumptions and tradeoffs.
+**Problem:** Find nearby candidates and assign limited drivers without conflicting simultaneous reservations.
 
-<details>
-<summary>Open the looping animation</summary>
+**Scenario:** Two riders select one nearby driver while some location updates are delayed.
 
-![Design example: near a rider does not mean available](../assets/animations/case-uber.gif)
+The full system map stays visible as the highlighted path and component states change. Every stage lasts one second and the sequence repeats automatically. Values are illustrative; playback speed is not system timing.
 
-</details>
+![Ride matching: fresh candidates are not reservations](../assets/animations/case-uber.gif)
 
 ## Read the same sequence without motion
 
-1. The rider requests a trip with a pickup location.
-2. Search intersecting spatial cells and filter by actual distance and freshness.
-3. Check current availability and conditionally claim the driver.
-4. Notify the selected driver and track acceptance or timeout.
-5. Another request must not also claim D. Stale location data is not an assignment guarantee.
-6. Expired offers need an explicit release/retry policy before another assignment.
+1. **Ingest changing locations.** Drivers report observed positions through a location ingestion path. Record observation age; receiving an old report now does not make its position fresh.
+   100k drivers / 5s: 20k updates/s.; Higher update frequency costs more..
+2. **Accept the ride requests.** Two riders request matches through the ride API. A matching result requires more than a nearby-driver lookup.
+   Separate discovery from assignment.; State the allowed location staleness..
+3. **Search beyond one cell.** The matcher considers neighboring spatial regions and filters stale candidates. A closer driver can lie across a cell boundary rather than inside the rider's cell.
+   Compute actual candidate distances.; A fast stale answer can be wrong..
+4. **Race one available driver.** A and B both propose D1, but only one conditional claim can win. The authoritative state transition prevents a shared candidate from becoming two assignments.
+   Cached availability is not authority.; Failed claims must be retried safely..
+5. **Deliver an identified offer.** The winning assignment creates an offer addressed to the driver. Offer delivery and reservation state need explicit identifiers and timeout behavior.
+   A reserved driver is not yet accepted.; Repeated delivery may occur..
+6. **Handle a missing response.** D1 becomes unreachable and the offer reaches its timeout policy. Do not release or reuse state blindly if an acceptance can race the timeout.
+   Use conditional state transitions.; Check current assignment/version..
+7. **Try another eligible driver.** After the allowed transition, the matcher conditionally claims D2 and sends a new offer. A fallback candidate still needs a new authoritative claim.
+   Recheck eligibility and freshness.; Do not reuse expired ownership blindly..
+8. **Accept and confirm the trip.** D2 accepts and the assignment store records the valid transition. Only the current accepted assignment should produce a confirmed rider result.
+   Old offer replies must be rejected.; Receipt and state change can race..
+9. **Tune the busy city.** Measure matching latency, location age, and hot-region load together. Adaptive updates and partitions trade freshness, maintenance work, and boundary coordination.
+   Equal areas can have unequal traffic.; More partitions are not a universal fix..
+
+**Design tradeoff:** Fresher locations increase update load; spatial precision adds lookup cost, and assignment still requires authoritative coordination.
 
 [View all states as still images](../assets/animations/case-uber-steps.png)
 

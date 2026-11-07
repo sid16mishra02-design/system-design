@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+You move shop.example from server A to B. Some users still reach A. What information could they be using, and when should it change?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Domain Name System (DNS)
 
@@ -126,12 +132,7 @@ These are some widely used managed DNS solutions:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![DNS: a name becomes an address](../../assets/animations/dns-lookup.gif)
-
-</details>
+![DNS: lookup, cache, and a server move](../../assets/animations/dns-lookup.gif)
 
 [Read the numbered steps](../../animations/dns-lookup.md) · [View the still sequence](../../assets/animations/dns-lookup-steps.png)
 <!-- END ANIMATION -->

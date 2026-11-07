@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Your browser cannot load the shop. Would you inspect a cable, a port, a certificate, or the database first—and what evidence changes that choice?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # OSI Model
 
@@ -59,7 +65,7 @@ This layer includes the physical equipment involved in the data transfer, such a
 
 ### Use it: locate a failure before changing the design
 
-A browser cannot load your product page. Instead of blaming “the network,” separate the steps: reach the destination IP, establish transport, secure the connection, then send the application request. The OSI model gives names to these different responsibilities; real implementations do not always fit perfectly into seven separate boxes.
+A browser cannot load your product page. Separate the steps: reach the destination IP, establish transport, secure the connection, then send the application request. The OSI model gives names to these different responsibilities; real implementations do not always fit perfectly into seven separate boxes.
 
 ### Apply and improve
 

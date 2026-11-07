@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A customer moves after an order ships. Should every address change? How would you distinguish today's profile from the delivery fact recorded when the order was placed?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Normalization and Denormalization
 
@@ -161,12 +167,7 @@ Below are some disadvantages of denormalization:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![An address update and duplicated data](../../assets/animations/normalization.gif)
-
-</details>
+![Normalize current facts; preserve historical snapshots](../../assets/animations/normalization.gif)
 
 [Read the numbered steps](../../animations/normalization.md) · [View the still sequence](../../assets/animations/normalization-steps.png)
 <!-- END ANIMATION -->

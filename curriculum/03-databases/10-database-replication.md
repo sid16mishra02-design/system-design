@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+You save an address and immediately read its old value elsewhere. Which copy answered? Would another live copy also protect you from accidental deletion?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Database Replication
 
@@ -52,29 +58,25 @@ In contrast, asynchronous replication copies the data to the replica after the d
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Replication is copying, not partitioning](../../assets/animations/replication.gif)
-
-</details>
+![Replication: write, lag, read, and restore](../../assets/animations/replication.gif)
 
 [Read the numbered steps](../../animations/replication.md) · [View the still sequence](../../assets/animations/replication-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-Write an address on the primary, then read a lagging replica: the old address may appear. Replication copies data; sharding divides its ownership. Neither replaces backups.
+Replication copies data; sharding divides ownership. After a primary commits V2, an asynchronous replica may still return V1.
 
-```mermaid
-flowchart LR
-  W["Update address"] --> P["Primary: new"]
-  P -->|"apply later"| R["Replica: temporarily old"]
-  U["Immediate read"] --> R
-```
+Route freshness-sensitive reads through the appropriate authoritative protocol; use replicas where their lag is acceptable. Monitor lag and test failover. Waiting for selected replica acknowledgements increases write latency; it does not make every reader always identical.
 
-**Apply:** send freshness-sensitive reads to an appropriate authoritative path. Use replicas for reads that tolerate their lag; monitor that lag and test failover. Synchronous acknowledgement can wait for selected replicas, increasing write latency; it does not mean every reader always sees identical data.
+An accidental deletion can propagate to every live copy. Keep and test historical backups separately.
 
-Self-check: what if an accidental deletion reaches every replica?
+### Follow one write and two reads
+
+A customer changes an address on the primary and immediately opens the profile page. A read from a lagging replica can show the old address even though the write succeeded. Decide whether that particular user journey needs a read-your-writes rule, an authoritative read, or a visible pending state.
+
+Replicas can distribute read work and support recovery, but the promises depend on the replication and failover protocol. Promoting a stale replica may lose acknowledged updates under some configurations. “There are two copies” does not state which copy can accept writes after a partition.
+
+Measure replication delay and practice recovery with realistic traffic. Keep copies in suitable failure domains, and test backups independently. **Question:** if a valid command accidentally deletes every customer, why would quickly copying that command to all replicas make restoration harder rather than easier?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

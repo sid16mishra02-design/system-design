@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+An order is recorded in one service and charged in another. Then the workflow fails, or the charge response disappears. Can one local database transaction settle everything? When should you retry, wait, or compensate?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Distributed Transactions
 
@@ -96,32 +102,25 @@ There are two common implementation approaches:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![A saga compensates a completed step](../../assets/animations/saga.gif)
-
-</details>
+![Saga: local commits and compensating recovery](../../assets/animations/saga.gif)
 
 [Read the numbered steps](../../animations/saga.md) · [View the still sequence](../../assets/animations/saga-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Use it: coordinate an order and its payment
+A distributed transaction spans multiple databases. Two-phase commit coordinates participants around a commit decision. A saga commits local steps and compensates when a later step fails. Refunding a charge compensates; it cannot erase an email already delivered.
 
-The order service records an order; a separate payment service charges the customer. A local database transaction cannot automatically make both services commit together.
+First list each step, durable outcome, retry rule, and compensation. Record intermediate states such as payment pending. Give repeated commands stable identifiers, and make effects tolerate duplicates. If a charge response is lost, reconcile the provider outcome before creating another charge.
 
-Two-phase commit coordinates participants around a commit decision. A saga commits local steps and uses compensating actions when a later step fails. Refunding a charge compensates for an order failure; it does not erase every external effect, such as a receipt email.
+Keep a business invariant inside one owner or transaction when practical. Cross-service coordination adds waiting and recovery work. Durable workflow state lets recovery distinguish failure from an unknown outcome. Measure stuck workflows and provide reconciliation when automation cannot settle them.
 
-### Apply and improve
+### Find the boundary local rollback cannot cross
 
-Write the steps, retry behavior, and compensation for each partial outcome before choosing a mechanism. Give repeated commands stable identifiers and make processing tolerate duplicates. Record enough durable state to resume after a crash and to distinguish “failed” from “outcome unknown.”
+An order service commits an order; a payment service commits a charge; inventory then says no stock remains. Rolling back the order database does not undo the completed payment. The design needs a way to recover the business workflow across separate commits.
 
-Reduce unnecessary coordination by keeping a business invariant inside one owner or transaction where practical. When services must coordinate, expose a truthful intermediate status, such as payment pending, rather than falsely reporting a completed order.
+A saga can record progress and request compensating actions, such as refunding the charge. Compensation is another real operation: it can be delayed, retried, or fail. A durable workflow record lets recovery continue after the coordinator restarts. Deduplicate retries at each participant where repeated effects would be harmful.
 
-Measure stuck work and provide reconciliation for outcomes automation cannot immediately settle.
-
-Self-check: if the charge succeeded but its response was lost, why is immediately charging again unsafe?
+For work that truly requires a shared atomic decision, examine supported distributed transaction protocols and their coordination costs. For many user-facing workflows, an explicit pending state plus recoverable compensation is a more useful promise than pretending everything is instantaneous. **Check:** what will the customer see while a refund remains unconfirmed?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

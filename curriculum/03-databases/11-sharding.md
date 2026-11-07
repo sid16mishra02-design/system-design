@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A shop outgrows one database. Which customer requests can stay together, how will callers find their owner, and which reports need multiple owners?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Sharding
 
@@ -87,12 +93,7 @@ Here are some reasons why sharding might be the right choice:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Sharding divides ownership of data](../../assets/animations/sharding.gif)
-
-</details>
+![Sharding: route by ownership, then handle growth](../../assets/animations/sharding.gif)
 
 [Read the numbered steps](../../animations/sharding.md) · [View the still sequence](../../assets/animations/sharding-steps.png)
 <!-- END ANIMATION -->

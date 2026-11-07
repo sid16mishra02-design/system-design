@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A shop replaces workers frequently. One needs a different operating-system kernel; another repeatedly runs out of memory. Which isolation boundary matters? What must remain after a worker disappears?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Virtual Machines (VMs) and Containers
 
@@ -60,18 +66,12 @@ Instead of virtualizing the underlying hardware, containers virtualize the opera
 
 ## Make it concrete
 
-### Choose the boundary you need
+VMs can run separate guest kernels; containers normally share their host kernel while isolating processes and resources. Containers can run inside VMs.
 
-Two VMs can run separate guest kernels. Containers normally share the host kernel while isolating processes and resource usage. A smaller image does not make a container a separate guest operating system.
+Package replaceable shop workers consistently, but choose VMs where kernel or stronger isolation requirements call for them. Set CPU and memory budgets from measurements: an unbounded worker can starve neighbors, while too little memory causes restarts. Keep durable job state outside disposable instances and check readiness before routing work.
 
-For a shop with many application workers, containers can make packaging and replacement predictable. A workload requiring a different kernel or a stronger isolation boundary may call for VMs; containers can also run inside VMs.
+Smaller images can shorten distribution; initialization, dependency connections, and warm-up still affect readiness. Measure the full startup path and prove where an interrupted job resumes.
 
-### Apply and improve it
-
-Set CPU and memory budgets based on measured workload. An unbounded worker can starve neighboring work; a memory limit that is too small can cause repeated restarts. Separate durable state from disposable application instances, and verify readiness before sending traffic to a replacement.
-
-Smaller images can shorten distribution, but startup also includes initialization, dependency connections, and warm-up. Measure that full path instead of assuming image size alone predicts readiness.
-
-**Check:** where does an in-progress job resume after its container is replaced?
+For a job-processing service, replacing a container should not erase the only record that an order needs processing. Keep a durable work record and a safe restart rule. A deployment tool starting a process is also not proof that it can serve requests: dependency connections and application warm-up may still be incomplete. Test replacement under load and observe useful readiness, memory pressure, and retry behavior together.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

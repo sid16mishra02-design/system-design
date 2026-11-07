@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Viewers in several countries request the same product image from one distant server. Which work can happen closer to them? If you replace the image, why might some viewers still see its old version? Would the same sharing policy be safe for private invoices?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Content Delivery Network (CDN)
 
@@ -60,30 +66,25 @@ Here are some widely used CDNs:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![CDN: origin miss, then nearby reuse](../../assets/animations/cdn-edge.gif)
-
-</details>
+![CDN: origin content, nearby reuse, and freshness](../../assets/animations/cdn-edge.gif)
 
 [Read the numbered steps](../../animations/cdn-edge.md) · [View the still sequence](../../assets/animations/cdn-edge-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Use it: serve a popular image near viewers
+A CDN keeps reusable content at geographically distributed edge locations. An edge hit avoids another origin transfer; a miss fetches the origin under the selected cache policy.
 
-A CDN can keep copies at locations closer to users. A viewer requests an image; an edge location serves a cached copy or fetches the original when needed. This can reduce origin traffic and long-distance transfer time.
+Start with frequently requested static assets. Define cache keys and cache-control behavior, then use versioned names such as `logo-v2.png` or deliberate invalidation for updates. New origin bytes do not instantly replace every existing edge copy.
 
-### Apply and improve
+Measure hit ratio, origin requests, regional latency, and behavior during an origin outage. A CDN will not automatically fix a slow personalized database query. Keep private invoices out of publicly shared cache entries; signed or authenticated access needs deliberate configuration.
 
-Start with frequently requested static assets. Define cache keys and cache-control behavior deliberately. Versioned names, such as `logo-v2.png`, let new pages request new content without depending entirely on purging an old cached name.
+### Decide which bytes can be shared
 
-Measure cache hit ratio, origin requests, response time, and geography. A CDN may not solve a slow personalized database query. Decide what is safe to share: a private invoice must not become a publicly reusable cache entry. Authentication and signed access require deliberate configuration.
+A shop's product image may be identical for thousands of visitors. Serving a nearby cached copy reduces repeated long-distance transfers and origin work. A private account page has different rules: caching it without a correct key and access policy can expose one person's data to another.
 
-Trace an update: new bytes at the origin do not automatically replace all existing edge copies immediately. Plan expiration, versioning, or invalidation for the required freshness.
+Follow a cold request all the way to the origin, then a later cache hit. Decide how an updated image gets a new identity or invalidates the old copy. A long cache lifetime saves origin traffic but delays changes unless you manage freshness deliberately.
 
-Self-check: what can the CDN safely serve if the origin is temporarily unavailable?
+Measure hit rate, origin load, transfer time, and failed revalidations. A high hit rate is useful only if the returned content is correct for the requester. **Question:** if the origin fails, which cached objects can safely remain available, and for how long?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

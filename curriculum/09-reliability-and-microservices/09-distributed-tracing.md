@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+An order page calls inventory and delivery at the same time. Each call has a recorded duration, and the parent request records time that already includes those calls. A dashboard adds every span and reports more time than the customer waited. Which measurements overlap? Where is the actual critical path? How would you prove the trace follows the same request across all services?
+<!-- END INQUIRY -->
+
 ## Follow one request across several services
 
 A trace connects the work caused by one request. Each measured operation is a **span**, with timing and relationships to other spans. Shared context lets different services connect their spans to the same trace.
@@ -43,12 +49,7 @@ Trace a deliberately slow test request across every expected boundary. Check for
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Find the slow part of a request](../../assets/animations/request-latency.gif)
-
-</details>
+![Latency: trace the complete request](../../assets/animations/request-latency.gif)
 
 [Read the numbered steps](../../animations/request-latency.md) · [View the still sequence](../../assets/animations/request-latency-steps.png)
 <!-- END ANIMATION -->

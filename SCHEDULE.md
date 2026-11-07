@@ -20,11 +20,11 @@ Default: **60–90 minutes per study day**, five study days, one review day, and
 
 ## Daily routine and adjustment rule
 
-Spend about 10 minutes recalling yesterday, 30–45 reading, 15–20 drawing an example, and 5–15 explaining a failure or decision. Use the remaining time for one specific question. A topic may take more than one session.
+Spend about 5 minutes recalling yesterday, 5–10 attempting the opening scenario, 30–40 reading, 15–20 drawing and revising your idea, and 5–15 explaining a failure or decision. A topic may take more than one session. Keep your first attempt so you can see which constraint changed your reasoning.
 
 If you cannot explain the topic at the time limit, mark it in progress and continue it next study day. Move later rows forward; do not double tomorrow’s workload. Use Day 6 to resolve the hardest question, or repeat the week. At 30–45 minutes per day, plan two sessions per listed study day and roughly double the timeline.
 
-Every listed concept opens a complete lesson in this repository. Read its explanation, then work through **Make it concrete** or its built-in example. The external library is optional; use it only to answer a specific remaining question.
+Every listed concept opens a complete lesson in this repository. Begin with **Try solving this first** before scrolling to the explanation. Compare your reasoning with **Make it concrete** or the built-in example, then revisit the opening questions. The external library is optional; use it only to answer a specific remaining question.
 
 ## Week × day plan
 

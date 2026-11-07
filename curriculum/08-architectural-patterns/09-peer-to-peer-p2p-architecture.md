@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A training app distributes one large video file to many learners. Some learners already have different pieces and can upload them; others sit behind restrictive routers. One helpful peer suddenly leaves before sharing its last piece. How would a newcomer find trustworthy content and finish downloading? Which dependencies remain even if peers exchange most bytes directly?
+<!-- END INQUIRY -->
+
 ## Participants can provide as well as consume
 
 In a client-server design, clients ask a service for work or data. In a peer-to-peer design, participants can exchange data or provide services to one another.
@@ -37,12 +43,7 @@ Measure completion time, origin bandwidth saved, failed connections, and behavio
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Peers share verified pieces and may leave](../../assets/animations/p2p-pieces.gif)
-
-</details>
+![P2P: exchange verified pieces and survive departures](../../assets/animations/p2p-pieces.gif)
 
 [Read the numbered steps](../../animations/p2p-pieces.md) · [View the still sequence](../../assets/animations/p2p-pieces-steps.png)
 <!-- END ANIMATION -->

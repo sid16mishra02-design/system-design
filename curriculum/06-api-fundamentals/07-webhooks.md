@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A payment provider tells your shop that a charge succeeded. Your shop records the event, but its acknowledgement disappears, so the provider sends the same event again. Should another shipment begin? How will you recognize the sender and distinguish a retry from a new event? What if a delayed pending event arrives after you already know payment completed?
+<!-- END INQUIRY -->
+
 ## Let another system call you when something happens
 
 A webhook is an event notification delivered to an endpoint you provide, commonly using an HTTP request. Instead of repeatedly asking a provider whether payment finished, your application can receive its payment event.
@@ -44,12 +50,7 @@ Test duplicate, reordered, invalidly signed, delayed, and crash-interrupted even
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![A lost response must not mean two charges](../../assets/animations/idempotency.gif)
-
-</details>
+![Idempotency: retries, durable state, and recovery](../../assets/animations/idempotency.gif)
 
 [Read the numbered steps](../../animations/idempotency.md) · [View the still sequence](../../assets/animations/idempotency-steps.png)
 <!-- END ANIMATION -->

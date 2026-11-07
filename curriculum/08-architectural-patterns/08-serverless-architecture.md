@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Your photo service receives no uploads all night, then 5,000 photos in a minute. Thumbnail jobs sometimes run twice, and the database accepts only 100 connections. What must survive between executions? How would you control the burst without losing work? Which measurements would tell you whether paying for warm capacity is worthwhile?
+<!-- END INQUIRY -->
+
 ## Let a platform manage more of the runtime
 
 Serverless does not mean no servers exist. It means the provider manages much of provisioning and running the execution environment. Functions triggered by requests or events are one common form; managed services also play a role.

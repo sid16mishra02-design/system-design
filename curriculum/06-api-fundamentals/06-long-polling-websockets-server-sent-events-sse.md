@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A scoreboard mainly sends scores to browsers; an editor exchanges changes both ways. Which connection pattern fits each? After a thirty-second disconnect, how will the client discover missed updates rather than silently continue with old state?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Long polling, WebSockets, Server-Sent Events (SSE)
 
@@ -107,32 +113,19 @@ Let's understand how server-sent events work:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Which way do live updates travel?](../../assets/animations/realtime-protocols.gif)
-
-</details>
+![Live updates: compare complete connection lifecycles](../../assets/animations/realtime-protocols.gif)
 
 [Read the numbered steps](../../animations/realtime-protocols.md) · [View the still sequence](../../assets/animations/realtime-protocols-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Match the direction of communication
+SSE streams server-to-client events. WebSockets support a persistent two-way channel. Long polling holds a client request until an update or timeout, then renews it. Choose by direction, frequency, client support, and operations.
 
-A sports scoreboard mainly sends server updates to browsers: SSE can fit. A collaborative editor sends frequent changes in both directions: WebSockets can fit. Long polling keeps a request open until an update or timeout, then the client asks again.
+These transports do not automatically provide durable history. Give updates sequence positions and recover after the last confirmed position, or reload a current snapshot when history is unavailable. Reconnect with backoff to avoid a synchronized retry storm.
 
-These mechanisms carry updates; they do not automatically provide a durable message history. A closed connection can leave a gap.
+A scoreboard can sometimes combine rapid changes into the latest useful state; chat may need to preserve individual messages. Bound per-client buffers so slow clients cannot consume unlimited memory. Set heartbeats and idle behavior appropriate to intervening proxies.
 
-### Apply and improve it
-
-Give updates sequence numbers or event identifiers. After reconnecting, a client can request events after its last confirmed position, or reload a current snapshot when history is unavailable. Reconnect with backoff so an outage does not produce a synchronized rush of new connections.
-
-For a scoreboard, combine rapid score changes into the latest useful state instead of sending every intermediate render instruction. For a chat, preserve the messages themselves. Bound per-client buffers: a slow client must not consume unlimited server memory. Use heartbeats and idle timeouts appropriate to intervening proxies.
-
-Measure active connections, delivery delay, reconnect frequency, and queued bytes; ordinary requests per second does not describe this workload completely.
-
-**Check:** if a client disconnects for thirty seconds, how does it discover what it missed?
+Measure active connections, delivery delay, reconnect rate, and queued bytes. Requests per second alone does not describe this workload.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

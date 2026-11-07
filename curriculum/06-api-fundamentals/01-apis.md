@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A mobile developer needs to create an order without knowing your internal database structure. What information must their request contain, and what must your response guarantee? The service records the order but the response disappears. How should the developer retry without accidentally creating another order? Think about inputs, permissions, errors, and the difference between acceptance and completed work.
+<!-- END INQUIRY -->
+
 ## A contract between two parts of a system
 
 An API, or application programming interface, specifies how one program asks another to do something. Its contract includes accepted inputs, outputs, errors, and relevant behavior.

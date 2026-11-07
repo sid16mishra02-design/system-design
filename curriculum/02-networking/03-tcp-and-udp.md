@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A voice call loses a sound packet; a file download loses some bytes. Should both wait for recovery?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # TCP and UDP
 
@@ -40,26 +46,25 @@ TCP provides ordered delivery of data from user to server (and vice versa), wher
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Lost data: transport choices](../../assets/animations/tcp-udp.gif)
-
-</details>
+![TCP and UDP: what a loss changes](../../assets/animations/tcp-udp.gif)
 
 [Read the numbered steps](../../animations/tcp-udp.md) · [View the still sequence](../../assets/animations/tcp-udp-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Use it: match transport to the interaction
+TCP supplies an ordered byte stream with loss recovery; a missing range can delay later bytes. UDP exposes datagrams without built-in delivery or ordering guarantees; applications can add recovery.
 
-For live speech, a late sound packet may be less useful than a small gap. TCP supplies an ordered byte stream with loss recovery; UDP leaves delivery and ordering to higher layers. UDP applications can still implement reliability.
+Choose using measured loss, delay, and required ordering. Reuse connections where appropriate. For UDP, design congestion handling, message sizing, and loss policy explicitly; it is not automatically faster.
 
-### Apply and improve
+TCP can fail, and successful transport delivery does not prove a payment committed.
 
-Measure loss, delay, and required ordering before choosing. Reuse connections where appropriate rather than repeatedly paying connection setup costs. With UDP, explicitly design congestion handling, loss tolerance, and message sizing; “no retransmission” is not automatically faster for the application.
+### Match the promise to the data
 
-Self-check: TCP can fail; successful delivery still does not prove a payment committed.
+For downloading a document, missing bytes make the result unusable, so reliable ordered delivery is helpful. For a live voice stream, a late audio sample may be less useful than playing the next sample on time. The application still needs to decide how it handles gaps; selecting UDP does not magically solve congestion or guarantee low latency.
+
+In a payment service, TCP can deliver bytes and then the connection can disappear before the response reaches the caller. The caller still cannot infer whether the business operation succeeded. That uncertainty needs application-level operation identifiers and recovery, even though transport is reliable.
+
+Draw both layers separately: delivery of data, and confirmation of the requested business effect. **Question:** after a timeout, what evidence could distinguish “nothing happened” from “the operation succeeded but its response was lost”?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

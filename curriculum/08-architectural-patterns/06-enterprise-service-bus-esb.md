@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Billing emits one address format; legacy shipping expects another. Where should conversion happen? What happens to orders if the converter fails?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Enterprise Service Bus (ESB)
 
@@ -37,12 +43,14 @@ Below are some widely used Enterprise Service Bus (ESB) technologies:
 
 ## Make it concrete
 
-### Integrate unlike systems
+An ESB transforms and routes messages between unlike systems. A broker mainly transports messages, although product features overlap.
 
-Billing uses one message format; legacy shipping uses another. An ESB can transform fields and route messages between them. A broker mainly carries messages, although product features overlap.
+Put billing-to-shipping transformations at explicit integration boundaries. Avoid accumulating changing business rules in one bus. Measure transformation cost and queue delay; bound retries so a failed shipping endpoint cannot monopolize processing. Redundant instances need working state and failover, not just extra machines.
 
-Apply transformations at clear integration boundaries. Keep changing business rules from accumulating in one central bus. Measure transformation cost and queue delay, and bound retries so one failed endpoint cannot monopolize processing. Redundant instances help only when routing state and failover also work.
+Make the mapping explicit: a billing customer code and address might become the recipient identifier and delivery fields required by shipping. Validate missing or incompatible fields rather than silently producing a plausible but wrong shipment. Decide how an integration failure becomes visible to operators and to the originating order.
 
-**Check:** if the bus stops, which business flows still work independently?
+A failed endpoint can cause retries and queue growth. Give retries limits, backoff, and a recovery path for messages that cannot currently be delivered. Watch processing delay, not merely whether the bus process is alive.
+
+Use the bus for required integration rather than centralizing every business decision there. Shared transformation infrastructure can reduce duplicated adapters while becoming a critical dependency for many flows at once.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

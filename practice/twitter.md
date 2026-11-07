@@ -2,6 +2,12 @@
 
 [← Schedule](../SCHEDULE.md) · [Design worksheet](../templates/DESIGN.md)
 
+## Try solving this first
+
+One account has 20 followers; another has 20 million. Both publish a post. Readers expect their home feeds quickly. Would you prepare every follower’s feed when a post is written, or assemble it when someone opens the app? Follow the work and storage costs for each account before choosing.
+
+## Work through the design
+
 1. **Day 1:** Without a solution, define scope, functional requirements, and measurable constraints.
 2. **Day 2:** Estimate requests, storage, and bandwidth. Show units and assumptions. Define APIs and data entities.
 3. **Day 3:** Draw a complete request flow. Justify storage, cache, communication, and partition choices.
@@ -41,12 +47,7 @@ Delete a post after its reference has reached many timelines. Rendering should n
 <!-- BEGIN ANIMATION -->
 ## Watch the design in action
 
-<details>
-<summary>Open the looping request-flow animation</summary>
-
-![Design example: fanout makes feeds fast, at a cost](../assets/animations/case-twitter.gif)
-
-</details>
+![Feeds: publish, fan out, read, and enforce visibility](../assets/animations/case-twitter.gif)
 
 [Read the numbered steps](../animations/case-twitter.md) · [View the still sequence](../assets/animations/case-twitter-steps.png)
 <!-- END ANIMATION -->

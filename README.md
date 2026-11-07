@@ -1,12 +1,12 @@
 # System Design: a structured learning path
 
-A complete, category-based path for understanding system design fundamentals. Read the lessons here, work through concrete examples, and finish with designs you can explain yourself. The sequence combines a full course with a categorized resource collection; you do not need to navigate either original repository.
+A complete, category-based path for understanding system design fundamentals. Start with a real problem, attempt your own solution, then learn the concept and test your reasoning against a worked design. The sequence combines a full course with a categorized resource collection; you do not need to navigate either original repository.
 
 ## Start here
 
 1. Set your study window in the [22-week schedule](SCHEDULE.md). Default: 60–90 minutes, five study days plus a review day and a rest day.
 2. Start at category 01 below and follow the numbered topics. The schedule gives the exact week and day.
-3. Each topic page contains its full explanation. Read it on the page, then work through **Make it concrete** when present. Article and video links are optional extra reading. The applied sections explain where the concept helps, how to improve a design using it, and how to check the result.
+3. Start with **Try solving this first** on each topic page. Spend a few minutes writing or drawing your answer before scrolling to the explanation. Then compare it with **Make it concrete** or the worked example. Ask what problem the concept solves, which assumption makes it useful, and what cost it introduces. External links are optional.
 4. Keep a [daily note](templates/DAILY.md) and update the [progress tracker](PROGRESS.md). Move unfinished work forward when you need more time.
 
 You do not need to finish a topic in one sitting. Move on when you can explain it simply, draw its flow, and describe a failure or tradeoff. Follow this one path; open the extra library to answer a specific question.
@@ -37,11 +37,11 @@ Complete the foundations, produce five independent case-study worksheets, then e
 
 The 57 course and case-study lessons are reproduced directly on their reading pages, with the original text preserved and separate examples or practice guidance. Another 20 lessons fill the topics that were previously only external links. They include plain explanations, worked scenarios, practical uses, optimization choices with their costs, and checks of common misunderstandings.
 
-The original topics retain 100% of their text. Added teaching guidance stays within 30% of each original topic's word count. The 20 new standalone lessons use the specifically approved exception to that addition limit. See the [content audit](CONTENT-AUDIT.md).
+The original topics retain 100% of their text. Scenario-first questions and the separate teaching notes are counted together in the [content audit](CONTENT-AUDIT.md). The owner approved expanding beyond the initial 30% guideline wherever clearer reasoning needs more space. The audit reports actual additions; percentages are disclosure, not a target to fill. The 20 standalone lessons remain independently written explanations.
 
 ## Validated topics and visual explanations
 
-See the [category × topic audit](TOPIC-VALIDATION.md) for each concept's problem, design scenario, application steps, tradeoff, and evidence in the lesson. Confusing sequences have [animated walkthroughs](animations/README.md), with still images and numbered text alternatives.
+See the [category × topic audit](TOPIC-VALIDATION.md) for each concept's problem, design scenario, application steps, tradeoff, and evidence in the lesson. Confusing sequences have [animated walkthroughs](animations/README.md) that are visible by default, loop automatically, and spend one second on each step. The whole architecture remains visible as paths and state change. Still images and numbered explanations support slower study.
 
 ## Applied depth
 

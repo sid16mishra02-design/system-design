@@ -1,22 +1,37 @@
-# PACELC: normal operation also matters
+# PACELC: healthy-path latency and partition policy
 
 [← Animation index](README.md)
 
-This is one illustrative scenario, not a complete implementation or a simulation of all failure modes. The related lesson explains assumptions and tradeoffs.
+**Problem:** Choose normal-operation freshness and coordination costs as well as behavior during a partition.
 
-<details>
-<summary>Open the looping animation</summary>
+**Scenario:** Compare illustrative 40 ms coordinated and 5 ms local acknowledgements.
 
-![PACELC: normal operation also matters](../assets/animations/pacelc.gif)
+The full system map stays visible as the highlighted path and component states change. Every stage lasts one second and the sequence repeats automatically. Values are illustrative; playback speed is not system timing.
 
-</details>
+![PACELC: healthy-path latency and partition policy](../assets/animations/pacelc.gif)
 
 ## Read the same sequence without motion
 
-1. Normal operation: waiting for distant coordination can cost latency.
-2. Coordinated completion can provide the chosen stronger guarantee.
-3. An asynchronous path can respond sooner while the remote copy lags.
-4. During a partition, availability versus consistency becomes a separate choice.
+1. **Ask about the healthy path.** Even without a partition, must a remote reader immediately see this newly acknowledged update? Requirements determine which communication the whole read/write protocol must perform.
+   Where can reads be served?; When may the writer see success?; What stale result is acceptable?.
+2. **Coordinate before success.** In one illustrative protocol, the local write waits for the remote coordination rule. Waiting buys only the guarantees of the complete protocol, not a universal consistency label.
+   Toy coordinated path: 40 ms.; Reads must obey matching rules..
+3. **Acknowledge the chosen rule.** Remote coordination completes and the writer receives the illustrative 40 ms acknowledgement. A distant stage can increase healthy-operation write latency.
+   Required persistence still matters.; One remote ACK alone is not a proof..
+4. **Compare a local-first path.** Rewind the example: another policy acknowledges local V2 before the remote copy catches up. These toy 5 ms and 40 ms values compare policies, not benchmark products.
+   This is an alternative protocol.; The remote copy can now lag..
+5. **Read from the lagging copy.** A remote read may still return V1 after the earlier local acknowledgement. Earlier acknowledgement needs an explicit rule for subsequent reads.
+   A healthy network can still have lag.; Choose staleness per operation..
+6. **Route a stronger read.** A selected authoritative read path can obtain V2, with its own communication and availability costs. Strong reads depend on protocol and routing, not the mere existence of synchronous or asynchronous copies.
+   Account for distance on this path.; Do not let arbitrary replicas bypass it..
+7. **Catch up the remote copy.** The asynchronous stream eventually applies V2 on the distant database. Propagation and read rules together determine observable freshness.
+   Measure lag and response percentiles.; Successful propagation is required..
+8. **Now partition the replicas.** When communication stops, decide whether the next operation can complete without required coordination. Partition availability versus consistency is a different question from healthy-path latency.
+   Some operations may refuse or wait.; Others may accept stale/local behavior..
+9. **Specify both decisions.** Document partition behavior and normal-operation latency/freshness for the actual operations and protocol. PACELC prompts both failure-path and healthy-path reasoning.
+   Measure the chosen policy's cost.; Avoid a universal SQL/NoSQL shortcut..
+
+**Design tradeoff:** Remote coordination can cost latency; earlier local acknowledgements require explicit remote-read and partition behavior.
 
 [View all states as still images](../assets/animations/pacelc-steps.png)
 

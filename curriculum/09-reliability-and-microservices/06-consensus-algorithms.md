@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Three servers maintain a shared configuration history. The current leader becomes isolated from the other two, but can still hear from one client. Both network groups want to accept changes. Which decisions may safely become committed? What should happen if no communicating group satisfies the protocol's rules? How would a returning leader learn what it missed?
+<!-- END INQUIRY -->
+
 ## Agreeing on decisions despite some failures
 
 Consensus protocols help cooperating nodes agree on decisions, such as the order of entries in a **replicated log**, the same ordered history kept on multiple nodes. Raft and Paxos address this under stated assumptions about faults and communication.
@@ -39,12 +45,7 @@ Measure commit latency and throughput, then test leader loss, partitions, delaye
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Raft: minority isolation stops safe progress](../../assets/animations/raft-majority.gif)
-
-</details>
+![Raft: commit one replicated history despite a minority partition](../../assets/animations/raft-majority.gif)
 
 [Read the numbered steps](../../animations/raft-majority.md) · [View the still sequence](../../assets/animations/raft-majority-steps.png)
 <!-- END ANIMATION -->

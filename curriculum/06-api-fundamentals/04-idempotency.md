@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A ₹500 payment succeeds, but its response disappears. Two identical retries arrive together. How can both return a sensible result without charging twice? What if you record “already handled” and crash before performing the payment?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Idempotency
 
@@ -66,38 +72,25 @@ Idempotency is not free. We need extra storage and lookups for keys, and additio
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![A lost response must not mean two charges](../../assets/animations/idempotency.gif)
-
-</details>
+![Idempotency: retries, durable state, and recovery](../../assets/animations/idempotency.gif)
 
 [Read the numbered steps](../../animations/idempotency.md) · [View the still sequence](../../assets/animations/idempotency-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Why retries need a business rule
+An idempotent operation has the same effect when repeated as when performed once. Scope a payment key K to caller and operation; store a payload fingerprint so K with a different amount is rejected. An atomic uniqueness rule chooses one owner when retries arrive concurrently. Other callers receive the stored result or a defined in-progress response.
 
-A ₹500 payment succeeds, but its response is lost. The client retries with the same idempotency key K. The intended result is one payment and a repeatable response, not a second charge.
+Coordinate the key record with the side effect and recovery. Merely checking then inserting can race; recording “done” before unperformed work can silently lose it. Across a provider boundary, use its idempotency contract and reconcile uncertain outcomes.
 
-```mermaid
-flowchart LR
-  A["Original request: K"] --> S["Atomic claim of K"]
-  R["Retry: K"] --> S
-  S --> O["One payment operation"]
-  O --> V["Saved result for K"]
-```
+Retain keys for the supported retry period. Expiring K too early permits an old retry to create new work. Track duplicates and in-progress requests to detect retry storms.
 
-### Apply it safely
+### Design for uncertainty, not only repetition
 
-Scope keys to the caller and operation. Record a request fingerprint so the same key with a different amount is rejected. A unique constraint can ensure two concurrent requests cannot both claim K. The loser receives the stored result or a defined in-progress response.
+The client cannot tell whether a lost response means the payment failed or merely that its acknowledgement disappeared. A stable operation key gives a retry a way to identify the same logical attempt. It must be associated durably and atomically with the accepted request; checking for a key and inserting it later leaves a race between simultaneous requests.
 
-The claim and the side effect must be coordinated. Recording K, crashing, and later skipping the unperformed payment is also wrong. Across an external provider boundary, use its idempotency contract and reconcile uncertain outcomes.
+An operation still in progress needs an explicit response or recovery path. If the payment provider completed the charge before your local record was updated, recovery must reconcile the same provider operation instead of creating another. Reusing a key with a different request body should not silently apply a new meaning.
 
-Retain keys for the supported retry period; expiring one too soon permits an old retry to create new work. Track duplicate and in-progress requests to spot retry storms.
-
-**Check:** if two identical requests arrive together, which durable operation chooses the winner?
+**Check:** draw two concurrent retries and a crash immediately after the external side effect. Which durable fact lets every recovery path find the same operation?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

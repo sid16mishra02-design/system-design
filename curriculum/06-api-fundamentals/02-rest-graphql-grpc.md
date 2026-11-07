@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Your product screen needs names, prices, and stock for thirty items. Should the client fetch resources, request selected fields, or call a typed inventory operation? If the response is small but triggers thirty database lookups, what actually needs improving?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # REST, GraphQL, gRPC
 
@@ -275,18 +281,12 @@ Well, the answer is none of them. There is no silver bullet as each of these tec
 
 ## Make it concrete
 
-### Use a concrete client requirement
+REST commonly models resources using HTTP behavior. GraphQL lets clients select fields through a schema. gRPC defines typed service operations and supported streaming interactions. These are interface models, not a universal speed ranking.
 
-A shopping app needs product names, prices, and stock. With REST, it might request a product resource and then an inventory resource. With GraphQL, it can ask for selected fields through a schema. With gRPC, cooperating services call operations defined by a typed contract, such as checking inventory for a list of product IDs.
+Choose according to client compatibility, operation shape, caching needs, and communication patterns. For a product page, REST might expose product resources and stock views; GraphQL might select required product fields; an internal gRPC operation might check stock for a list of IDs.
 
-These are different interface models, not a ranking from slowest to fastest. REST commonly uses HTTP's resource and caching behavior. GraphQL gives clients control over requested fields, but server resolvers still determine how much database work happens. gRPC is useful for typed service communication and supported streaming patterns; client compatibility and operations still matter.
+After one query lists thirty products, a resolver fetching stock separately for each may add thirty calls: the N+1 problem. Batch stock lookups by product IDs. A bounded REST batch endpoint or suitable cached product view can solve a similar workload. Reuse appropriate gRPC connections instead of opening one for every product.
 
-### Apply and improve it
-
-Suppose a page displays 30 products. After one query lists them, a GraphQL resolver fetching stock separately for each product may add 30 database calls: the N+1 problem. Batch stock lookups by product IDs. For a REST endpoint, a bounded batch endpoint or an appropriate cached product view can address the same workload. For a gRPC inventory call, consider batching IDs and reusing connections rather than opening one for every product.
-
-Measure end-to-end latency, bytes transferred, database calls, and failure behavior under a representative request. Returning fewer bytes does not help much if database work dominates. Whichever interface you choose, enforce authorization for the actual data requested and bound expensive queries.
-
-**Check:** which part of your product page is costly: extra network trips, oversized responses, or repeated database work? Pick the optimization that addresses that measured cause.
+Measure end-to-end latency, database calls, round trips, and bytes. Fewer response fields do not help much when repeated database work dominates. Bound expensive queries and enforce authorization on requested records. None of these interface choices automatically decides storage consistency or business correctness.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

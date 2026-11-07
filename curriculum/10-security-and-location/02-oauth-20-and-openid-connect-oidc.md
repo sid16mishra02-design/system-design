@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A printing app needs selected photos but must not receive the user's password. What permission should it request? Which returned information proves login, and what belongs at the photo API?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # OAuth 2.0 and OpenID Connect (OIDC)
 
@@ -61,30 +67,19 @@ Both OAuth 2.0 and OIDC are easy to implement and are JSON based, which is suppo
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![OAuth / OIDC: code, tokens, and audiences](../../assets/animations/oauth-oidc.gif)
-
-</details>
+![OAuth and OIDC: delegated access without sharing passwords](../../assets/animations/oauth-oidc.gif)
 
 [Read the numbered steps](../../animations/oauth-oidc.md) · [View the still sequence](../../assets/animations/oauth-oidc-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Separate delegated permission from login identity
+OAuth delegates resource access; OIDC adds authenticated login identity. Access tokens belong at their intended API; ID tokens identify the user to their client. Access tokens need not be JWTs or last one hour; OIDC ID tokens are JWTs.
 
-A photo-printing app requests limited photo access without receiving the user's password: OAuth authorization. OIDC adds authenticated login identity. Access tokens belong at their intended API; ID tokens identify the user to their intended client. Access tokens need not be JWTs or last one hour; OIDC ID tokens are JWTs.
+For the printing app, redirect to the provider, receive an authorization code, and exchange it for tokens. Public clients use PKCE, tying redemption to a secret created for that attempt. Use maintained implementations.
 
-### Apply it
+Validate issuer, audience, signature, and lifetime as applicable to the token contract. Request minimal permissions; the API still checks photo ownership. Cache signing keys with rotation-aware refresh. Choose lifetime and refresh behavior against revocation needs.
 
-With an authorization-code flow, redirect the user to the provider, receive a code, and exchange it for tokens. Browser and mobile public clients use PKCE to protect that exchange. PKCE ties redemption to a secret created for that login attempt. Use maintained implementations, not homemade token handling.
-
-Validate token issuer, audience, signature, and lifetime as applicable to the token's format and contract. Request only needed permissions. The photo API still checks photo ownership; a valid token does not grant access to every user's data.
-
-Cache signing keys with rotation-aware refresh rather than fetching them per request. Choose token lifetime and refresh behavior against revocation needs.
-
-**Check:** which token belongs at the photo API, and who checks photo ownership?
+Keep the roles separate when debugging: the client requests permission, the provider issues tokens, and the resource API enforces access to data. A successful login should not make an arbitrary ID token acceptable as an API credential. Libraries help implement the protocol, but the application still chooses scopes, account mapping, and ownership rules.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A shop deploys two application servers and promises to survive a machine failure. Both servers use one load balancer, one database, and the same configuration service. During a sale, the shared database stops responding. Which requests can still work? Where would another copy actually help? Who would select the replacement, reconnect clients, and prevent two machines from accepting conflicting writes?
+<!-- END INQUIRY -->
+
 ## One failure that stops the whole path
 
 A **single point of failure** is a component whose failure can stop the service you care about.

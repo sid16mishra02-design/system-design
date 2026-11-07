@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A new storage node announces itself to one peer. Some clients can discover it immediately, while other peers still list only the old members. A temporary network partition delays one part of the cluster. Must every view already match? How can peers decide whether returning observations are old or new? Would learning the same membership list also establish one safe order for payments?
+<!-- END INQUIRY -->
+
 ## Spread information through repeated peer exchanges
 
 In a gossip protocol, nodes periodically exchange information with selected peers. Those peers spread what they know further. Repeated exchanges let knowledge travel through a cluster without every node contacting every other node each time.
@@ -37,12 +43,7 @@ Measure how long an update takes to reach most or all reachable nodes, plus mess
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Gossip spreads knowledge gradually](../../assets/animations/gossip-spread.gif)
-
-</details>
+![Gossip: membership spreads without instant agreement](../../assets/animations/gossip-spread.gif)
 
 [Read the numbered steps](../../animations/gossip-spread.md) · [View the still sequence](../../assets/animations/gossip-spread-steps.png)
 <!-- END ANIMATION -->

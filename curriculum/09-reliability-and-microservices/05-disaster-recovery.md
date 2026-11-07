@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A region fails when the latest usable order backup is an hour old. What can be lost? When will customers actually be able to purchase again?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Disaster recovery
 
@@ -52,24 +58,21 @@ A hot site maintains up-to-date copies of data at all times. Hot sites are time-
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Recovery time and data-loss targets differ](../../assets/animations/recovery-objectives.gif)
-
-</details>
+![Disaster recovery: recover data and restore useful service](../../assets/animations/recovery-objectives.gif)
 
 [Read the numbered steps](../../animations/recovery-objectives.md) · [View the still sequence](../../assets/animations/recovery-objectives-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Test recovery, not just backup creation
+RPO limits tolerable data loss; RTO limits recovery time. Hourly backups with no newer recoverable log imply roughly an hour of possible data loss.
 
-With successful hourly backups and no newer recoverable log, possible data loss is roughly an hour: RPO. Restoring service within two hours concerns RTO.
+Rehearse restoring order data, configuration, credentials, and traffic routing. Measure when customers can work again, not when file copying finishes. Faster restore improves RTO; more frequent recoverable capture improves RPO. Protect backups from production deletion and compromise.
 
-Choose targets from business loss tolerance. Rehearse restoring data, application configuration, credentials, and traffic routing in an isolated recovery exercise. Measure when users can work again, not when files finish copying. Faster restore automation improves RTO; more frequent recoverable data capture improves RPO. Protect backups from the same accidental deletion or compromise affecting production.
+Take an example failure at 10:50 with a recoverable backup from 10:00 and no later usable log. Orders committed after the backup may be unrecoverable through that backup alone. Restoring files in ten minutes does not establish a ten-minute recovery time if credentials, application settings, or traffic routing take another hour.
 
-**Check:** can you prove the last backup is restorable?
+Practice recovery in an isolated environment and check application-level invariants, not just whether restored tables open. Include the people, access, and dependencies needed during the incident.
+
+Replication is not a substitute for all backups: accidental deletion can be copied to replicas. Faster failover and independent recoverable history address different failure scenarios. Choose their cost from the required loss and downtime tolerance.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Creating an order succeeds, but the customer's order-list screen does not show it yet. Which state is authoritative? What should the customer see while the list catches up?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Command and Query Responsibility Segregation (CQRS)
 
@@ -49,28 +55,19 @@ Here are some scenarios where CQRS will be helpful:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![CQRS: a read view can lag behind a write](../../assets/animations/cqrs.gif)
-
-</details>
+![CQRS: separate writes from query-shaped read views](../../assets/animations/cqrs.gif)
 
 [Read the numbered steps](../../animations/cqrs.md) · [View the still sequence](../../assets/animations/cqrs-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Different models for changing and reading
+CQRS separates write responsibilities from read views; it does not require event sourcing.
 
-A create-order command updates the write model. An event updates a separate, customer-friendly order-list view. CQRS separates those responsibilities; it does not require event sourcing.
+For recent-order screens, project changes into a customer-shaped read model instead of repeatedly joining the write model. Make projection updates duplicate-safe and monitor lag. Return the confirmed order identifier with a pending-view state. Define how a lost read view is rebuilt. Extra models add synchronization work; simple CRUD may not benefit.
 
-### Apply it
+Suppose an order is committed at time T, but the projection worker is briefly stopped. The write succeeded even though the read view is behind. A retry of the user's create request must not silently create another order merely because the list looks empty. Use the confirmed identifier to show a useful pending state.
 
-Optimize the read view for actual queries, such as recent orders by customer, instead of making every screen join the write model. Keep projection updates idempotent and monitor lag. After creating an order, show its confirmed identifier and a pending-view state rather than pretending the read view updated instantly.
-
-Extra models add synchronization and recovery work; a simple CRUD application may not benefit.
-
-**Check:** how would you rebuild a lost read view?
+A read model can contain exactly the fields and indexes needed for a customer screen. This can reduce joins and read cost, while adding storage and update work. Keep the source of rebuild data explicit; CQRS alone does not guarantee an event history exists. Test a stopped projector, duplicate changes, and reconstruction before claiming the split improved the design.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

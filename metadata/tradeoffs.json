@@ -4,76 +4,87 @@
     "choice": "Larger machine vs more machines.",
     "example": "Check the shared database bottleneck.",
     "topic": "Scalability",
-    "words": 14
+    "words": 46,
+    "opening_question": "Checkout demand doubles. The application CPU is busy, but the database has spare capacity. What would you change first, and what evidence would make you choose a larger machine over more machines?"
   },
   {
     "comparison": "Concurrency vs parallelism",
     "choice": "Managing overlapping tasks vs executing tasks at the same time.",
     "example": "One cook can alternate tasks; several cooks can work simultaneously.",
     "topic": "Latency vs Throughput vs Bandwidth",
-    "words": 23
+    "words": 54,
+    "opening_question": "A page waits for three independent remote calls. A video encoder performs three expensive calculations. How would you reduce elapsed time in each case, and which case needs more execution capacity?"
   },
   {
     "comparison": "Long polling vs WebSockets",
     "choice": "Repeated waiting requests vs a persistent two-way connection.",
     "example": "Use message direction, frequency, and reconnect behavior to choose.",
     "topic": "Long polling, WebSockets, Server-Sent Events (SSE)",
-    "words": 21
+    "words": 49,
+    "opening_question": "A dashboard receives occasional status changes; an editor exchanges frequent updates in both directions. How would each client learn about new data, and what must happen after disconnection?"
   },
   {
     "comparison": "Batch vs stream processing",
     "choice": "Process accumulated records together vs process a continuing flow.",
     "example": "Nightly sales reports favor batches; live fraud signals need timely updates.",
     "topic": "Change Data Capture (CDC)",
-    "words": 24
+    "words": 51,
+    "opening_question": "Finance needs a complete daily report, while fraud detection must react before a payment decision. Which records would you process together, and where would waiting become unacceptable?"
   },
   {
     "comparison": "Stateful vs stateless design",
     "choice": "Requests depend on server-local session state vs portable request context.",
     "example": "With an external session store, another app server can handle the next request.",
     "topic": "APIs",
-    "words": 27
+    "words": 56,
+    "opening_question": "Request one reaches server A and stores a login session in its memory. Request two reaches B. How should B identify the user, and what happens when A disappears?"
   },
   {
     "comparison": "Strong vs eventual consistency",
     "choice": "Reads reflect completed writes vs replicas converge after writes stop and communication recovers.",
     "example": "Profile display may tolerate lag; stock reservation needs an explicit correctness rule.",
     "topic": "CAP Theorem",
-    "words": 29
+    "words": 56,
+    "opening_question": "An address display can be briefly old, but two buyers want the last ticket. What must each read promise, and what should happen when replicas cannot communicate?"
   },
   {
     "comparison": "Read-through vs write-through cache",
     "choice": "The cache loads missed reads vs the cache layer persists writes synchronously.",
     "example": "A product cache can load read misses and synchronously persist writes; these policies can be combined.",
     "topic": "Caching Strategies",
-    "words": 32
+    "words": 60,
+    "opening_question": "A price lookup misses the cache; later, a writer changes the price. Who should fetch the missing record, who should persist the write, and can those responsibilities coexist?"
   },
   {
     "comparison": "Push vs pull",
     "choice": "Sender initiates delivery vs receiver requests updates.",
     "example": "A webhook pushes payment news; polling repeatedly asks for it.",
     "topic": "Webhooks",
-    "words": 20
+    "words": 47,
+    "opening_question": "A checkout needs to learn whether an external payment completed. Should it keep asking, or wait for a notification? How would your design recover a missed update?"
   },
   {
     "comparison": "REST vs RPC",
     "choice": "Resource-oriented interfaces vs calling defined operations.",
     "example": "Use resource reads for products; typed service operations can reserve inventory.",
     "topic": "REST, GraphQL, gRPC",
-    "words": 20
+    "words": 49,
+    "opening_question": "One client browses product records while another asks inventory to reserve five units. How would you express each contract, and which interface makes the operation and its failure understandable?"
   },
   {
     "comparison": "Synchronous vs asynchronous communication",
     "choice": "Caller waits for completion vs completion is decoupled from the initiating call.",
     "example": "Queued email can finish after the order confirmation.",
     "topic": "Message Queues",
-    "words": 24
+    "words": 52,
+    "opening_question": "An order is committed, but the email provider is slow. What must finish before you respond to the buyer, and how would the remaining work survive a crash?"
   },
   {
     "comparison": "Latency vs throughput",
     "choice": "Time for one operation vs operations completed per unit time.",
     "example": "More counters can serve more customers without shortening each individual checkout.",
     "topic": "Latency vs Throughput vs Bandwidth",
-    "words": 24
+    "words": 54,
+    "opening_question": "Adding workers doubles completed orders per second, yet each buyer waits the same time. What improved, what did not, and which measure matches the complaint you are trying to solve?"
   }
 ]

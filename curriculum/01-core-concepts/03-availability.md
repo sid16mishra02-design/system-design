@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+One checkout server fails during a sale. What must happen before its spare can safely serve the waiting customers?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Availability
 
@@ -67,30 +73,23 @@ A fault-tolerant system has no service interruption but a significantly higher c
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![A replacement helps only if traffic reaches it](../../assets/animations/availability-failover.gif)
-
-</details>
+![Availability: replace, reroute, and inspect dependencies](../../assets/animations/availability-failover.gif)
 
 [Read the numbered steps](../../animations/availability-failover.md) · [View the still sequence](../../assets/animations/availability-failover-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Use it: keep checkout reachable
+Two checkout servers help only if traffic switches to a usable survivor. Shared power, database, or deployment failures can defeat both. The parallel availability formula assumes independent failures and effective failover.
 
-Two checkout servers can help if traffic automatically switches away from a failed one. They offer little protection against a shared failed database, power supply, or deployment error.
+Trace the complete request, define successful service, and identify shared dependencies. Add readiness checks, replacement capacity, and tested failover where they remove a failure point. Keep spare capacity for surviving instances. A payment outage may allow browsing while checkout fails truthfully.
 
-### Apply and improve
+Measure successful requests and latency, not merely whether a process runs. Test switchover and in-flight outcomes; a fast error or stale answer may violate the operation's requirements.
 
-Trace the complete customer request and identify shared dependencies. Add health checks, replacement capacity, and tested failover where they remove a real failure point. Keep enough spare capacity for the surviving servers to carry traffic. During a payment outage, browsing may remain available while checkout reports a temporary failure.
+### Decide what remains useful
 
-Define success before calculating availability: a fast error or stale answer may not satisfy the operation's requirements. Measure successful requests and their latency, not just whether a process is running.
+For an online shop, “the website is up” is too vague. Product browsing, payment submission, and viewing an old order can have different success criteria. If payment is unavailable, keep safe functions available and show checkout's actual status; returning a success page without a confirmed operation is not useful availability.
 
-The parallel formula assumes independent failures and effective failover.
-
-Self-check: what still works after one dependency fails?
+Begin with the smallest redundancy that removes the observed failure. Two app instances do little for a database with no recovery path. Moving copies into different failure domains helps against some shared failures but adds coordination and operating cost. Run a controlled failure exercise and check both new requests and operations already in flight. The exercise should verify the user-visible promise, not just a green health dashboard.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

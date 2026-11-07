@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A balance changed several times, and an auditor asks how it reached 70. Can you reconstruct it? How would rebuilding avoid charging or emailing someone again?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Event Sourcing
 
@@ -36,24 +42,21 @@ Following are the disadvantages of event sourcing:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Event sourcing: replay builds state](../../assets/animations/event-sourcing.gif)
-
-</details>
+![Event sourcing: history is authoritative, views are rebuildable](../../assets/animations/event-sourcing.gif)
 
 [Read the numbered steps](../../animations/event-sourcing.md) · [View the still sequence](../../assets/animations/event-sourcing-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Rebuild state from business history
+Event sourcing makes stored events authoritative, not merely notifications. Deposited(100), then Withdrawn(30), rebuilds balance 70.
 
-Deposited(100), then Withdrawn(30), produces balance 70. Stored events are authoritative; publishing notifications alone is not event sourcing.
+Use verified snapshots to shorten replay, retain required history, and version event schemas. Rebuilding state must not repeat external payment or receipt side effects. Replay and auditability add recovery and schema work.
 
-Use it when historical decisions and replay matter. To shorten replay, load a verified snapshot and apply later events. Snapshots do not replace the event history. Version event schemas deliberately, and separate replay from external actions so rebuilding a view does not resend receipts.
+Walk the example twice. On the first replay, applying the two events produces 70. On a later rebuild, the same retained history should reproduce the same intended state rather than create another withdrawal. Email or payment calls are outside that state reconstruction and need their own deliberate execution rules.
 
-**Check:** can you rebuild the balance without charging or emailing anyone again?
+A snapshot records a derived state at a known history position. Load it and apply only later events to avoid replaying the entire retained history every time. Verify that the snapshot belongs to the right history and schema version.
+
+Choose this pattern when history and reconstruction are real requirements. Ordinary current-state storage with an audit log can be simpler when it already meets the product's needs. Event history does not make schema changes or recovery automatic.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

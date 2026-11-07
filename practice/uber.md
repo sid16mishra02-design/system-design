@@ -2,6 +2,12 @@
 
 [← Schedule](../SCHEDULE.md) · [Design worksheet](../templates/DESIGN.md)
 
+## Try solving this first
+
+A rider requests a trip near a map-cell boundary. Two riders can see the same nearby driver, whose last location is already several seconds old. How would you find candidates without missing a driver across the boundary? What must happen before you promise either rider that this driver is theirs?
+
+## Work through the design
+
 1. **Day 1:** Without a solution, define scope, functional requirements, and measurable constraints.
 2. **Day 2:** Estimate requests, storage, and bandwidth. Show units and assumptions. Define APIs and data entities.
 3. **Day 3:** Draw a complete request flow. Justify storage, cache, communication, and partition choices.
@@ -41,12 +47,7 @@ For a busy city center, equal geographic partitions may carry very unequal traff
 <!-- BEGIN ANIMATION -->
 ## Watch the design in action
 
-<details>
-<summary>Open the looping request-flow animation</summary>
-
-![Design example: near a rider does not mean available](../assets/animations/case-uber.gif)
-
-</details>
+![Ride matching: fresh candidates are not reservations](../assets/animations/case-uber.gif)
 
 [Read the numbered steps](../animations/case-uber.md) · [View the still sequence](../assets/animations/case-uber-steps.png)
 <!-- END ANIMATION -->

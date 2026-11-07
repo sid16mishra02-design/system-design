@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+An orders instance is replaced, but a long-lived caller keeps using its old address. How should the caller learn the change? Can a recently discovered destination still fail?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Service Discovery
 
@@ -58,28 +64,19 @@ Here are some commonly used service discovery infrastructure tools:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Discovery data can become stale](../../assets/animations/discovery-heartbeat.gif)
-
-</details>
+![Discovery: find instances, detect suspicion, and route safely](../../assets/animations/discovery-heartbeat.gif)
 
 [Read the numbered steps](../../animations/discovery-heartbeat.md) · [View the still sequence](../../assets/animations/discovery-heartbeat-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Find changing service instances
+Discovery supplies service destinations; load balancing chooses among them. A discovered address can become stale before use.
 
-The orders service has three instances whose addresses change during deployment. Discovery supplies usable destinations; load balancing chooses among them. A discovered address can become stale before the request reaches it.
+For orders deployments, register instances using meaningful readiness checks. Stop new traffic and drain bounded in-flight work before retirement. Refresh cached discovery state and give calls deadlines and safe retry behavior. Caching reduces lookup traffic but delays learning about changes; repeatedly selecting the same failed address defeats failover.
 
-### Apply it
+Imagine an old instance completes a long-running request while a replacement starts. Removing the old address from new routing and terminating all existing work are separate actions. Use a bounded drain appropriate to the service, and define what happens when that bound is exceeded.
 
-Use readiness checks that reflect whether an instance can accept work, not merely whether its process exists. During replacement, stop sending new work and allow bounded draining where needed.
-
-Caching discovery results reduces lookup traffic but delays learning about changes. Choose refresh behavior with that tradeoff in mind. Clients still need deadlines and safe retry behavior; repeatedly selecting the same failed destination defeats failover.
-
-**Check:** how will a long-lived client notice a replacement instance?
+A registry or DNS answer can be correct when returned and obsolete a moment later. Clients must still handle connection failures and avoid blindly replaying non-idempotent writes. Repeatedly querying discovery on every request can add latency and another dependency; caching forever avoids lookups but preserves dead addresses. Test rollout, crash, and registry unavailability rather than only the normal lookup path.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

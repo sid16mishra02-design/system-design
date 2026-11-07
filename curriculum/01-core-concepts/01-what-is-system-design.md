@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A payment times out. Should another click create another charge?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # What is system design?
 
@@ -21,8 +27,14 @@ also makes it easier to reason about and manage architectural changes as the sys
 
 ## Make it concrete
 
-Design a food-ordering app by tracing order → payment → restaurant. First specify correct charging, acceptable response time, and failure behavior. Then choose components that meet those needs. If payment times out, prevent duplicate charges before adding faster servers.
+Trace order → payment → restaurant. Specify correctness, response time, and failure behavior before choosing components. If payment times out, recover the same operation safely; faster servers alone cannot prevent duplicate charges.
 
-Self-check: which requirement justifies each component?
+### Reason from the user's promise
+
+Imagine the restaurant accepts the order, but the payment response disappears. The customer sees a spinner. Starting with “we need three microservices” does not tell you whether to retry the charge or cancel dinner. Start with the promise instead: one confirmed order must correspond to the intended payment, and an uncertain result must be recoverable.
+
+Write the sequence of events, the data each step needs, and what the user sees after a failure. This exposes responsibilities before you name products. A single application and database may meet the first version's needs. Introduce a queue, cache, or service boundary only when a requirement explains the additional moving part.
+
+**Try again:** the restaurant is closed after payment succeeds. What state must you record, who performs recovery, and what should the customer see while a refund is pending?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

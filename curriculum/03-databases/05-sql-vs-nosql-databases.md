@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Checkout updates stock while a catalog stores varied product attributes. Which operations and guarantees should decide the databases—not their labels?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # SQL vs NoSQL databases
 
@@ -64,18 +70,16 @@ As always we should always pick the technology that fits the requirements better
 
 ## Make it concrete
 
-### Use it: decide from operations, not labels
+Choose from operations and guarantees, not SQL/NoSQL labels. Orders may need relationships and multi-record invariants; catalogs may need varied attributes. SQL columns can be nullable; NoSQL includes structured graph and key-value models, not only documents.
 
-An order system needs relationships, integrity rules, and multi-record updates. A catalog may need flexible product documents. Either choice still needs evidence about its queries, transaction guarantees, and operational limits.
+Compare creating an order, listing recent orders, and updating stock in candidate products. Measure queries and writes and verify transaction guarantees. Adding two stores also adds consistency, backup, and monitoring work.
 
-### Apply and improve
+### Compare two concrete workloads
 
-Write a small workload: create an order, list recent orders, and update stock. Compare how each candidate represents these operations and enforces their invariants. Measure representative queries and writes before assuming one category is faster.
+An order must refer to a real customer and reserve stock without breaking a business invariant. A product description must hold different attributes for books and shoes. These are requirements, not instructions to choose two databases. Some relational products handle flexible data, and some nonrelational products support strong transactions.
 
-Avoid adding two database types simply because each sounds appropriate. Cross-store consistency, backups, and monitoring add work.
+For each candidate, sketch the same reads and writes, including a failure halfway through checkout. Ask how constraints are enforced, which query becomes expensive, and how recovery works. Test representative data sizes and request distributions rather than comparing labels in isolation.
 
-SQL columns can be nullable; NoSQL includes structured graph and key-value models, not only document collections.
-
-Self-check: name the requirement that would make you reconsider your choice.
+Begin with one store when it meets both needs. Add another when the benefit is specific enough to justify synchronizing facts across systems. **Decision test:** what exact operation or guarantee would fail if you kept your simpler design? If you cannot name one, more technology may not improve it.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -4,6 +4,34 @@
 
 Use these comparisons after the fundamentals. For each choice, state the requirement, what each option costs, and what changed requirement would make you reconsider. These summaries are study aids; the local lessons provide the detail.
 
+## Try solving these first
+
+Pick one scenario. Sketch an answer and its cost before reading the comparison table. The requirement can justify more than one design.
+
+1. **Vertical vs horizontal scaling:** Checkout demand doubles. The application CPU is busy, but the database has spare capacity. What would you change first, and what evidence would make you choose a larger machine over more machines?
+
+2. **Concurrency vs parallelism:** A page waits for three independent remote calls. A video encoder performs three expensive calculations. How would you reduce elapsed time in each case, and which case needs more execution capacity?
+
+3. **Long polling vs WebSockets:** A dashboard receives occasional status changes; an editor exchanges frequent updates in both directions. How would each client learn about new data, and what must happen after disconnection?
+
+4. **Batch vs stream processing:** Finance needs a complete daily report, while fraud detection must react before a payment decision. Which records would you process together, and where would waiting become unacceptable?
+
+5. **Stateful vs stateless design:** Request one reaches server A and stores a login session in its memory. Request two reaches B. How should B identify the user, and what happens when A disappears?
+
+6. **Strong vs eventual consistency:** An address display can be briefly old, but two buyers want the last ticket. What must each read promise, and what should happen when replicas cannot communicate?
+
+7. **Read-through vs write-through cache:** A price lookup misses the cache; later, a writer changes the price. Who should fetch the missing record, who should persist the write, and can those responsibilities coexist?
+
+8. **Push vs pull:** A checkout needs to learn whether an external payment completed. Should it keep asking, or wait for a notification? How would your design recover a missed update?
+
+9. **REST vs RPC:** One client browses product records while another asks inventory to reserve five units. How would you express each contract, and which interface makes the operation and its failure understandable?
+
+10. **Synchronous vs asynchronous communication:** An order is committed, but the email provider is slow. What must finish before you respond to the buyer, and how would the remaining work survive a crash?
+
+11. **Latency vs throughput:** Adding workers doubles completed orders per second, yet each buyer waits the same time. What improved, what did not, and which measure matches the complaint you are trying to solve?
+
+## Compare your reasoning
+
 | Comparison | What differs | Concrete consequence | Local explanation |
 | --- | --- | --- | --- |
 | Vertical vs horizontal scaling | Larger machine vs more machines. | Check the shared database bottleneck. | [Revisit lesson](../curriculum/01-core-concepts/02-scalability.md) |

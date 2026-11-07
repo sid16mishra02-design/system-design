@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A user uploads a large archive in ten chunks. The network drops during one chunk, two pieces arrive in the wrong order, and the final assembled file will later be restored from backup. What would let you detect which bytes differ, retry only damaged work, and verify the completed object? If a supplied verification value is also replaced, what confidence should it give you?
+<!-- END INQUIRY -->
+
 ## Detecting that data changed
 
 A checksum is a value calculated from data. The receiver can calculate it again and compare the result with the expected value. If they differ, the data is not identical.

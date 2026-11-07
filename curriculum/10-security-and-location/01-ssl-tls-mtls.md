@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A browser connects securely to a gateway, which forwards the request internally. Where can the data be read? How does the next service know who called it?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # SSL, TLS, mTLS
 
@@ -41,26 +47,21 @@ Nowadays, mTLS is commonly used by microservices or distributed systems in a [ze
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![TLS identity is separate from authorization](../../assets/animations/tls-mtls.gif)
-
-</details>
+![TLS and mTLS: protect connections, then authorize the operation](../../assets/animations/tls-mtls.gif)
 
 [Read the numbered steps](../../animations/tls-mtls.md) · [View the still sequence](../../assets/animations/tls-mtls-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Protect a connection and verify identities
+TLS protects a connection; usually the client verifies the server certificate. mTLS also verifies a client certificate. SSL is obsolete.
 
-HTTPS uses TLS to protect data in transit. Usually, a client verifies the server certificate. With mTLS, the server also verifies a client certificate, useful for identifying calling services.
+At a gateway, design protection for the new internal connection separately. An identified calling service still needs authorization for the operation. Automate certificate renewal and monitor expiry. Reuse suitable connections to reduce handshakes, but never skip certificate verification for speed.
 
-Use supported TLS configurations, automate certificate renewal, and monitor expiry. Connection reuse can reduce repeated handshake work when suitable; bypassing certificate verification is not a valid optimization. A gateway that terminates TLS creates a new internal connection whose protection must be designed separately.
+Trace the data hop by hop. Browser-to-gateway TLS protects that connection. If the gateway reads the request and opens another connection, the internal hop needs its own protection decision and endpoint checks. The browser's verified server identity does not automatically become the identity of every internal caller.
 
-Encryption does not replace authorization: an identified service still needs permission for an operation.
+With mTLS, possession of a trusted client certificate can establish a calling identity; the receiving service still decides whether that identity may read or change a particular order. Plan certificate expiry, rotation, and trust changes as operational work.
 
-**Check:** where is traffic decrypted, and which identity is authorized at the next hop?
+Measure connection setup and reuse before optimizing. Disabling verification removes an identity check rather than improving the same security guarantee faster.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+App A accepted your login, but the next request reaches App B. How can B identify the same session? What if A dies mid-purchase?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Load Balancing
 
@@ -121,12 +127,7 @@ Following are some of the load balancing solutions commonly used in the industry
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Scale a service without losing sessions](../../assets/animations/load-balancer.gif)
-
-</details>
+![Load balancing: healthy routing and shared state](../../assets/animations/load-balancer.gif)
 
 [Read the numbered steps](../../animations/load-balancer.md) · [View the still sequence](../../assets/animations/load-balancer-steps.png)
 <!-- END ANIMATION -->

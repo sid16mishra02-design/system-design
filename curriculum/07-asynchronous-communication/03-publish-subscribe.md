@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Every order needs billing and shipping. Both teams put workers on one shared work queue, but some orders get only one action. Why? How should deliveries and progress differ between teams and within one team?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Publish-Subscribe
 
@@ -67,38 +73,25 @@ Here are some commonly used publish-subscribe technologies:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Independent subscribers need their own copy](../../assets/animations/pub-sub.gif)
-
-</details>
+![Pub/sub: one event, independent business reactions](../../assets/animations/pub-sub.gif)
 
 [Read the numbered steps](../../animations/pub-sub.md) · [View the still sequence](../../assets/animations/pub-sub-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### One event, several independent reactions
+Pub/sub gives independent subscriptions their own logical delivery. Billing and shipping each need a subscription; workers within billing may compete for its work. One shared work queue does not guarantee both actions happen.
 
-An OrderPlaced event must reach both billing and shipping. Each needs its own subscription. Several workers inside the billing subscription may share billing work; that does not mean shipping receives its required copy.
+Define event meaning, versioned fields, and stable event IDs. Make repeated processing safe. Use durable subscriptions or retained history when offline consumers must catch up; ephemeral broadcast cannot guarantee that. Some implementations let consumers pull retained records rather than immediately pushing every event.
 
-```mermaid
-flowchart TD
-  E["OrderPlaced"] --> B["Billing subscription"]
-  E --> S["Shipping subscription"]
-  B --> B1["Billing workers"]
-  S --> S1["Shipping workers"]
-```
+Scale each subscription against its own backlog and downstream capacity. Partition related events consistently when ordering matters; do not assume a global order across partitions. A slow analytics consumer need not block billing.
 
-### Apply it
+### Distinguish fanout from competing workers
 
-Define the event's meaning and versioned fields so consumers do not depend on incidental database details. Give events identifiers and make consumers tolerate retries. Use durable subscriptions or retained history when a temporarily offline consumer must catch up; ephemeral broadcast alone does not guarantee that.
+An order event may interest billing, shipping, and analytics independently. Each subscription needs its own progress so that slow analytics does not consume shipping's only copy. Within shipping, several workers might instead compete to process its deliveries. Those are different relationships, even if one broker implements both.
 
-Scale each subscription against its own backlog and downstream capacity. Partition related events consistently when their ordering matters, and avoid assuming a global order across independent partitions. A slow analytics consumer should not need to block payment processing.
+Define who owns event schemas, how consumers recover their position, and what happens when an older event is replayed. A consumer that sends an email needs a duplicate policy; rebuilding an analytical view may intentionally replay history. Retention and push-versus-pull delivery are product and configuration choices.
 
-Some systems let consumers pull retained records; pub/sub does not inherently require immediate push.
-
-**Check:** if billing and shipping compete on the same work queue, which business action might never happen?
+Use fanout when independent consumers need the fact. A direct call may be simpler when one operation needs an immediate answer from one owner. **Question:** can you add a new subscriber and reconstruct its required history, or were earlier events already discarded?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

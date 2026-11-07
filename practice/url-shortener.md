@@ -2,6 +2,12 @@
 
 [← Schedule](../SCHEDULE.md) · [Design worksheet](../templates/DESIGN.md)
 
+## Try solving this first
+
+A campaign needs short links. One link suddenly receives thousands of clicks a second, and its owner must still be able to disable it. Sketch the simplest lookup you would build. Which work must finish before redirecting the visitor? If you keep extra copies of the destination, how will a disabled link stop working?
+
+## Work through the design
+
 1. **Day 1:** Without a solution, define scope, functional requirements, and measurable constraints.
 2. **Day 2:** Estimate requests, storage, and bandwidth. Show units and assumptions. Define APIs and data entities.
 3. **Day 3:** Draw a complete request flow. Justify storage, cache, communication, and partition choices.
@@ -41,12 +47,7 @@ Track redirect latency percentiles, cache hit rate, database reads, and failed l
 <!-- BEGIN ANIMATION -->
 ## Watch the design in action
 
-<details>
-<summary>Open the looping request-flow animation</summary>
-
-![Design example: create and resolve a short URL](../assets/animations/case-url-shortener.gif)
-
-</details>
+![URL shortener: create, resolve, cache, and disable](../assets/animations/case-url-shortener.gif)
 
 [Read the numbered steps](../animations/case-url-shortener.md) · [View the still sequence](../assets/animations/case-url-shortener-steps.png)
 <!-- END ANIMATION -->

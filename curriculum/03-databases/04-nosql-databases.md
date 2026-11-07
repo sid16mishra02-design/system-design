@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Products have different attributes, sessions are fetched by identifier, and recommendations explore relationships. Would one representation suit all three? What would you measure before choosing?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # NoSQL databases
 
@@ -154,16 +160,18 @@ Multi-model databases combine different database models (i.e. relational, graph,
 
 ## Make it concrete
 
-### Use it: choose a data model for an access pattern
+Documents can represent varied product attributes; key-value records can serve sessions; graphs can explore relationships. NoSQL is a collection of models, not one universal design.
 
-A product catalog might store each product as a document with different attributes. A key-value store might retrieve a session by its identifier. A graph database might explore relationships. These are different models within the broad NoSQL label.
+Sketch reads and writes before choosing. Organize identifier-based access around the key. For relationship-heavy requests, check the product's actual query and indexing support.
 
-### Apply and improve
+Choose partition keys that spread traffic, not merely records. Verify transaction scope, consistency, schema rules, and limits for the specific database. NoSQL does not automatically mean no schema, no transactions, or unlimited horizontal scale. Identify which queries your representation makes expensive.
 
-Sketch the actual reads and writes. If almost every lookup uses a product identifier, organize data around that key. If queries repeatedly need relationships across many records, check the chosen database's query and indexing support rather than assuming it will behave like a relational join.
+### Ask what a single request must retrieve
 
-Choose partition keys that spread real traffic, not merely record counts. Verify transaction scope, consistency options, and limits for the particular database. NoSQL does not automatically mean no schema, no transactions, or unlimited horizontal scale.
+For a session store, a request may need exactly one record by session ID. A key-value model can match that operation closely. A product catalog with varying attributes may suit documents, but “show all products with this attribute” still requires a supported access path. A collection of documents does not automatically make arbitrary searches cheap.
 
-Self-check: what query becomes expensive with your chosen representation?
+Next ask what must change together. If an order updates several records, inspect the actual product's transaction boundaries and behavior during failures. Do not infer those guarantees from the NoSQL label.
+
+Keep the first design simple enough to operate. Adding a specialized store can be worthwhile for a demonstrated query need; it also adds backup, synchronization, and incident response work. **Try again:** where would you place a frequently updated inventory count if stale copies could allow two buyers to claim the last item?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

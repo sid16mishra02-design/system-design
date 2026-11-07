@@ -1,23 +1,35 @@
-# Lost data: transport choices
+# TCP and UDP: what a loss changes
 
 [← Animation index](README.md)
 
-This is one illustrative scenario, not a complete implementation or a simulation of all failure modes. The related lesson explains assumptions and tradeoffs.
+**Problem:** Match delivery and ordering behavior to an application's timing requirements.
 
-<details>
-<summary>Open the looping animation</summary>
+**Scenario:** Illustrative file bytes 1-3 and voice frames A-C each suffer one lost item.
 
-![Lost data: transport choices](../assets/animations/tcp-udp.gif)
+The full system map stays visible as the highlighted path and component states change. Every stage lasts one second and the sequence repeats automatically. Values are illustrative; playback speed is not system timing.
 
-</details>
+![TCP and UDP: what a loss changes](../assets/animations/tcp-udp.gif)
 
 ## Read the same sequence without motion
 
-1. TCP presents an ordered byte stream; a lost segment can delay delivery.
-2. TCP detects loss and retransmits; later bytes wait for the missing data.
-3. UDP sends datagrams without a built-in delivery or ordering guarantee.
-4. Datagram C can arrive without transport waiting for B.
-5. The UDP application chooses whether to recover, ignore, or reorder data.
+1. **Two different deadlines.** A file and voice call each lose data. Should both wait for recovery? Reason about this scenario before comparing the mechanism and its consequences.
+   Which data still has value if late?; Who repairs a missing item?; Does delivery prove business success?.
+2. **TCP delivers initial bytes.** The first TCP bytes arrive and become available to the file reader. TCP presents a byte stream, not application message boundaries.
+   ACKs support transport recovery.; Applications still frame their messages..
+3. **A TCP gap holds later data.** Range 2 is lost; range 3 arrives but waits behind the missing bytes. Ordered delivery can make a later arrival wait for earlier lost data.
+   Later bytes may be buffered.; The sender detects or times out loss..
+4. **TCP retransmits the gap.** Recovery supplies range 2, allowing the reader to consume ranges 2 and 3 in order. Recovery costs time and network work; the connection can still eventually fail.
+   Delivery does not prove business commit.; TCP can report errors or time out..
+5. **UDP exposes an early frame.** Frame A reaches the UDP receiver and is available to the voice application. UDP supplies datagrams without built-in ordering or retransmission.
+   Application sees datagram boundaries.; No permanent delivery guarantee..
+6. **One UDP frame disappears.** Frame B is lost, but C can arrive without UDP waiting for B. A missing datagram does not impose TCP's ordered-stream wait.
+   UDP does not repair the loss itself.; C may still be late for playback..
+7. **The application chooses.** The voice player can conceal a gap or drop late sound according to its timing policy. Less transport waiting shifts responsibility toward application design.
+   Recovery can be added above UDP.; Reordering is an application choice.; Live deadlines differ from file goals..
+8. **Design the whole protocol.** Check congestion handling, message size, loss behavior, and the application's own success response. Neither UDP nor TCP alone establishes that a payment or other business operation succeeded.
+   Do not equate UDP with always faster.; Measure under realistic loss and load..
+
+**Design tradeoff:** Ordered recovery can delay later bytes; avoiding transport waits leaves more delivery policy to the application.
 
 [View all states as still images](../assets/animations/tcp-udp-steps.png)
 

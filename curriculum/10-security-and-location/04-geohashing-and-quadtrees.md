@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A rider stands near a grid boundary. A closer driver is across the line, and a farther driver is inside the same cell. Which candidates should the search inspect? What if a candidate's last location is old?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Geohashing and Quadtrees
 
@@ -91,30 +97,19 @@ Below are some common uses of quadtrees:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Nearby search must cross cell boundaries](../../assets/animations/nearby-search.gif)
-
-</details>
+![Nearby search: index candidates, then verify real proximity](../../assets/animations/nearby-search.gif)
 
 [Read the numbered steps](../../animations/nearby-search.md) · [View the still sequence](../../assets/animations/nearby-search-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Find nearby candidates before calculating exact distance
+Geohashes encode locations into grid cells; quadtrees repeatedly subdivide regions. They narrow candidates before exact distance checks rather than proving which driver is closest.
 
-A ride app needs drivers near a customer. A geohash encodes location into grid cells; a quadtree repeatedly subdivides an area so populated regions can be searched at finer resolution. Both help narrow candidates rather than calculating every driver's distance.
+For ride matching, inspect relevant and neighboring cells, then calculate actual distances and check eligibility and freshness. Two nearby points can lie across a boundary. Choose precision against search radius and density: coarse cells return excess candidates; overly fine cells need more lookups. Expand outward when too few eligible candidates remain.
 
-Two nearby drivers can lie on opposite cell boundaries. Searching only the customer's geohash cell may miss the closer driver.
+For quadtrees, split busy regions with sensible depth or occupancy limits. Moving drivers require index updates, so measure maintenance as well as lookup speed. Reject stale records or handle them under an explicit tolerance. A fast search over outdated positions can still produce a wrong result.
 
-### Apply and improve it
-
-Search the relevant cell and neighboring cells, then calculate actual distances for the candidates. Choose cell precision against the search radius and driver density: coarse cells return too many candidates; overly fine cells require more cell lookups. Expand outward when too few eligible drivers are found.
-
-In a quadtree, split busy regions while setting sensible depth or occupancy limits. Frequent location changes add update work, so measure index maintenance as well as lookup speed. Reject stale location records or treat them according to the application's tolerance; a fast result using an old position can still be wrong.
-
-**Check:** how do you avoid missing a driver just across the grid boundary?
+The spatial search returns candidates, not a reservation. In a ride design, check current driver availability and claim an assignment through authoritative state after discovery. Increasing geographical precision cannot solve a race where two riders select the same available driver. Measure search quality, location age, and assignment success separately.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

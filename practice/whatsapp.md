@@ -2,6 +2,12 @@
 
 [← Schedule](../SCHEDULE.md) · [Design worksheet](../templates/DESIGN.md)
 
+## Try solving this first
+
+A sender presses Send while the recipient is offline. The sender then loses connectivity and presses Send again. What would you promise each person at each point? Where would you keep the message, how would you distinguish a retry from a new message, and what evidence would justify showing a delivered mark?
+
+## Work through the design
+
 1. **Day 1:** Without a solution, define scope, functional requirements, and measurable constraints.
 2. **Day 2:** Estimate requests, storage, and bandwidth. Show units and assumptions. Define APIs and data entities.
 3. **Day 3:** Draw a complete request flow. Justify storage, cache, communication, and partition choices.
@@ -41,12 +47,7 @@ Pause a worker after it records a message but before it acknowledges processing.
 <!-- BEGIN ANIMATION -->
 ## Watch the design in action
 
-<details>
-<summary>Open the looping request-flow animation</summary>
-
-![Design example: accepted is not yet delivered](../assets/animations/case-whatsapp.gif)
-
-</details>
+![Messaging: durable acceptance, routing, and reconnect](../assets/animations/case-whatsapp.gif)
 
 [Read the numbered steps](../animations/case-whatsapp.md) · [View the still sequence](../assets/animations/case-whatsapp-steps.png)
 <!-- END ANIMATION -->

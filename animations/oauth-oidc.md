@@ -1,23 +1,37 @@
-# OAuth / OIDC: code, tokens, and audiences
+# OAuth and OIDC: delegated access without sharing passwords
 
 [← Animation index](README.md)
 
-This is one illustrative scenario, not a complete implementation or a simulation of all failure modes. The related lesson explains assumptions and tradeoffs.
+**Problem:** Delegate API permissions and establish login identity without confusing token purposes or audiences.
 
-<details>
-<summary>Open the looping animation</summary>
+**Scenario:** A photo-printing client signs a user in and requests permitted photos.
 
-![OAuth / OIDC: code, tokens, and audiences](../assets/animations/oauth-oidc.gif)
+The full system map stays visible as the highlighted path and component states change. Every stage lasts one second and the sequence repeats automatically. Values are illustrative; playback speed is not system timing.
 
-</details>
+![OAuth and OIDC: delegated access without sharing passwords](../assets/animations/oauth-oidc.gif)
 
 ## Read the same sequence without motion
 
-1. The browser signs in at the provider; the client does not receive that password.
-2. An authorization-code flow returns a code to the client redirect.
-3. The client exchanges the code with the required checks, such as PKCE.
-4. With OIDC, the client can receive an ID token; an access token targets an API.
-5. The API validates the access token and enforces authorization.
+1. **Request limited access.** The client redirects with the selected scopes and flow protections. Permission requests should name needed access rather than ask for unlimited data.
+   Registered redirect URI; PKCE binds later code redemption.
+2. **Sign in at the provider.** The user authenticates at the provider, not by giving the client a password. OAuth authorization and user authentication are related but different jobs.
+   Provider handles authentication; User authorizes relevant access.
+3. **Return a short-lived code.** The browser returns an authorization code to the registered client callback. A callback code is not the access token to present to the photo API.
+   Validate callback state; Do not redeem an unrelated code.
+4. **Exchange the code.** The client supplies the code and required verifier or client authentication. Exact checks depend on the client type and selected standard flow.
+   Validate code and redirect binding; Client authentication where required.
+5. **Validate the login identity.** For OIDC, the client validates the ID token intended for that client. An ID token conveys client login identity; it is not a generic API permission token.
+   Check issuer, signature, audience; Check nonce and lifetime as required.
+6. **Request the permitted photo.** The client sends the access token to its intended photo API. API authorization includes both token permission and the requested objectâ€™s ownership.
+   Validate token by its format; Do not substitute an ID token.
+7. **Return authorized data.** The API returns the allowed photo through the client. Sign-in and token receipt do not prove every object is accessible.
+   Audience targets the resource API; Keep credentials out of logs.
+8. **Reject an unrelated photo.** The same signed-in user asks for a photo owned by someone else. A valid identity does not grant unlimited access.
+   Scope may not settle ownership; Return a truthful denial.
+9. **Respect token lifetime.** Expired access requires an allowed renewal flow or a new authorization. Renewal is a defined protocol behavior; refresh credentials are not universally issued.
+   Rotate and protect credentials; Plan logout and revocation behavior.
+
+**Design tradeoff:** Delegation avoids sharing a password but requires redirect, token, lifetime, scope, and ownership validation.
 
 [View all states as still images](../assets/animations/oauth-oidc-steps.png)
 

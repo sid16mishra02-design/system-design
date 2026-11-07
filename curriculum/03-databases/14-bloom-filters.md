@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A storage service receives many key lookups, but most requested keys do not exist. Disk reads are expensive. You can keep a small memory structure that sometimes says a missing key might exist. Which result could safely avoid a disk read? Which result must be verified? What could go wrong if the database accepts a new key before that memory structure learns about it?
+<!-- END INQUIRY -->
+
 ## A small filter before an expensive lookup
 
 A Bloom filter answers a membership question with two possible meanings: **definitely absent**, or **possibly present**. It saves space by accepting some false positives.
@@ -37,12 +43,7 @@ Measure actual absent-key frequency, authoritative reads avoided, false positive
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Bloom filter: no, or maybe](../../assets/animations/bloom-filter.gif)
-
-</details>
+![Bloom filters: a cheap gate, not the authority](../../assets/animations/bloom-filter.gif)
 
 [Read the numbered steps](../../animations/bloom-filter.md) · [View the still sequence](../../assets/animations/bloom-filter-steps.png)
 <!-- END ANIMATION -->

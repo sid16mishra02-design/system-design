@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Two ticket servers lose contact. A sells the last seat; B still shows it available. Should B confirm another sale? What if B cannot check?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # CAP Theorem
 
@@ -49,22 +55,21 @@ An AP database delivers availability and partition tolerance at the expense of c
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![CAP: a choice during a partition](../../assets/animations/cap-partition.gif)
-
-</details>
+![CAP: compare two partition policies](../../assets/animations/cap-partition.gif)
 
 [Read the numbered steps](../../animations/cap-partition.md) · [View the still sequence](../../assets/animations/cap-partition-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-During a partition, two replicas cannot communicate. A confirms “sold”; B still has “available.” CAP consistency requires one-copy, real-time behavior, not instantaneous forwarding everywhere. CAP availability requires successful request completion at non-failing nodes; an error does not count.
+CAP consistency means one-copy, real-time behavior, not instant forwarding everywhere. Availability requires successful request completion at non-failing nodes; an error does not count. Require an authoritative reservation decision; reject an uncoordinated sale rather than sell twice. Recommendations may tolerate older results. This is a per-operation partition decision, not simply “choose two.”
 
-**Apply:** ticket reservations need an authoritative decision preventing duplicate sales. Reject an uncoordinated sale rather than confirm it twice. Recommendations may instead serve older results. Choose per operation during the partition, not two labels for every situation.
+### Put yourself on the isolated side
 
-Self-check: what can B safely answer?
+Two replicas agree that a ticket is available. They lose communication. A buyer on side A completes a purchase; side B now receives a request. B cannot distinguish “A sold it” from “nothing changed at A” by looking at its old state.
+
+If B returns its old answer as current, the system may violate the promised one-copy, real-time behavior. If B waits or rejects a request that its nonfailed node received, it gives up CAP availability for that request. The problem is missing information, not a lack of clever routing.
+
+State the requirement for the operation first. A briefly old profile may be tolerable; selling the same seat twice is a different consequence. CAP's availability definition is not a monthly uptime percentage, and the theorem does not mean choosing any two desirable properties forever. **Check:** what can B truthfully promise while it cannot learn A's state?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

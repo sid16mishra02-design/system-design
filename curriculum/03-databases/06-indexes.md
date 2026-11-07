@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+One customer's latest ten orders require examining a million rows. What information could narrow the search, and what extra work would writes inherit?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Indexes
 
@@ -31,28 +37,25 @@ Sparse indexes require less maintenance than dense indexes at write-time since t
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![An index narrows the records to examine](../../assets/animations/index-lookup.gif)
-
-</details>
+![Indexes: narrow a query without forgetting write cost](../../assets/animations/index-lookup.gif)
 
 [Read the numbered steps](../../animations/index-lookup.md) · [View the still sequence](../../assets/animations/index-lookup-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Use it: find a customer's recent orders
+An index narrows the search instead of replacing the data. For `WHERE customer_id = ? ORDER BY created_at DESC`, an index starting with those fields may avoid unrelated rows; verify the database's actual plan.
 
-A book index narrows where you look; it does not replace the pages. For `WHERE customer_id = ? ORDER BY created_at DESC`, an index beginning with those fields may avoid examining unrelated orders. The exact benefit depends on the database and query plan.
+Compare rows examined, rows returned, and timing before and after adding the candidate index using representative data. An index on city will not optimize every query.
 
-### Apply and improve
+Indexes consume storage and add write maintenance. Check which workloads use an index before removing it. Faster reads must justify those costs.
 
-Inspect how many rows the query scans and returns. Compare its plan and timing before and after adding the candidate index using representative data. An index on city may help one filter but not every possible query.
+### Predict the work before measuring it
 
-Indexes consume space and add write work because inserts and updates must maintain them. Remove genuinely unused indexes only after checking the workloads they support.
+Imagine ten million orders, with only a few dozen belonging to the current customer. Without a suitable access path, the database may examine many unrelated rows. An index matching customer and creation time can let it find that customer's range and return the newest entries with less work.
 
-Self-check: why can adding indexes speed reads while slowing order creation?
+The index is an extra maintained structure. Inserting a new order now updates both the table and relevant indexes. Adding an index to every column can therefore consume memory, storage, and write capacity while helping few queries.
+
+Use an execution plan and representative measurements to check your prediction. A tiny test table can hide the cost of a scan; a nonselective filter can still make a scan reasonable. **Question:** when the screen asks for an unindexed combination of filters and sort order, what evidence would show whether an existing index actually helps?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

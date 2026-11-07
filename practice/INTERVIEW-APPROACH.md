@@ -2,7 +2,11 @@
 
 [← Start here](../README.md)
 
-1. Read the full interview-method lesson below.
+## Try solving this first
+
+“Design chat.” What must you ask before choosing components for a two-person messenger versus a global broadcast service?
+
+1. Attempt the problem, then read the interview-method lesson below.
 2. Optional further reading: [How to Answer a System Design Interview Problem](https://algomaster.io/learn/system-design-interviews/answering-framework).
 3. Use the [design worksheet](../templates/DESIGN.md) before reading any solution.
 

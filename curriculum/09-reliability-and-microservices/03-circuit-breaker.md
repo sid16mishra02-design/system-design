@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Checkout repeatedly waits on a failing payment service until workers are exhausted. Should it keep trying every request? How can it notice recovery safely?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Circuit breaker
 
@@ -33,24 +39,21 @@ In this state, the circuit breaker allows a limited number of requests from the 
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Circuit breaker: closed, open, half-open](../../assets/animations/circuit-breaker.gif)
-
-</details>
+![Circuit breaker: stop cascading calls, then test recovery](../../assets/animations/circuit-breaker.gif)
 
 [Read the numbered steps](../../animations/circuit-breaker.md) · [View the still sequence](../../assets/animations/circuit-breaker-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Stop repeating a failing dependency call
+A breaker reacts to repeated dependency failures; a timeout bounds one call. Closed permits calls, open rejects them, and half-open admits limited recovery probes.
 
-Suppose payment calls repeatedly time out. Opening a breaker temporarily stops new calls; limited half-open probes later test recovery. A timeout bounds one call, while the breaker reacts to a failure pattern.
+For payments, show pending or unavailable rather than inventing success. Separate unrelated dependencies and choose thresholds from traffic. Bound retries and use backoff so probes do not create another flood.
 
-Choose thresholds from observed traffic, and separate unrelated dependencies. Use bounded retries and backoff so probes do not become a new flood. A checkout can show payment pending or unavailable; inventing a successful charge is not a safe fallback.
+A stuck payment call can hold a worker, connection, or other resource that unrelated checkouts also need. Failing fast while the dependency is unhealthy protects that shared capacity. It does not cancel every request already in progress or repair the payment provider.
 
-**Check:** which response preserves business correctness while the payment breaker is open?
+After a waiting period, allow a limited probe set rather than immediately releasing the entire backlog. Successful probes can support closing; failed probes reopen the breaker according to its policy. A low-traffic service may need different failure evaluation from one receiving thousands of calls each second.
+
+Measure avoided failed calls, useful checkout success, and recovery delay. Keep payment state honest when a response is uncertain: a timeout does not prove that a charge never occurred.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

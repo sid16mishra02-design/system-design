@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Billing and catalog teams need independent databases. How will a checkout read both without assuming their writes and recovery happen together?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Database Federation
 
@@ -43,22 +49,23 @@ Below are some disadvantages of federated databases:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Sharding divides ownership of data](../../assets/animations/sharding.gif)
-
-</details>
+![Sharding: route by ownership, then handle growth](../../assets/animations/sharding.gif)
 
 [Read the numbered steps](../../animations/sharding.md) · [View the still sequence](../../assets/animations/sharding-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-Use separate databases for billing and catalog when those domains need independent ownership or scaling. Federation separates by function; sharding divides a dataset by a key.
+Functional partitioning separates databases by business domain; federation can also provide unified queries across autonomous stores. Sharding instead divides a dataset by key.
 
-**Apply:** assign each fact an owner, then define how cross-domain reads and updates work. Avoid repeatedly joining remote databases in a latency-sensitive request; a read model may help, with explicit freshness rules. Separate databases also mean separate backups and recovery coordination.
+Assign each fact an owner and define cross-domain reads and updates. Consider a read model instead of repeated remote joins, with explicit freshness rules. Independent stores also need coordinated backups and recovery.
 
-Self-check: is moving customers 1–1000 to another database functional federation or sharding?
+### Separate ownership before separating machines
+
+Imagine orders and catalog teams operating their own databases. An order stores a product identifier and the purchase-time price; the catalog owns the current description. A screen needing both must decide how to compose the results and what to show when catalog data is unavailable.
+
+Splitting by business responsibility can let teams evolve their data independently. It also removes the assumption that one local transaction or join covers every fact. A reporting layer may unify queries, but it cannot erase network delay or conflicting ownership rules.
+
+For frequent cross-domain reads, a derived view can reduce repeated calls if its update delay is acceptable. For infrequent operations, simple service calls may be easier to maintain. **Try again:** if the catalog changes a price, should yesterday's order total change? Define what each stored value means before synchronizing it.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

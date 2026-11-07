@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A school controls students' outgoing browsing; a shop controls traffic entering its servers. What should each intermediary represent, inspect, and forward?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Proxy
 
@@ -64,18 +70,18 @@ Below are some commonly used proxy technologies:
 
 ## Make it concrete
 
-### Use it: place a controlled entry or exit point
+A forward proxy represents clients making outgoing requests; a reverse proxy represents servers receiving requests. HTTP load balancers and reverse proxies can overlap.
 
-A school proxy acts for students making outgoing requests. A shop's reverse proxy acts for its servers receiving requests. Follow who each intermediary represents.
+A shop's reverse proxy can route /orders, terminate TLS, and enforce request limits. Measure its queueing, connections, and latency before adding app servers. Set timeouts and size limits deliberately, and reuse connections where suitable.
 
-A reverse proxy can route `/orders` to order servers, terminate TLS, and apply request limits. It can also become a bottleneck or single failure point.
+Trust forwarded client identity only through a controlled chain. Services must still enforce business permissions. The proxy itself can become a bottleneck or failure point.
 
-### Apply and improve
+### Identify whose boundary it represents
 
-Measure request duration, connection count, and queueing at the proxy before adding application servers. Set request size and timeout limits deliberately. Use connection reuse to avoid unnecessary setup work. Forward original client information only through a trusted chain; otherwise callers may forge identity-related headers.
+If office laptops send web traffic through an outbound intermediary, that intermediary represents the clients: a forward proxy. If customers call one public shop address and an intermediary routes requests to internal services, it represents the servers: a reverse proxy. The direction is about responsibility, not whether packets can travel back.
 
-An HTTP load balancer can also be a reverse proxy; these roles can overlap.
+A reverse proxy can hide changing internal addresses and apply common connection policies. That becomes useful when services move or many callers would otherwise duplicate routing configuration. For one small internal service, another intermediary may add little value.
 
-Self-check: which checks belong at the entry point, and which business permissions must still be checked by the service?
+When optimizing, inspect the proxy's connection limits and waiting time as well as downstream work. A fast proxy cannot repair a slow stock query. **Question:** if a client supplies a forged forwarded-address header, which trusted component should replace or validate it before an application relies on it?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+An order must trigger billing and shipping, even when a receiver is temporarily offline. Should workers compete for one job or each receive the event? What must survive a crash?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Message Brokers
 
@@ -45,30 +51,23 @@ Here are some commonly used message brokers:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![A work queue can redeliver a job](../../assets/animations/work-queue.gif)
-
-</details>
+![Work queues: absorb bursts and survive worker crashes](../../assets/animations/work-queue.gif)
 
 [Read the numbered steps](../../animations/work-queue.md) · [View the still sequence](../../assets/animations/work-queue-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### A real integration boundary
+A broker stores or routes messages between producers and consumers under configured guarantees. Choose a queue when one worker should perform each job, and independent subscriptions when several business reactions each need the event.
 
-An order service sends work to messaging infrastructure. Billing and shipping consume it later. The broker stores or routes messages according to its configured guarantees; a queue or topic describes the delivery pattern offered.
+Specify persistence, acknowledgement, ordering, and retry requirements before choosing a product. Streaming platforms can track consumer positions and support delivery guarantees; labels alone do not settle behavior. Batch where added delay is acceptable, bound in-flight work, and monitor backlog age. A consumer crash after a side effect but before acknowledgement can lead to repetition.
 
-### Apply it
+### Follow ownership of unfinished work
 
-Decide whether one worker should perform each job or every independent subscriber should receive the event. Specify persistence, acknowledgement, ordering, and retry requirements before choosing a product.
+After an order commits, email delivery can happen later. A broker can separate the order service's pace from the email worker's pace, but first decide what makes the handoff durable. If the service commits an order and crashes before publishing, the broker never saw the event. A recorded publication intent or another suitable atomic handoff mechanism closes that gap.
 
-For throughput, batch messages when the added delay is acceptable. Limit consumers' in-flight work so a fast broker cannot overwhelm a slow database. Track backlog age, not just message count: ten old payment jobs can matter more than thousands of fresh analytics events.
+Next decide when work is acknowledged. Acknowledging before completing a required effect can lose work after a crash; acknowledging afterward can allow duplicate execution. The consumer must handle the selected delivery semantics.
 
-Streaming platforms can track consumer positions and support delivery guarantees; inspect each system’s contract.
-
-**Check:** what happens after a consumer performs work but crashes before acknowledging it?
+Watch queue age and processing rate, not merely the number of connected workers. More workers help only until a downstream dependency saturates. **Question:** when the broker reconnects after an outage, what limits the recovery burst reaching your email provider?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -1,0 +1,499 @@
+[
+  {
+    "topic": "What is system design?",
+    "path": "curriculum/01-core-concepts/01-what-is-system-design.md",
+    "challenge": "A payment times out. Should another click create another charge?",
+    "words": 10,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Scalability",
+    "path": "curriculum/01-core-concepts/02-scalability.md",
+    "challenge": "Demand doubles; the database is saturated. Where should capacity grow?",
+    "words": 10,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Availability",
+    "path": "curriculum/01-core-concepts/03-availability.md",
+    "challenge": "One checkout server fails during a sale. What must happen before its spare can safely serve the waiting customers?",
+    "words": 19,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Latency vs Throughput vs Bandwidth",
+    "path": "curriculum/01-core-concepts/04-latency-vs-throughput-vs-bandwidth.md",
+    "challenge": "During a sale, checkout responds in 200 ms on average, yet some users wait over a second. An illustrative trace shows 30 ms of network travel, 70 ms of application work, and a 100 ms query. More users arrive each second. Would you buy bandwidth, add servers, change the query, or limit concurrency? Which measurement would tell you whether the change helped the customer's experience?",
+    "words": 65,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Reliability",
+    "path": "curriculum/01-core-concepts/05-reliability.md",
+    "challenge": "A customer places an order. The payment provider charges successfully, but the order worker crashes before recording the result or replying. The customer sees an error and tries again. Which facts must survive the crash? How can the system decide whether to retry, resume, or refund without inventing a second purchase? What should the customer see while the outcome is still uncertain?",
+    "words": 62,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "SPOF",
+    "path": "curriculum/01-core-concepts/06-spof.md",
+    "challenge": "A shop deploys two application servers and promises to survive a machine failure. Both servers use one load balancer, one database, and the same configuration service. During a sale, the shared database stops responding. Which requests can still work? Where would another copy actually help? Who would select the replacement, reconnect clients, and prevent two machines from accepting conflicting writes?",
+    "words": 60,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "IP",
+    "path": "curriculum/02-networking/01-ip.md",
+    "challenge": "Your shop must accept internet traffic, but its database should not. Which machines need public addresses, and how will the others communicate?",
+    "words": 22,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "OSI Model",
+    "path": "curriculum/02-networking/02-osi-model.md",
+    "challenge": "Your browser cannot load the shop. Would you inspect a cable, a port, a certificate, or the database first\u2014and what evidence changes that choice?",
+    "words": 25,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "TCP and UDP",
+    "path": "curriculum/02-networking/03-tcp-and-udp.md",
+    "challenge": "A voice call loses a sound packet; a file download loses some bytes. Should both wait for recovery?",
+    "words": 18,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Domain Name System (DNS)",
+    "path": "curriculum/02-networking/04-domain-name-system-dns.md",
+    "challenge": "You move shop.example from server A to B. Some users still reach A. What information could they be using, and when should it change?",
+    "words": 25,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Proxy",
+    "path": "curriculum/02-networking/05-proxy.md",
+    "challenge": "A school controls students' outgoing browsing; a shop controls traffic entering its servers. What should each intermediary represent, inspect, and forward?",
+    "words": 21,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "HTTP/HTTPS",
+    "path": "curriculum/02-networking/06-httphttps.md",
+    "challenge": "A mobile app's first product request is slow, while later requests are faster. The order endpoint uses HTTPS, yet one customer can still request someone else's order by changing an identifier. Then a checkout request times out after the server may have created the order. Which parts of these problems concern connection setup, protected transport, authorization, and business-level retry behavior?",
+    "words": 60,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Checksums",
+    "path": "curriculum/02-networking/07-checksums.md",
+    "challenge": "A user uploads a large archive in ten chunks. The network drops during one chunk, two pieces arrive in the wrong order, and the final assembled file will later be restored from backup. What would let you detect which bytes differ, retry only damaged work, and verify the completed object? If a supplied verification value is also replaced, what confidence should it give you?",
+    "words": 64,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Load Balancing",
+    "path": "curriculum/02-networking/08-load-balancing.md",
+    "challenge": "App A accepted your login, but the next request reaches App B. How can B identify the same session? What if A dies mid-purchase?",
+    "words": 24,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Clustering",
+    "path": "curriculum/02-networking/09-clustering.md",
+    "challenge": "Three workers resize photos. One crashes after writing an image but before reporting success. Who should resume the job, and what could go wrong?",
+    "words": 24,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Storage",
+    "path": "curriculum/03-databases/01-storage.md",
+    "challenge": "A photo upload stores the image, then crashes before recording its database row. Where should the bytes and metadata live, and how could you recover?",
+    "words": 25,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Databases and DBMS",
+    "path": "curriculum/03-databases/02-databases-and-dbms.md",
+    "challenge": "A shop must find orders by customer, update statuses, and reject impossible relationships. Which guarantees should the data manager enforce, and which workload should guide its design?",
+    "words": 27,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "SQL databases",
+    "path": "curriculum/03-databases/03-sql-databases.md",
+    "challenge": "A customer's order-history screen becomes slow as the shop grows. What would you inspect before adding servers, and which data relationships must remain valid?",
+    "words": 24,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "NoSQL databases",
+    "path": "curriculum/03-databases/04-nosql-databases.md",
+    "challenge": "Products have different attributes, sessions are fetched by identifier, and recommendations explore relationships. Would one representation suit all three? What would you measure before choosing?",
+    "words": 25,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "SQL vs NoSQL databases",
+    "path": "curriculum/03-databases/05-sql-vs-nosql-databases.md",
+    "challenge": "Checkout updates stock while a catalog stores varied product attributes. Which operations and guarantees should decide the databases\u2014not their labels?",
+    "words": 21,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Indexes",
+    "path": "curriculum/03-databases/06-indexes.md",
+    "challenge": "One customer's latest ten orders require examining a million rows. What information could narrow the search, and what extra work would writes inherit?",
+    "words": 23,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Normalization and Denormalization",
+    "path": "curriculum/03-databases/07-normalization-and-denormalization.md",
+    "challenge": "A customer moves after an order ships. Should every address change? How would you distinguish today's profile from the delivery fact recorded when the order was placed?",
+    "words": 27,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Transactions",
+    "path": "curriculum/03-databases/08-transactions.md",
+    "challenge": "Two buyers see one ticket. Which single database action should determine who reserves it, and what result permits confirmation?",
+    "words": 19,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "ACID and BASE consistency models",
+    "path": "curriculum/03-databases/09-acid-and-base-consistency-models.md",
+    "challenge": "An order commits, but its replica still shows yesterday's list. Which correctness promise held, and which reader-visible guarantee did not?",
+    "words": 20,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Database Replication",
+    "path": "curriculum/03-databases/10-database-replication.md",
+    "challenge": "You save an address and immediately read its old value elsewhere. Which copy answered? Would another live copy also protect you from accidental deletion?",
+    "words": 24,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Sharding",
+    "path": "curriculum/03-databases/11-sharding.md",
+    "challenge": "A shop outgrows one database. Which customer requests can stay together, how will callers find their owner, and which reports need multiple owners?",
+    "words": 23,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Consistent Hashing",
+    "path": "curriculum/03-databases/12-consistent-hashing.md",
+    "challenge": "A cache gains a node. How much data should move, how will clients agree on ownership, and when is the new owner ready?",
+    "words": 23,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Database Federation",
+    "path": "curriculum/03-databases/13-database-federation.md",
+    "challenge": "Billing and catalog teams need independent databases. How will a checkout read both without assuming their writes and recovery happen together?",
+    "words": 21,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Bloom Filters",
+    "path": "curriculum/03-databases/14-bloom-filters.md",
+    "challenge": "A storage service receives many key lookups, but most requested keys do not exist. Disk reads are expensive. You can keep a small memory structure that sometimes says a missing key might exist. Which result could safely avoid a disk read? Which result must be verified? What could go wrong if the database accepts a new key before that memory structure learns about it?",
+    "words": 64,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "CAP Theorem",
+    "path": "curriculum/04-distributed-data/01-cap-theorem.md",
+    "challenge": "Two ticket servers lose contact. A sells the last seat; B still shows it available. Should B confirm another sale? What if B cannot check?",
+    "words": 25,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "PACELC Theorem",
+    "path": "curriculum/04-distributed-data/02-pacelc-theorem.md",
+    "challenge": "Your global profile app runs normally, but fresh reads wait for another region. Is the network partitioned? What delay/freshness choice still exists?",
+    "words": 23,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Distributed Transactions",
+    "path": "curriculum/04-distributed-data/03-distributed-transactions.md",
+    "challenge": "An order is recorded in one service and charged in another. Then the workflow fails, or the charge response disappears. Can one local database transaction settle everything? When should you retry, wait, or compensate?",
+    "words": 34,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Caching",
+    "path": "curriculum/05-caching/01-caching.md",
+    "challenge": "A product page repeatedly reads a slow database. You add a fast copy of its price. Later the database says \u20b9550 while the copy still says \u20b9500. Which price should checkout trust? How should a missing or outdated copy be refreshed? What happens when hundreds of readers miss together?",
+    "words": 49,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Caching Strategies",
+    "path": "curriculum/05-caching/02-caching-strategies.md",
+    "challenge": "Your product page uses a fast copy of database prices. A reader fetches \u20b9500, pauses, and later stores it after another request updates the database to \u20b9550 and removes the old copy. Which value might readers now see? Who should load missing values and update writes? When may a write be acknowledged if persistence happens later?",
+    "words": 56,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Cache Eviction Policies",
+    "path": "curriculum/05-caching/03-cache-eviction-policies.md",
+    "challenge": "A cache holds only three products. You insert A, B, and C, read A again, then need room for D. Which item would you remove, and why? Would your answer change if B had been read hundreds of times earlier? Does removing an old item for space also guarantee that retained prices are fresh?",
+    "words": 54,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Distributed Caching",
+    "path": "curriculum/05-caching/04-distributed-caching.md",
+    "challenge": "Two hundred application instances reuse one popular product through a shared cache. Its entry expires, and every instance asks the database for it at once. Would adding more cache nodes solve this one-key burst? How could callers share the reload work? What should happen if the cache is entirely unavailable but the database cannot absorb unlimited fallback requests?",
+    "words": 58,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Content Delivery Network (CDN)",
+    "path": "curriculum/05-caching/05-content-delivery-network-cdn.md",
+    "challenge": "Viewers in several countries request the same product image from one distant server. Which work can happen closer to them? If you replace the image, why might some viewers still see its old version? Would the same sharing policy be safe for private invoices?",
+    "words": 44,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "APIs",
+    "path": "curriculum/06-api-fundamentals/01-apis.md",
+    "challenge": "A mobile developer needs to create an order without knowing your internal database structure. What information must their request contain, and what must your response guarantee? The service records the order but the response disappears. How should the developer retry without accidentally creating another order? Think about inputs, permissions, errors, and the difference between acceptance and completed work.",
+    "words": 58,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "REST, GraphQL, gRPC",
+    "path": "curriculum/06-api-fundamentals/02-rest-graphql-grpc.md",
+    "challenge": "Your product screen needs names, prices, and stock for thirty items. Should the client fetch resources, request selected fields, or call a typed inventory operation? If the response is small but triggers thirty database lookups, what actually needs improving?",
+    "words": 39,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "API Gateway",
+    "path": "curriculum/06-api-fundamentals/03-api-gateway.md",
+    "challenge": "Your app has five microservices with ten APIs each. One screen needs three APIs from different services. Which calls should the client make? Where could you combine their responses? What should happen if one service is slow?",
+    "words": 37,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Idempotency",
+    "path": "curriculum/06-api-fundamentals/04-idempotency.md",
+    "challenge": "A \u20b9500 payment succeeds, but its response disappears. Two identical retries arrive together. How can both return a sensible result without charging twice? What if you record \u201calready handled\u201d and crash before performing the payment?",
+    "words": 35,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Rate Limiting",
+    "path": "curriculum/06-api-fundamentals/05-rate-limiting.md",
+    "challenge": "A search customer should receive at most 100 requests per second, but ten app servers each enforce that allowance locally. What could the customer actually send? How much burst traffic is acceptable, and what should happen when allowance runs out?",
+    "words": 40,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Long polling, WebSockets, Server-Sent Events (SSE)",
+    "path": "curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md",
+    "challenge": "A scoreboard mainly sends scores to browsers; an editor exchanges changes both ways. Which connection pattern fits each? After a thirty-second disconnect, how will the client discover missed updates rather than silently continue with old state?",
+    "words": 36,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Webhooks",
+    "path": "curriculum/06-api-fundamentals/07-webhooks.md",
+    "challenge": "A payment provider tells your shop that a charge succeeded. Your shop records the event, but its acknowledgement disappears, so the provider sends the same event again. Should another shipment begin? How will you recognize the sender and distinguish a retry from a new event? What if a delayed pending event arrives after you already know payment completed?",
+    "words": 58,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "API Design",
+    "path": "curriculum/06-api-fundamentals/08-api-design.md",
+    "challenge": "One customer has a million orders, and a client asks to list them. Should one response contain everything? If you divide results into pages, how do equal creation times and concurrent inserts affect the next page? What must a continuation marker mean, and how do you stop a user changing it to read another customer\u2019s orders?",
+    "words": 56,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Message Brokers",
+    "path": "curriculum/07-asynchronous-communication/01-message-brokers.md",
+    "challenge": "An order must trigger billing and shipping, even when a receiver is temporarily offline. Should workers compete for one job or each receive the event? What must survive a crash?",
+    "words": 30,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Message Queues",
+    "path": "curriculum/07-asynchronous-communication/02-message-queues.md",
+    "challenge": "A thousand uploads arrive together. Thumbnail generation is slower than upload acceptance. Where should unfinished jobs wait? A worker saves an image and crashes before reporting completion: should the replacement do the work again?",
+    "words": 34,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Publish-Subscribe",
+    "path": "curriculum/07-asynchronous-communication/03-publish-subscribe.md",
+    "challenge": "Every order needs billing and shipping. Both teams put workers on one shared work queue, but some orders get only one action. Why? How should deliveries and progress differ between teams and within one team?",
+    "words": 35,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Change Data Capture (CDC)",
+    "path": "curriculum/07-asynchronous-communication/04-change-data-capture-cdc.md",
+    "challenge": "The product database commits a new price, but updating the search index fails. Repeated full scans are expensive, and independently writing both stores creates awkward failure cases. How could search learn about committed changes? After a pipeline restart, what if the same change appears again? How would you detect a destination falling far behind while retained change history keeps growing?",
+    "words": 60,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "N-tier architecture",
+    "path": "curriculum/08-architectural-patterns/01-n-tier-architecture.md",
+    "challenge": "A shop's checkout slows while product pages remain responsive. Which responsibility needs extra capacity? What changes if the database runs on another machine?",
+    "words": 23,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Monoliths and Microservices",
+    "path": "curriculum/08-architectural-patterns/02-monoliths-and-microservices.md",
+    "challenge": "A shop's catalog team cannot release a small search change without coordinating a billing deployment. Catalog traffic also grows faster than checkout. Would splitting services solve both problems? What new failures could one order encounter? Which data should each team own?",
+    "words": 41,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Event-Driven Architecture (EDA)",
+    "path": "curriculum/08-architectural-patterns/03-event-driven-architecture-eda.md",
+    "challenge": "An order is saved, but a crash prevents shipping from hearing about it. What information must survive? Should checkout success mean shipping already finished?",
+    "words": 24,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Event Sourcing",
+    "path": "curriculum/08-architectural-patterns/04-event-sourcing.md",
+    "challenge": "A balance changed several times, and an auditor asks how it reached 70. Can you reconstruct it? How would rebuilding avoid charging or emailing someone again?",
+    "words": 26,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Command and Query Responsibility Segregation (CQRS)",
+    "path": "curriculum/08-architectural-patterns/05-command-and-query-responsibility-segregation-cqrs.md",
+    "challenge": "Creating an order succeeds, but the customer's order-list screen does not show it yet. Which state is authoritative? What should the customer see while the list catches up?",
+    "words": 28,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Enterprise Service Bus (ESB)",
+    "path": "curriculum/08-architectural-patterns/06-enterprise-service-bus-esb.md",
+    "challenge": "Billing emits one address format; legacy shipping expects another. Where should conversion happen? What happens to orders if the converter fails?",
+    "words": 21,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Virtual Machines (VMs) and Containers",
+    "path": "curriculum/08-architectural-patterns/07-virtual-machines-vms-and-containers.md",
+    "challenge": "A shop replaces workers frequently. One needs a different operating-system kernel; another repeatedly runs out of memory. Which isolation boundary matters? What must remain after a worker disappears?",
+    "words": 28,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Serverless Architecture",
+    "path": "curriculum/08-architectural-patterns/08-serverless-architecture.md",
+    "challenge": "Your photo service receives no uploads all night, then 5,000 photos in a minute. Thumbnail jobs sometimes run twice, and the database accepts only 100 connections. What must survive between executions? How would you control the burst without losing work? Which measurements would tell you whether paying for warm capacity is worthwhile?",
+    "words": 53,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Peer-to-Peer (P2P) Architecture",
+    "path": "curriculum/08-architectural-patterns/09-peer-to-peer-p2p-architecture.md",
+    "challenge": "A training app distributes one large video file to many learners. Some learners already have different pieces and can upload them; others sit behind restrictive routers. One helpful peer suddenly leaves before sharing its last piece. How would a newcomer find trustworthy content and finish downloading? Which dependencies remain even if peers exchange most bytes directly?",
+    "words": 56,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Service Discovery",
+    "path": "curriculum/09-reliability-and-microservices/01-service-discovery.md",
+    "challenge": "An orders instance is replaced, but a long-lived caller keeps using its old address. How should the caller learn the change? Can a recently discovered destination still fail?",
+    "words": 28,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "HeartBeats",
+    "path": "curriculum/09-reliability-and-microservices/02-heartbeats.md",
+    "challenge": "A worker reports every five seconds, then sends nothing for twenty seconds. A replacement begins the same job, but the original worker later resumes and still believes it owns the work. Was the original worker necessarily dead? What should the monitor infer from silence? How would you prevent both workers from applying the same irreversible business effect?",
+    "words": 57,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Circuit breaker",
+    "path": "curriculum/09-reliability-and-microservices/03-circuit-breaker.md",
+    "challenge": "Checkout repeatedly waits on a failing payment service until workers are exhausted. Should it keep trying every request? How can it notice recovery safely?",
+    "words": 24,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "SLA, SLO, SLI",
+    "path": "curriculum/09-reliability-and-microservices/04-sla-slo-sli.md",
+    "challenge": "Checkout responds quickly but sometimes returns errors. What counts as success? Which measured percentage would show whether the service meets its promise?",
+    "words": 22,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Disaster recovery",
+    "path": "curriculum/09-reliability-and-microservices/05-disaster-recovery.md",
+    "challenge": "A region fails when the latest usable order backup is an hour old. What can be lost? When will customers actually be able to purchase again?",
+    "words": 26,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Consensus Algorithms",
+    "path": "curriculum/09-reliability-and-microservices/06-consensus-algorithms.md",
+    "challenge": "Three servers maintain a shared configuration history. The current leader becomes isolated from the other two, but can still hear from one client. Both network groups want to accept changes. Which decisions may safely become committed? What should happen if no communicating group satisfies the protocol's rules? How would a returning leader learn what it missed?",
+    "words": 56,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Distributed Locking",
+    "path": "curriculum/09-reliability-and-microservices/07-distributed-locking.md",
+    "challenge": "Worker A starts a monthly report, pauses for a long time, then resumes. Meanwhile its ownership deadline passed, so worker B took over and saved a newer report. A now tries to overwrite that result. Did deadline expiry physically stop A? What must the protected storage check? Could a conditional write avoid needing this lock at all?",
+    "words": 57,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Gossip Protocol",
+    "path": "curriculum/09-reliability-and-microservices/08-gossip-protocol.md",
+    "challenge": "A new storage node announces itself to one peer. Some clients can discover it immediately, while other peers still list only the old members. A temporary network partition delays one part of the cluster. Must every view already match? How can peers decide whether returning observations are old or new? Would learning the same membership list also establish one safe order for payments?",
+    "words": 63,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Distributed Tracing",
+    "path": "curriculum/09-reliability-and-microservices/09-distributed-tracing.md",
+    "challenge": "An order page calls inventory and delivery at the same time. Each call has a recorded duration, and the parent request records time that already includes those calls. A dashboard adds every span and reports more time than the customer waited. Which measurements overlap? Where is the actual critical path? How would you prove the trace follows the same request across all services?",
+    "words": 63,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "SSL, TLS, mTLS",
+    "path": "curriculum/10-security-and-location/01-ssl-tls-mtls.md",
+    "challenge": "A browser connects securely to a gateway, which forwards the request internally. Where can the data be read? How does the next service know who called it?",
+    "words": 27,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "OAuth 2.0 and OpenID Connect (OIDC)",
+    "path": "curriculum/10-security-and-location/02-oauth-20-and-openid-connect-oidc.md",
+    "challenge": "A printing app needs selected photos but must not receive the user's password. What permission should it request? Which returned information proves login, and what belongs at the photo API?",
+    "words": 30,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Single Sign-On (SSO)",
+    "path": "curriculum/10-security-and-location/03-single-sign-on-sso.md",
+    "challenge": "An employee signs in once and opens payroll and email. Later, payroll logout leaves email open, and disabling the employee at the provider does not immediately close an existing payroll session. Which sessions and permissions must the organization control? How quickly must access removal take effect?",
+    "words": 46,
+    "status": "Scenario and first-principles questions precede the explanation"
+  },
+  {
+    "topic": "Geohashing and Quadtrees",
+    "path": "curriculum/10-security-and-location/04-geohashing-and-quadtrees.md",
+    "challenge": "A rider stands near a grid boundary. A closer driver is across the line, and a farther driver is inside the same cell. Which candidates should the search inspect? What if a candidate's last location is old?",
+    "words": 37,
+    "status": "Scenario and first-principles questions precede the explanation"
+  }
+]

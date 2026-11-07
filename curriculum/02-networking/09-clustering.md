@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Three workers resize photos. One crashes after writing an image but before reporting success. Who should resume the job, and what could go wrong?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Clustering
 
@@ -72,12 +78,7 @@ Clustering is commonly used in the industry, and often many technologies offer s
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Scale a service without losing sessions](../../assets/animations/load-balancer.gif)
-
-</details>
+![Load balancing: healthy routing and shared state](../../assets/animations/load-balancer.gif)
 
 [Read the numbered steps](../../animations/load-balancer.md) · [View the still sequence](../../assets/animations/load-balancer-steps.png)
 <!-- END ANIMATION -->

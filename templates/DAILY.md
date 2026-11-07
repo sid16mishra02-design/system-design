@@ -2,6 +2,9 @@
 
 - Date / week / day:
 - Topic and reading link:
+- Before reading: my answer or sketch for the opening scenario:
+- The constraint that made my first idea insufficient:
+- After reading: what I changed, and why:
 - In my own words (five sentences):
 - Diagram (draw a request, its data, and the return path):
 - One concrete example:

@@ -1,4 +1,4 @@
-"""Check source preservation, topic budgets, curriculum coverage, and links."""
+"""Check source preservation, disclosed teaching counts, inquiry coverage, and links."""
 from pathlib import Path
 import hashlib
 import json
@@ -66,8 +66,10 @@ linkmap = json.loads((ROOT/'metadata/inline-link-map.json').read_text(encoding='
 comparisons = json.loads((ROOT/'metadata/tradeoffs.json').read_text(encoding='utf-8'))
 tradeoff_page = (ROOT/'practice/TRADEOFFS.md').read_text(encoding='utf-8')
 for row in comparisons:
-    check(row['words'] == words(' '.join([row['comparison'], row['choice'], row['example']])),
+    check(row['words'] == words(' '.join([row['comparison'], row['choice'], row['example'], row['opening_question']])),
           f'Tradeoff count mismatch: {row["comparison"]}')
+    check(row['opening_question'] in tradeoff_page and '?' in row['opening_question'],
+          f'Missing comparison scenario: {row["comparison"]}')
     check(f'| {row["comparison"]} | {row["choice"]} | {row["example"]} |' in tradeoff_page,
           f'Local tradeoff explanation missing: {row["comparison"]}')
 
@@ -94,6 +96,8 @@ for entry in audit:
         example = re.search(r'## Make it concrete\n\n(.*?)\n\n\[Next topic', text, re.S)
         checkpoint = re.search(r'## Before moving on\n\n(.*?)\n\n\[Next topic', text, re.S)
         added = words(example[1]) if example else words(checkpoint[1]) if checkpoint else 0
+        inquiry = re.search(r'<!-- BEGIN INQUIRY -->\n## Try solving this first\n\n(.*?)\n<!-- END INQUIRY -->', text, re.S)
+        added += words(inquiry[1]) if inquiry else 0
     check(entry['inline_teaching_words'] == added, f'Inline count mismatch: {entry["topic"]}')
     extra = sum(row['words'] for row in comparisons if row['topic'] == entry['topic'])
     check(entry['tradeoff_teaching_words'] == extra, f'Tradeoff allocation mismatch: {entry["topic"]}')
@@ -101,10 +105,24 @@ for entry in audit:
     baseline = words(original[entry['topic']])
     check(entry['original_words'] == baseline, f'Source count mismatch: {entry["topic"]}')
     check(entry['added_explanatory_words'] == added, f'Addition count mismatch: {entry["topic"]}')
-    check(added <= int(.30*baseline), f'30% addition limit exceeded: {entry["topic"]}')
+    check(entry['exceeds_initial_30_percent'] == (added > int(.30*baseline)),
+          f'Expansion disclosure mismatch: {entry["topic"]}')
+    check(entry['addition_policy']=='Reader-approved clarity expansion; actual addition reported',
+          f'Missing revised addition policy: {entry["topic"]}')
     check(entry['changed_original_words'] == 0, f'Source-edit audit mismatch: {entry["topic"]}')
 
 topics = json.loads((ROOT/'metadata/topics.json').read_text(encoding='utf-8'))
+inquiry_review = json.loads((ROOT/'metadata/inquiry-review.json').read_text(encoding='utf-8'))
+check(len(inquiry_review)==71 and {x['topic'] for x in inquiry_review}=={x['title'] for x in topics},
+      'Every foundational topic must have a reviewed opening problem')
+for opening in inquiry_review:
+    text=(ROOT/opening['path']).read_text(encoding='utf-8')
+    check(opening['challenge'] in text and '?' in opening['challenge'], f'Missing inquiry: {opening["topic"]}')
+    check(text.index('<!-- BEGIN INQUIRY -->')<text.index('<!-- END INQUIRY -->'),f'Invalid inquiry block: {opening["topic"]}')
+    if '<!-- BEGIN ORIGINAL TOPIC -->' in text:
+        check(text.index('<!-- END INQUIRY -->')<text.index('<!-- BEGIN ORIGINAL TOPIC -->'),
+              f'Scenario follows the answer: {opening["topic"]}')
+    check(opening['words']==words(opening['challenge']),f'Inquiry count mismatch: {opening["topic"]}')
 check(len({x['title'] for x in topics}) == len(topics), 'Duplicate scheduled topic')
 cases = {'URL Shortener', 'WhatsApp', 'Twitter', 'Netflix', 'Uber'}
 excluded = {'System Design', 'Table of contents', 'Next Steps', 'References', 'System Design Interviews'} | cases
@@ -183,6 +201,9 @@ for entry in topic_review+practice_review:
         section=evidence_section(text,evidence['anchor'].lstrip('#'))
         check(bool(section) and evidence['quote'] in section,
               f'{key} is not grounded at its heading: {entry["topic"]}')
+    inquiry=entry['inquiry_evidence']
+    check(inquiry['quote'] in evidence_section(text,inquiry['anchor'].lstrip('#')),
+          f'Opening scenario is not grounded at its heading: {entry["topic"]}')
     check(bool(entry['problem_solved']) and bool(entry['design_scenario']) and len(entry['application_steps'])>=2,
           f'Incomplete application audit: {entry["topic"]}')
     check(not entry['needs_animation'] or bool(entry['animations']),f'Missing recommended animation: {entry["topic"]}')
@@ -243,7 +264,7 @@ for link in re.findall(r'^- \[[^\]]+\]\([^\n]+\)', source_bank, re.M):
 if errors:
     print('\n'.join(errors))
     sys.exit(1)
-print(f'PASS: {len(manifest["files"])} unchanged source files; {len(audit)} verbatim inline readings and topic budgets; '
+print(f'PASS: {len(manifest["files"])} unchanged source files; {len(audit)} verbatim inline readings and disclosed teaching counts; '
       f'{len(new_lessons)} original lessons; {len(topics)} local scheduled concepts; 154 daily rows; {link_count} local links.')
 print(f'PASS: {len(topic_review)} topic + {len(practice_review)} practice/comparison evidence reviews across 13 categories; {len(animations)} animation/still/text sets.')
 print('External resource access is not guaranteed; original source links are preserved.')

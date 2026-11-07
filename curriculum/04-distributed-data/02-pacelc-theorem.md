@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Your global profile app runs normally, but fresh reads wait for another region. Is the network partitioned? What delay/freshness choice still exists?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # PACELC Theorem
 
@@ -19,22 +25,21 @@ For example, according to the CAP theorem, a database can be considered availabl
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![PACELC: normal operation also matters](../../assets/animations/pacelc.gif)
-
-</details>
+![PACELC: healthy-path latency and partition policy](../../assets/animations/pacelc.gif)
 
 [Read the numbered steps](../../animations/pacelc.md) · [View the still sequence](../../assets/animations/pacelc-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-During a partition, consider availability versus consistency. Else, waiting for distant replicas can trade latency for consistency.
+PACELC includes normal-operation latency versus consistency, not only partition behavior. Permit stale regional profiles when acceptable; coordinate reads requiring freshness. Measure both cases.
 
-**Apply:** a global profile service may permit stale regional reads; a fresh balance check may wait. Measure normal-operation delay as well as partition behavior.
+### Compare a normal day with a network split
 
-Self-check: what changes without a partition?
+Suppose an account update reaches a nearby region. Waiting for the distant region to participate can add network time. A different design can acknowledge locally and propagate later, but a distant read may then see the previous value. The precise guarantee depends on which replicas coordinate and how reads are performed.
+
+That is the normal-operation tradeoff: even without a partition, the coordination needed for stronger consistency may cost latency. During a partition, ask separately whether an operation must wait or fail to preserve its guarantee, or can continue with weaker visibility.
+
+Use this framework to ask questions about a real configuration rather than stamp a permanent label on a database. Measure a user's full read-after-write journey and the impact of region failures. **Try again:** if you promise immediate global visibility, which network delay have you accepted as part of that promise?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A customer places an order. The payment provider charges successfully, but the order worker crashes before recording the result or replying. The customer sees an error and tries again. Which facts must survive the crash? How can the system decide whether to retry, resume, or refund without inventing a second purchase? What should the customer see while the outcome is still uncertain?
+<!-- END INQUIRY -->
+
 ## What it means
 
 A reliable service keeps doing its intended job correctly over time, including when expected problems happen. Being reachable is only part of that: an available checkout that charges the wrong amount is not behaving reliably.
@@ -39,12 +45,7 @@ Deliberately interrupt the flow after each durable step in a test environment. C
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![A saga compensates a completed step](../../assets/animations/saga.gif)
-
-</details>
+![Saga: local commits and compensating recovery](../../assets/animations/saga.gif)
 
 [Read the numbered steps](../../animations/saga.md) · [View the still sequence](../../assets/animations/saga-steps.png)
 

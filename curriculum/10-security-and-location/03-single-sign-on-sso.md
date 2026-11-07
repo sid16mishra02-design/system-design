@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+An employee signs in once and opens payroll and email. Later, payroll logout leaves email open, and disabling the employee at the provider does not immediately close an existing payroll session. Which sessions and permissions must the organization control? How quickly must access removal take effect?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Single Sign-On (SSO)
 
@@ -86,32 +92,21 @@ These are some commonly used Identity Providers (IdP):
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![SSO does not mean one universal app session](../../assets/animations/single-sign-on.gif)
-
-</details>
+![SSO: reuse provider login, keep application sessions explicit](../../assets/animations/single-sign-on.gif)
 
 [Read the numbered steps](../../animations/single-sign-on.md) · [View the still sequence](../../assets/animations/single-sign-on-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### One sign-in, several application sessions
+SSO lets applications trust one provider's authenticated identity, but each application still owns permissions and often a separate session. One sign-in does not imply universal logout.
 
-An employee signs into an identity provider, then opens payroll and email without entering a separate password for each. Each application trusts identity information through an agreed protocol, but still owns its permissions and often maintains its own session.
+Map provider identities to local accounts with stable identifiers. Grant payroll roles explicitly; authenticating an employee does not make them an administrator. Define behavior for group changes, disabled accounts, provider outages, and delayed provisioning.
 
-Logging out of payroll may end only the payroll session. The identity-provider session or email session can remain active. “Single sign-on” does not automatically mean a single universal logout.
+Reuse valid local sessions according to policy rather than contacting the provider on every page. That improves convenience but can delay revocation. Choose session lifetimes, logout, and revocation behavior to meet the required access-removal delay. A provider password change does not automatically terminate every application session.
 
-### Apply it across an organization
+Test an already open payroll session after disabling the employee. Monitor login failure, session expiry, and provisioning delay separately.
 
-Map identity-provider accounts to local accounts using stable identifiers. Decide which roles grant payroll access rather than treating every authenticated employee as an administrator. Define what happens when employment ends, group membership changes, or the provider is unavailable.
-
-Reuse an existing valid application session according to policy instead of performing a fresh provider interaction for every page. Balance that convenience against how quickly access revocation must take effect. Monitor login failures, session expiry, and provisioning delays separately.
-
-Use explicit logout and revocation requirements when choosing session lifetimes. Do not assume changing a provider password instantly terminates every previously established application session.
-
-**Check:** after disabling an employee, what prevents an already open payroll session from remaining usable?
+A single provider can simplify onboarding and credential management while becoming a shared login dependency. Existing sessions may keep some applications usable during a provider outage, but only under their session policy. That resilience and the speed of account revocation must be considered together.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

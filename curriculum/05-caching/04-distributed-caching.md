@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Two hundred application instances reuse one popular product through a shared cache. Its entry expires, and every instance asks the database for it at once. Would adding more cache nodes solve this one-key burst? How could callers share the reload work? What should happen if the cache is entirely unavailable but the database cannot absorb unlimited fallback requests?
+<!-- END INQUIRY -->
+
 ## Sharing a fast copy across servers
 
 With a local cache, each application server stores its own copy. A distributed cache is reached over the network and can be shared across application servers; its data may also be spread across several cache nodes.
@@ -45,12 +51,7 @@ Measure hit rate per important key class, cache latency, value sizes, origin loa
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Cache-aside: hit, miss, and update](../../assets/animations/cache-aside.gif)
-
-</details>
+![Cache-aside: speed, stale copies, and recovery](../../assets/animations/cache-aside.gif)
 
 [Read the numbered steps](../../animations/cache-aside.md) · [View the still sequence](../../assets/animations/cache-aside-steps.png)
 <!-- END ANIMATION -->

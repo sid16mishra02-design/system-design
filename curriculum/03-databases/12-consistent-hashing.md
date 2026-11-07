@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A cache gains a node. How much data should move, how will clients agree on ownership, and when is the new owner ready?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Consistent Hashing
 
@@ -154,12 +160,7 @@ Let's look at some examples where consistent hashing is used:
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Consistent hashing: a node joins](../../assets/animations/consistent-hash.gif)
-
-</details>
+![Consistent hashing: placement and membership changes](../../assets/animations/consistent-hash.gif)
 
 [Read the numbered steps](../../animations/consistent-hash.md) · [View the still sequence](../../assets/animations/consistent-hash-steps.png)
 <!-- END ANIMATION -->

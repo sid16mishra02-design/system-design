@@ -1,5 +1,11 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Two buyers see one ticket. Which single database action should determine who reserves it, and what result permits confirmation?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Transactions
 
@@ -46,26 +52,25 @@ If there isn't any roll-back or the transaction comes from the _committed state_
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Two buyers, one remaining ticket](../../assets/animations/atomic-stock.gif)
-
-</details>
+![Transactions: two buyers and the final ticket](../../assets/animations/atomic-stock.gif)
 
 [Read the numbered steps](../../animations/atomic-stock.md) · [View the still sequence](../../assets/animations/atomic-stock-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-### Use it: sell the last ticket once
+Reading stock does not reserve it. A transaction boundary alone does not prevent overselling; isolation and statements matter.
 
-Two buyers both read stock = 1. A transaction boundary alone does not prevent overselling; isolation and the actual statements matter.
+Atomically run `UPDATE stock SET quantity = quantity - 1 WHERE product_id = ? AND quantity > 0`. Check affected rows before confirming success; commit related reservation changes together.
 
-An atomic conditional update such as `UPDATE stock SET quantity = quantity - 1 WHERE product_id = ? AND quantity > 0` lets the application check whether a row was changed before confirming success. Group related database changes when they must commit together.
+Keep transactions short and retry conflicts safely. External payment needs separate coordination.
 
-Keep transactions short, use suitable locking or isolation, and retry conflicts safely. External payment is a separate coordination problem.
+### Walk through the race
 
-Self-check: what prevents both buyers receiving confirmation?
+Two buyers both read quantity 1. If each later writes quantity 0 and confirms a purchase, the final stock value looks plausible even though two orders were accepted. The mistake is treating a read as exclusive ownership.
+
+The conditional update makes the check and decrement one database operation. One buyer changes a row; the other observes zero changed rows. If inserting the reservation fails, the transaction should roll back its stock change too. Check the actual database's isolation and conflict behavior rather than assuming any transaction is serializable.
+
+Keep network calls to external payment systems outside long-held database locks when designing the workflow. Persist a recoverable order state and coordinate external effects separately. **Try again:** a buyer receives a timeout after commit. How can a retry find the original reservation instead of subtracting stock again?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

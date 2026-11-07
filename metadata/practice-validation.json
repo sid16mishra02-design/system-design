@@ -4,11 +4,11 @@
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Larger machine vs more machines."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Check the shared database bottleneck."
     },
     "problem_solved": "Choose a capacity change for an overloaded stage without assuming that every shared dependency scales with it.",
@@ -23,18 +23,22 @@
     "animation_reason": "A static larger-machine versus multiple-machines diagram with the shared dependency highlighted is sufficient.",
     "animations": [],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "Checkout demand doubles. The application CPU is busy, but the database has spare capacity. What would you change first, and what evidence would make you choose a larger machine over more machines?"
+    }
   },
   {
     "topic": "Concurrency vs parallelism",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Managing overlapping tasks vs executing tasks at the same time."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "One cook can alternate tasks; several cooks can work simultaneously."
     },
     "problem_solved": "Distinguish overlapping in-progress tasks from simultaneous execution when trying to remove waiting or add compute capacity.",
@@ -52,18 +56,22 @@
       "concurrency-parallelism"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "A page waits for three independent remote calls. A video encoder performs three expensive calculations. How would you reduce elapsed time in each case, and which case needs more execution capacity?"
+    }
   },
   {
     "topic": "Long polling vs WebSockets",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Repeated waiting requests vs a persistent two-way connection."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Use message direction, frequency, and reconnect behavior to choose."
     },
     "problem_solved": "Select an update transport based on interaction direction, frequency, and recovery requirements rather than a universal faster/slower label.",
@@ -81,18 +89,22 @@
       "realtime-protocols"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "A dashboard receives occasional status changes; an editor exchanges frequent updates in both directions. How would each client learn about new data, and what must happen after disconnection?"
+    }
   },
   {
     "topic": "Batch vs stream processing",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Process accumulated records together vs process a continuing flow."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Nightly sales reports favor batches; live fraud signals need timely updates."
     },
     "problem_solved": "Choose processing cadence according to the age of data the business can tolerate and the overhead of processing it.",
@@ -110,18 +122,22 @@
       "batch-stream"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "Finance needs a complete daily report, while fraud detection must react before a payment decision. Which records would you process together, and where would waiting become unacceptable?"
+    }
   },
   {
     "topic": "Stateful vs stateless design",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Requests depend on server-local session state vs portable request context."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "With an external session store, another app server can handle the next request."
     },
     "problem_solved": "Avoid making a user's next request depend on the same application instance remaining available.",
@@ -139,18 +155,22 @@
       "load-balancer"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "Request one reaches server A and stores a login session in its memory. Request two reaches B. How should B identify the user, and what happens when A disappears?"
+    }
   },
   {
     "topic": "Strong vs eventual consistency",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Reads reflect completed writes vs replicas converge after writes stop and communication recovers."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Profile display may tolerate lag; stock reservation needs an explicit correctness rule."
     },
     "problem_solved": "Choose observable data guarantees per operation while defining whether temporary stale reads are acceptable.",
@@ -169,18 +189,22 @@
       "cap-partition"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "An address display can be briefly old, but two buyers want the last ticket. What must each read promise, and what should happen when replicas cannot communicate?"
+    }
   },
   {
     "topic": "Read-through vs write-through cache",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "The cache loads missed reads vs the cache layer persists writes synchronously."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "A product cache can load read misses and synchronously persist writes; these policies can be combined."
     },
     "problem_solved": "Assign cache loading and persistence responsibilities without mistaking complementary read and write policies for mutually exclusive designs.",
@@ -198,18 +222,22 @@
       "read-write-through"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "A price lookup misses the cache; later, a writer changes the price. Who should fetch the missing record, who should persist the write, and can those responsibilities coexist?"
+    }
   },
   {
     "topic": "Push vs pull",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Sender initiates delivery vs receiver requests updates."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "A webhook pushes payment news; polling repeatedly asks for it."
     },
     "problem_solved": "Decide who initiates update delivery and how to avoid unnecessary requests or unhandled delivery failures.",
@@ -227,18 +255,22 @@
       "push-pull"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "A checkout needs to learn whether an external payment completed. Should it keep asking, or wait for a notification? How would your design recover a missed update?"
+    }
   },
   {
     "topic": "REST vs RPC",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Resource-oriented interfaces vs calling defined operations."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Use resource reads for products; typed service operations can reserve inventory."
     },
     "problem_solved": "Choose an interface model without assuming it supplies the service's business correctness or storage consistency guarantees.",
@@ -254,18 +286,22 @@
     "animation_reason": "A static pair of resource and operation requests, with identical invariant requirements, is sufficient.",
     "animations": [],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "One client browses product records while another asks inventory to reserve five units. How would you express each contract, and which interface makes the operation and its failure understandable?"
+    }
   },
   {
     "topic": "Synchronous vs asynchronous communication",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Caller waits for completion vs completion is decoupled from the initiating call."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Queued email can finish after the order confirmation."
     },
     "problem_solved": "Decide which work must finish before responding and which can safely complete later without misrepresenting business state.",
@@ -283,18 +319,22 @@
       "sync-async"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "An order is committed, but the email provider is slow. What must finish before you respond to the buyer, and how would the remaining work survive a crash?"
+    }
   },
   {
     "topic": "Latency vs throughput",
     "path": "practice/TRADEOFFS.md",
     "category": "11-tradeoffs",
     "fundamental_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "Time for one operation vs operations completed per unit time."
     },
     "application_evidence": {
-      "anchor": "system-design-tradeoffs",
+      "anchor": "#compare-your-reasoning",
       "quote": "More counters can serve more customers without shortening each individual checkout."
     },
     "problem_solved": "Avoid confusing increased total capacity with a shorter wait or execution time for each request.",
@@ -313,7 +353,11 @@
       "request-latency"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-these-first",
+      "quote": "Adding workers doubles completed orders per second, yet each buyer waits the same time. What improved, what did not, and which measure matches the complaint you are trying to solve?"
+    }
   },
   {
     "topic": "System Design Interviews",
@@ -339,7 +383,11 @@
     "animation_reason": "The structured method, timing guide, worked bottleneck example, and worksheet are adequately expressed as static steps; there is no system-state race that requires animation.",
     "animations": [],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-this-first",
+      "quote": "\u201cDesign chat.\u201d What must you ask before choosing components for a two-person messenger versus a global broadcast service?"
+    }
   },
   {
     "topic": "URL Shortener",
@@ -367,7 +415,11 @@
       "case-url-shortener"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-this-first",
+      "quote": "A campaign needs short links. One link suddenly receives thousands of clicks a second, and its owner must still be able to disable it. Sketch the simplest lookup you would build. Which work must finish before redirecting the visitor? If you keep extra copies of the destination, how will a disabled link stop working?"
+    }
   },
   {
     "topic": "WhatsApp",
@@ -395,7 +447,11 @@
       "case-whatsapp"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-this-first",
+      "quote": "A sender presses Send while the recipient is offline. The sender then loses connectivity and presses Send again. What would you promise each person at each point? Where would you keep the message, how would you distinguish a retry from a new message, and what evidence would justify showing a delivered mark?"
+    }
   },
   {
     "topic": "Twitter",
@@ -423,7 +479,11 @@
       "case-twitter"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-this-first",
+      "quote": "One account has 20 followers; another has 20 million. Both publish a post. Readers expect their home feeds quickly. Would you prepare every follower\u2019s feed when a post is written, or assemble it when someone opens the app? Follow the work and storage costs for each account before choosing."
+    }
   },
   {
     "topic": "Netflix",
@@ -451,7 +511,11 @@
       "case-netflix"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-this-first",
+      "quote": "A viewer on a weak mobile connection and another on a fast TV connection select the same film. A million other viewers may join tonight. How would you prepare, locate, and deliver the bytes each player needs? What changes when bandwidth drops halfway through playback, and which work could have happened before anyone pressed Play?"
+    }
   },
   {
     "topic": "Uber",
@@ -479,6 +543,10 @@
       "case-uber"
     ],
     "validated_on": "2026-11-07",
-    "status": "Reviewed; definition and application evidenced"
+    "status": "Reviewed; definition and application evidenced",
+    "inquiry_evidence": {
+      "anchor": "#try-solving-this-first",
+      "quote": "A rider requests a trip near a map-cell boundary. Two riders can see the same nearby driver, whose last location is already several seconds old. How would you find candidates without missing a driver across the boundary? What must happen before you promise either rider that this driver is theirs?"
+    }
   }
 ]

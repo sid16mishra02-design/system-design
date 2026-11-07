@@ -28,19 +28,19 @@ Collection assembled and derivative resource indexes created on 2026-11-07. Thei
 
 ## Preservation limits
 
-The audit compares each course topic from its top-level heading to the next top-level heading. Word counts use the documented script tokenization. All explanatory example text and self-check questions count toward the 30% addition limit. Navigation, source pointers, headings, schedules, and worksheets are documented separately rather than counted as topic prose. Original copied bytes are checked against the recorded SHA-256 hashes.
+The audit compares each course topic from its top-level heading to the next top-level heading. Word counts use the documented script tokenization. Scenario prompts, independent examples, and self-check questions are included in the reported teaching additions. The owner later relaxed the initial 30% addition limit to allow clearer explanations and removal of weak independent text. Navigation, source pointers, schedules, and worksheets are documented separately. Original copied bytes are checked against the recorded SHA-256 hashes.
 
 ## Inline lesson edition — 2026-11-07
 
 The learning route contains complete local lesson text, rather than redirecting to an original repository or a separate source README. The 57 verbatim excerpts retain their original headings, prose, code, and illustration URLs. Internal course link destinations are technically relocated to local lessons without changing their link labels. HTML comment markers identify the exact excerpt boundaries for validation. Required origin links are retained here as attribution, not assigned reading.
 
-The 20 former link-only topics now have original lessons, under the root GPL-3.0 license. Their external article links remain direct and optional; those articles have not been copied or quoted. The learner explicitly approved an exception to the 30% addition limit for these 20 new lessons. Existing source-topic examples and practice guidance remain within that limit. Repeated checkpoint text on concept pages is included in the addition count.
+The 20 former link-only topics now have original lessons, under the root GPL-3.0 license. Their external article links remain direct and optional; those articles have not been copied or quoted. The learner initially approved an exception to the 30% addition limit for these 20 new lessons and subsequently approved clarity-driven expansion elsewhere. Repeated checkpoint text on concept pages is included in the addition count.
 
 Reproduced excerpts retain the original CC BY-NC-ND 4.0 license, including its disclaimer of warranties. See the retained license text. Section 2(a)(1)(A) permits sharing unchanged material in whole or in part for noncommercial purposes; this edition keeps copied passages unchanged and identifies independent material separately.
 
 ## Applied-depth expansion — 2026-11-07
 
-Independent teaching guidance was expanded across all 71 foundations and six case-study/method readings with practical uses, worked scenarios, conditional optimization, and verification. Preserved original passages remain unchanged. Existing-topic additions, including allocated comparison text, remain within their per-topic 30% limit; the twenty standalone lessons retain the approved exception. Coverage and counts appear in DEPTH-REVIEW.md.
+Independent teaching guidance was expanded across all 71 foundations and six case-study/method readings with practical uses, worked scenarios, conditional optimization, and verification. Preserved original passages remain unchanged. The first expansion used the per-topic 30% limit. The subsequent scenario-first edition uses the owner's permission to expand where necessary and reports actual counts in CONTENT-AUDIT.md and DEPTH-REVIEW.md.
 
 ## Requested visual layer — 2026-11-07
 

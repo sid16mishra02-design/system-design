@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Checkout responds quickly but sometimes returns errors. What counts as success? Which measured percentage would show whether the service meets its promise?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # SLA, SLO, SLI
 
@@ -28,12 +34,14 @@ An SLI, or Service Level Indicator, is a key metric used to determine whether or
 
 ## Make it concrete
 
-### Turn a promise into a measurement
+SLI is the measurement; SLO the target; SLA an agreement that may specify consequences.
 
-SLI: measured successful-request percentage. SLO: your target, such as 99.9%. SLA: an agreement that may specify consequences.
+For checkout, count correct purchases within a latency threshold over a defined window. Ten failures among 10,000 requests means 99.9% success. An error budget is the permitted failure allowance. Prioritize dominant user-visible failures.
 
-For checkout, define success and a latency threshold before counting requests. A fast error is not a successful purchase. Track user-visible failures and latency; improve the largest causes rather than optimizing an already fast component. An error budget is the permitted failure allowance within a measurement window.
+In that example, requests that return an error are not rescued by a fast response time. If the success definition also requires completion within a deadline, a correct but excessively late purchase can count as unsuccessful. State which requests are eligible and avoid changing the denominator simply to improve the reported number.
 
-**Check:** which slow responses count as failures?
+The error budget expresses how much failure the chosen objective allows in its measurement window. It is a planning signal, not permission to harm customers. Teams can use it to decide whether operational reliability needs attention before adding more risky changes.
+
+An SLA may contain contractual consequences; an internal SLO can be stricter or cover additional user journeys. Measure what the user needs rather than assuming every process must be up for every feature to work.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -2,6 +2,12 @@
 
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A mobile app's first product request is slow, while later requests are faster. The order endpoint uses HTTPS, yet one customer can still request someone else's order by changing an identifier. Then a checkout request times out after the server may have created the order. Which parts of these problems concern connection setup, protected transport, authorization, and business-level retry behavior?
+<!-- END INQUIRY -->
+
 ## A request and its response
 
 HTTP defines how a client asks for a resource or operation and how a server responds. A request includes a method, path, headers, and sometimes a body. The response includes a status, headers, and sometimes a body.
@@ -39,12 +45,7 @@ Separate connection/setup time, time until the first response byte, and body tra
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![TLS identity is separate from authorization](../../assets/animations/tls-mtls.gif)
-
-</details>
+![TLS and mTLS: protect connections, then authorize the operation](../../assets/animations/tls-mtls.gif)
 
 [Read the numbered steps](../../animations/tls-mtls.md) · [View the still sequence](../../assets/animations/tls-mtls-steps.png)
 <!-- END ANIMATION -->

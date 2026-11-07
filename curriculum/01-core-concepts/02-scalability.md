@@ -2,6 +2,12 @@
 
 > **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
 
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Demand doubles; the database is saturated. Where should capacity grow?
+<!-- END INQUIRY -->
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Scalability
 
@@ -48,18 +54,21 @@ Horizontal scaling (also known as scaling out) expands a system's scale by addin
 <!-- BEGIN ANIMATION -->
 ## Watch the sequence
 
-<details>
-<summary>Open the looping animation</summary>
-
-![Scale a service without losing sessions](../../assets/animations/load-balancer.gif)
-
-</details>
+![Load balancing: healthy routing and shared state](../../assets/animations/load-balancer.gif)
 
 [Read the numbered steps](../../animations/load-balancer.md) · [View the still sequence](../../assets/animations/load-balancer-steps.png)
 <!-- END ANIMATION -->
 
 ## Make it concrete
 
-Checkout handles 100 requests/second. Scale up with a larger server; scale out with extra servers. Measure CPU, database load, and waiting. Expand the bottleneck. Scaling alone does not determine data consistency.
+Scale up adds machine resources; scale out adds machines. Measure bottlenecks before expanding capacity. Scaling alone does not determine consistency.
+
+### Follow the waiting work
+
+Suppose a checkout spends most of its time waiting for the database. Adding four application servers creates more callers for the same database; it can increase the queue instead of fixing it. First measure where time and capacity go. An expensive query may need a suitable index, while CPU-heavy image conversion may benefit from extra workers.
+
+Scaling up can be a simpler first step but has hardware and failure-domain limits. Scaling out requires routing and a plan for shared state. A user whose session lives only in server A may appear logged out when the next request reaches B.
+
+Increase load in a representative test and watch throughput, tail latency, errors, and the saturated resource together. Stop when more workers add waiting without useful completions. **Question:** if one customer causes half of all database traffic, would distributing other customers evenly solve that hotspot?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)
