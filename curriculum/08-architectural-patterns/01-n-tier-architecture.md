@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A shop's checkout slows while product pages remain responsive. Which responsibility needs extra capacity? What changes if the database runs on another machine?
+Checkout slows while product browsing stays fast. The browser, application logic, and database run on separate machines, and each order line triggers another network call. The team wants to scale every tier equally. Which responsibility is actually waiting, which boundary creates the repeated trips, and could a logical layer remain in the same deployment?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -11,7 +11,7 @@ A shop's checkout slows while product pages remain responsive. Which responsibil
 
 N-tier architecture divides an application into logical layers and physical tiers. Layers are a way to separate responsibilities and manage dependencies. Each layer has a specific responsibility. A higher layer can use services in a lower layer, but not the other way around.
 
-![n-tier-architecture](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/n-tier-architecture/n-tier-architecture.png)
+![n-tier-architecture](../../assets/source-diagrams/chapter-III/n-tier-architecture/n-tier-architecture.png)
 
 Tiers are physically separated, running on separate machines. A tier can call to another tier directly, or use asynchronous messaging. Although each layer might be hosted in its own tier, that's not required. Several layers might be hosted on the same tier. Physically separating the tiers improves scalability and resiliency and adds latency from the additional network communication.
 

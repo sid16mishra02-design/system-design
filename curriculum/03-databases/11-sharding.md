@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A shop outgrows one database. Which customer requests can stay together, how will callers find their owner, and which reports need multiple owners?
+Your customer table no longer fits one machine. You split users evenly by ID, but one celebrity account generates half the reads and every global report now contacts every shard. The row counts look balanced; the traffic is not. Which key keeps common requests together, and how will you move ownership when one shard grows hot?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -35,7 +35,7 @@ In this tutorial, we will specifically focus on sharding.
 
 Sharding is a database architecture pattern related to _horizontal partitioning_, which is the practice of separating one table's rows into multiple different tables, known as _partitions_ or _shards_. Each partition has the same schema and columns, but also a subset of the shared data. Likewise, the data held in each is unique and independent of the data held in other partitions.
 
-![sharding](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/sharding/sharding.png)
+![sharding](../../assets/source-diagrams/chapter-II/sharding/sharding.png)
 
 The justification for data sharding is that, after a certain point, it is cheaper and more feasible to scale horizontally by adding more machines than to scale it vertically by adding powerful servers. Sharding can be implemented at both application or the database level.
 

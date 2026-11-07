@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-An order must trigger billing and shipping, even when a receiver is temporarily offline. Should workers compete for one job or each receive the event? What must survive a crash?
+The order database commits successfully, but the service crashes one millisecond before publishing “OrderPlaced.” Shipping never learns the order exists. In a different failure, a consumer performs its work and crashes before acknowledging, so the event returns. Where is the durable handoff, when is work complete, and which repeats must be safe?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -13,7 +13,7 @@ An order must trigger billing and shipping, even when a receiver is temporarily 
 
 A message broker is a software that enables applications, systems, and services to communicate with each other and exchange information. The message broker does this by translating messages between formal messaging protocols. This allows interdependent services to _"talk"_ with one another directly, even if they were written in different languages or implemented on different platforms.
 
-![message-broker](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/message-brokers/message-broker.png)
+![message-broker](../../assets/source-diagrams/chapter-III/message-brokers/message-broker.png)
 
 Message brokers can validate, store, route, and deliver messages to the appropriate destinations. They serve as intermediaries between other applications, allowing senders to issue messages without knowing where the receivers are, whether or not they are active, or how many of them there are. This facilitates the decoupling of processes and services within systems.
 

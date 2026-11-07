@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-One checkout server fails during a sale. What must happen before its spare can safely serve the waiting customers?
+Black Friday traffic is split across two checkout servers. At the busiest minute, server A dies with purchases in flight. Server B is healthy—but both share the same database and power zone. Which customers can still complete safely? What must fail over, what state could be uncertain, and when is a fast error more honest than a success page?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

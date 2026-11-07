@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A shop replaces workers frequently. One needs a different operating-system kernel; another repeatedly runs out of memory. Which isolation boundary matters? What must remain after a worker disappears?
+A noisy image worker consumes all memory and restarts a neighboring checkout process. Security then discovers two tenants share a kernel that one workload can exploit. Packaging was consistent, but isolation assumptions were wrong. Which boundary needs its own operating system, which can share one, and where must durable state live when instances disappear?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -57,7 +57,7 @@ Containers are lightweight and allow us to use just the computing resources we n
 
 ## Virtualization vs Containerization
 
-![virtualization-vs-containerization](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/virtual-machines-and-containers/virtualization-vs-containerization.png)
+![virtualization-vs-containerization](../../assets/source-diagrams/chapter-IV/virtual-machines-and-containers/virtualization-vs-containerization.png)
 
 In traditional virtualization, a hypervisor virtualizes physical hardware. The result is that each virtual machine contains a guest OS, a virtual copy of the hardware that the OS requires to run, and an application and its associated libraries and dependencies.
 

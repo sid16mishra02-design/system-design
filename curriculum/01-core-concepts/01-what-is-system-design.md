@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A payment times out. Should another click create another charge?
+At 8:02 p.m., a customer pays for dinner. The restaurant accepts the order, but the app loses the payment response and shows “Try again.” Support can see money moved, yet no order exists. Before choosing databases, queues, or services, what must the system promise? Which facts must survive, and what should a second tap do?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

@@ -11,6 +11,10 @@ This is an independent, noncommercial learning collection. It preserves two sour
 - Changes to those files: none. The source remains a complete standalone work with its original order and relative diagram paths. Each topic page now also reproduces its complete, unchanged topic excerpt. New examples and exercises are visibly separate from those excerpts; they do not amend the copied wording.
 - That source, including the verbatim excerpts on lesson pages, is not covered by the root GPL license. Reuse must respect its original noncommercial and no-derivatives conditions.
 
+### Locally stored source diagrams
+
+The reading pages no longer load Karan course diagrams from a remote image host. Eighty-two referenced PNG files are stored byte-for-byte under `assets/source-diagrams/`, and lesson links point to those local copies. `metadata/localized-source-images.json` records each original URL, local path, byte count, and SHA-256 hash. This changes image delivery, not the image content or attribution; the diagrams remain part of Karan Pratap Singh's CC BY-NC-ND 4.0 work.
+
 ## Ashish Pratap Singh — Awesome System Design Resources
 
 - Repository: https://github.com/ashishps1/awesome-system-design-resources

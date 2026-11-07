@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A printing app needs selected photos but must not receive the user's password. What permission should it request? Which returned information proves login, and what belongs at the photo API?
+A photo-printing app asks users for their cloud-storage passwords so it can fetch pictures. A leaked database exposes every account. The replacement design receives a token—but accidentally sends an ID token to the photo API and accepts one meant for another client. Which party grants access, which token proves login, and which audience must validate it?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -30,7 +30,7 @@ The OAuth 2.0 protocol defines the following entities:
 
 Let's learn how OAuth 2.0 works:
 
-![oauth2](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/oauth2-and-openid-connect/oauth2.png)
+![oauth2](../../assets/source-diagrams/chapter-IV/oauth2-and-openid-connect/oauth2.png)
 
 1. The client requests authorization from the Authorization Server, supplying the client id and secret as identification. It also provides the scopes and an endpoint URI to send the Access Token or the Authorization Code.
 2. The Authorization Server authenticates the client and verifies that the requested scopes are permitted.

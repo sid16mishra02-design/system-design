@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Your photo service receives no uploads all night, then 5,000 photos in a minute. Thumbnail jobs sometimes run twice, and the database accepts only 100 connections. What must survive between executions? How would you control the burst without losing work? Which measurements would tell you whether paying for warm capacity is worthwhile?
+A campaign sends one million image jobs after weeks of silence. Functions scale quickly, then cold starts delay the first users, retries duplicate processing, and concurrent invocations overwhelm the database. Which work benefits from on-demand execution, what limits downstream pressure, and which long-running or stateful task should remain elsewhere?
 <!-- END INQUIRY -->
 
 ## Let a platform manage more of the runtime

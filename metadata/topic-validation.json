@@ -12,7 +12,7 @@
       "quote": "If payment times out, recover the same operation safely; faster servers alone cannot prevent duplicate charges."
     },
     "problem_solved": "Choosing components before knowing the behavior and failure guarantees the system must provide.",
-    "design_scenario": "A payment times out. Should another click create another charge?",
+    "design_scenario": "At 8:02 p.m., a customer pays for dinner. The restaurant accepts the order, but the app loses the payment response and shows \u201cTry again.\u201d Support can see money moved, yet no order exists. Before choosing databases, queues, or services, what must the system promise? Which facts must survive, and what should a second tap do?",
     "application_steps": [
       "Trace order \u2192 payment \u2192 restaurant.",
       "Specify charging correctness, response time, and failure behavior.",
@@ -27,7 +27,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A payment times out. Should another click create another charge?"
+      "quote": "At 8:02 p.m., a customer pays for dinner. The restaurant accepts the order, but the app loses the payment response and shows \u201cTry again.\u201d Support can see money moved, yet no order exists. Before choosing databases, queues, or services, what must the system promise? Which facts must survive, and what should a second tap do?"
     }
   },
   {
@@ -43,7 +43,7 @@
       "quote": "Measure bottlenecks before expanding capacity."
     },
     "problem_solved": "A rising request rate exceeds the capacity of a particular stage.",
-    "design_scenario": "Demand doubles; the database is saturated. Where should capacity grow?",
+    "design_scenario": "Your ticket sale opens at noon. Traffic jumps from 100 to 20,000 requests per second; application CPU stays calm while database waits climb and checkout freezes. The team proposes twenty more app servers. Where is capacity actually missing? How could adding callers make the outage worse, and what measurement would change your decision?",
     "application_steps": [
       "Measure CPU, database work, and waiting time.",
       "Locate the actual saturated stage.",
@@ -60,7 +60,7 @@
     "clarification": "Scaling capacity does not determine consistency.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Demand doubles; the database is saturated. Where should capacity grow?"
+      "quote": "Your ticket sale opens at noon. Traffic jumps from 100 to 20,000 requests per second; application CPU stays calm while database waits climb and checkout freezes. The team proposes twenty more app servers. Where is capacity actually missing? How could adding callers make the outage worse, and what measurement would change your decision?"
     }
   },
   {
@@ -76,7 +76,7 @@
       "quote": "Add readiness checks, replacement capacity, and tested failover where they remove a failure point."
     },
     "problem_solved": "Users lose access when a server or shared dependency fails.",
-    "design_scenario": "One checkout server fails during a sale. What must happen before its spare can safely serve the waiting customers?",
+    "design_scenario": "Black Friday traffic is split across two checkout servers. At the busiest minute, server A dies with purchases in flight. Server B is healthy\u2014but both share the same database and power zone. Which customers can still complete safely? What must fail over, what state could be uncertain, and when is a fast error more honest than a success page?",
     "application_steps": [
       "Trace the whole request and identify shared dependencies.",
       "Provide health checks, replacement capacity, and tested failover where they remove a real failure point.",
@@ -93,7 +93,7 @@
     "clarification": "Redundancy formulas need failure-dependence assumptions.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "One checkout server fails during a sale. What must happen before its spare can safely serve the waiting customers?"
+      "quote": "Black Friday traffic is split across two checkout servers. At the busiest minute, server A dies with purchases in flight. Server B is healthy\u2014but both share the same database and power zone. Which customers can still complete safely? What must fail over, what state could be uncertain, and when is a fast error more honest than a success page?"
     }
   },
   {
@@ -109,7 +109,7 @@
       "quote": "Begin with a trace or timing breakdown, form one hypothesis, and compare before and after at a similar workload."
     },
     "problem_solved": "Optimizing the wrong performance quantity or interpreting averages and network capacity as interchangeable.",
-    "design_scenario": "A 200 ms request contains 30 ms network, 70 ms application, and 100 ms database work; an index cuts the query to 25 ms.",
+    "design_scenario": "A sale dashboard celebrates 10,000 completed checkouts per minute, while social media fills with screenshots of ten-second waits. A trace shows a fast network, a growing database queue, and a few very slow requests. Which number describes the customer\u2019s pain? Would more bandwidth, more workers, or a faster query help\u2014and how would you prove it?",
     "application_steps": [
       "State the operation, measurement boundary, and units.",
       "Measure the critical path and identify the dominant stage.",
@@ -126,7 +126,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "During a sale, checkout responds in 200 ms on average, yet some users wait over a second. An illustrative trace shows 30 ms of network travel, 70 ms of application work, and a 100 ms query. More users arrive each second. Would you buy bandwidth, add servers, change the query, or limit concurrency? Which measurement would tell you whether the change helped the customer's experience?"
+      "quote": "A sale dashboard celebrates 10,000 completed checkouts per minute, while social media fills with screenshots of ten-second waits. A trace shows a fast network, a growing database queue, and a few very slow requests. Which number describes the customer\u2019s pain? Would more bandwidth, more workers, or a faster query help\u2014and how would you prove it?"
     }
   },
   {
@@ -142,7 +142,7 @@
       "quote": "A more deliberate flow records a stable operation identifier, makes payment retries reuse it, and resumes the order update from durable state."
     },
     "problem_solved": "A partially completed operation can leave users with duplicate charges, lost state, or a permanently unresolved order.",
-    "design_scenario": "Payment succeeds but an order worker crashes before recording the result.",
+    "design_scenario": "A payment provider charges a customer, then your order worker crashes before saving the result. The retry starts on another machine while a refund job from the first attempt is also waking up. Which durable facts prevent two orders or an accidental refund? What status should the customer see while the truth is still being reconstructed?",
     "application_steps": [
       "Define the invariant and durable acceptance boundary.",
       "Reuse stable identifiers for retries and resume from durable state.",
@@ -160,7 +160,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A customer places an order. The payment provider charges successfully, but the order worker crashes before recording the result or replying. The customer sees an error and tries again. Which facts must survive the crash? How can the system decide whether to retry, resume, or refund without inventing a second purchase? What should the customer see while the outcome is still uncertain?"
+      "quote": "A payment provider charges a customer, then your order worker crashes before saving the result. The retry starts on another machine while a refund job from the first attempt is also waking up. Which durable facts prevent two orders or an accidental refund? What status should the customer see while the truth is still being reconstructed?"
     }
   },
   {
@@ -176,7 +176,7 @@
       "quote": "A failover plan needs data replication, a promotion decision, a stable address or discovery change, and client reconnection."
     },
     "problem_solved": "Redundant application instances still depend on one component or common failure domain.",
-    "design_scenario": "Two app instances share a load balancer and database D; the database fails.",
+    "design_scenario": "Your architecture diagram proudly shows six application replicas. During a launch, one tiny configuration service stops responding and every replica refuses new traffic. The servers are alive, but the product is gone. Which dependency actually controlled availability? Where would another copy help, and who decides which copy is safe to trust?",
     "application_steps": [
       "Trace each dependency in the real request path.",
       "Provide a tested replacement, promotion decision, client reconnection, and a rule for which database may accept writes.",
@@ -191,7 +191,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A shop deploys two application servers and promises to survive a machine failure. Both servers use one load balancer, one database, and the same configuration service. During a sale, the shared database stops responding. Which requests can still work? Where would another copy actually help? Who would select the replacement, reconnect clients, and prevent two machines from accepting conflicting writes?"
+      "quote": "Your architecture diagram proudly shows six application replicas. During a launch, one tiny configuration service stops responding and every replica refuses new traffic. The servers are alive, but the product is gone. Which dependency actually controlled availability? Where would another copy help, and who decides which copy is safe to trust?"
     }
   },
   {
@@ -207,7 +207,7 @@
       "quote": "Check the destination address, route, firewall, and listening port when debugging."
     },
     "problem_solved": "Services need reachable addresses without exposing every dependency to the internet.",
-    "design_scenario": "Your shop must accept internet traffic, but its database should not. Which machines need public addresses, and how will the others communicate?",
+    "design_scenario": "A school\u2019s 2,000 students share one public address. Your abuse system blocks that address after one student attacks an endpoint, locking out the entire campus. Meanwhile, the database is on a private address yet accidentally reachable from every internal workload. What does an address identify, what does it fail to prove, and where should access policy live?",
     "application_steps": [
       "Determine which component must be internet-reachable.",
       "Check destination address, route, firewall, and listening port when a connection fails.",
@@ -222,7 +222,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Your shop must accept internet traffic, but its database should not. Which machines need public addresses, and how will the others communicate?"
+      "quote": "A school\u2019s 2,000 students share one public address. Your abuse system blocks that address after one student attacks an endpoint, locking out the entire campus. Meanwhile, the database is on a private address yet accidentally reachable from every internal workload. What does an address identify, what does it fail to prove, and where should access policy live?"
     }
   },
   {
@@ -238,7 +238,7 @@
       "quote": "If a TCP connection cannot open, inspect ports, listeners, and filtering."
     },
     "problem_solved": "A vague network failure leads to changing unrelated parts of the system.",
-    "design_scenario": "Your browser cannot load the shop. Would you inspect a cable, a port, a certificate, or the database first\u2014and what evidence changes that choice?",
+    "design_scenario": "Checkout fails only on one office network. DNS returns an address, the machine responds to network probes, TCP opens, TLS rejects the certificate, and the application never receives HTTP. Five teams each blame a different service. How would you locate the failing responsibility without randomly changing the database, firewall, and code?",
     "application_steps": [
       "Separate reaching the IP, opening transport, securing the connection, and sending the application request.",
       "Inspect the layer-specific evidence: routing, listeners/filtering, certificate verification, or HTTP errors.",
@@ -253,7 +253,7 @@
     "clarification": "The layered model is conceptual rather than seven separate machines.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Your browser cannot load the shop. Would you inspect a cable, a port, a certificate, or the database first\u2014and what evidence changes that choice?"
+      "quote": "Checkout fails only on one office network. DNS returns an address, the machine responds to network probes, TCP opens, TLS rejects the certificate, and the application never receives HTTP. Five teams each blame a different service. How would you locate the failing responsibility without randomly changing the database, firewall, and code?"
     }
   },
   {
@@ -269,7 +269,7 @@
       "quote": "Choose using measured loss, delay, and required ordering."
     },
     "problem_solved": "Applications differ in whether ordered delivery, loss recovery, and timely delivery are most important.",
-    "design_scenario": "A voice call loses a sound packet; a file download loses some bytes. Should both wait for recovery?",
+    "design_scenario": "During a live match, one missing audio packet arrives two seconds late and interrupts the current commentary. In the same app, a missing payment byte would corrupt a charge request. Which data should wait for recovery, which should move on, and what must the application still handle even when the transport promises ordered delivery?",
     "application_steps": [
       "Specify acceptable loss, delay, and ordering.",
       "Measure those properties and reuse connections where appropriate.",
@@ -286,7 +286,7 @@
     "clarification": "Transport delivery and application-level behavior are distinct.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A voice call loses a sound packet; a file download loses some bytes. Should both wait for recovery?"
+      "quote": "During a live match, one missing audio packet arrives two seconds late and interrupts the current commentary. In the same app, a missing payment byte would corrupt a charge request. Which data should wait for recovery, which should move on, and what must the application still handle even when the transport promises ordered delivery?"
     }
   },
   {
@@ -302,7 +302,7 @@
       "quote": "For a planned move, lower the TTL ahead of time and allow the previous TTL to elapse before relying on shorter caching."
     },
     "problem_solved": "Clients need to resolve service names, while cached answers can temporarily outlive a destination change.",
-    "design_scenario": "You move shop.example from server A to B. Some users still reach A. What information could they be using, and when should it change?",
+    "design_scenario": "At 9 a.m. you move shop.example to a new server. At noon, half the users reach the new site while others still reach the old checkout\u2014even though the DNS dashboard shows the new address. No one is lying. Where can the old answer still live, what does its lifetime control, and how would you migrate without losing orders?",
     "application_steps": [
       "Trace browser, resolver, cached/authoritative answer, and subsequent server connection.",
       "Lower TTL ahead of a planned move and allow the old TTL to expire before relying on shorter caching.",
@@ -319,7 +319,7 @@
     "clarification": "Managed DNS can support health-aware routing; caching still affects changes.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "You move shop.example from server A to B. Some users still reach A. What information could they be using, and when should it change?"
+      "quote": "At 9 a.m. you move shop.example to a new server. At noon, half the users reach the new site while others still reach the old checkout\u2014even though the DNS dashboard shows the new address. No one is lying. Where can the old answer still live, what does its lifetime control, and how would you migrate without losing orders?"
     }
   },
   {
@@ -335,7 +335,7 @@
       "quote": "Measure its queueing, connections, and latency before adding app servers."
     },
     "problem_solved": "A system needs a controlled entry or exit point for routing and common request handling.",
-    "design_scenario": "A school controls students' outgoing browsing; a shop controls traffic entering its servers. What should each intermediary represent, inspect, and forward?",
+    "design_scenario": "A customer request reaches your order service with an \u201coriginal client IP\u201d header claiming to be an administrator. It passed through a public edge and two internal hops, but any caller could have written the first header. Which intermediary represents the client, which represents your servers, and where should identity information become trusted?",
     "application_steps": [
       "Identify whether the intermediary represents clients or servers.",
       "Measure proxy queueing, connection counts, and request duration.",
@@ -350,7 +350,7 @@
     "clarification": "Reverse proxies and load balancers can overlap in responsibility.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A school controls students' outgoing browsing; a shop controls traffic entering its servers. What should each intermediary represent, inspect, and forward?"
+      "quote": "A customer request reaches your order service with an \u201coriginal client IP\u201d header claiming to be an administrator. It passed through a public edge and two internal hops, but any caller could have written the first header. Which intermediary represents the client, which represents your servers, and where should identity information become trusted?"
     }
   },
   {
@@ -366,7 +366,7 @@
       "quote": "Reuse connections where supported instead of paying setup costs for every call."
     },
     "problem_solved": "Clients and servers need a request/response contract and protected transport without confusing a network result with a business outcome.",
-    "design_scenario": "A first product-page visit resolves a name, establishes a connection and TLS, and downloads a response; an order write may commit before its response is lost.",
+    "design_scenario": "A customer presses Pay once. The browser sends an HTTPS request, receives no response, and retries. The first request may have committed after the connection vanished. Encryption protected the bytes, yet the business outcome is uncertain. Which parts did HTTPS secure, what remains unknown, and how should the next request discover the original result?",
     "application_steps": [
       "Separate resolution, connection setup, TLS, response start, and body transfer.",
       "Reuse connections, reduce unnecessary redirects/round trips, and safely cache or compress suitable content.",
@@ -383,7 +383,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A mobile app's first product request is slow, while later requests are faster. The order endpoint uses HTTPS, yet one customer can still request someone else's order by changing an identifier. Then a checkout request times out after the server may have created the order. Which parts of these problems concern connection setup, protected transport, authorization, and business-level retry behavior?"
+      "quote": "A customer presses Pay once. The browser sends an HTTPS request, receives no response, and retries. The first request may have committed after the connection vanished. Encryption protected the bytes, yet the business outcome is uncertain. Which parts did HTTPS secure, what remains unknown, and how should the next request discover the original result?"
     }
   },
   {
@@ -399,7 +399,7 @@
       "quote": "Calculate a digest incrementally while streaming bytes rather than loading the whole file into memory."
     },
     "problem_solved": "A transferred, stored, or assembled file may differ from its expected bytes.",
-    "design_scenario": "A 1 GB archive arrives in ten chunks; per-chunk digests detect damaged pieces and a full-file digest checks final assembly.",
+    "design_scenario": "A backup job copies a 40 GB database snapshot across the network and reports success. During restore week, one flipped bit makes the archive unreadable. The file existed, the byte count matched, and transport completed. What evidence could have exposed corruption earlier, and why would that evidence still not prove the backup contains the correct business data?",
     "application_steps": [
       "Choose integrity checks for accidental corruption versus deliberate replacement.",
       "Verify chunks and the assembled file using trustworthy expected metadata.",
@@ -414,7 +414,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A user uploads a large archive in ten chunks. The network drops during one chunk, two pieces arrive in the wrong order, and the final assembled file will later be restored from backup. What would let you detect which bytes differ, retry only damaged work, and verify the completed object? If a supplied verification value is also replaced, what confidence should it give you?"
+      "quote": "A backup job copies a 40 GB database snapshot across the network and reports success. During restore week, one flipped bit makes the archive unreadable. The file existed, the byte count matched, and transport completed. What evidence could have exposed corruption earlier, and why would that evidence still not prove the backup contains the correct business data?"
     }
   },
   {
@@ -430,7 +430,7 @@
       "quote": "When removing an instance, stop new requests and allow active work to finish."
     },
     "problem_solved": "Requests must be distributed across healthy instances without losing state or overwhelming shared dependencies.",
-    "design_scenario": "App A accepted your login, but the next request reaches App B. How can B identify the same session? What if A dies mid-purchase?",
+    "design_scenario": "A load balancer adds three checkout instances and graphs turn green. Logged-in users then bounce between \u201ccart full\u201d and \u201ccart empty\u201d because each server keeps its own session. One slow instance also attracts long-lived connections. What should be distributed, what state must travel, and which health signal should stop new requests without killing work already in flight?",
     "application_steps": [
       "Choose a routing policy for actual request/connection behavior and use readiness checks.",
       "Stop new traffic and drain active work when removing instances, with spare capacity for failure.",
@@ -447,7 +447,7 @@
     "clarification": "Balancing application traffic does not remove shared dependency limits.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "App A accepted your login, but the next request reaches App B. How can B identify the same session? What if A dies mid-purchase?"
+      "quote": "A load balancer adds three checkout instances and graphs turn green. Logged-in users then bounce between \u201ccart full\u201d and \u201ccart empty\u201d because each server keeps its own session. One slow instance also attracts long-lived connections. What should be distributed, what state must travel, and which health signal should stop new requests without killing work already in flight?"
     }
   },
   {
@@ -463,7 +463,7 @@
       "quote": "State how work is assigned, how failed members are detected, and whether unfinished work can be reassigned safely."
     },
     "problem_solved": "Several machines must divide work or coordinate state and safely recover unfinished work.",
-    "design_scenario": "Three workers resize photos. One crashes after writing an image but before reporting success. Who should resume the job, and what could go wrong?",
+    "design_scenario": "Four photo workers share a queue. One crashes after saving a resized image but before reporting completion; another repeats the job and sends a second customer notification. The machines formed a cluster, yet cooperation was unsafe. How should work ownership, failure detection, and repeated execution behave before adding a fifth worker?",
     "application_steps": [
       "Specify assignment, failure detection, and recovery of unfinished tasks.",
       "Make retried work safe and leave capacity for failures.",
@@ -480,7 +480,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Three workers resize photos. One crashes after writing an image but before reporting success. Who should resume the job, and what could go wrong?"
+      "quote": "Four photo workers share a queue. One crashes after saving a resized image but before reporting completion; another repeats the job and sends a second customer notification. The machines formed a cluster, yet cooperation was unsafe. How should work ownership, failure detection, and repeated execution behave before adding a fifth worker?"
     }
   },
   {
@@ -496,7 +496,7 @@
       "quote": "If writing the object succeeds but recording its database row fails, cleanup or reconciliation must handle the orphaned object."
     },
     "problem_solved": "Large file bytes and searchable application metadata need suitable interfaces and coordinated lifecycle handling.",
-    "design_scenario": "A photo upload stores the image, then crashes before recording its database row. Where should the bytes and metadata live, and how could you recover?",
+    "design_scenario": "A creator uploads a video. The 2 GB object reaches storage, then the service crashes before writing its database row. The user retries, creating another orphan; later, cleanup nearly deletes the valid copy. Where should bytes and searchable metadata live, and which reconciliation rule can recover without guessing?",
     "application_steps": [
       "Specify object size, read/write patterns, durability, and retrieval delay.",
       "Choose block, file, or object interfaces for those operations and use authorized direct/CDN delivery when appropriate.",
@@ -511,7 +511,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A photo upload stores the image, then crashes before recording its database row. Where should the bytes and metadata live, and how could you recover?"
+      "quote": "A creator uploads a video. The 2 GB object reaches storage, then the service crashes before writing its database row. The user retries, creating another orphan; later, cleanup nearly deletes the valid copy. Where should bytes and searchable metadata live, and which reconciliation rule can recover without guessing?"
     }
   },
   {
@@ -527,7 +527,7 @@
       "quote": "Appropriate indexes, bounded result sets, and fewer unnecessary round trips can help before adding machines."
     },
     "problem_solved": "An application needs correct, persistent, concurrent access to related facts rather than ad hoc storage and unrestricted scans.",
-    "design_scenario": "A shop must find orders by customer, update statuses, and reject impossible relationships. Which guarantees should the data manager enforce, and which workload should guide its design?",
+    "design_scenario": "Support sees an order marked \u201cshipped\u201d whose customer record never existed and whose payment reference appears twice. The service wrote several files successfully, but no component enforced relationships or coordinated concurrent updates. Which facts need querying, which rules must remain true, and what should manage access when two workers change them together?",
     "application_steps": [
       "List lookups, lists, updates, and reports before selecting a database.",
       "Specify required freshness for each operation.",
@@ -542,7 +542,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A shop must find orders by customer, update statuses, and reject impossible relationships. Which guarantees should the data manager enforce, and which workload should guide its design?"
+      "quote": "Support sees an order marked \u201cshipped\u201d whose customer record never existed and whose payment reference appears twice. The service wrote several files successfully, but no component enforced relationships or coordinated concurrent updates. Which facts need querying, which rules must remain true, and what should manage access when two workers change them together?"
     }
   },
   {
@@ -558,7 +558,7 @@
       "quote": "For a customer's newest orders, inspect a query plan and an index matching the filter and sort."
     },
     "problem_solved": "Related orders, customers, and items need explicit identities, integrity constraints, and coordinated changes.",
-    "design_scenario": "A customer's order-history screen becomes slow as the shop grows. What would you inspect before adding servers, and which data relationships must remain valid?",
+    "design_scenario": "At midnight, two jobs update the same order: one cancels it while another marks it shipped. A reporting query scans a year of rows and blocks checkout writes. The schema has tables and keys, but that alone did not save the workflow. Which relationships and transitions must be constrained, and which query path needs deliberate design?",
     "application_steps": [
       "Model relationships with keys and the necessary constraints.",
       "Write important queries and inspect candidate filter/sort indexes using a query plan.",
@@ -573,7 +573,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A customer's order-history screen becomes slow as the shop grows. What would you inspect before adding servers, and which data relationships must remain valid?"
+      "quote": "At midnight, two jobs update the same order: one cancels it while another marks it shipped. A reporting query scans a year of rows and blocks checkout writes. The schema has tables and keys, but that alone did not save the workflow. Which relationships and transitions must be constrained, and which query path needs deliberate design?"
     }
   },
   {
@@ -589,7 +589,7 @@
       "quote": "Choose partition keys that spread traffic, not merely records."
     },
     "problem_solved": "Different access patterns may fit document, key-value, graph, or other models better than one assumed universal schema.",
-    "design_scenario": "Products have different attributes, sessions are fetched by identifier, and recommendations explore relationships. Would one representation suit all three? What would you measure before choosing?",
+    "design_scenario": "A catalog stores shoes, books, and cameras with different attributes. Launch week arrives; one celebrity product becomes 70% of traffic and its partition throttles while others sit idle. The flexible documents look perfect on paper. Which reads determine the data shape, which key controls traffic, and which guarantees does checkout still need?",
     "application_steps": [
       "Sketch actual reads and writes before choosing a model.",
       "Check query/index support and the cost of relationship-heavy queries.",
@@ -604,7 +604,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Products have different attributes, sessions are fetched by identifier, and recommendations explore relationships. Would one representation suit all three? What would you measure before choosing?"
+      "quote": "A catalog stores shoes, books, and cameras with different attributes. Launch week arrives; one celebrity product becomes 70% of traffic and its partition throttles while others sit idle. The flexible documents look perfect on paper. Which reads determine the data shape, which key controls traffic, and which guarantees does checkout still need?"
     }
   },
   {
@@ -620,7 +620,7 @@
       "quote": "Compare creating an order, listing recent orders, and updating stock in candidate products."
     },
     "problem_solved": "Choosing by database category alone ignores required operations and operational cost.",
-    "design_scenario": "Checkout updates stock while a catalog stores varied product attributes. Which operations and guarantees should decide the databases\u2014not their labels?",
+    "design_scenario": "The team argues for days: finance wants relational tables, catalog wants flexible documents, and leadership wants \u201cweb scale.\u201d Nobody has written the three operations the product must perform. For creating an order, browsing varied products, and reserving the last item, which access pattern or guarantee actually forces a choice\u2014and could one store still be enough?",
     "application_steps": [
       "Express the workload and invariants.",
       "Compare representations, guarantees, and measured reads/writes for candidate products.",
@@ -635,7 +635,7 @@
     "clarification": "NULL behavior and access models are not universal SQL/NoSQL distinctions.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Checkout updates stock while a catalog stores varied product attributes. Which operations and guarantees should decide the databases\u2014not their labels?"
+      "quote": "The team argues for days: finance wants relational tables, catalog wants flexible documents, and leadership wants \u201cweb scale.\u201d Nobody has written the three operations the product must perform. For creating an order, browsing varied products, and reserving the last item, which access pattern or guarantee actually forces a choice\u2014and could one store still be enough?"
     }
   },
   {
@@ -651,7 +651,7 @@
       "quote": "Compare rows examined, rows returned, and timing before and after adding the candidate index using representative data."
     },
     "problem_solved": "Finding a small relevant subset should not require scanning every unrelated database row.",
-    "design_scenario": "One customer's latest ten orders require examining a million rows. What information could narrow the search, and what extra work would writes inherit?",
+    "design_scenario": "A customer opens \u201cMy last 20 orders.\u201d The database examines 80 million rows, sorts the matches, and returns twenty records after six seconds. Someone proposes indexing every column. Which path would let the database find the needed range directly, what write cost would it add, and what evidence in the query plan would prove it worked?",
     "application_steps": [
       "Match a candidate index to the filter and sort.",
       "Inspect rows examined versus returned and compare query plans/timings on representative data.",
@@ -668,7 +668,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "One customer's latest ten orders require examining a million rows. What information could narrow the search, and what extra work would writes inherit?"
+      "quote": "A customer opens \u201cMy last 20 orders.\u201d The database examines 80 million rows, sorts the matches, and returns twenty records after six seconds. Someone proposes indexing every column. Which path would let the database find the needed range directly, what write cost would it add, and what evidence in the query plan would prove it worked?"
     }
   },
   {
@@ -684,7 +684,7 @@
       "quote": "For every duplicated current value, decide who updates each copy and what readers may see while updates propagate."
     },
     "problem_solved": "Duplicated values can become inconsistent, while meaningful historical snapshots must not be overwritten as if they were current facts.",
-    "design_scenario": "A customer moves after an order ships. Should every address change? How would you distinguish today's profile from the delivery fact recorded when the order was placed?",
+    "design_scenario": "A customer changes their address after an order ships. The profile should show the new address; the invoice must preserve the old delivery address. One engineer removes all duplication, while another copies the address into five tables. Which fact is current state, which is history, and who updates every intentional copy?",
     "application_steps": [
       "Identify minimal candidate keys and whether a non-key attribute depends on only part of a composite key.",
       "Assign ownership and meaning to each fact.",
@@ -702,7 +702,7 @@
     "clarification": "Keys, partial dependencies, and historical snapshots require precise meanings.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A customer moves after an order ships. Should every address change? How would you distinguish today's profile from the delivery fact recorded when the order was placed?"
+      "quote": "A customer changes their address after an order ships. The profile should show the new address; the invoice must preserve the old delivery address. One engineer removes all duplication, while another copies the address into five tables. Which fact is current state, which is history, and who updates every intentional copy?"
     }
   },
   {
@@ -718,7 +718,7 @@
       "quote": "Check affected rows before confirming success; commit related reservation changes together."
     },
     "problem_solved": "Concurrent buyers may both believe they reserved the same final unit.",
-    "design_scenario": "Two buyers see one ticket. Which single database action should determine who reserves it, and what result permits confirmation?",
+    "design_scenario": "One concert ticket remains. Two buyers read \u201cavailable\u201d at the same moment, both pay, and both receive confirmation; the final stock row still says zero. Nothing looks negative. Where did correctness disappear? What must be checked and changed atomically, and how should a timeout after commit be retried?",
     "application_steps": [
       "Use an atomic conditional update scoped to product_id and positive quantity.",
       "Check whether a row changed before confirming success, and group related database changes.",
@@ -735,7 +735,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Two buyers see one ticket. Which single database action should determine who reserves it, and what result permits confirmation?"
+      "quote": "One concert ticket remains. Two buyers read \u201cavailable\u201d at the same moment, both pay, and both receive confirmation; the final stock row still says zero. Nothing looks negative. Where did correctness disappear? What must be checked and changed atomically, and how should a timeout after commit be retried?"
     }
   },
   {
@@ -751,7 +751,7 @@
       "quote": "Specify the invariant, acceptable staleness, and failure response before choosing coordination, then measure its latency and availability costs."
     },
     "problem_solved": "The word consistency can incorrectly conflate local invariant preservation with visibility across replicas.",
-    "design_scenario": "An order commits, but its replica still shows yesterday's list. Which correctness promise held, and which reader-visible guarantee did not?",
+    "design_scenario": "A bank transfer must never create or destroy money. A profile photo can appear a few seconds late in another region. The architecture review labels one database \u201cACID\u201d and the other \u201cBASE,\u201d then stops thinking. Which invariant must commit together, which read may be stale, and what mechanism eventually makes copies converge?",
     "application_steps": [
       "State the business invariant and acceptable staleness for each operation.",
       "Select coordination and failure behavior required for correctness.",
@@ -768,7 +768,7 @@
     "clarification": "ACID consistency is distinct from replica consistency; isolation levels vary.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "An order commits, but its replica still shows yesterday's list. Which correctness promise held, and which reader-visible guarantee did not?"
+      "quote": "A bank transfer must never create or destroy money. A profile photo can appear a few seconds late in another region. The architecture review labels one database \u201cACID\u201d and the other \u201cBASE,\u201d then stops thinking. Which invariant must commit together, which read may be stale, and what mechanism eventually makes copies converge?"
     }
   },
   {
@@ -784,7 +784,7 @@
       "quote": "Route freshness-sensitive reads through the appropriate authoritative protocol; use replicas where their lag is acceptable."
     },
     "problem_solved": "Copies support read capacity or recovery but can lag, and copying the same mistake does not preserve historical recovery points.",
-    "design_scenario": "You save an address and immediately read its old value elsewhere. Which copy answered? Would another live copy also protect you from accidental deletion?",
+    "design_scenario": "A customer changes their password, receives success, and is immediately routed to a replica that still accepts the old one. Minutes later, an operator accidentally deletes every account and the deletion races to every copy. Which reads require fresh state, what does lag change, and why are replicas not historical backups?",
     "application_steps": [
       "Route freshness-sensitive reads to an appropriate authoritative path.",
       "Use replicas for reads that tolerate their lag and monitor that lag.",
@@ -801,7 +801,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "You save an address and immediately read its old value elsewhere. Which copy answered? Would another live copy also protect you from accidental deletion?"
+      "quote": "A customer changes their password, receives success, and is immediately routed to a replica that still accepts the old one. Minutes later, an operator accidentally deletes every account and the deletion races to every copy. Which reads require fresh state, what does lag change, and why are replicas not historical backups?"
     }
   },
   {
@@ -817,7 +817,7 @@
       "quote": "Choose a shard key from frequent queries and traffic. A customer identifier can keep one customer's orders together."
     },
     "problem_solved": "A growing dataset or workload needs distribution without confusing copied data with divided ownership.",
-    "design_scenario": "A shop outgrows one database. Which customer requests can stay together, how will callers find their owner, and which reports need multiple owners?",
+    "design_scenario": "Your customer table no longer fits one machine. You split users evenly by ID, but one celebrity account generates half the reads and every global report now contacts every shard. The row counts look balanced; the traffic is not. Which key keeps common requests together, and how will you move ownership when one shard grows hot?",
     "application_steps": [
       "Choose a shard key from frequent queries and traffic locality.",
       "Measure request distribution and data sizes, including hot customers.",
@@ -834,7 +834,7 @@
     "clarification": "Dividing ownership is different from copying data for resilience.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A shop outgrows one database. Which customer requests can stay together, how will callers find their owner, and which reports need multiple owners?"
+      "quote": "Your customer table no longer fits one machine. You split users evenly by ID, but one celebrity account generates half the reads and every global report now contacts every shard. The row counts look balanced; the traffic is not. Which key keeps common requests together, and how will you move ownership when one shard grows hot?"
     }
   },
   {
@@ -850,7 +850,7 @@
       "quote": "Warm caches gradually or limit database pressure when reassignment creates misses."
     },
     "problem_solved": "Naive modulo-based key placement can move many keys when the number of nodes changes.",
-    "design_scenario": "A cache gains a node. How much data should move, how will clients agree on ownership, and when is the new owner ready?",
+    "design_scenario": "A cache fleet grows from 20 to 21 nodes five minutes before a product launch. With modulo routing, most keys suddenly map elsewhere and the database receives a wall of misses. How could membership change move only a neighboring slice of keys? What still happens if one viral key dominates all traffic?",
     "application_steps": [
       "Use compatible membership and key-to-owner rules across participants.",
       "Plan data availability and client disagreement during membership changes.",
@@ -867,7 +867,7 @@
     "clarification": "Key movement, load balance, and hot-key traffic are separate concerns.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A cache gains a node. How much data should move, how will clients agree on ownership, and when is the new owner ready?"
+      "quote": "A cache fleet grows from 20 to 21 nodes five minutes before a product launch. With modulo routing, most keys suddenly map elsewhere and the database receives a wall of misses. How could membership change move only a neighboring slice of keys? What still happens if one viral key dominates all traffic?"
     }
   },
   {
@@ -883,7 +883,7 @@
       "quote": "Consider a read model instead of repeated remote joins, with explicit freshness rules."
     },
     "problem_solved": "Business domains may need separate ownership or scaling without mistaking functional boundaries for key ranges.",
-    "design_scenario": "Billing and catalog teams need independent databases. How will a checkout read both without assuming their writes and recovery happen together?",
+    "design_scenario": "Orders, catalog, and billing each own a database. A customer invoice needs facts from all three during a catalog outage, and finance insists yesterday\u2019s purchase price must never change. Which service owns each meaning, where should cross-domain views be assembled, and which data should be copied as history rather than joined live?",
     "application_steps": [
       "Assign each fact a domain owner.",
       "Define cross-domain reads and updates.",
@@ -900,7 +900,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Billing and catalog teams need independent databases. How will a checkout read both without assuming their writes and recovery happen together?"
+      "quote": "Orders, catalog, and billing each own a database. A customer invoice needs facts from all three during a catalog outage, and finance insists yesterday\u2019s purchase price must never change. Which service owns each meaning, where should cross-domain views be assembled, and which data should be copied as history rather than joined live?"
     }
   },
   {
@@ -916,7 +916,7 @@
       "quote": "Choose the expected item count and acceptable false-positive rate before sizing the filter."
     },
     "problem_solved": "Many absent-key queries waste expensive authoritative lookups.",
-    "design_scenario": "Of 10,000 lookups, 9,000 keys are absent; a current 1% false-positive filter leaves about 1,090 authoritative lookups.",
+    "design_scenario": "A storage engine receives millions of requests for keys that do not exist. Touching disk for every miss is expensive, so the team adds a tiny bit array. One query hits every marked bit even though its key is absent. How can the structure confidently say \u201cno\u201d but only say \u201cmaybe,\u201d and where must a positive result be verified?",
     "application_steps": [
       "Use the filter only as a preliminary gate, keeping the real store authoritative.",
       "Choose expected capacity and false-positive tolerance, then size and maintain the filter.",
@@ -933,7 +933,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A storage service receives many key lookups, but most requested keys do not exist. Disk reads are expensive. You can keep a small memory structure that sometimes says a missing key might exist. Which result could safely avoid a disk read? Which result must be verified? What could go wrong if the database accepts a new key before that memory structure learns about it?"
+      "quote": "A storage engine receives millions of requests for keys that do not exist. Touching disk for every miss is expensive, so the team adds a tiny bit array. One query hits every marked bit even though its key is absent. How can the structure confidently say \u201cno\u201d but only say \u201cmaybe,\u201d and where must a positive result be verified?"
     }
   },
   {
@@ -945,7 +945,7 @@
       "quote": "CAP consistency means one-copy, real-time behavior, not instant forwarding everywhere."
     },
     "problem_solved": "A network partition prevents replicas coordinating while a client still expects a valid result.",
-    "design_scenario": "Two ticket servers lose contact. A sells the last seat; B still shows it available. Should B confirm another sale? What if B cannot check?",
+    "design_scenario": "Only one seat remains. Replica A records the sale, then the network link to replica B breaks. A second buyer reaches B, which still sees \u201cavailable\u201d and cannot ask A. Should B answer, wait, or refuse? Which promise is sacrificed by each choice, and why can no routing trick reveal information that never arrived?",
     "application_steps": [
       "State the invariant: do not confirm the same ticket sale twice.",
       "Require an authoritative reservation decision before confirming a sale.",
@@ -966,7 +966,7 @@
     "clarification": "One-copy real-time consistency and CAP availability need precise definitions.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Two ticket servers lose contact. A sells the last seat; B still shows it available. Should B confirm another sale? What if B cannot check?"
+      "quote": "Only one seat remains. Replica A records the sale, then the network link to replica B breaks. A second buyer reaches B, which still sees \u201cavailable\u201d and cannot ask A. Should B answer, wait, or refuse? Which promise is sacrificed by each choice, and why can no routing trick reveal information that never arrived?"
     }
   },
   {
@@ -978,7 +978,7 @@
       "quote": "PACELC includes normal-operation latency versus consistency, not only partition behavior."
     },
     "problem_solved": "CAP alone does not describe the latency-versus-consistency decision during normal network operation.",
-    "design_scenario": "Your global profile app runs normally, but fresh reads wait for another region. Is the network partitioned? What delay/freshness choice still exists?",
+    "design_scenario": "Your app writes a profile in Mumbai and immediately reads it in London. Waiting for both regions makes the update feel slow; acknowledging locally makes London briefly show the old value. Then the regions lose contact entirely. What tradeoff exists on the normal day, and what different choice appears during the partition?",
     "application_steps": [
       "Define acceptable freshness per operation.",
       "Compare regional stale reads with waiting for cross-region coordination during normal operation.",
@@ -999,7 +999,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Your global profile app runs normally, but fresh reads wait for another region. Is the network partitioned? What delay/freshness choice still exists?"
+      "quote": "Your app writes a profile in Mumbai and immediately reads it in London. Waiting for both regions makes the update feel slow; acknowledging locally makes London briefly show the old value. Then the regions lose contact entirely. What tradeoff exists on the normal day, and what different choice appears during the partition?"
     }
   },
   {
@@ -1011,7 +1011,7 @@
       "quote": "A distributed transaction spans multiple databases."
     },
     "problem_solved": "An order and an external payment can reach different committed states after a partial failure.",
-    "design_scenario": "An order is recorded in one service and charged in another. Then the workflow fails, or the charge response disappears. Can one local database transaction settle everything? When should you retry, wait, or compensate?",
+    "design_scenario": "An order is recorded and payment is charged, but inventory reservation fails. Three services have already committed locally; no shared rollback button exists. The customer sees \u201cprocessing\u201d while a refund worker keeps crashing. Which progress must be durable, what action compensates earlier work, and how can repeated recovery avoid repeated money movement?",
     "application_steps": [
       "List order and payment steps and their durable state.",
       "Choose coordinated commit or local commits with compensation according to the invariant.",
@@ -1033,7 +1033,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "An order is recorded in one service and charged in another. Then the workflow fails, or the charge response disappears. Can one local database transaction settle everything? When should you retry, wait, or compensate?"
+      "quote": "An order is recorded and payment is charged, but inventory reservation fails. Three services have already committed locally; no shared rollback button exists. The customer sees \u201cprocessing\u201d while a refund worker keeps crashing. Which progress must be durable, what action compensates earlier work, and how can repeated recovery avoid repeated money movement?"
     }
   },
   {
@@ -1045,7 +1045,7 @@
       "quote": "A cache stores a reusable faster copy; the database remains authoritative in this example."
     },
     "problem_solved": "Repeated product reads unnecessarily hit slower authoritative storage, but cached copies can become stale.",
-    "design_scenario": "A product page repeatedly reads a slow database. You add a fast copy of its price. Later the database says \u20b9550 while the copy still says \u20b9500. Which price should checkout trust? How should a missing or outdated copy be refreshed? What happens when hundreds of readers miss together?",
+    "design_scenario": "A product page serves a cached price of \u20b9500. The merchant changes it to \u20b9550, checkout charges \u20b9550, and screenshots accuse the store of bait-and-switch pricing. The cache made reads fast but split the user experience. Which value is authoritative, how stale may a copy be, and what must happen when invalidation fails?",
     "application_steps": [
       "Choose reusable product data and a key including all result-affecting inputs.",
       "On a miss, read authoritative storage and populate the cache.",
@@ -1067,7 +1067,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A product page repeatedly reads a slow database. You add a fast copy of its price. Later the database says \u20b9550 while the copy still says \u20b9500. Which price should checkout trust? How should a missing or outdated copy be refreshed? What happens when hundreds of readers miss together?"
+      "quote": "A product page serves a cached price of \u20b9500. The merchant changes it to \u20b9550, checkout charges \u20b9550, and screenshots accuse the store of bait-and-switch pricing. The cache made reads fast but split the user experience. Which value is authoritative, how stale may a copy be, and what must happen when invalidation fails?"
     }
   },
   {
@@ -1079,7 +1079,7 @@
       "quote": "Read-through and write-through are not opposites: they describe different sides of access and can be combined."
     },
     "problem_solved": "The design must assign ownership of cache loading and writes without silently losing freshness or durability guarantees.",
-    "design_scenario": "A price changes from \u20b9500 to \u20b9550 while an older reader is still loading the old value.",
+    "design_scenario": "A popular product is read 100,000 times and updated once. Another value changes every second. The team wants one caching rule for both. Who should load a missing value, who persists a write, and when should a cached copy be updated or removed? What failure could make each policy lie?",
     "application_steps": [
       "Choose who owns miss loading: application for cache-aside or a cache layer for read-through.",
       "Choose synchronous persistence or explicitly bounded write-behind risk.",
@@ -1101,7 +1101,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Your product page uses a fast copy of database prices. A reader fetches \u20b9500, pauses, and later stores it after another request updates the database to \u20b9550 and removes the old copy. Which value might readers now see? Who should load missing values and update writes? When may a write be acknowledged if persistence happens later?"
+      "quote": "A popular product is read 100,000 times and updated once. Another value changes every second. The team wants one caching rule for both. Who should load a missing value, who persists a write, and when should a cached copy be updated or removed? What failure could make each policy lie?"
     }
   },
   {
@@ -1113,7 +1113,7 @@
       "quote": "**Eviction** removes entries to make room. **Expiration** removes entries after an age limit, often a TTL, or time to live."
     },
     "problem_solved": "When the working set exceeds cache capacity, the system must choose which reusable values to remove.",
-    "design_scenario": "Capacity is three equal-sized entries: insert A/B/C, read A, then insert D.",
+    "design_scenario": "The cache is full when a flash sale begins. It evicts a frequently viewed product because that item was inserted long ago, then fills with one-time search results and hammers the database. Which history should determine what leaves, and how would object size, recency, frequency, or expiry change the decision?",
     "application_steps": [
       "Replay actual accesses against the cache capacity.",
       "For the stated trace, observe LRU removes B while FIFO removes A.",
@@ -1135,7 +1135,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A cache holds only three products. You insert A, B, and C, read A again, then need room for D. Which item would you remove, and why? Would your answer change if B had been read hundreds of times earlier? Does removing an old item for space also guarantee that retained prices are fresh?"
+      "quote": "The cache is full when a flash sale begins. It evicts a frequently viewed product because that item was inserted long ago, then fills with one-time search results and hammers the database. Which history should determine what leaves, and how would object size, recency, frequency, or expiry change the decision?"
     }
   },
   {
@@ -1147,7 +1147,7 @@
       "quote": "A distributed cache is reached over the network and can be shared across application servers; its data may also be spread across several cache nodes."
     },
     "problem_solved": "Many application instances duplicate expensive reads and can stampede the origin when a shared hot key expires.",
-    "design_scenario": "Two hundred app instances all miss the same popular product entry at once.",
+    "design_scenario": "Ten application servers share one cache. A celebrity post becomes a hot key, one cache node saturates, and a retry storm reaches the database when that node fails. Adding cache capacity did not spread the one key. How should ownership, replication, local copies, and coordinated reloads protect the underlying store?",
     "application_steps": [
       "Use a shared product key whose tenant and representation inputs are correct.",
       "Coalesce concurrent reloads per key, with a defined failure/lease policy.",
@@ -1169,7 +1169,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Two hundred application instances reuse one popular product through a shared cache. Its entry expires, and every instance asks the database for it at once. Would adding more cache nodes solve this one-key burst? How could callers share the reload work? What should happen if the cache is entirely unavailable but the database cannot absorb unlimited fallback requests?"
+      "quote": "Ten application servers share one cache. A celebrity post becomes a hot key, one cache node saturates, and a retry storm reaches the database when that node fails. Adding cache capacity did not spread the one key. How should ownership, replication, local copies, and coordinated reloads protect the underlying store?"
     }
   },
   {
@@ -1181,7 +1181,7 @@
       "quote": "A CDN keeps reusable content at geographically distributed edge locations."
     },
     "problem_solved": "Serving every static asset from one origin creates repeated long-distance transfers and origin load.",
-    "design_scenario": "Viewers in several countries request the same product image from one distant server. Which work can happen closer to them? If you replace the image, why might some viewers still see its old version? Would the same sharing policy be safe for private invoices?",
+    "design_scenario": "A trailer launches globally. Viewers in Singapore fetch every segment from a Virginia origin while a million nearby users request identical bytes. Minutes later, the studio replaces a broken frame but some edges keep the old version. Which content can be served nearby, how does the first copy arrive, and how will a new version replace it safely?",
     "application_steps": [
       "Cache safely shareable static content at edges with explicit keys and cache-control.",
       "Serve a hit at the edge; fetch the origin for a miss.",
@@ -1203,7 +1203,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Viewers in several countries request the same product image from one distant server. Which work can happen closer to them? If you replace the image, why might some viewers still see its old version? Would the same sharing policy be safe for private invoices?"
+      "quote": "A trailer launches globally. Viewers in Singapore fetch every segment from a Virginia origin while a million nearby users request identical bytes. Minutes later, the studio replaces a broken frame but some edges keep the old version. Which content can be served nearby, how does the first copy arrive, and how will a new version replace it safely?"
     }
   },
   {
@@ -1215,7 +1215,7 @@
       "quote": "An API, or application programming interface, specifies how one program asks another to do something."
     },
     "problem_solved": "Independent clients need stable, unambiguous behavior without depending on internal implementation details.",
-    "design_scenario": "A checkout client submits an order and loses the response after the order is recorded.",
+    "design_scenario": "A mobile team changes one field and accidentally breaks three partners. Another client retries a timed-out \u201ccreate order\u201d request and produces two orders. Everyone called the endpoint an API, but nobody agreed on its contract. What must callers know about inputs, outcomes, errors, compatibility, and safe repetition before either side changes independently?",
     "application_steps": [
       "Specify required inputs, authentication, validation, and business rejection rules.",
       "Return a stable order identifier and distinguish accepted-for-later from completed.",
@@ -1235,7 +1235,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A mobile developer needs to create an order without knowing your internal database structure. What information must their request contain, and what must your response guarantee? The service records the order but the response disappears. How should the developer retry without accidentally creating another order? Think about inputs, permissions, errors, and the difference between acceptance and completed work."
+      "quote": "A mobile team changes one field and accidentally breaks three partners. Another client retries a timed-out \u201ccreate order\u201d request and produces two orders. Everyone called the endpoint an API, but nobody agreed on its contract. What must callers know about inputs, outcomes, errors, compatibility, and safe repetition before either side changes independently?"
     }
   },
   {
@@ -1247,7 +1247,7 @@
       "quote": "These are interface models, not a universal speed ranking."
     },
     "problem_solved": "The interface must fit the clients, data shapes, and communication pattern without hiding inefficient backend work.",
-    "design_scenario": "Your product screen needs names, prices, and stock for thirty items. Should the client fetch resources, request selected fields, or call a typed inventory operation? If the response is small but triggers thirty database lookups, what actually needs improving?",
+    "design_scenario": "A product page needs five fields but downloads a huge document; an internal inventory service needs a typed ReserveStock operation with strict deadlines. The team wants one fashionable protocol everywhere. Which interaction is resource-shaped, which is an operation, who chooses response fields, and which failure semantics must remain visible?",
     "application_steps": [
       "Choose a resource, schema-selection, or typed-operation interface based on the client and operation.",
       "Trace the inventory lookups for the 30 products.",
@@ -1267,7 +1267,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Your product screen needs names, prices, and stock for thirty items. Should the client fetch resources, request selected fields, or call a typed inventory operation? If the response is small but triggers thirty database lookups, what actually needs improving?"
+      "quote": "A product page needs five fields but downloads a huge document; an internal inventory service needs a typed ReserveStock operation with strict deadlines. The team wants one fashionable protocol everywhere. Which interaction is resource-shaped, which is an operation, who chooses response fields, and which failure semantics must remain visible?"
     }
   },
   {
@@ -1279,7 +1279,7 @@
       "quote": "An API gateway provides a shared entry point for routing and cross-cutting policies."
     },
     "problem_solved": "Clients otherwise must discover and coordinate multiple backend services and shared entry-point concerns themselves.",
-    "design_scenario": "Your app has five microservices with ten APIs each. One screen needs three APIs from different services. Which calls should the client make? Where could you combine their responses? What should happen if one service is slow?",
+    "design_scenario": "Your travel app has five services and fifty APIs. Minutes before launch, the product screen needs details, live stock, and reviews; mobile and web duplicate the three calls. Reviews become slow, so one blank section prevents the whole page from loading. Where should routing, authentication, composition, and the partial-result decision live\u2014and which extra component is actually justified?",
     "application_steps": [
       "Route product and order requests to their service owners.",
       "Aggregate catalog and stock only with a defined deadline and partial-response rule.",
@@ -1301,7 +1301,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Your app has five microservices with ten APIs each. One screen needs three APIs from different services. Which calls should the client make? Where could you combine their responses? What should happen if one service is slow?"
+      "quote": "Your travel app has five services and fifty APIs. Minutes before launch, the product screen needs details, live stock, and reviews; mobile and web duplicate the three calls. Reviews become slow, so one blank section prevents the whole page from loading. Where should routing, authentication, composition, and the partial-result decision live\u2014and which extra component is actually justified?"
     }
   },
   {
@@ -1313,7 +1313,7 @@
       "quote": "An idempotent operation has the same effect when repeated as when performed once."
     },
     "problem_solved": "A retried payment after a lost response must not create an extra charge or skip a charge that never happened.",
-    "design_scenario": "A \u20b9500 payment succeeds, but its response disappears. Two identical retries arrive together. How can both return a sensible result without charging twice? What if you record \u201calready handled\u201d and crash before performing the payment?",
+    "design_scenario": "A customer taps Pay, sees a timeout, and taps again while the first request is still running. Both reach different servers; one crashes after the provider charges the card but before saving success. What durable identity makes these attempts one purchase, how should \u201cstill processing\u201d behave, and how will recovery find an external effect that already happened?",
     "application_steps": [
       "Scope K to caller and operation and record a payload fingerprint.",
       "Use an atomic uniqueness rule to choose one owner; define the duplicate\u2019s result or in-progress response.",
@@ -1335,7 +1335,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A \u20b9500 payment succeeds, but its response disappears. Two identical retries arrive together. How can both return a sensible result without charging twice? What if you record \u201calready handled\u201d and crash before performing the payment?"
+      "quote": "A customer taps Pay, sees a timeout, and taps again while the first request is still running. Both reach different servers; one crashes after the provider charges the card but before saving success. What durable identity makes these attempts one purchase, how should \u201cstill processing\u201d behave, and how will recovery find an external effect that already happened?"
     }
   },
   {
@@ -1347,7 +1347,7 @@
       "quote": "Rate limiting bounds operation frequency to protect capacity or fairness."
     },
     "problem_solved": "One customer or an aggregate traffic burst can overload shared search capacity or unfairly consume it.",
-    "design_scenario": "A search customer should receive at most 100 requests per second, but ten app servers each enforce that allowance locally. What could the customer actually send? How much burst traffic is acceptable, and what should happen when allowance runs out?",
+    "design_scenario": "A bot creates ten connections to each of ten app servers. Every server allows 100 requests per second, so the \u201c100 requests/second\u201d customer limit quietly becomes 10,000. During the burst, real users time out. Whose identity consumes the allowance, where is it counted, how much bursting is acceptable, and what happens if the counter store fails?",
     "application_steps": [
       "Define the identity key, interval, sustained rate, and burst allowance.",
       "Coordinate a global allowance or partition the budget intentionally across instances.",
@@ -1369,7 +1369,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A search customer should receive at most 100 requests per second, but ten app servers each enforce that allowance locally. What could the customer actually send? How much burst traffic is acceptable, and what should happen when allowance runs out?"
+      "quote": "A bot creates ten connections to each of ten app servers. Every server allows 100 requests per second, so the \u201c100 requests/second\u201d customer limit quietly becomes 10,000. During the burst, real users time out. Whose identity consumes the allowance, where is it counted, how much bursting is acceptable, and what happens if the counter store fails?"
     }
   },
   {
@@ -1381,7 +1381,7 @@
       "quote": "These transports do not automatically provide durable history."
     },
     "problem_solved": "Clients need timely updates, sometimes bidirectional, without losing all progress when a connection drops.",
-    "design_scenario": "A scoreboard mainly sends scores to browsers; an editor exchanges changes both ways. Which connection pattern fits each? After a thirty-second disconnect, how will the client discover missed updates rather than silently continue with old state?",
+    "design_scenario": "A collaborative editor sends cursor moves both ways every second; a delivery tracker only needs occasional server updates. After a train enters a tunnel, thousands of clients reconnect together and some updates are missing. Which direction and frequency does each product need, how is progress resumed, and who applies backpressure?",
     "application_steps": [
       "Select SSE for suitable server-to-client updates, WebSockets for suitable bidirectional work, or long polling when appropriate.",
       "Assign event positions or provide snapshots to recover missed updates.",
@@ -1403,7 +1403,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A scoreboard mainly sends scores to browsers; an editor exchanges changes both ways. Which connection pattern fits each? After a thirty-second disconnect, how will the client discover missed updates rather than silently continue with old state?"
+      "quote": "A collaborative editor sends cursor moves both ways every second; a delivery tracker only needs occasional server updates. After a train enters a tunnel, thousands of clients reconnect together and some updates are missing. Which direction and frequency does each product need, how is progress resumed, and who applies backpressure?"
     }
   },
   {
@@ -1415,7 +1415,7 @@
       "quote": "A webhook is an event notification delivered to an endpoint you provide, commonly using an HTTP request."
     },
     "problem_solved": "A service needs provider events without constant polling, while tolerating duplicate, delayed, or reordered delivery.",
-    "design_scenario": "A payment provider resends event E after the receiver durably accepted it but its acknowledgement was lost.",
+    "design_scenario": "Your checkout waits for a payment provider. The provider sends \u201cpaid,\u201d receives a timeout, and sends it three more times; the second delivery arrives before an earlier \u201cpending\u201d event. If you simply run the handler each time, customers receive repeated receipts. How will you authenticate, order, deduplicate, retry, and reconcile these callbacks?",
     "application_steps": [
       "Verify the provider\u2019s signature against the specified representation and validate the event.",
       "Durably accept E and acknowledge according to the delivery contract.",
@@ -1437,7 +1437,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A payment provider tells your shop that a charge succeeded. Your shop records the event, but its acknowledgement disappears, so the provider sends the same event again. Should another shipment begin? How will you recognize the sender and distinguish a retry from a new event? What if a delayed pending event arrives after you already know payment completed?"
+      "quote": "Your checkout waits for a payment provider. The provider sends \u201cpaid,\u201d receives a timeout, and sends it three more times; the second delivery arrives before an earlier \u201cpending\u201d event. If you simply run the handler each time, customers receive repeated receipts. How will you authenticate, order, deduplicate, retry, and reconcile these callbacks?"
     }
   },
   {
@@ -1449,7 +1449,7 @@
       "quote": "Start with what clients need to do and the data they exchange."
     },
     "problem_solved": "Unbounded lists, ambiguous results, incompatible changes, and unsafe retries prevent clients completing tasks predictably.",
-    "design_scenario": "An account with one million orders pages through a changing order list.",
+    "design_scenario": "A list endpoint works in testing, then a large customer accumulates two million orders. One request attempts to return everything, times out, retries, and doubles database pressure. Meanwhile, a new field breaks an older app. Which boundaries, pagination rules, error shapes, and version promises keep the contract usable as data and clients grow?",
     "application_steps": [
       "Set a maximum page size and stable sort with a unique tie-breaker.",
       "Return a continuation cursor and document snapshot versus live-list semantics.",
@@ -1469,7 +1469,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "One customer has a million orders, and a client asks to list them. Should one response contain everything? If you divide results into pages, how do equal creation times and concurrent inserts affect the next page? What must a continuation marker mean, and how do you stop a user changing it to read another customer\u2019s orders?"
+      "quote": "A list endpoint works in testing, then a large customer accumulates two million orders. One request attempts to return everything, times out, retries, and doubles database pressure. Meanwhile, a new field breaks an older app. Which boundaries, pagination rules, error shapes, and version promises keep the contract usable as data and clients grow?"
     }
   },
   {
@@ -1481,7 +1481,7 @@
       "quote": "A broker stores or routes messages between producers and consumers under configured guarantees."
     },
     "problem_solved": "Producers and consumers should exchange work/events without requiring each receiver to be synchronously active or directly addressed.",
-    "design_scenario": "An order must trigger billing and shipping, even when a receiver is temporarily offline. Should workers compete for one job or each receive the event? What must survive a crash?",
+    "design_scenario": "The order database commits successfully, but the service crashes one millisecond before publishing \u201cOrderPlaced.\u201d Shipping never learns the order exists. In a different failure, a consumer performs its work and crashes before acknowledging, so the event returns. Where is the durable handoff, when is work complete, and which repeats must be safe?",
     "application_steps": [
       "Decide whether one worker must do each job or independent subscribers each need the event.",
       "Specify persistence, acknowledgement, ordering, and replay/retry guarantees before selecting a product.",
@@ -1503,7 +1503,7 @@
     "clarification": "Streaming systems can track consumer progress and provide delivery guarantees.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "An order must trigger billing and shipping, even when a receiver is temporarily offline. Should workers compete for one job or each receive the event? What must survive a crash?"
+      "quote": "The order database commits successfully, but the service crashes one millisecond before publishing \u201cOrderPlaced.\u201d Shipping never learns the order exists. In a different failure, a consumer performs its work and crashes before acknowledging, so the event returns. Where is the durable handoff, when is work complete, and which repeats must be safe?"
     }
   },
   {
@@ -1515,7 +1515,7 @@
       "quote": "A work queue buffers jobs for competing consumers, letting uploads return while thumbnails remain pending."
     },
     "problem_solved": "Bursts of thumbnail work should not hold upload requests open or overwhelm downstream processing; redeliveries must be safe.",
-    "design_scenario": "A thousand uploads arrive together. Thumbnail generation is slower than upload acceptance. Where should unfinished jobs wait? A worker saves an image and crashes before reporting completion: should the replacement do the work again?",
+    "design_scenario": "A resize worker saves an image, crashes before acknowledging, and the queue gives the same job to another worker. During an outage, one million jobs remain safely stored\u2014but the oldest is now six hours late. How will workers recognize repeated effects, when should a job reappear, and which metric reveals that durability has become unacceptable delay?",
     "application_steps": [
       "Durably enqueue stable job identifiers and use deterministic output keys.",
       "Acknowledge after durable completion with realistic visibility/processing leases.",
@@ -1537,7 +1537,7 @@
     "clarification": "At-least-once delivery can repeat execution.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A thousand uploads arrive together. Thumbnail generation is slower than upload acceptance. Where should unfinished jobs wait? A worker saves an image and crashes before reporting completion: should the replacement do the work again?"
+      "quote": "A resize worker saves an image, crashes before acknowledging, and the queue gives the same job to another worker. During an outage, one million jobs remain safely stored\u2014but the oldest is now six hours late. How will workers recognize repeated effects, when should a job reappear, and which metric reveals that durability has become unacceptable delay?"
     }
   },
   {
@@ -1549,7 +1549,7 @@
       "quote": "Pub/sub gives independent subscriptions their own logical delivery."
     },
     "problem_solved": "Several independent business reactions must each receive an event without being treated as competing workers for one job.",
-    "design_scenario": "Every order needs billing and shipping. Both teams put workers on one shared work queue, but some orders get only one action. Why? How should deliveries and progress differ between teams and within one team?",
+    "design_scenario": "One OrderPlaced event should trigger billing, shipping, analytics, and fraud checks. Analytics slows down and accidentally consumes the only copy, so shipping sees nothing. Which consumers need independent progress, where may workers compete, and can a new subscriber replay yesterday\u2019s events without disturbing existing ones?",
     "application_steps": [
       "Create separate billing and shipping subscriptions.",
       "Specify event identifiers, versioned meaning, and safe repeated processing.",
@@ -1571,7 +1571,7 @@
     "clarification": "Subscription delivery can be pull-based or retained rather than immediate push.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Every order needs billing and shipping. Both teams put workers on one shared work queue, but some orders get only one action. Why? How should deliveries and progress differ between teams and within one team?"
+      "quote": "One OrderPlaced event should trigger billing, shipping, analytics, and fraud checks. Analytics slows down and accidentally consumes the only copy, so shipping sees nothing. Which consumers need independent progress, where may workers compete, and can a new subscriber replay yesterday\u2019s events without disturbing existing ones?"
     }
   },
   {
@@ -1583,7 +1583,7 @@
       "quote": "CDC observes changes in a database and makes them available to other systems."
     },
     "problem_solved": "A derived search index needs committed database changes without repeatedly scanning the entire source or independently double-writing each request.",
-    "design_scenario": "A committed price update travels through a connector to the search index, whose consumer restarts from an older position.",
+    "design_scenario": "A product price commits in the database, but search still shows the old price because a dual-write to the index failed. Recovery replays the same change twice and an older event arrives late. How can committed changes become a durable stream, how will consumers order or deduplicate them, and which store remains authoritative?",
     "application_steps": [
       "Take an initial snapshot and track a recoverable change-log position.",
       "Apply records using stable product identifiers and a version rule that makes replay safe.",
@@ -1605,7 +1605,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "The product database commits a new price, but updating the search index fails. Repeated full scans are expensive, and independently writing both stores creates awkward failure cases. How could search learn about committed changes? After a pipeline restart, what if the same change appears again? How would you detect a destination falling far behind while retained change history keeps growing?"
+      "quote": "A product price commits in the database, but search still shows the old price because a dual-write to the index failed. Recovery replays the same change twice and an older event arrives late. How can committed changes become a durable stream, how will consumers order or deduplicate them, and which store remains authoritative?"
     }
   },
   {
@@ -1617,7 +1617,7 @@
       "quote": "Layers separate responsibilities; tiers separate deployed processes or machines."
     },
     "problem_solved": "Separates presentation, business rules, and persistence so each responsibility has an explicit deployment and scaling boundary.",
-    "design_scenario": "A shop's checkout slows while product pages remain responsive. Which responsibility needs extra capacity? What changes if the database runs on another machine?",
+    "design_scenario": "Checkout slows while product browsing stays fast. The browser, application logic, and database run on separate machines, and each order line triggers another network call. The team wants to scale every tier equally. Which responsibility is actually waiting, which boundary creates the repeated trips, and could a logical layer remain in the same deployment?",
     "application_steps": [
       "Identify presentation, order rules, and persistence.",
       "Place deployment boundaries deliberately and trace network calls.",
@@ -1636,7 +1636,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A shop's checkout slows while product pages remain responsive. Which responsibility needs extra capacity? What changes if the database runs on another machine?"
+      "quote": "Checkout slows while product browsing stays fast. The browser, application logic, and database run on separate machines, and each order line triggers another network call. The team wants to scale every tier equally. Which responsibility is actually waiting, which boundary creates the repeated trips, and could a logical layer remain in the same deployment?"
     }
   },
   {
@@ -1648,7 +1648,7 @@
       "quote": "A monolith is one deployable application; microservices introduce independently deployed service boundaries."
     },
     "problem_solved": "Defines capability and data-ownership boundaries without treating distributed deployment as an automatic performance improvement.",
-    "design_scenario": "A shop's catalog team cannot release a small search change without coordinating a billing deployment. Catalog traffic also grows faster than checkout. Would splitting services solve both problems? What new failures could one order encounter? Which data should each team own?",
+    "design_scenario": "Catalog cannot release a search fix without coordinating a full application deploy, and its traffic grows ten times faster than billing. Leadership orders fifty microservices by Friday. What boundary would actually improve ownership or scaling, which data belongs behind it, and what new partial failures appear when one order crosses payment and inventory?",
     "application_steps": [
       "Measure the bottleneck and release constraint.",
       "Choose explicit capability and data ownership.",
@@ -1667,7 +1667,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A shop's catalog team cannot release a small search change without coordinating a billing deployment. Catalog traffic also grows faster than checkout. Would splitting services solve both problems? What new failures could one order encounter? Which data should each team own?"
+      "quote": "Catalog cannot release a search fix without coordinating a full application deploy, and its traffic grows ten times faster than billing. Leadership orders fifty microservices by Friday. What boundary would actually improve ownership or scaling, which data belongs behind it, and what new partial failures appear when one order crosses payment and inventory?"
     }
   },
   {
@@ -1679,7 +1679,7 @@
       "quote": "EDA lets consumers react after the initiating action commits."
     },
     "problem_solved": "Decouples an initiating business action from downstream reactions that can complete later.",
-    "design_scenario": "An order is saved, but a crash prevents shipping from hearing about it. What information must survive? Should checkout success mean shipping already finished?",
+    "design_scenario": "A warehouse update must inform search, recommendations, and fraud systems. The order service currently calls all three; one slow recommendation deploy blocks checkout. Moving to events removes the wait\u2014but now consumers can lag, repeat, and disagree. Which fact should be published, what remains authoritative, and when does the user need an immediate answer instead?",
     "application_steps": [
       "Coordinate the order and publication intent durably.",
       "Publish committed events and handle repeated delivery safely.",
@@ -1700,7 +1700,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "An order is saved, but a crash prevents shipping from hearing about it. What information must survive? Should checkout success mean shipping already finished?"
+      "quote": "A warehouse update must inform search, recommendations, and fraud systems. The order service currently calls all three; one slow recommendation deploy blocks checkout. Moving to events removes the wait\u2014but now consumers can lag, repeat, and disagree. Which fact should be published, what remains authoritative, and when does the user need an immediate answer instead?"
     }
   },
   {
@@ -1712,7 +1712,7 @@
       "quote": "Event sourcing makes stored events authoritative, not merely notifications."
     },
     "problem_solved": "Preserves authoritative business history so current state and derived views can be reconstructed.",
-    "design_scenario": "A balance changed several times, and an auditor asks how it reached 70. Can you reconstruct it? How would rebuilding avoid charging or emailing someone again?",
+    "design_scenario": "An account balance is wrong, and auditors ask exactly how it became wrong six months ago. The database contains only today\u2019s total. The team proposes storing every accepted change and rebuilding views, but email must not resend during replay. Which events are durable facts, how is current state derived, and which side effects must stay outside replay?",
     "application_steps": [
       "Persist authoritative business event history.",
       "Replay events or a verified snapshot and later events.",
@@ -1733,7 +1733,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A balance changed several times, and an auditor asks how it reached 70. Can you reconstruct it? How would rebuilding avoid charging or emailing someone again?"
+      "quote": "An account balance is wrong, and auditors ask exactly how it became wrong six months ago. The database contains only today\u2019s total. The team proposes storing every accepted change and rebuilding views, but email must not resend during replay. Which events are durable facts, how is current state derived, and which side effects must stay outside replay?"
     }
   },
   {
@@ -1745,7 +1745,7 @@
       "quote": "CQRS separates write responsibilities from read views; it does not require event sourcing."
     },
     "problem_solved": "Allows write rules and read queries to use models shaped for their different responsibilities.",
-    "design_scenario": "Creating an order succeeds, but the customer's order-list screen does not show it yet. Which state is authoritative? What should the customer see while the list catches up?",
+    "design_scenario": "Writing an order needs strict validation; listing a customer\u2019s orders needs a fast, denormalized view. After creation succeeds, the list briefly omits the new order and support calls it data loss. Should both paths share one model? What lag is acceptable, how is the read view rebuilt, and which system answers authoritative status?",
     "application_steps": [
       "Commit create-order through the write model.",
       "Project changes safely into a customer read model.",
@@ -1766,7 +1766,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Creating an order succeeds, but the customer's order-list screen does not show it yet. Which state is authoritative? What should the customer see while the list catches up?"
+      "quote": "Writing an order needs strict validation; listing a customer\u2019s orders needs a fast, denormalized view. After creation succeeds, the list briefly omits the new order and support calls it data loss. Should both paths share one model? What lag is acceptable, how is the read view rebuilt, and which system answers authoritative status?"
     }
   },
   {
@@ -1778,7 +1778,7 @@
       "quote": "An ESB transforms and routes messages between unlike systems."
     },
     "problem_solved": "Integrates systems with incompatible message formats and routing requirements.",
-    "design_scenario": "Billing emits one address format; legacy shipping expects another. Where should conversion happen? What happens to orders if the converter fails?",
+    "design_scenario": "Twelve legacy systems exchange incompatible formats. A central integration layer transforms and routes everything\u2014until one change for payroll breaks inventory and no team understands the hidden rules. Which mediation belongs centrally, which business logic belongs with its owner, and how will you stop the shared hub becoming an organizational and runtime bottleneck?",
     "application_steps": [
       "Define source and target message contracts.",
       "Transform and route at a clear integration boundary.",
@@ -1797,7 +1797,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Billing emits one address format; legacy shipping expects another. Where should conversion happen? What happens to orders if the converter fails?"
+      "quote": "Twelve legacy systems exchange incompatible formats. A central integration layer transforms and routes everything\u2014until one change for payroll breaks inventory and no team understands the hidden rules. Which mediation belongs centrally, which business logic belongs with its owner, and how will you stop the shared hub becoming an organizational and runtime bottleneck?"
     }
   },
   {
@@ -1809,7 +1809,7 @@
       "quote": "VMs can run separate guest kernels; containers normally share their host kernel while isolating processes and resources."
     },
     "problem_solved": "Chooses packaging, resource control, and operating-system isolation boundaries for workloads.",
-    "design_scenario": "A shop replaces workers frequently. One needs a different operating-system kernel; another repeatedly runs out of memory. Which isolation boundary matters? What must remain after a worker disappears?",
+    "design_scenario": "A noisy image worker consumes all memory and restarts a neighboring checkout process. Security then discovers two tenants share a kernel that one workload can exploit. Packaging was consistent, but isolation assumptions were wrong. Which boundary needs its own operating system, which can share one, and where must durable state live when instances disappear?",
     "application_steps": [
       "Choose the required kernel and isolation boundary.",
       "Allocate measured resources and externalize durable state.",
@@ -1828,7 +1828,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A shop replaces workers frequently. One needs a different operating-system kernel; another repeatedly runs out of memory. Which isolation boundary matters? What must remain after a worker disappears?"
+      "quote": "A noisy image worker consumes all memory and restarts a neighboring checkout process. Security then discovers two tenants share a kernel that one workload can exploit. Packaging was consistent, but isolation assumptions were wrong. Which boundary needs its own operating system, which can share one, and where must durable state live when instances disappear?"
     }
   },
   {
@@ -1840,7 +1840,7 @@
       "quote": "Serverless does not mean no servers exist."
     },
     "problem_solved": "Offloads parts of runtime provisioning and operation for suitable request- or event-triggered work.",
-    "design_scenario": "A stored photo triggers thumbnail generation that can run again after a repeated event.",
+    "design_scenario": "A campaign sends one million image jobs after weeks of silence. Functions scale quickly, then cold starts delay the first users, retries duplicate processing, and concurrent invocations overwhelm the database. Which work benefits from on-demand execution, what limits downstream pressure, and which long-running or stateful task should remain elsewhere?",
     "application_steps": [
       "Store photo P and use a deterministic output key such as P/version/thumbnail.",
       "Make duplicate events safe without relying on invocation-local memory.",
@@ -1859,7 +1859,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Your photo service receives no uploads all night, then 5,000 photos in a minute. Thumbnail jobs sometimes run twice, and the database accepts only 100 connections. What must survive between executions? How would you control the burst without losing work? Which measurements would tell you whether paying for warm capacity is worthwhile?"
+      "quote": "A campaign sends one million image jobs after weeks of silence. Functions scale quickly, then cold starts delay the first users, retries duplicate processing, and concurrent invocations overwhelm the database. Which work benefits from on-demand execution, what limits downstream pressure, and which long-running or stateful task should remain elsewhere?"
     }
   },
   {
@@ -1871,7 +1871,7 @@
       "quote": "In a peer-to-peer design, participants can exchange data or provide services to one another."
     },
     "problem_solved": "Distributes content-serving work among participants instead of making one origin serve every byte.",
-    "design_scenario": "Peers A and B exchange different verified pieces of the same large file.",
+    "design_scenario": "A game update is too large for one origin during launch. Players can exchange verified pieces, but fast peers leave, a malicious peer sends corrupt data, and some users sit behind restrictive networks. How will peers discover one another, prove each piece is valid, find rare pieces, and fall back when the swarm cannot connect?",
     "application_steps": [
       "Split content into verifiable pieces and obtain trustworthy piece metadata.",
       "Discover reachable peers with useful pieces and resume from alternative sources when peers depart.",
@@ -1892,7 +1892,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A training app distributes one large video file to many learners. Some learners already have different pieces and can upload them; others sit behind restrictive routers. One helpful peer suddenly leaves before sharing its last piece. How would a newcomer find trustworthy content and finish downloading? Which dependencies remain even if peers exchange most bytes directly?"
+      "quote": "A game update is too large for one origin during launch. Players can exchange verified pieces, but fast peers leave, a malicious peer sends corrupt data, and some users sit behind restrictive networks. How will peers discover one another, prove each piece is valid, find rare pieces, and fall back when the swarm cannot connect?"
     }
   },
   {
@@ -1904,7 +1904,7 @@
       "quote": "Discovery supplies service destinations; load balancing chooses among them."
     },
     "problem_solved": "Finds service instance addresses that change during deployment or failure.",
-    "design_scenario": "An orders instance is replaced, but a long-lived caller keeps using its old address. How should the caller learn the change? Can a recently discovered destination still fail?",
+    "design_scenario": "A new orders instance starts every minute and old ones disappear just as quickly. One caller cached an address seconds before that instance died, then retried the charge against another instance. How should callers find healthy candidates, how stale may discovery data be, and which operations are safe to repeat after routing changes?",
     "application_steps": [
       "Register instances only when ready for relevant work.",
       "Remove retiring routes and drain bounded existing work.",
@@ -1925,7 +1925,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "An orders instance is replaced, but a long-lived caller keeps using its old address. How should the caller learn the change? Can a recently discovered destination still fail?"
+      "quote": "A new orders instance starts every minute and old ones disappear just as quickly. One caller cached an address seconds before that instance died, then retried the charge against another instance. How should callers find healthy candidates, how stale may discovery data be, and which operations are safe to repeat after routing changes?"
     }
   },
   {
@@ -1937,7 +1937,7 @@
       "quote": "A heartbeat is a periodic \u201cI am here\u201d signal."
     },
     "problem_solved": "Provides recent reachability evidence to support failure suspicion, not proof of end-to-end health.",
-    "design_scenario": "A worker reporting every five seconds pauses long enough to cross a fifteen-second suspicion threshold.",
+    "design_scenario": "A worker stops sending heartbeats during a long garbage-collection pause. The coordinator declares it dead and assigns its job elsewhere; the original worker wakes and continues writing. Was the worker dead, slow, or partitioned? How should suspicion, timeout, reassignment, and protection from the old worker fit together?",
     "application_steps": [
       "Choose report interval and suspicion threshold from observed delay, pauses, and detection needs.",
       "Separate liveness from readiness so a heartbeat does not hide a broken business dependency.",
@@ -1958,7 +1958,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A worker reports every five seconds, then sends nothing for twenty seconds. A replacement begins the same job, but the original worker later resumes and still believes it owns the work. Was the original worker necessarily dead? What should the monitor infer from silence? How would you prevent both workers from applying the same irreversible business effect?"
+      "quote": "A worker stops sending heartbeats during a long garbage-collection pause. The coordinator declares it dead and assigns its job elsewhere; the original worker wakes and continues writing. Was the worker dead, slow, or partitioned? How should suspicion, timeout, reassignment, and protection from the old worker fit together?"
     }
   },
   {
@@ -1970,7 +1970,7 @@
       "quote": "A breaker reacts to repeated dependency failures; a timeout bounds one call."
     },
     "problem_solved": "Stops repeated calls to a failing dependency from consuming resources and spreading failure.",
-    "design_scenario": "Checkout repeatedly waits on a failing payment service until workers are exhausted. Should it keep trying every request? How can it notice recovery safely?",
+    "design_scenario": "A recommendation service slows from 50 ms to 20 seconds. Every checkout thread waits, retry traffic triples, and the healthy order path collapses behind an optional feature. When should calls stop reaching the dependency, what may the user see instead, and how will limited probes decide that recovery is real?",
     "application_steps": [
       "Measure payment failures and select thresholds.",
       "Stop calls while open and admit limited recovery probes.",
@@ -1991,7 +1991,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Checkout repeatedly waits on a failing payment service until workers are exhausted. Should it keep trying every request? How can it notice recovery safely?"
+      "quote": "A recommendation service slows from 50 ms to 20 seconds. Every checkout thread waits, retry traffic triples, and the healthy order path collapses behind an optional feature. When should calls stop reaching the dependency, what may the user see instead, and how will limited probes decide that recovery is real?"
     }
   },
   {
@@ -2003,7 +2003,7 @@
       "quote": "SLI is the measurement; SLO the target; SLA an agreement that may specify consequences."
     },
     "problem_solved": "Connects a user-facing service promise to a measurable target and observed performance.",
-    "design_scenario": "Checkout responds quickly but sometimes returns errors. What counts as success? Which measured percentage would show whether the service meets its promise?",
+    "design_scenario": "The status page boasts 99.99% uptime, yet checkout was unusable for every customer during the biggest sale because responses took 30 seconds. Leadership says the SLA was met. What user event should be measured, over which window, which target drives engineering, and how much failure can the team spend before risky releases should pause?",
     "application_steps": [
       "Define successful purchase and latency threshold.",
       "Measure a window and compare the target.",
@@ -2022,7 +2022,7 @@
     "clarification": "Targets, observations, measurement windows, and error budgets are different concepts.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Checkout responds quickly but sometimes returns errors. What counts as success? Which measured percentage would show whether the service meets its promise?"
+      "quote": "The status page boasts 99.99% uptime, yet checkout was unusable for every customer during the biggest sale because responses took 30 seconds. Leadership says the SLA was met. What user event should be measured, over which window, which target drives engineering, and how much failure can the team spend before risky releases should pause?"
     }
   },
   {
@@ -2034,7 +2034,7 @@
       "quote": "RPO limits tolerable data loss; RTO limits recovery time."
     },
     "problem_solved": "Defines tolerable data loss and time to recover usable service after a serious disruption.",
-    "design_scenario": "A region fails when the latest usable order backup is an hour old. What can be lost? When will customers actually be able to purchase again?",
+    "design_scenario": "At 2:00 a.m., ransomware encrypts production and the live replicas copy the damage. The last tested backup is six hours old; restoring it will take four hours. The business can lose ten minutes of orders and tolerate one hour offline. Which target has already been missed, what recovery data is missing, and when should this have been rehearsed?",
     "application_steps": [
       "Set data-loss and recovery targets from business tolerance.",
       "Rehearse restoring data and operational dependencies.",
@@ -2055,7 +2055,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A region fails when the latest usable order backup is an hour old. What can be lost? When will customers actually be able to purchase again?"
+      "quote": "At 2:00 a.m., ransomware encrypts production and the live replicas copy the damage. The last tested backup is six hours old; restoring it will take four hours. The business can lose ten minutes of orders and tolerate one hour offline. Which target has already been missed, what recovery data is missing, and when should this have been rehearsed?"
     }
   },
   {
@@ -2067,7 +2067,7 @@
       "quote": "Consensus protocols help cooperating nodes agree on decisions, such as the order of entries in a **replicated log**, the same ordered history kept on multiple nodes."
     },
     "problem_solved": "Maintains an agreed ordered decision history among replicas under a specified failure model.",
-    "design_scenario": "A three-voter Raft group must handle an isolated former leader without conflicting committed decisions.",
+    "design_scenario": "Five replicas maintain configuration. The leader accepts a change on itself and one follower, then becomes isolated with that follower. The other three elect a new leader and accept a different change. Which group may safely make progress, when is an entry committed, and how will the returning minority repair its conflicting history?",
     "application_steps": [
       "Use a well-understood protocol implementation and specify voters and failure assumptions.",
       "Replicate log entries through leader, term, history, persistence, and quorum rules.",
@@ -2088,7 +2088,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Three servers maintain a shared configuration history. The current leader becomes isolated from the other two, but can still hear from one client. Both network groups want to accept changes. Which decisions may safely become committed? What should happen if no communicating group satisfies the protocol's rules? How would a returning leader learn what it missed?"
+      "quote": "Five replicas maintain configuration. The leader accepts a change on itself and one follower, then becomes isolated with that follower. The other three elect a new leader and accept a different change. Which group may safely make progress, when is an entry committed, and how will the returning minority repair its conflicting history?"
     }
   },
   {
@@ -2100,7 +2100,7 @@
       "quote": "A distributed lock tries to give one participant temporary ownership of work shared across machines."
     },
     "problem_solved": "Coordinates exclusive work across processes while accounting for expiry and stale owners.",
-    "design_scenario": "Report worker A pauses past lease expiry, B gets token 11, then A resumes with token 10.",
+    "design_scenario": "Worker A acquires a five-second lease, pauses for ten seconds, and resumes after worker B has acquired the same lock. Both believe they own the job and write to storage. A timeout-based lock did not stop the old process. What evidence lets the protected resource reject A\u2019s late write?",
     "application_steps": [
       "Decide whether duplicates are a cost problem or a correctness violation.",
       "Acquire ownership with a lease and have the protected store enforce fencing or another direct invariant.",
@@ -2121,7 +2121,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "Worker A starts a monthly report, pauses for a long time, then resumes. Meanwhile its ownership deadline passed, so worker B took over and saved a newer report. A now tries to overwrite that result. Did deadline expiry physically stop A? What must the protected storage check? Could a conditional write avoid needing this lock at all?"
+      "quote": "Worker A acquires a five-second lease, pauses for ten seconds, and resumes after worker B has acquired the same lock. Both believe they own the job and write to storage. A timeout-based lock did not stop the old process. What evidence lets the protected resource reject A\u2019s late write?"
     }
   },
   {
@@ -2133,7 +2133,7 @@
       "quote": "In a gossip protocol, nodes periodically exchange information with selected peers."
     },
     "problem_solved": "Spreads membership or health observations without every update requiring one sender to contact all nodes directly.",
-    "design_scenario": "A learns member D joined, tells B, and C learns later after another peer exchange.",
+    "design_scenario": "A storage node joins a 500-node cluster while one region is temporarily unreachable. Membership news spreads peer to peer; for several seconds, different nodes hold different maps. How quickly should knowledge spread, how much traffic is acceptable, and which decisions still require stronger agreement than shared rumors?",
     "application_steps": [
       "Select peers and exchange membership observations using the chosen protocol version rules.",
       "Allow temporary view disagreement and reconnect or resynchronize after separation.",
@@ -2154,7 +2154,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A new storage node announces itself to one peer. Some clients can discover it immediately, while other peers still list only the old members. A temporary network partition delays one part of the cluster. Must every view already match? How can peers decide whether returning observations are old or new? Would learning the same membership list also establish one safe order for payments?"
+      "quote": "A storage node joins a 500-node cluster while one region is temporarily unreachable. Membership news spreads peer to peer; for several seconds, different nodes hold different maps. How quickly should knowledge spread, how much traffic is acceptable, and which decisions still require stronger agreement than shared rumors?"
     }
   },
   {
@@ -2166,7 +2166,7 @@
       "quote": "A trace connects the work caused by one request."
     },
     "problem_solved": "Connects request work across service boundaries to locate slow or failing dependencies.",
-    "design_scenario": "An order-page trace separates gateway work, orders-service work, and a slow sequential database call, then contrasts overlapping dependency calls.",
+    "design_scenario": "A checkout request crosses eight services and takes four seconds, but every service dashboard reports an average below 100 ms. Retries created hidden duplicate calls and one request ID vanished at a queue boundary. How will you reconstruct the critical path, preserve context across asynchronous work, and distinguish waiting from actual processing?",
     "application_steps": [
       "Propagate trace context through HTTP and message metadata and create meaningful spans.",
       "Find the critical path rather than summing overlapping spans or inclusive parent times.",
@@ -2187,7 +2187,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "An order page calls inventory and delivery at the same time. Each call has a recorded duration, and the parent request records time that already includes those calls. A dashboard adds every span and reports more time than the customer waited. Which measurements overlap? Where is the actual critical path? How would you prove the trace follows the same request across all services?"
+      "quote": "A checkout request crosses eight services and takes four seconds, but every service dashboard reports an average below 100 ms. Retries created hidden duplicate calls and one request ID vanished at a queue boundary. How will you reconstruct the critical path, preserve context across asynchronous work, and distinguish waiting from actual processing?"
     }
   },
   {
@@ -2199,7 +2199,7 @@
       "quote": "TLS protects a connection; usually the client verifies the server certificate."
     },
     "problem_solved": "Protects connection data and establishes endpoint identity while keeping authorization separate.",
-    "design_scenario": "A browser connects securely to a gateway, which forwards the request internally. Where can the data be read? How does the next service know who called it?",
+    "design_scenario": "A service presents a valid certificate for the wrong hostname, while another authenticated service attempts an operation it is not allowed to perform. The connections are encrypted, yet one peer may be an impostor and the other lacks permission. What identity should each side verify, where is authorization enforced, and when is mutual authentication worth the operational cost?",
     "application_steps": [
       "Locate TLS termination and each subsequent connection.",
       "Verify endpoint identities and authorize the operation separately.",
@@ -2220,7 +2220,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A browser connects securely to a gateway, which forwards the request internally. Where can the data be read? How does the next service know who called it?"
+      "quote": "A service presents a valid certificate for the wrong hostname, while another authenticated service attempts an operation it is not allowed to perform. The connections are encrypted, yet one peer may be an impostor and the other lacks permission. What identity should each side verify, where is authorization enforced, and when is mutual authentication worth the operational cost?"
     }
   },
   {
@@ -2232,7 +2232,7 @@
       "quote": "OAuth delegates resource access; OIDC adds authenticated login identity."
     },
     "problem_solved": "Separates delegated access to protected resources from a client receiving authenticated login identity.",
-    "design_scenario": "A printing app needs selected photos but must not receive the user's password. What permission should it request? Which returned information proves login, and what belongs at the photo API?",
+    "design_scenario": "A photo-printing app asks users for their cloud-storage passwords so it can fetch pictures. A leaked database exposes every account. The replacement design receives a token\u2014but accidentally sends an ID token to the photo API and accepts one meant for another client. Which party grants access, which token proves login, and which audience must validate it?",
     "application_steps": [
       "Obtain narrow delegated permission through a provider flow.",
       "Exchange the code with appropriate PKCE and validate the token contract.",
@@ -2253,7 +2253,7 @@
     "clarification": "Code exchange, PKCE, token audience, format, and lifetime are separate choices.",
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A printing app needs selected photos but must not receive the user's password. What permission should it request? Which returned information proves login, and what belongs at the photo API?"
+      "quote": "A photo-printing app asks users for their cloud-storage passwords so it can fetch pictures. A leaked database exposes every account. The replacement design receives a token\u2014but accidentally sends an ID token to the photo API and accepts one meant for another client. Which party grants access, which token proves login, and which audience must validate it?"
     }
   },
   {
@@ -2265,7 +2265,7 @@
       "quote": "SSO lets applications trust one provider's authenticated identity, but each application still owns permissions and often a separate session."
     },
     "problem_solved": "Lets multiple applications share an identity-provider sign-in while retaining application-specific permissions and session policies.",
-    "design_scenario": "An employee signs in once and opens payroll and email. Later, payroll logout leaves email open, and disabling the employee at the provider does not immediately close an existing payroll session. Which sessions and permissions must the organization control? How quickly must access removal take effect?",
+    "design_scenario": "An employee leaves the company. Their central identity account is disabled, but three applications still have week-long local sessions and one sensitive app never checks again. \u201cSingle sign-on\u201d made login easy; it did not make logout instant. Which session exists where, how is access revoked, and which applications need shorter or revalidated sessions?",
     "application_steps": [
       "Map stable provider identities to explicit application roles.",
       "Define provider/application sessions and revocation requirements.",
@@ -2286,7 +2286,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "An employee signs in once and opens payroll and email. Later, payroll logout leaves email open, and disabling the employee at the provider does not immediately close an existing payroll session. Which sessions and permissions must the organization control? How quickly must access removal take effect?"
+      "quote": "An employee leaves the company. Their central identity account is disabled, but three applications still have week-long local sessions and one sensitive app never checks again. \u201cSingle sign-on\u201d made login easy; it did not make logout instant. Which session exists where, how is access revoked, and which applications need shorter or revalidated sessions?"
     }
   },
   {
@@ -2298,7 +2298,7 @@
       "quote": "Geohashes encode locations into grid cells; quadtrees repeatedly subdivide regions."
     },
     "problem_solved": "Narrows spatial search candidates so nearby-driver queries avoid a distance calculation against every driver.",
-    "design_scenario": "A rider stands near a grid boundary. A closer driver is across the line, and a farther driver is inside the same cell. Which candidates should the search inspect? What if a candidate's last location is old?",
+    "design_scenario": "A rider stands one metre from a driver\u2014but on the opposite side of a map-cell boundary. Another driver appears nearby because their location is two minutes old. Searching only the rider\u2019s cell misses the best candidate. Which neighbouring space must be searched, how should distance be verified, and why is finding a driver different from reserving one?",
     "application_steps": [
       "Choose regions from radius, density, and current index shape.",
       "Inspect neighbors and calculate exact distances.",
@@ -2319,7 +2319,7 @@
     "clarification": null,
     "inquiry_evidence": {
       "anchor": "#try-solving-this-first",
-      "quote": "A rider stands near a grid boundary. A closer driver is across the line, and a farther driver is inside the same cell. Which candidates should the search inspect? What if a candidate's last location is old?"
+      "quote": "A rider stands one metre from a driver\u2014but on the opposite side of a map-cell boundary. Another driver appears nearby because their location is two minutes old. Searching only the rider\u2019s cell misses the best candidate. Which neighbouring space must be searched, how should distance be verified, and why is finding a driver different from reserving one?"
     }
   }
 ]

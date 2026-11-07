@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Billing emits one address format; legacy shipping expects another. Where should conversion happen? What happens to orders if the converter fails?
+Twelve legacy systems exchange incompatible formats. A central integration layer transforms and routes everything—until one change for payroll breaks inventory and no team understands the hidden rules. Which mediation belongs centrally, which business logic belongs with its owner, and how will you stop the shared hub becoming an organizational and runtime bottleneck?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -11,7 +11,7 @@ Billing emits one address format; legacy shipping expects another. Where should 
 
 An Enterprise Service Bus (ESB) is an architectural pattern whereby a centralized software component performs integrations between applications. It performs transformations of data models, handles connectivity, performs message routing, converts communication protocols, and potentially manages the composition of multiple requests. The ESB can make these integrations and transformations available as a service interface for reuse by new applications.
 
-![enterprise-service-bus](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/enterprise-service-bus/enterprise-service-bus.png)
+![enterprise-service-bus](../../assets/source-diagrams/chapter-III/enterprise-service-bus/enterprise-service-bus.png)
 
 ## Advantages
 

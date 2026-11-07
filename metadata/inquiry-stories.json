@@ -1,0 +1,428 @@
+[
+  {
+    "topic": "What is system design?",
+    "path": "curriculum/01-core-concepts/01-what-is-system-design.md",
+    "story": "At 8:02 p.m., a customer pays for dinner. The restaurant accepts the order, but the app loses the payment response and shows \u201cTry again.\u201d Support can see money moved, yet no order exists. Before choosing databases, queues, or services, what must the system promise? Which facts must survive, and what should a second tap do?",
+    "words": 57
+  },
+  {
+    "topic": "Scalability",
+    "path": "curriculum/01-core-concepts/02-scalability.md",
+    "story": "Your ticket sale opens at noon. Traffic jumps from 100 to 20,000 requests per second; application CPU stays calm while database waits climb and checkout freezes. The team proposes twenty more app servers. Where is capacity actually missing? How could adding callers make the outage worse, and what measurement would change your decision?",
+    "words": 54
+  },
+  {
+    "topic": "Availability",
+    "path": "curriculum/01-core-concepts/03-availability.md",
+    "story": "Black Friday traffic is split across two checkout servers. At the busiest minute, server A dies with purchases in flight. Server B is healthy\u2014but both share the same database and power zone. Which customers can still complete safely? What must fail over, what state could be uncertain, and when is a fast error more honest than a success page?",
+    "words": 60
+  },
+  {
+    "topic": "Latency vs Throughput vs Bandwidth",
+    "path": "curriculum/01-core-concepts/04-latency-vs-throughput-vs-bandwidth.md",
+    "story": "A sale dashboard celebrates 10,000 completed checkouts per minute, while social media fills with screenshots of ten-second waits. A trace shows a fast network, a growing database queue, and a few very slow requests. Which number describes the customer\u2019s pain? Would more bandwidth, more workers, or a faster query help\u2014and how would you prove it?",
+    "words": 57
+  },
+  {
+    "topic": "Reliability",
+    "path": "curriculum/01-core-concepts/05-reliability.md",
+    "story": "A payment provider charges a customer, then your order worker crashes before saving the result. The retry starts on another machine while a refund job from the first attempt is also waking up. Which durable facts prevent two orders or an accidental refund? What status should the customer see while the truth is still being reconstructed?",
+    "words": 56
+  },
+  {
+    "topic": "SPOF",
+    "path": "curriculum/01-core-concepts/06-spof.md",
+    "story": "Your architecture diagram proudly shows six application replicas. During a launch, one tiny configuration service stops responding and every replica refuses new traffic. The servers are alive, but the product is gone. Which dependency actually controlled availability? Where would another copy help, and who decides which copy is safe to trust?",
+    "words": 51
+  },
+  {
+    "topic": "IP",
+    "path": "curriculum/02-networking/01-ip.md",
+    "story": "A school\u2019s 2,000 students share one public address. Your abuse system blocks that address after one student attacks an endpoint, locking out the entire campus. Meanwhile, the database is on a private address yet accidentally reachable from every internal workload. What does an address identify, what does it fail to prove, and where should access policy live?",
+    "words": 58
+  },
+  {
+    "topic": "OSI Model",
+    "path": "curriculum/02-networking/02-osi-model.md",
+    "story": "Checkout fails only on one office network. DNS returns an address, the machine responds to network probes, TCP opens, TLS rejects the certificate, and the application never receives HTTP. Five teams each blame a different service. How would you locate the failing responsibility without randomly changing the database, firewall, and code?",
+    "words": 51
+  },
+  {
+    "topic": "TCP and UDP",
+    "path": "curriculum/02-networking/03-tcp-and-udp.md",
+    "story": "During a live match, one missing audio packet arrives two seconds late and interrupts the current commentary. In the same app, a missing payment byte would corrupt a charge request. Which data should wait for recovery, which should move on, and what must the application still handle even when the transport promises ordered delivery?",
+    "words": 54
+  },
+  {
+    "topic": "Domain Name System (DNS)",
+    "path": "curriculum/02-networking/04-domain-name-system-dns.md",
+    "story": "At 9 a.m. you move shop.example to a new server. At noon, half the users reach the new site while others still reach the old checkout\u2014even though the DNS dashboard shows the new address. No one is lying. Where can the old answer still live, what does its lifetime control, and how would you migrate without losing orders?",
+    "words": 61
+  },
+  {
+    "topic": "Proxy",
+    "path": "curriculum/02-networking/05-proxy.md",
+    "story": "A customer request reaches your order service with an \u201coriginal client IP\u201d header claiming to be an administrator. It passed through a public edge and two internal hops, but any caller could have written the first header. Which intermediary represents the client, which represents your servers, and where should identity information become trusted?",
+    "words": 53
+  },
+  {
+    "topic": "HTTP/HTTPS",
+    "path": "curriculum/02-networking/06-httphttps.md",
+    "story": "A customer presses Pay once. The browser sends an HTTPS request, receives no response, and retries. The first request may have committed after the connection vanished. Encryption protected the bytes, yet the business outcome is uncertain. Which parts did HTTPS secure, what remains unknown, and how should the next request discover the original result?",
+    "words": 54
+  },
+  {
+    "topic": "Checksums",
+    "path": "curriculum/02-networking/07-checksums.md",
+    "story": "A backup job copies a 40 GB database snapshot across the network and reports success. During restore week, one flipped bit makes the archive unreadable. The file existed, the byte count matched, and transport completed. What evidence could have exposed corruption earlier, and why would that evidence still not prove the backup contains the correct business data?",
+    "words": 57
+  },
+  {
+    "topic": "Load Balancing",
+    "path": "curriculum/02-networking/08-load-balancing.md",
+    "story": "A load balancer adds three checkout instances and graphs turn green. Logged-in users then bounce between \u201ccart full\u201d and \u201ccart empty\u201d because each server keeps its own session. One slow instance also attracts long-lived connections. What should be distributed, what state must travel, and which health signal should stop new requests without killing work already in flight?",
+    "words": 57
+  },
+  {
+    "topic": "Clustering",
+    "path": "curriculum/02-networking/09-clustering.md",
+    "story": "Four photo workers share a queue. One crashes after saving a resized image but before reporting completion; another repeats the job and sends a second customer notification. The machines formed a cluster, yet cooperation was unsafe. How should work ownership, failure detection, and repeated execution behave before adding a fifth worker?",
+    "words": 51
+  },
+  {
+    "topic": "Storage",
+    "path": "curriculum/03-databases/01-storage.md",
+    "story": "A creator uploads a video. The 2 GB object reaches storage, then the service crashes before writing its database row. The user retries, creating another orphan; later, cleanup nearly deletes the valid copy. Where should bytes and searchable metadata live, and which reconciliation rule can recover without guessing?",
+    "words": 48
+  },
+  {
+    "topic": "Databases and DBMS",
+    "path": "curriculum/03-databases/02-databases-and-dbms.md",
+    "story": "Support sees an order marked \u201cshipped\u201d whose customer record never existed and whose payment reference appears twice. The service wrote several files successfully, but no component enforced relationships or coordinated concurrent updates. Which facts need querying, which rules must remain true, and what should manage access when two workers change them together?",
+    "words": 52
+  },
+  {
+    "topic": "SQL databases",
+    "path": "curriculum/03-databases/03-sql-databases.md",
+    "story": "At midnight, two jobs update the same order: one cancels it while another marks it shipped. A reporting query scans a year of rows and blocks checkout writes. The schema has tables and keys, but that alone did not save the workflow. Which relationships and transitions must be constrained, and which query path needs deliberate design?",
+    "words": 56
+  },
+  {
+    "topic": "NoSQL databases",
+    "path": "curriculum/03-databases/04-nosql-databases.md",
+    "story": "A catalog stores shoes, books, and cameras with different attributes. Launch week arrives; one celebrity product becomes 70% of traffic and its partition throttles while others sit idle. The flexible documents look perfect on paper. Which reads determine the data shape, which key controls traffic, and which guarantees does checkout still need?",
+    "words": 52
+  },
+  {
+    "topic": "SQL vs NoSQL databases",
+    "path": "curriculum/03-databases/05-sql-vs-nosql-databases.md",
+    "story": "The team argues for days: finance wants relational tables, catalog wants flexible documents, and leadership wants \u201cweb scale.\u201d Nobody has written the three operations the product must perform. For creating an order, browsing varied products, and reserving the last item, which access pattern or guarantee actually forces a choice\u2014and could one store still be enough?",
+    "words": 56
+  },
+  {
+    "topic": "Indexes",
+    "path": "curriculum/03-databases/06-indexes.md",
+    "story": "A customer opens \u201cMy last 20 orders.\u201d The database examines 80 million rows, sorts the matches, and returns twenty records after six seconds. Someone proposes indexing every column. Which path would let the database find the needed range directly, what write cost would it add, and what evidence in the query plan would prove it worked?",
+    "words": 56
+  },
+  {
+    "topic": "Normalization and Denormalization",
+    "path": "curriculum/03-databases/07-normalization-and-denormalization.md",
+    "story": "A customer changes their address after an order ships. The profile should show the new address; the invoice must preserve the old delivery address. One engineer removes all duplication, while another copies the address into five tables. Which fact is current state, which is history, and who updates every intentional copy?",
+    "words": 51
+  },
+  {
+    "topic": "Transactions",
+    "path": "curriculum/03-databases/08-transactions.md",
+    "story": "One concert ticket remains. Two buyers read \u201cavailable\u201d at the same moment, both pay, and both receive confirmation; the final stock row still says zero. Nothing looks negative. Where did correctness disappear? What must be checked and changed atomically, and how should a timeout after commit be retried?",
+    "words": 48
+  },
+  {
+    "topic": "ACID and BASE consistency models",
+    "path": "curriculum/03-databases/09-acid-and-base-consistency-models.md",
+    "story": "A bank transfer must never create or destroy money. A profile photo can appear a few seconds late in another region. The architecture review labels one database \u201cACID\u201d and the other \u201cBASE,\u201d then stops thinking. Which invariant must commit together, which read may be stale, and what mechanism eventually makes copies converge?",
+    "words": 52
+  },
+  {
+    "topic": "Database Replication",
+    "path": "curriculum/03-databases/10-database-replication.md",
+    "story": "A customer changes their password, receives success, and is immediately routed to a replica that still accepts the old one. Minutes later, an operator accidentally deletes every account and the deletion races to every copy. Which reads require fresh state, what does lag change, and why are replicas not historical backups?",
+    "words": 51
+  },
+  {
+    "topic": "Sharding",
+    "path": "curriculum/03-databases/11-sharding.md",
+    "story": "Your customer table no longer fits one machine. You split users evenly by ID, but one celebrity account generates half the reads and every global report now contacts every shard. The row counts look balanced; the traffic is not. Which key keeps common requests together, and how will you move ownership when one shard grows hot?",
+    "words": 56
+  },
+  {
+    "topic": "Consistent Hashing",
+    "path": "curriculum/03-databases/12-consistent-hashing.md",
+    "story": "A cache fleet grows from 20 to 21 nodes five minutes before a product launch. With modulo routing, most keys suddenly map elsewhere and the database receives a wall of misses. How could membership change move only a neighboring slice of keys? What still happens if one viral key dominates all traffic?",
+    "words": 52
+  },
+  {
+    "topic": "Database Federation",
+    "path": "curriculum/03-databases/13-database-federation.md",
+    "story": "Orders, catalog, and billing each own a database. A customer invoice needs facts from all three during a catalog outage, and finance insists yesterday\u2019s purchase price must never change. Which service owns each meaning, where should cross-domain views be assembled, and which data should be copied as history rather than joined live?",
+    "words": 52
+  },
+  {
+    "topic": "Bloom Filters",
+    "path": "curriculum/03-databases/14-bloom-filters.md",
+    "story": "A storage engine receives millions of requests for keys that do not exist. Touching disk for every miss is expensive, so the team adds a tiny bit array. One query hits every marked bit even though its key is absent. How can the structure confidently say \u201cno\u201d but only say \u201cmaybe,\u201d and where must a positive result be verified?",
+    "words": 59
+  },
+  {
+    "topic": "CAP Theorem",
+    "path": "curriculum/04-distributed-data/01-cap-theorem.md",
+    "story": "Only one seat remains. Replica A records the sale, then the network link to replica B breaks. A second buyer reaches B, which still sees \u201cavailable\u201d and cannot ask A. Should B answer, wait, or refuse? Which promise is sacrificed by each choice, and why can no routing trick reveal information that never arrived?",
+    "words": 54
+  },
+  {
+    "topic": "PACELC Theorem",
+    "path": "curriculum/04-distributed-data/02-pacelc-theorem.md",
+    "story": "Your app writes a profile in Mumbai and immediately reads it in London. Waiting for both regions makes the update feel slow; acknowledging locally makes London briefly show the old value. Then the regions lose contact entirely. What tradeoff exists on the normal day, and what different choice appears during the partition?",
+    "words": 52
+  },
+  {
+    "topic": "Distributed Transactions",
+    "path": "curriculum/04-distributed-data/03-distributed-transactions.md",
+    "story": "An order is recorded and payment is charged, but inventory reservation fails. Three services have already committed locally; no shared rollback button exists. The customer sees \u201cprocessing\u201d while a refund worker keeps crashing. Which progress must be durable, what action compensates earlier work, and how can repeated recovery avoid repeated money movement?",
+    "words": 52
+  },
+  {
+    "topic": "Caching",
+    "path": "curriculum/05-caching/01-caching.md",
+    "story": "A product page serves a cached price of \u20b9500. The merchant changes it to \u20b9550, checkout charges \u20b9550, and screenshots accuse the store of bait-and-switch pricing. The cache made reads fast but split the user experience. Which value is authoritative, how stale may a copy be, and what must happen when invalidation fails?",
+    "words": 53
+  },
+  {
+    "topic": "Caching Strategies",
+    "path": "curriculum/05-caching/02-caching-strategies.md",
+    "story": "A popular product is read 100,000 times and updated once. Another value changes every second. The team wants one caching rule for both. Who should load a missing value, who persists a write, and when should a cached copy be updated or removed? What failure could make each policy lie?",
+    "words": 51
+  },
+  {
+    "topic": "Cache Eviction Policies",
+    "path": "curriculum/05-caching/03-cache-eviction-policies.md",
+    "story": "The cache is full when a flash sale begins. It evicts a frequently viewed product because that item was inserted long ago, then fills with one-time search results and hammers the database. Which history should determine what leaves, and how would object size, recency, frequency, or expiry change the decision?",
+    "words": 50
+  },
+  {
+    "topic": "Distributed Caching",
+    "path": "curriculum/05-caching/04-distributed-caching.md",
+    "story": "Ten application servers share one cache. A celebrity post becomes a hot key, one cache node saturates, and a retry storm reaches the database when that node fails. Adding cache capacity did not spread the one key. How should ownership, replication, local copies, and coordinated reloads protect the underlying store?",
+    "words": 50
+  },
+  {
+    "topic": "Content Delivery Network (CDN)",
+    "path": "curriculum/05-caching/05-content-delivery-network-cdn.md",
+    "story": "A trailer launches globally. Viewers in Singapore fetch every segment from a Virginia origin while a million nearby users request identical bytes. Minutes later, the studio replaces a broken frame but some edges keep the old version. Which content can be served nearby, how does the first copy arrive, and how will a new version replace it safely?",
+    "words": 58
+  },
+  {
+    "topic": "APIs",
+    "path": "curriculum/06-api-fundamentals/01-apis.md",
+    "story": "A mobile team changes one field and accidentally breaks three partners. Another client retries a timed-out \u201ccreate order\u201d request and produces two orders. Everyone called the endpoint an API, but nobody agreed on its contract. What must callers know about inputs, outcomes, errors, compatibility, and safe repetition before either side changes independently?",
+    "words": 52
+  },
+  {
+    "topic": "REST, GraphQL, gRPC",
+    "path": "curriculum/06-api-fundamentals/02-rest-graphql-grpc.md",
+    "story": "A product page needs five fields but downloads a huge document; an internal inventory service needs a typed ReserveStock operation with strict deadlines. The team wants one fashionable protocol everywhere. Which interaction is resource-shaped, which is an operation, who chooses response fields, and which failure semantics must remain visible?",
+    "words": 49
+  },
+  {
+    "topic": "API Gateway",
+    "path": "curriculum/06-api-fundamentals/03-api-gateway.md",
+    "story": "Your travel app has five services and fifty APIs. Minutes before launch, the product screen needs details, live stock, and reviews; mobile and web duplicate the three calls. Reviews become slow, so one blank section prevents the whole page from loading. Where should routing, authentication, composition, and the partial-result decision live\u2014and which extra component is actually justified?",
+    "words": 58
+  },
+  {
+    "topic": "Idempotency",
+    "path": "curriculum/06-api-fundamentals/04-idempotency.md",
+    "story": "A customer taps Pay, sees a timeout, and taps again while the first request is still running. Both reach different servers; one crashes after the provider charges the card but before saving success. What durable identity makes these attempts one purchase, how should \u201cstill processing\u201d behave, and how will recovery find an external effect that already happened?",
+    "words": 57
+  },
+  {
+    "topic": "Rate Limiting",
+    "path": "curriculum/06-api-fundamentals/05-rate-limiting.md",
+    "story": "A bot creates ten connections to each of ten app servers. Every server allows 100 requests per second, so the \u201c100 requests/second\u201d customer limit quietly becomes 10,000. During the burst, real users time out. Whose identity consumes the allowance, where is it counted, how much bursting is acceptable, and what happens if the counter store fails?",
+    "words": 58
+  },
+  {
+    "topic": "Long polling, WebSockets, Server-Sent Events (SSE)",
+    "path": "curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md",
+    "story": "A collaborative editor sends cursor moves both ways every second; a delivery tracker only needs occasional server updates. After a train enters a tunnel, thousands of clients reconnect together and some updates are missing. Which direction and frequency does each product need, how is progress resumed, and who applies backpressure?",
+    "words": 50
+  },
+  {
+    "topic": "Webhooks",
+    "path": "curriculum/06-api-fundamentals/07-webhooks.md",
+    "story": "Your checkout waits for a payment provider. The provider sends \u201cpaid,\u201d receives a timeout, and sends it three more times; the second delivery arrives before an earlier \u201cpending\u201d event. If you simply run the handler each time, customers receive repeated receipts. How will you authenticate, order, deduplicate, retry, and reconcile these callbacks?",
+    "words": 52
+  },
+  {
+    "topic": "API Design",
+    "path": "curriculum/06-api-fundamentals/08-api-design.md",
+    "story": "A list endpoint works in testing, then a large customer accumulates two million orders. One request attempts to return everything, times out, retries, and doubles database pressure. Meanwhile, a new field breaks an older app. Which boundaries, pagination rules, error shapes, and version promises keep the contract usable as data and clients grow?",
+    "words": 53
+  },
+  {
+    "topic": "Message Brokers",
+    "path": "curriculum/07-asynchronous-communication/01-message-brokers.md",
+    "story": "The order database commits successfully, but the service crashes one millisecond before publishing \u201cOrderPlaced.\u201d Shipping never learns the order exists. In a different failure, a consumer performs its work and crashes before acknowledging, so the event returns. Where is the durable handoff, when is work complete, and which repeats must be safe?",
+    "words": 52
+  },
+  {
+    "topic": "Message Queues",
+    "path": "curriculum/07-asynchronous-communication/02-message-queues.md",
+    "story": "A resize worker saves an image, crashes before acknowledging, and the queue gives the same job to another worker. During an outage, one million jobs remain safely stored\u2014but the oldest is now six hours late. How will workers recognize repeated effects, when should a job reappear, and which metric reveals that durability has become unacceptable delay?",
+    "words": 57
+  },
+  {
+    "topic": "Publish-Subscribe",
+    "path": "curriculum/07-asynchronous-communication/03-publish-subscribe.md",
+    "story": "One OrderPlaced event should trigger billing, shipping, analytics, and fraud checks. Analytics slows down and accidentally consumes the only copy, so shipping sees nothing. Which consumers need independent progress, where may workers compete, and can a new subscriber replay yesterday\u2019s events without disturbing existing ones?",
+    "words": 45
+  },
+  {
+    "topic": "Change Data Capture (CDC)",
+    "path": "curriculum/07-asynchronous-communication/04-change-data-capture-cdc.md",
+    "story": "A product price commits in the database, but search still shows the old price because a dual-write to the index failed. Recovery replays the same change twice and an older event arrives late. How can committed changes become a durable stream, how will consumers order or deduplicate them, and which store remains authoritative?",
+    "words": 53
+  },
+  {
+    "topic": "N-tier architecture",
+    "path": "curriculum/08-architectural-patterns/01-n-tier-architecture.md",
+    "story": "Checkout slows while product browsing stays fast. The browser, application logic, and database run on separate machines, and each order line triggers another network call. The team wants to scale every tier equally. Which responsibility is actually waiting, which boundary creates the repeated trips, and could a logical layer remain in the same deployment?",
+    "words": 54
+  },
+  {
+    "topic": "Monoliths and Microservices",
+    "path": "curriculum/08-architectural-patterns/02-monoliths-and-microservices.md",
+    "story": "Catalog cannot release a search fix without coordinating a full application deploy, and its traffic grows ten times faster than billing. Leadership orders fifty microservices by Friday. What boundary would actually improve ownership or scaling, which data belongs behind it, and what new partial failures appear when one order crosses payment and inventory?",
+    "words": 53
+  },
+  {
+    "topic": "Event-Driven Architecture (EDA)",
+    "path": "curriculum/08-architectural-patterns/03-event-driven-architecture-eda.md",
+    "story": "A warehouse update must inform search, recommendations, and fraud systems. The order service currently calls all three; one slow recommendation deploy blocks checkout. Moving to events removes the wait\u2014but now consumers can lag, repeat, and disagree. Which fact should be published, what remains authoritative, and when does the user need an immediate answer instead?",
+    "words": 55
+  },
+  {
+    "topic": "Event Sourcing",
+    "path": "curriculum/08-architectural-patterns/04-event-sourcing.md",
+    "story": "An account balance is wrong, and auditors ask exactly how it became wrong six months ago. The database contains only today\u2019s total. The team proposes storing every accepted change and rebuilding views, but email must not resend during replay. Which events are durable facts, how is current state derived, and which side effects must stay outside replay?",
+    "words": 57
+  },
+  {
+    "topic": "Command and Query Responsibility Segregation (CQRS)",
+    "path": "curriculum/08-architectural-patterns/05-command-and-query-responsibility-segregation-cqrs.md",
+    "story": "Writing an order needs strict validation; listing a customer\u2019s orders needs a fast, denormalized view. After creation succeeds, the list briefly omits the new order and support calls it data loss. Should both paths share one model? What lag is acceptable, how is the read view rebuilt, and which system answers authoritative status?",
+    "words": 53
+  },
+  {
+    "topic": "Enterprise Service Bus (ESB)",
+    "path": "curriculum/08-architectural-patterns/06-enterprise-service-bus-esb.md",
+    "story": "Twelve legacy systems exchange incompatible formats. A central integration layer transforms and routes everything\u2014until one change for payroll breaks inventory and no team understands the hidden rules. Which mediation belongs centrally, which business logic belongs with its owner, and how will you stop the shared hub becoming an organizational and runtime bottleneck?",
+    "words": 53
+  },
+  {
+    "topic": "Virtual Machines (VMs) and Containers",
+    "path": "curriculum/08-architectural-patterns/07-virtual-machines-vms-and-containers.md",
+    "story": "A noisy image worker consumes all memory and restarts a neighboring checkout process. Security then discovers two tenants share a kernel that one workload can exploit. Packaging was consistent, but isolation assumptions were wrong. Which boundary needs its own operating system, which can share one, and where must durable state live when instances disappear?",
+    "words": 54
+  },
+  {
+    "topic": "Serverless Architecture",
+    "path": "curriculum/08-architectural-patterns/08-serverless-architecture.md",
+    "story": "A campaign sends one million image jobs after weeks of silence. Functions scale quickly, then cold starts delay the first users, retries duplicate processing, and concurrent invocations overwhelm the database. Which work benefits from on-demand execution, what limits downstream pressure, and which long-running or stateful task should remain elsewhere?",
+    "words": 49
+  },
+  {
+    "topic": "Peer-to-Peer (P2P) Architecture",
+    "path": "curriculum/08-architectural-patterns/09-peer-to-peer-p2p-architecture.md",
+    "story": "A game update is too large for one origin during launch. Players can exchange verified pieces, but fast peers leave, a malicious peer sends corrupt data, and some users sit behind restrictive networks. How will peers discover one another, prove each piece is valid, find rare pieces, and fall back when the swarm cannot connect?",
+    "words": 55
+  },
+  {
+    "topic": "Service Discovery",
+    "path": "curriculum/09-reliability-and-microservices/01-service-discovery.md",
+    "story": "A new orders instance starts every minute and old ones disappear just as quickly. One caller cached an address seconds before that instance died, then retried the charge against another instance. How should callers find healthy candidates, how stale may discovery data be, and which operations are safe to repeat after routing changes?",
+    "words": 53
+  },
+  {
+    "topic": "HeartBeats",
+    "path": "curriculum/09-reliability-and-microservices/02-heartbeats.md",
+    "story": "A worker stops sending heartbeats during a long garbage-collection pause. The coordinator declares it dead and assigns its job elsewhere; the original worker wakes and continues writing. Was the worker dead, slow, or partitioned? How should suspicion, timeout, reassignment, and protection from the old worker fit together?",
+    "words": 47
+  },
+  {
+    "topic": "Circuit breaker",
+    "path": "curriculum/09-reliability-and-microservices/03-circuit-breaker.md",
+    "story": "A recommendation service slows from 50 ms to 20 seconds. Every checkout thread waits, retry traffic triples, and the healthy order path collapses behind an optional feature. When should calls stop reaching the dependency, what may the user see instead, and how will limited probes decide that recovery is real?",
+    "words": 50
+  },
+  {
+    "topic": "SLA, SLO, SLI",
+    "path": "curriculum/09-reliability-and-microservices/04-sla-slo-sli.md",
+    "story": "The status page boasts 99.99% uptime, yet checkout was unusable for every customer during the biggest sale because responses took 30 seconds. Leadership says the SLA was met. What user event should be measured, over which window, which target drives engineering, and how much failure can the team spend before risky releases should pause?",
+    "words": 55
+  },
+  {
+    "topic": "Disaster recovery",
+    "path": "curriculum/09-reliability-and-microservices/05-disaster-recovery.md",
+    "story": "At 2:00 a.m., ransomware encrypts production and the live replicas copy the damage. The last tested backup is six hours old; restoring it will take four hours. The business can lose ten minutes of orders and tolerate one hour offline. Which target has already been missed, what recovery data is missing, and when should this have been rehearsed?",
+    "words": 60
+  },
+  {
+    "topic": "Consensus Algorithms",
+    "path": "curriculum/09-reliability-and-microservices/06-consensus-algorithms.md",
+    "story": "Five replicas maintain configuration. The leader accepts a change on itself and one follower, then becomes isolated with that follower. The other three elect a new leader and accept a different change. Which group may safely make progress, when is an entry committed, and how will the returning minority repair its conflicting history?",
+    "words": 53
+  },
+  {
+    "topic": "Distributed Locking",
+    "path": "curriculum/09-reliability-and-microservices/07-distributed-locking.md",
+    "story": "Worker A acquires a five-second lease, pauses for ten seconds, and resumes after worker B has acquired the same lock. Both believe they own the job and write to storage. A timeout-based lock did not stop the old process. What evidence lets the protected resource reject A\u2019s late write?",
+    "words": 49
+  },
+  {
+    "topic": "Gossip Protocol",
+    "path": "curriculum/09-reliability-and-microservices/08-gossip-protocol.md",
+    "story": "A storage node joins a 500-node cluster while one region is temporarily unreachable. Membership news spreads peer to peer; for several seconds, different nodes hold different maps. How quickly should knowledge spread, how much traffic is acceptable, and which decisions still require stronger agreement than shared rumors?",
+    "words": 47
+  },
+  {
+    "topic": "Distributed Tracing",
+    "path": "curriculum/09-reliability-and-microservices/09-distributed-tracing.md",
+    "story": "A checkout request crosses eight services and takes four seconds, but every service dashboard reports an average below 100 ms. Retries created hidden duplicate calls and one request ID vanished at a queue boundary. How will you reconstruct the critical path, preserve context across asynchronous work, and distinguish waiting from actual processing?",
+    "words": 52
+  },
+  {
+    "topic": "SSL, TLS, mTLS",
+    "path": "curriculum/10-security-and-location/01-ssl-tls-mtls.md",
+    "story": "A service presents a valid certificate for the wrong hostname, while another authenticated service attempts an operation it is not allowed to perform. The connections are encrypted, yet one peer may be an impostor and the other lacks permission. What identity should each side verify, where is authorization enforced, and when is mutual authentication worth the operational cost?",
+    "words": 58
+  },
+  {
+    "topic": "OAuth 2.0 and OpenID Connect (OIDC)",
+    "path": "curriculum/10-security-and-location/02-oauth-20-and-openid-connect-oidc.md",
+    "story": "A photo-printing app asks users for their cloud-storage passwords so it can fetch pictures. A leaked database exposes every account. The replacement design receives a token\u2014but accidentally sends an ID token to the photo API and accepts one meant for another client. Which party grants access, which token proves login, and which audience must validate it?",
+    "words": 57
+  },
+  {
+    "topic": "Single Sign-On (SSO)",
+    "path": "curriculum/10-security-and-location/03-single-sign-on-sso.md",
+    "story": "An employee leaves the company. Their central identity account is disabled, but three applications still have week-long local sessions and one sensitive app never checks again. \u201cSingle sign-on\u201d made login easy; it did not make logout instant. Which session exists where, how is access revoked, and which applications need shorter or revalidated sessions?",
+    "words": 53
+  },
+  {
+    "topic": "Geohashing and Quadtrees",
+    "path": "curriculum/10-security-and-location/04-geohashing-and-quadtrees.md",
+    "story": "A rider stands one metre from a driver\u2014but on the opposite side of a map-cell boundary. Another driver appears nearby because their location is two minutes old. Searching only the rider\u2019s cell misses the best candidate. Which neighbouring space must be searched, how should distance be verified, and why is finding a driver different from reserving one?",
+    "words": 58
+  }
+]

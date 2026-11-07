@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A worker reports every five seconds, then sends nothing for twenty seconds. A replacement begins the same job, but the original worker later resumes and still believes it owns the work. Was the original worker necessarily dead? What should the monitor infer from silence? How would you prevent both workers from applying the same irreversible business effect?
+A worker stops sending heartbeats during a long garbage-collection pause. The coordinator declares it dead and assigns its job elsewhere; the original worker wakes and continues writing. Was the worker dead, slow, or partitioned? How should suspicion, timeout, reassignment, and protection from the old worker fit together?
 <!-- END INQUIRY -->
 
 ## A signal that a participant was recently reachable

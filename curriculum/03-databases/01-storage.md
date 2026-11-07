@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A photo upload stores the image, then crashes before recording its database row. Where should the bytes and metadata live, and how could you recover?
+A creator uploads a video. The 2 GB object reaches storage, then the service crashes before writing its database row. The user retries, creating another orphan; later, cleanup nearly deletes the valid copy. Where should bytes and searchable metadata live, and which reconciliation rule can recover without guessing?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

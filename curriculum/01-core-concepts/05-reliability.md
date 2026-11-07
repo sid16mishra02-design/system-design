@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A customer places an order. The payment provider charges successfully, but the order worker crashes before recording the result or replying. The customer sees an error and tries again. Which facts must survive the crash? How can the system decide whether to retry, resume, or refund without inventing a second purchase? What should the customer see while the outcome is still uncertain?
+A payment provider charges a customer, then your order worker crashes before saving the result. The retry starts on another machine while a refund job from the first attempt is also waking up. Which durable facts prevent two orders or an accidental refund? What status should the customer see while the truth is still being reconstructed?
 <!-- END INQUIRY -->
 
 ## What it means

@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A new storage node announces itself to one peer. Some clients can discover it immediately, while other peers still list only the old members. A temporary network partition delays one part of the cluster. Must every view already match? How can peers decide whether returning observations are old or new? Would learning the same membership list also establish one safe order for payments?
+A storage node joins a 500-node cluster while one region is temporarily unreachable. Membership news spreads peer to peer; for several seconds, different nodes hold different maps. How quickly should knowledge spread, how much traffic is acceptable, and which decisions still require stronger agreement than shared rumors?
 <!-- END INQUIRY -->
 
 ## Spread information through repeated peer exchanges

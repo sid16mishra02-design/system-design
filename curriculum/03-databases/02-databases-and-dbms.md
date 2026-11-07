@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A shop must find orders by customer, update statuses, and reject impossible relationships. Which guarantees should the data manager enforce, and which workload should guide its design?
+Support sees an order marked “shipped” whose customer record never existed and whose payment reference appears twice. The service wrote several files successfully, but no component enforced relationships or coordinated concurrent updates. Which facts need querying, which rules must remain true, and what should manage access when two workers change them together?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -39,7 +39,7 @@ Data in a table is recorded in rows. There can be thousands or millions of rows 
 
 ## Types
 
-![database-types](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/databases-and-dbms/database-types.png)
+![database-types](../../assets/source-diagrams/chapter-II/databases-and-dbms/database-types.png)
 
 Below are different types of databases:
 

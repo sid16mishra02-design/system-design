@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-During a sale, checkout responds in 200 ms on average, yet some users wait over a second. An illustrative trace shows 30 ms of network travel, 70 ms of application work, and a 100 ms query. More users arrive each second. Would you buy bandwidth, add servers, change the query, or limit concurrency? Which measurement would tell you whether the change helped the customer's experience?
+A sale dashboard celebrates 10,000 completed checkouts per minute, while social media fills with screenshots of ten-second waits. A trace shows a fast network, a growing database queue, and a few very slow requests. Which number describes the customer’s pain? Would more bandwidth, more workers, or a faster query help—and how would you prove it?
 <!-- END INQUIRY -->
 
 ## The three questions

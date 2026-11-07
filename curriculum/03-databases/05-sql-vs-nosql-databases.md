@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Checkout updates stock while a catalog stores varied product attributes. Which operations and guarantees should decide the databases—not their labels?
+The team argues for days: finance wants relational tables, catalog wants flexible documents, and leadership wants “web scale.” Nobody has written the three operations the product must perform. For creating an order, browsing varied products, and reserving the last item, which access pattern or guarantee actually forces a choice—and could one store still be enough?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

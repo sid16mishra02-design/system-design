@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A product page repeatedly reads a slow database. You add a fast copy of its price. Later the database says ₹550 while the copy still says ₹500. Which price should checkout trust? How should a missing or outdated copy be refreshed? What happens when hundreds of readers miss together?
+A product page serves a cached price of ₹500. The merchant changes it to ₹550, checkout charges ₹550, and screenshots accuse the store of bait-and-switch pricing. The cache made reads fast but split the user experience. Which value is authoritative, how stale may a copy be, and what must happen when invalidation fails?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -11,7 +11,7 @@ A product page repeatedly reads a slow database. You add a fast copy of its pric
 
 _"There are only two hard things in Computer Science: cache invalidation and naming things." - Phil Karlton_
 
-![caching](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/caching.png)
+![caching](../../assets/source-diagrams/chapter-I/caching/caching.png)
 
 A cache's primary purpose is to increase data retrieval performance by reducing the need to access the underlying slower storage layer. Trading off capacity for speed, a cache typically stores a subset of data transiently, in contrast to databases whose data is usually complete and durable.
 
@@ -51,7 +51,7 @@ Cache invalidation is a process where the computer system declares the cache ent
 
 ### Write-through cache
 
-![write-through-cache](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/write-through-cache.png)
+![write-through-cache](../../assets/source-diagrams/chapter-I/caching/write-through-cache.png)
 
 Data is written into the cache and the corresponding database simultaneously.
 
@@ -61,7 +61,7 @@ Data is written into the cache and the corresponding database simultaneously.
 
 ### Write-around cache
 
-![write-around-cache](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/write-around-cache.png)
+![write-around-cache](../../assets/source-diagrams/chapter-I/caching/write-around-cache.png)
 
 Where write directly goes to the database or permanent storage, bypassing the cache.
 
@@ -71,7 +71,7 @@ Where write directly goes to the database or permanent storage, bypassing the ca
 
 ### Write-back cache
 
-![write-back-cache](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/write-back-cache.png)
+![write-back-cache](../../assets/source-diagrams/chapter-I/caching/write-back-cache.png)
 
 Where the write is only done to the caching layer and the write is confirmed as soon as the write to the cache completes. The cache then asynchronously syncs this write to the database.
 
@@ -92,13 +92,13 @@ Following are some of the most common cache eviction policies:
 
 ## Distributed Cache
 
-![distributed-cache](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/distributed-cache.png)
+![distributed-cache](../../assets/source-diagrams/chapter-I/caching/distributed-cache.png)
 
 A distributed cache is a system that pools together the random-access memory (RAM) of multiple networked computers into a single in-memory data store used as a data cache to provide fast access to data. While most caches are traditionally in one physical server or hardware component, a distributed cache can grow beyond the memory limits of a single computer by linking together multiple computers.
 
 ## Global Cache
 
-![global-cache](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/global-cache.png)
+![global-cache](../../assets/source-diagrams/chapter-I/caching/global-cache.png)
 
 As the name suggests, we will have a single shared cache that all the application nodes will use. When the requested data is not found in the global cache, it's the responsibility of the cache to find out the missing piece of data from the underlying data store.
 

@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A thousand uploads arrive together. Thumbnail generation is slower than upload acceptance. Where should unfinished jobs wait? A worker saves an image and crashes before reporting completion: should the replacement do the work again?
+A resize worker saves an image, crashes before acknowledging, and the queue gives the same job to another worker. During an outage, one million jobs remain safely stored—but the oldest is now six hours late. How will workers recognize repeated effects, when should a job reappear, and which metric reveals that durability has become unacceptable delay?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -15,7 +15,7 @@ A message queue is a form of service-to-service communication that facilitates a
 
 Queues are used to effectively manage requests in large-scale distributed systems. In small systems with minimal processing loads and small databases, writes can be predictably fast. However, in more complex and large systems writes can take an almost non-deterministic amount of time.
 
-![message-queue](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/message-queues/message-queue.png)
+![message-queue](../../assets/source-diagrams/chapter-III/message-queues/message-queue.png)
 
 ## Working
 

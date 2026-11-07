@@ -79,7 +79,12 @@ def localize_course_links(text, path):
         url, separator, fragment = match[0].partition('#')
         target = os.path.relpath(ROOT/linkmap[url], (ROOT/path).parent).replace('\\', '/')
         return target + (separator + fragment if separator else '')
-    return re.sub(r'(?<=\]\()https://karanpratapsingh.com/courses/system-design(?:/[a-z0-9-]+)?(?:#[a-z0-9-]+)?(?=\))', relocate, text)
+    text = re.sub(r'(?<=\]\()https://karanpratapsingh.com/courses/system-design(?:/[a-z0-9-]+)?(?:#[a-z0-9-]+)?(?=\))', relocate, text)
+    image_base='https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/'
+    def local_image(match):
+        target=ROOT/'assets/source-diagrams'/match.group(0)[len(image_base):]
+        return os.path.relpath(target,(ROOT/path).parent).replace('\\','/')
+    return re.sub(re.escape(image_base)+r'[^)\s]+',local_image,text)
 
 
 audit = json.loads((ROOT/'metadata/content-audit.json').read_text(encoding='utf-8'))
@@ -112,6 +117,15 @@ for entry in audit:
     check(entry['changed_original_words'] == 0, f'Source-edit audit mismatch: {entry["topic"]}')
 
 topics = json.loads((ROOT/'metadata/topics.json').read_text(encoding='utf-8'))
+localized_images=json.loads((ROOT/'metadata/localized-source-images.json').read_text(encoding='utf-8'))
+check(len(localized_images)==len({x['source_url'] for x in localized_images}), 'Duplicate localized source image')
+for image in localized_images:
+    path=ROOT/image['path']
+    check(path.is_file() and hashlib.sha256(path.read_bytes()).hexdigest()==image['sha256'],
+          f'Localized source image missing or changed: {image["path"]}')
+for path in list((ROOT/'curriculum').rglob('*.md'))+list((ROOT/'practice').glob('*.md')):
+    check('raw.githubusercontent.com/karanpratapsingh/portfolio/' not in path.read_text(encoding='utf-8'),
+          f'Remote Karan image remains in reading path: {path.relative_to(ROOT)}')
 inquiry_review = json.loads((ROOT/'metadata/inquiry-review.json').read_text(encoding='utf-8'))
 check(len(inquiry_review)==71 and {x['topic'] for x in inquiry_review}=={x['title'] for x in topics},
       'Every foundational topic must have a reviewed opening problem')
@@ -264,7 +278,8 @@ for link in re.findall(r'^- \[[^\]]+\]\([^\n]+\)', source_bank, re.M):
 if errors:
     print('\n'.join(errors))
     sys.exit(1)
-print(f'PASS: {len(manifest["files"])} unchanged source files; {len(audit)} verbatim inline readings and disclosed teaching counts; '
-      f'{len(new_lessons)} original lessons; {len(topics)} local scheduled concepts; 154 daily rows; {link_count} local links.')
+print(f'PASS: {len(manifest["files"])} unchanged source files; {len(localized_images)} byte-verified local source images; '
+      f'{len(audit)} verbatim inline readings and disclosed teaching counts; {len(new_lessons)} original lessons; '
+      f'{len(topics)} local scheduled concepts; 154 daily rows; {link_count} local links.')
 print(f'PASS: {len(topic_review)} topic + {len(practice_review)} practice/comparison evidence reviews across 13 categories; {len(animations)} animation/still/text sets.')
 print('External resource access is not guaranteed; original source links are preserved.')

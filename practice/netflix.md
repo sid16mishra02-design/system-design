@@ -152,7 +152,7 @@ Here is our high-level estimate:
 
 This is the general data model which reflects our requirements.
 
-![netflix-datamodel](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/netflix/netflix-datamodel.png)
+![netflix-datamodel](../assets/source-diagrams/chapter-V/netflix/netflix-datamodel.png)
 
 We have the following tables:
 
@@ -304,7 +304,7 @@ _Note: Learn more about [REST, GraphQL, gRPC](../curriculum/06-api-fundamentals/
 
 ### Video processing
 
-![video-processing-pipeline](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/netflix/video-processing-pipeline.png)
+![video-processing-pipeline](../assets/source-diagrams/chapter-V/netflix/video-processing-pipeline.png)
 
 There are so many variables in play when it comes to processing a video. For example, an average data size of two-hour raw 8K footage from a high-end camera can easily be up to 4 TB, thus we need to have some kind of processing to reduce both storage and delivery costs.
 
@@ -314,7 +314,7 @@ Let's discuss how this works:
 
 - **File Chunker**
 
-![file-chunking](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/netflix/file-chunking.png)
+![file-chunking](../assets/source-diagrams/chapter-V/netflix/file-chunking.png)
 
 This is the first step of our processing pipeline. File chunking is the process of splitting a file into smaller pieces called chunks. It can help us eliminate duplicate copies of repeating data on storage, and reduces the amount of data sent over the network by only selecting changed chunks.
 
@@ -443,7 +443,7 @@ We will use distributed file storage such as [HDFS](../curriculum/03-databases/0
 
 ## Identify and resolve bottlenecks
 
-![netflix-advanced-design](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/netflix/netflix-advanced-design.png)
+![netflix-advanced-design](../assets/source-diagrams/chapter-V/netflix/netflix-advanced-design.png)
 
 Let us identify and resolve bottlenecks such as single points of failure in our design:
 

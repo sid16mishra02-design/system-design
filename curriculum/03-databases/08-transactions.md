@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Two buyers see one ticket. Which single database action should determine who reserves it, and what result permits confirmation?
+One concert ticket remains. Two buyers read “available” at the same moment, both pay, and both receive confirmation; the final stock row still says zero. Nothing looks negative. Where did correctness disappear? What must be checked and changed atomically, and how should a timeout after commit be retried?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -17,7 +17,7 @@ _Usually, relational databases support ACID transactions, and non-relational dat
 
 A transaction in a database can be in one of the following states:
 
-![transaction-states](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/transactions/transaction-states.png)
+![transaction-states](../../assets/source-diagrams/chapter-II/transactions/transaction-states.png)
 
 ### Active
 

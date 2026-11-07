@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A cache holds only three products. You insert A, B, and C, read A again, then need room for D. Which item would you remove, and why? Would your answer change if B had been read hundreds of times earlier? Does removing an old item for space also guarantee that retained prices are fresh?
+The cache is full when a flash sale begins. It evicts a frequently viewed product because that item was inserted long ago, then fills with one-time search results and hammers the database. Which history should determine what leaves, and how would object size, recency, frequency, or expiry change the decision?
 <!-- END INQUIRY -->
 
 ## What leaves when the cache is full?

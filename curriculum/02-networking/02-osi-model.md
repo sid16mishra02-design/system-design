@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Your browser cannot load the shop. Would you inspect a cable, a port, a certificate, or the database first—and what evidence changes that choice?
+Checkout fails only on one office network. DNS returns an address, the machine responds to network probes, TCP opens, TLS rejects the certificate, and the application never receives HTTP. Five teams each blame a different service. How would you locate the failing responsibility without randomly changing the database, firewall, and code?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -30,7 +30,7 @@ While this model is not directly implemented in the TCP/IP networks that are mos
 
 The seven abstraction layers of the OSI model can be defined as follows, from top to bottom:
 
-![osi-model](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/osi-model/osi-model.png)
+![osi-model](../../assets/source-diagrams/chapter-I/osi-model/osi-model.png)
 
 ### Application
 

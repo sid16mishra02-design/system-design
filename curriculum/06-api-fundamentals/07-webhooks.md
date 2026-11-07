@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A payment provider tells your shop that a charge succeeded. Your shop records the event, but its acknowledgement disappears, so the provider sends the same event again. Should another shipment begin? How will you recognize the sender and distinguish a retry from a new event? What if a delayed pending event arrives after you already know payment completed?
+Your checkout waits for a payment provider. The provider sends “paid,” receives a timeout, and sends it three more times; the second delivery arrives before an earlier “pending” event. If you simply run the handler each time, customers receive repeated receipts. How will you authenticate, order, deduplicate, retry, and reconcile these callbacks?
 <!-- END INQUIRY -->
 
 ## Let another system call you when something happens

@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A training app distributes one large video file to many learners. Some learners already have different pieces and can upload them; others sit behind restrictive routers. One helpful peer suddenly leaves before sharing its last piece. How would a newcomer find trustworthy content and finish downloading? Which dependencies remain even if peers exchange most bytes directly?
+A game update is too large for one origin during launch. Players can exchange verified pieces, but fast peers leave, a malicious peer sends corrupt data, and some users sit behind restrictive networks. How will peers discover one another, prove each piece is valid, find rare pieces, and fall back when the swarm cannot connect?
 <!-- END INQUIRY -->
 
 ## Participants can provide as well as consume

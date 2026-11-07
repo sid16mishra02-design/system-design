@@ -192,7 +192,7 @@ Here is our high-level estimate:
 
 Next, we will focus on the data model design. Here is our database schema:
 
-![url-shortener-datamodel](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/url-shortener/url-shortener-datamodel.png)
+![url-shortener-datamodel](../assets/source-diagrams/chapter-V/url-shortener/url-shortener-datamodel.png)
 
 Initially, we can get started with just two tables:
 
@@ -369,7 +369,7 @@ _For more details, refer to [caching](../curriculum/05-caching/01-caching.md)._
 
 Now that we have identified some core components, let's do the first draft of our system design.
 
-![url-shortener-basic-design](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/url-shortener/url-shortener-basic-design.png)
+![url-shortener-basic-design](../assets/source-diagrams/chapter-V/url-shortener/url-shortener-basic-design.png)
 
 Here's how it works:
 
@@ -441,7 +441,7 @@ We can also use an [API Gateway](../curriculum/06-api-fundamentals/03-api-gatewa
 
 ## Identify and resolve bottlenecks
 
-![url-shortener-advanced-design](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/url-shortener/url-shortener-advanced-design.png)
+![url-shortener-advanced-design](../assets/source-diagrams/chapter-V/url-shortener/url-shortener-advanced-design.png)
 
 Let us identify and resolve bottlenecks such as single points of failure in our design:
 

@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A region fails when the latest usable order backup is an hour old. What can be lost? When will customers actually be able to purchase again?
+At 2:00 a.m., ransomware encrypts production and the live replicas copy the damage. The last tested backup is six hours old; restoring it will take four hours. The business can lose ten minutes of orders and tolerate one hour offline. Which target has already been missed, what recovery data is missing, and when should this have been rehearsed?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -28,7 +28,7 @@ Disaster recovery can have the following benefits:
 
 Let's discuss some important terms relevantly for disaster recovery:
 
-![disaster-recovery](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/disaster-recovery/disaster-recovery.png)
+![disaster-recovery](../../assets/source-diagrams/chapter-IV/disaster-recovery/disaster-recovery.png)
 
 ### RTO
 

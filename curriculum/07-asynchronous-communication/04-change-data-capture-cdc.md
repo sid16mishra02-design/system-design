@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-The product database commits a new price, but updating the search index fails. Repeated full scans are expensive, and independently writing both stores creates awkward failure cases. How could search learn about committed changes? After a pipeline restart, what if the same change appears again? How would you detect a destination falling far behind while retained change history keeps growing?
+A product price commits in the database, but search still shows the old price because a dual-write to the index failed. Recovery replays the same change twice and an older event arrives late. How can committed changes become a durable stream, how will consumers order or deduplicate them, and which store remains authoritative?
 <!-- END INQUIRY -->
 
 ## Turn database changes into downstream updates

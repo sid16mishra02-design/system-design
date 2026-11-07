@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-An order page calls inventory and delivery at the same time. Each call has a recorded duration, and the parent request records time that already includes those calls. A dashboard adds every span and reports more time than the customer waited. Which measurements overlap? Where is the actual critical path? How would you prove the trace follows the same request across all services?
+A checkout request crosses eight services and takes four seconds, but every service dashboard reports an average below 100 ms. Retries created hidden duplicate calls and one request ID vanished at a queue boundary. How will you reconstruct the critical path, preserve context across asynchronous work, and distinguish waiting from actual processing?
 <!-- END INQUIRY -->
 
 ## Follow one request across several services

@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A mobile app's first product request is slow, while later requests are faster. The order endpoint uses HTTPS, yet one customer can still request someone else's order by changing an identifier. Then a checkout request times out after the server may have created the order. Which parts of these problems concern connection setup, protected transport, authorization, and business-level retry behavior?
+A customer presses Pay once. The browser sends an HTTPS request, receives no response, and retries. The first request may have committed after the connection vanished. Encryption protected the bytes, yet the business outcome is uncertain. Which parts did HTTPS secure, what remains unknown, and how should the next request discover the original result?
 <!-- END INQUIRY -->
 
 ## A request and its response

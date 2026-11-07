@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A browser connects securely to a gateway, which forwards the request internally. Where can the data be read? How does the next service know who called it?
+A service presents a valid certificate for the wrong hostname, while another authenticated service attempts an operation it is not allowed to perform. The connections are encrypted, yet one peer may be an impostor and the other lacks permission. What identity should each side verify, where is authorization enforced, and when is mutual authentication worth the operational cost?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

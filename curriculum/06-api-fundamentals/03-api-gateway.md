@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Your app has five microservices with ten APIs each. One screen needs three APIs from different services. Which calls should the client make? Where could you combine their responses? What should happen if one service is slow?
+Your travel app has five services and fifty APIs. Minutes before launch, the product screen needs details, live stock, and reviews; mobile and web duplicate the three calls. Reviews become slow, so one blank section prevents the whole page from loading. Where should routing, authentication, composition, and the partial-result decision live—and which extra component is actually justified?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -11,7 +11,7 @@ Your app has five microservices with ten APIs each. One screen needs three APIs 
 
 The API Gateway is an API management tool that sits between a client and a collection of backend services. It is a single entry point into a system that encapsulates the internal system architecture and provides an API that is tailored to each client. It also has other responsibilities such as authentication, monitoring, load balancing, caching, throttling, logging, etc.
 
-![api-gateway](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/api-gateway/api-gateway.png)
+![api-gateway](../../assets/source-diagrams/chapter-III/api-gateway/api-gateway.png)
 
 ## Why do we need an API Gateway?
 
@@ -59,7 +59,7 @@ In the Backend For Frontend (BFF) pattern, we create separate backend services t
 
 Also, sometimes the output of data returned by the microservices to the front end is not in the exact format or filtered as needed by the front end. To solve this issue, the frontend should have some logic to reformat the data, and therefore, we can use BFF to shift some of this logic to the intermediate layer.
 
-![backend-for-frontend](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/api-gateway/backend-for-frontend.png)
+![backend-for-frontend](../../assets/source-diagrams/chapter-III/api-gateway/backend-for-frontend.png)
 
 The primary function of the backend for the frontend pattern is to get the required data from the appropriate service, format the data, and sent it to the frontend.
 

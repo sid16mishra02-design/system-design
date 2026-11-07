@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-An orders instance is replaced, but a long-lived caller keeps using its old address. How should the caller learn the change? Can a recently discovered destination still fail?
+A new orders instance starts every minute and old ones disappear just as quickly. One caller cached an address seconds before that instance died, then retried the charge against another instance. How should callers find healthy candidates, how stale may discovery data be, and which operations are safe to repeat after routing changes?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -21,13 +21,13 @@ There are two main service discovery patterns:
 
 ### Client-side discovery
 
-![client-side-service-discovery](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/service-discovery/client-side-service-discovery.png)
+![client-side-service-discovery](../../assets/source-diagrams/chapter-IV/service-discovery/client-side-service-discovery.png)
 
 In this approach, the client obtains the location of another service by querying a service registry which is responsible for managing and storing the network locations of all the services.
 
 ### Server-side discovery
 
-![server-side-service-discovery](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/service-discovery/server-side-service-discovery.png)
+![server-side-service-discovery](../../assets/source-diagrams/chapter-IV/service-discovery/server-side-service-discovery.png)
 
 In this approach, we use an intermediate component such as a load balancer. The client makes a request to the service via a load balancer which then forwards the request to an available service instance.
 

@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A ₹500 payment succeeds, but its response disappears. Two identical retries arrive together. How can both return a sensible result without charging twice? What if you record “already handled” and crash before performing the payment?
+A customer taps Pay, sees a timeout, and taps again while the first request is still running. Both reach different servers; one crashes after the provider charges the card but before saving success. What durable identity makes these attempts one purchase, how should “still processing” behave, and how will recovery find an external effect that already happened?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

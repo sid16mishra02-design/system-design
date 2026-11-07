@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-You save an address and immediately read its old value elsewhere. Which copy answered? Would another live copy also protect you from accidental deletion?
+A customer changes their password, receives success, and is immediately routed to a replica that still accepts the old one. Minutes later, an operator accidentally deletes every account and the deletion races to every copy. Which reads require fresh state, what does lag change, and why are replicas not historical backups?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -15,7 +15,7 @@ Replication is a process that involves sharing information to ensure consistency
 
 The master serves reads and writes, replicating writes to one or more slaves, which serve only reads. Slaves can also replicate additional slaves in a tree-like fashion. If the master goes offline, the system can continue to operate in read-only mode until a slave is promoted to a master or a new master is provisioned.
 
-![master-slave-replication](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/database-replication/master-slave-replication.png)
+![master-slave-replication](../../assets/source-diagrams/chapter-II/database-replication/master-slave-replication.png)
 
 ### Advantages
 
@@ -34,7 +34,7 @@ The master serves reads and writes, replicating writes to one or more slaves, wh
 
 Both masters serve reads/writes and coordinate with each other. If either master goes down, the system can continue to operate with both reads and writes.
 
-![master-master-replication](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/database-replication/master-master-replication.png)
+![master-master-replication](../../assets/source-diagrams/chapter-II/database-replication/master-master-replication.png)
 
 ### Advantages
 

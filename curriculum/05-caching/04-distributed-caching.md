@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Two hundred application instances reuse one popular product through a shared cache. Its entry expires, and every instance asks the database for it at once. Would adding more cache nodes solve this one-key burst? How could callers share the reload work? What should happen if the cache is entirely unavailable but the database cannot absorb unlimited fallback requests?
+Ten application servers share one cache. A celebrity post becomes a hot key, one cache node saturates, and a retry storm reaches the database when that node fails. Adding cache capacity did not spread the one key. How should ownership, replication, local copies, and coordinated reloads protect the underlying store?
 <!-- END INQUIRY -->
 
 ## Sharing a fast copy across servers

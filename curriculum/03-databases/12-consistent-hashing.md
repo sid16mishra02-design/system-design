@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A cache gains a node. How much data should move, how will clients agree on ownership, and when is the new owner ready?
+A cache fleet grows from 20 to 21 nodes five minutes before a product launch. With modulo routing, most keys suddenly map elsewhere and the database receives a wall of misses. How could membership change move only a neighboring slice of keys? What still happens if one viral key dominates all traffic?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -17,7 +17,7 @@ Let's first understand the problem we're trying to solve.
 
 In traditional hashing-based distribution methods, we use a hash function to hash our partition keys (i.e. request ID or IP). Then if we use the modulo against the total number of nodes (server or databases). This will give us the node where we want to route our request.
 
-![simple-hashing](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/consistent-hashing/simple-hashing.png)
+![simple-hashing](../../assets/source-diagrams/chapter-II/consistent-hashing/simple-hashing.png)
 
 $$
 \begin{align*}
@@ -51,7 +51,7 @@ Now that we understand the problem, let's discuss consistent hashing in detail.
 
 Consistent Hashing is a distributed hashing scheme that operates independently of the number of nodes in a distributed hash table by assigning them a position on an abstract circle, or hash ring. This allows servers and objects to scale without affecting the overall system.
 
-![consistent-hashing](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/consistent-hashing/consistent-hashing.png)
+![consistent-hashing](../../assets/source-diagrams/chapter-II/consistent-hashing/consistent-hashing.png)
 
 Using consistent hashing, only `K/N` data would require re-distributing.
 
@@ -99,7 +99,7 @@ In order to ensure a more evenly distributed load, we can introduce the idea of 
 
 Instead of assigning a single position to a node, the hash range is divided into multiple smaller ranges, and each physical node is assigned several of these smaller ranges. Each of these subranges is considered a VNode. Hence, virtual nodes are basically existing physical nodes mapped multiple times across the hash ring to minimize changes to a node's assigned range.
 
-![virtual-nodes](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/consistent-hashing/virtual-nodes.png)
+![virtual-nodes](../../assets/source-diagrams/chapter-II/consistent-hashing/virtual-nodes.png)
 
 For this, we can use `k` number of hash functions.
 

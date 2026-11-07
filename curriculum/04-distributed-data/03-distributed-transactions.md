@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-An order is recorded in one service and charged in another. Then the workflow fails, or the charge response disappears. Can one local database transaction settle everything? When should you retry, wait, or compensate?
+An order is recorded and payment is charged, but inventory reservation fails. Three services have already committed locally; no shared rollback button exists. The customer sees “processing” while a refund worker keeps crashing. Which progress must be durable, what action compensates earlier work, and how can repeated recovery avoid repeated money movement?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -21,7 +21,7 @@ Now, let's look at some popular solutions for distributed transactions:
 
 ## Two-Phase commit
 
-![two-phase-commit](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/distributed-transactions/two-phase-commit.png)
+![two-phase-commit](../../assets/source-diagrams/chapter-II/distributed-transactions/two-phase-commit.png)
 
 The two-phase commit (2PC) protocol is a distributed algorithm that coordinates all the processes that participate in a distributed transaction on whether to commit or abort (roll back) the transaction.
 
@@ -51,7 +51,7 @@ Following problems may arise in the two-phase commit protocol:
 
 ## Three-phase commit
 
-![three-phase-commit](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/distributed-transactions/three-phase-commit.png)
+![three-phase-commit](../../assets/source-diagrams/chapter-II/distributed-transactions/three-phase-commit.png)
 
 Three-phase commit (3PC) is an extension of the two-phase commit where the commit phase is split into two phases. This helps with the blocking problem that occurs in the two-phase commit protocol.
 
@@ -80,7 +80,7 @@ The pre-commit phase accomplishes the following:
 
 ## Sagas
 
-![sagas](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/distributed-transactions/sagas.png)
+![sagas](../../assets/source-diagrams/chapter-II/distributed-transactions/sagas.png)
 
 A saga is a sequence of local transactions. Each local transaction updates the database and publishes a message or event to trigger the next local transaction in the saga. If a local transaction fails because it violates a business rule then the saga executes a series of compensating transactions that undo the changes that were made by the preceding local transactions.
 

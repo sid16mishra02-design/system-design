@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Your product screen needs names, prices, and stock for thirty items. Should the client fetch resources, request selected fields, or call a typed inventory operation? If the response is small but triggers thirty database lookups, what actually needs improving?
+A product page needs five fields but downloads a huge document; an internal inventory service needs a typed ReserveStock operation with strict deadlines. The team wants one fashionable protocol everywhere. Which interaction is resource-shaped, which is an operation, who chooses response fields, and which failure semantics must remain visible?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

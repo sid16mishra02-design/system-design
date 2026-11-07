@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Products have different attributes, sessions are fetched by identifier, and recommendations explore relationships. Would one representation suit all three? What would you measure before choosing?
+A catalog stores shoes, books, and cameras with different attributes. Launch week arrives; one celebrity product becomes 70% of traffic and its partition throttles while others sit idle. The flexible documents look perfect on paper. Which reads determine the data shape, which key controls traffic, and which guarantees does checkout still need?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

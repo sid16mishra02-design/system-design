@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-App A accepted your login, but the next request reaches App B. How can B identify the same session? What if A dies mid-purchase?
+A load balancer adds three checkout instances and graphs turn green. Logged-in users then bounce between “cart full” and “cart empty” because each server keeps its own session. One slow instance also attracts long-lived connections. What should be distributed, what state must travel, and which health signal should stop new requests without killing work already in flight?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -13,11 +13,11 @@ App A accepted your login, but the next request reaches App B. How can B identif
 
 Load balancing lets us distribute incoming network traffic across multiple resources ensuring high availability and reliability by sending requests only to resources that are online. This provides the flexibility to add or subtract resources as demand dictates.
 
-![load-balancing](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/load-balancing/load-balancer.png)
+![load-balancing](../../assets/source-diagrams/chapter-I/load-balancing/load-balancer.png)
 
 For additional scalability and redundancy, we can try to load balance at each layer of our system:
 
-![load-balancing-layers](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/load-balancing/load-balancer-layers.png)
+![load-balancing-layers](../../assets/source-diagrams/chapter-I/load-balancing/load-balancer-layers.png)
 
 ## But why?
 
@@ -93,7 +93,7 @@ As you must've already guessed, the load balancer itself can be a single point o
 
 And, if there's a failure detection and the _active_ load balancer fails, another _passive_ load balancer can take over which will make our system more fault-tolerant.
 
-![redundant-load-balancing](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/load-balancing/redundant-load-balancer.png)
+![redundant-load-balancing](../../assets/source-diagrams/chapter-I/load-balancing/redundant-load-balancer.png)
 
 ## Features
 

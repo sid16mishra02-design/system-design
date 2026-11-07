@@ -157,7 +157,7 @@ Here is our high-level estimate:
 
 This is the general data model which reflects our requirements.
 
-![uber-datamodel](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/uber/uber-datamodel.png)
+![uber-datamodel](../assets/source-diagrams/chapter-V/uber/uber-datamodel.png)
 
 We have the following tables:
 
@@ -341,7 +341,7 @@ _Note: Learn more about [REST, GraphQL, gRPC](../curriculum/06-api-fundamentals/
 
 Here's how our service is expected to work:
 
-![uber-working](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/uber/uber-working.png)
+![uber-working](../assets/source-diagrams/chapter-V/uber/uber-working.png)
 
 1. Customer requests a ride by specifying the source, destination, cab type, payment method, etc.
 2. Ride service registers this request, finds nearby drivers, and calculates the estimated time of arrival (ETA).
@@ -389,7 +389,7 @@ However, this is not scalable, and performing this query on large datasets will 
 
 Geohash is a hierarchical spatial index that uses Base-32 alphabet encoding, the first character in a geohash identifies the initial location as one of the 32 cells. This cell will also contain 32 cells. This means that to represent a point, the world is recursively divided into smaller and smaller cells with each additional bit until the desired precision is attained. The precision factor also determines the size of the cell.
 
-![geohashing](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/geohashing-and-quadtrees/geohashing.png)
+![geohashing](../assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/geohashing.png)
 
 For example, San Francisco with coordinates `37.7564, -122.4016` can be represented in geohash as `9q8yy9mf`.
 
@@ -399,13 +399,13 @@ Now, using the customer's geohash we can determine the nearest available driver 
 
 A [Quadtree](../curriculum/10-security-and-location/04-geohashing-and-quadtrees.md#quadtrees) is a tree data structure in which each internal node has exactly four children. They are often used to partition a two-dimensional space by recursively subdividing it into four quadrants or regions. Each child or leaf node stores spatial information. Quadtrees are the two-dimensional analog of [Octrees](https://en.wikipedia.org/wiki/Octree) which are used to partition three-dimensional space.
 
-![quadtree](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/geohashing-and-quadtrees/quadtree.png)
+![quadtree](../assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/quadtree.png)
 
 Quadtrees enable us to search points within a two-dimensional range efficiently, where those points are defined as latitude/longitude coordinates or as cartesian (x, y) coordinates.
 
 We can save further computation by only subdividing a node after a certain threshold.
 
-![quadtree-subdivision](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/geohashing-and-quadtrees/quadtree-subdivision.png)
+![quadtree-subdivision](../assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/quadtree-subdivision.png)
 
 [Quadtree](../curriculum/10-security-and-location/04-geohashing-and-quadtrees.md#quadtrees) seems perfect for our use case, we can update the Quadtree every time we receive a new location update from the driver. To reduce the load on the quadtree servers we can use an in-memory datastore such as [Redis](https://redis.io) to cache the latest updates. And with the application of mapping algorithms such as the [Hilbert curve](https://en.wikipedia.org/wiki/Hilbert_curve), we can perform efficient range queries to find nearby drivers for the customer.
 
@@ -465,7 +465,7 @@ _For more details, refer to [Caching](../curriculum/05-caching/01-caching.md)._
 
 ## Identify and resolve bottlenecks
 
-![uber-advanced-design](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/uber/uber-advanced-design.png)
+![uber-advanced-design](../assets/source-diagrams/chapter-V/uber/uber-advanced-design.png)
 
 Let us identify and resolve bottlenecks such as single points of failure in our design:
 

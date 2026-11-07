@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-An order commits, but its replica still shows yesterday's list. Which correctness promise held, and which reader-visible guarantee did not?
+A bank transfer must never create or destroy money. A profile photo can appear a few seconds late in another region. The architecture review labels one database “ACID” and the other “BASE,” then stops thinking. Which invariant must commit together, which read may be stale, and what mechanism eventually makes copies converge?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

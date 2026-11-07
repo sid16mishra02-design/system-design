@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A shop deploys two application servers and promises to survive a machine failure. Both servers use one load balancer, one database, and the same configuration service. During a sale, the shared database stops responding. Which requests can still work? Where would another copy actually help? Who would select the replacement, reconnect clients, and prevent two machines from accepting conflicting writes?
+Your architecture diagram proudly shows six application replicas. During a launch, one tiny configuration service stops responding and every replica refuses new traffic. The servers are alive, but the product is gone. Which dependency actually controlled availability? Where would another copy help, and who decides which copy is safe to trust?
 <!-- END INQUIRY -->
 
 ## One failure that stops the whole path

@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Every order needs billing and shipping. Both teams put workers on one shared work queue, but some orders get only one action. Why? How should deliveries and progress differ between teams and within one team?
+One OrderPlaced event should trigger billing, shipping, analytics, and fraud checks. Analytics slows down and accidentally consumes the only copy, so shipping sees nothing. Which consumers need independent progress, where may workers compete, and can a new subscriber replay yesterday’s events without disturbing existing ones?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -13,7 +13,7 @@ Every order needs billing and shipping. Both teams put workers on one shared wor
 
 Similar to a message queue, publish-subscribe is also a form of service-to-service communication that facilitates asynchronous communication. In a pub/sub model, any message published to a topic is pushed immediately to all the subscribers of the topic.
 
-![publish-subscribe](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/publish-subscribe/publish-subscribe.png)
+![publish-subscribe](../../assets/source-diagrams/chapter-III/publish-subscribe/publish-subscribe.png)
 
 The subscribers to the message topic often perform different functions, and can each do something different with the message in parallel. The publisher doesn't need to know who is using the information that it is broadcasting, and the subscribers don't need to know where the message comes from. This style of messaging is a bit different than message queues, where the component that sends the message often knows the destination it is sending to.
 

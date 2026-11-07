@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Two ticket servers lose contact. A sells the last seat; B still shows it available. Should B confirm another sale? What if B cannot check?
+Only one seat remains. Replica A records the sale, then the network link to replica B breaks. A second buyer reaches B, which still sees “available” and cannot ask A. Should B answer, wait, or refuse? Which promise is sacrificed by each choice, and why can no routing trick reveal information that never arrived?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -13,7 +13,7 @@ Two ticket servers lose contact. A sells the last seat; B still shows it availab
 
 CAP theorem states that a distributed system can deliver only two of the three desired characteristics Consistency, Availability, and Partition tolerance (CAP).
 
-![cap-theorem](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/cap-theorem/cap-theorem.png)
+![cap-theorem](../../assets/source-diagrams/chapter-II/cap-theorem/cap-theorem.png)
 
 Let's take a detailed look at the three distributed system characteristics to which the CAP theorem refers.
 

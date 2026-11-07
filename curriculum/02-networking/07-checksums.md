@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A user uploads a large archive in ten chunks. The network drops during one chunk, two pieces arrive in the wrong order, and the final assembled file will later be restored from backup. What would let you detect which bytes differ, retry only damaged work, and verify the completed object? If a supplied verification value is also replaced, what confidence should it give you?
+A backup job copies a 40 GB database snapshot across the network and reports success. During restore week, one flipped bit makes the archive unreadable. The file existed, the byte count matched, and transport completed. What evidence could have exposed corruption earlier, and why would that evidence still not prove the backup contains the correct business data?
 <!-- END INQUIRY -->
 
 ## Detecting that data changed

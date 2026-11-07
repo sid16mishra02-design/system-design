@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Three servers maintain a shared configuration history. The current leader becomes isolated from the other two, but can still hear from one client. Both network groups want to accept changes. Which decisions may safely become committed? What should happen if no communicating group satisfies the protocol's rules? How would a returning leader learn what it missed?
+Five replicas maintain configuration. The leader accepts a change on itself and one follower, then becomes isolated with that follower. The other three elect a new leader and accept a different change. Which group may safely make progress, when is an entry committed, and how will the returning minority repair its conflicting history?
 <!-- END INQUIRY -->
 
 ## Agreeing on decisions despite some failures

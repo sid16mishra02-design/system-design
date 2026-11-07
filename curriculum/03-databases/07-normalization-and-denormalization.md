@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A customer moves after an order ships. Should every address change? How would you distinguish today's profile from the delivery fact recorded when the order was placed?
+A customer changes their address after an order ships. The profile should show the new address; the invoice must preserve the old delivery address. One engineer removes all duplication, while another copies the address into five tables. Which fact is current state, which is history, and who updates every intentional copy?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

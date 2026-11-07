@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Worker A starts a monthly report, pauses for a long time, then resumes. Meanwhile its ownership deadline passed, so worker B took over and saved a newer report. A now tries to overwrite that result. Did deadline expiry physically stop A? What must the protected storage check? Could a conditional write avoid needing this lock at all?
+Worker A acquires a five-second lease, pauses for ten seconds, and resumes after worker B has acquired the same lock. Both believe they own the job and write to storage. A timeout-based lock did not stop the old process. What evidence lets the protected resource reject A’s late write?
 <!-- END INQUIRY -->
 
 ## Coordinate work across processes carefully

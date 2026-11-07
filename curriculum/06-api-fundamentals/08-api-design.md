@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-One customer has a million orders, and a client asks to list them. Should one response contain everything? If you divide results into pages, how do equal creation times and concurrent inserts affect the next page? What must a continuation marker mean, and how do you stop a user changing it to read another customer’s orders?
+A list endpoint works in testing, then a large customer accumulates two million orders. One request attempts to return everything, times out, retries, and doubles database pressure. Meanwhile, a new field breaks an older app. Which boundaries, pagination rules, error shapes, and version promises keep the contract usable as data and clients grow?
 <!-- END INQUIRY -->
 
 ## Make the contract predictable

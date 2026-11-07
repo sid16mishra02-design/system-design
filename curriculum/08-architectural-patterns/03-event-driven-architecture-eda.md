@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-An order is saved, but a crash prevents shipping from hearing about it. What information must survive? Should checkout success mean shipping already finished?
+A warehouse update must inform search, recommendations, and fraud systems. The order service currently calls all three; one slow recommendation deploy blocks checkout. Moving to events removes the wait—but now consumers can lag, repeat, and disagree. Which fact should be published, what remains authoritative, and when does the user need an immediate answer instead?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -23,7 +23,7 @@ Event-driven architectures have three key components:
 - **Event routers**: Filters and pushes the events to consumers.
 - **Event consumers**: Uses events to reflect changes in the system.
 
-![event-driven-architecture](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/event-driven-architecture/event-driven-architecture.png)
+![event-driven-architecture](../../assets/source-diagrams/chapter-III/event-driven-architecture/event-driven-architecture.png)
 
 _Note: Dots in the diagram represents different events in the system._
 

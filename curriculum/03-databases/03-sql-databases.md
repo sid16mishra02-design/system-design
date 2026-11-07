@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A customer's order-history screen becomes slow as the shop grows. What would you inspect before adding servers, and which data relationships must remain valid?
+At midnight, two jobs update the same order: one cancels it while another marks it shipped. A reporting query scans a year of rows and blocks checkout writes. The schema has tables and keys, but that alone did not save the workflow. Which relationships and transitions must be constrained, and which query path needs deliberate design?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->

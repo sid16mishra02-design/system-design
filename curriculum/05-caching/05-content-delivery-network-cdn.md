@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Viewers in several countries request the same product image from one distant server. Which work can happen closer to them? If you replace the image, why might some viewers still see its old version? Would the same sharing policy be safe for private invoices?
+A trailer launches globally. Viewers in Singapore fetch every segment from a Virginia origin while a million nearby users request identical bytes. Minutes later, the studio replaces a broken frame but some edges keep the old version. Which content can be served nearby, how does the first copy arrive, and how will a new version replace it safely?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -11,7 +11,7 @@ Viewers in several countries request the same product image from one distant ser
 
 A content delivery network (CDN) is a geographically distributed group of servers that work together to provide fast delivery of internet content. Generally, static files such as HTML/CSS/JS, photos, and videos are served from CDN.
 
-![cdn-map](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/content-delivery-network/cdn-map.png)
+![cdn-map](../../assets/source-diagrams/chapter-I/content-delivery-network/cdn-map.png)
 
 ## Why use a CDN?
 
@@ -19,7 +19,7 @@ Content Delivery Network (CDN) increases content availability and redundancy whi
 
 ## How does a CDN work?
 
-![cdn](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/content-delivery-network/cdn.png)
+![cdn](../../assets/source-diagrams/chapter-I/content-delivery-network/cdn.png)
 
 In a CDN, the origin server contains the original versions of the content while the edge servers are numerous and distributed across various locations around the world.
 

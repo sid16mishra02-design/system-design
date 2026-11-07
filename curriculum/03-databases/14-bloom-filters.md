@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A storage service receives many key lookups, but most requested keys do not exist. Disk reads are expensive. You can keep a small memory structure that sometimes says a missing key might exist. Which result could safely avoid a disk read? Which result must be verified? What could go wrong if the database accepts a new key before that memory structure learns about it?
+A storage engine receives millions of requests for keys that do not exist. Touching disk for every miss is expensive, so the team adds a tiny bit array. One query hits every marked bit even though its key is absent. How can the structure confidently say “no” but only say “maybe,” and where must a positive result be verified?
 <!-- END INQUIRY -->
 
 ## A small filter before an expensive lookup

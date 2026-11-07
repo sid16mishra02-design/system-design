@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-An employee signs in once and opens payroll and email. Later, payroll logout leaves email open, and disabling the employee at the provider does not immediately close an existing payroll session. Which sessions and permissions must the organization control? How quickly must access removal take effect?
+An employee leaves the company. Their central identity account is disabled, but three applications still have week-long local sessions and one sensitive app never checks again. “Single sign-on” made login easy; it did not make logout instant. Which session exists where, how is access revoked, and which applications need shorter or revalidated sessions?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -43,7 +43,7 @@ SAML specifically enables identity federation, making it possible for identity p
 
 Now, let's discuss how Single Sign-On works:
 
-![sso](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/single-sign-on/sso.png)
+![sso](../../assets/source-diagrams/chapter-IV/single-sign-on/sso.png)
 
 1. The user requests a resource from their desired application.
 2. The application redirects the user to the Identity Provider (IdP) for authentication.

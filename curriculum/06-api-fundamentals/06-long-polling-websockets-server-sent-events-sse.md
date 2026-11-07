@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A scoreboard mainly sends scores to browsers; an editor exchanges changes both ways. Which connection pattern fits each? After a thirty-second disconnect, how will the client discover missed updates rather than silently continue with old state?
+A collaborative editor sends cursor moves both ways every second; a delivery tracker only needs occasional server updates. After a train enters a tunnel, thousands of clients reconnect together and some updates are missing. Which direction and frequency does each product need, how is progress resumed, and who applies backpressure?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -17,7 +17,7 @@ HTTP Long polling is a technique used to push information to a client as soon as
 
 In Long polling, the server does not close the connection once it receives a request from the client. Instead, the server responds only if any new message is available or a timeout threshold is reached.
 
-![long-polling](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/long-polling-websockets-server-sent-events/long-polling.png)
+![long-polling](../../assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/long-polling.png)
 
 Once the client receives a response, it immediately sends a new request to the server to have a new pending connection to send data to the client, and the operation is repeated. With this approach, the server emulates a real-time server push feature.
 
@@ -51,7 +51,7 @@ WebSocket provides full-duplex communication channels over a single TCP connecti
 
 The client establishes a WebSocket connection through a process known as the WebSocket handshake. If the process succeeds, then the server and client can exchange data in both directions at any time. The WebSocket protocol enables the communication between a client and a server with lower overheads, facilitating real-time data transfer from and to the server.
 
-![websockets](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/long-polling-websockets-server-sent-events/websockets.png)
+![websockets](../../assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/websockets.png)
 
 This is made possible by providing a standardized way for the server to send content to the client without being asked and allowing for messages to be passed back and forth while keeping the connection open.
 
@@ -85,7 +85,7 @@ Let's discuss some disadvantages of WebSockets:
 
 Server-Sent Events (SSE) is a way of establishing long-term communication between client and server that enables the server to proactively push data to the client.
 
-![server-sent-events](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/long-polling-websockets-server-sent-events/server-sent-events.png)
+![server-sent-events](../../assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/server-sent-events.png)
 
 It is unidirectional, meaning once the client sends the request it can only receive the responses without the ability to send new requests over the same connection.
 

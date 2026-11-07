@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-You move shop.example from server A to B. Some users still reach A. What information could they be using, and when should it change?
+At 9 a.m. you move shop.example to a new server. At noon, half the users reach the new site while others still reach the old checkout—even though the DNS dashboard shows the new address. No one is lying. Where can the old answer still live, what does its lifetime control, and how would you migrate without losing orders?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -17,7 +17,7 @@ This brings us to Domain Name System (DNS) which is a hierarchical and decentral
 
 ## How DNS works
 
-![how-dns-works](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/domain-name-system/how-dns-works.png)
+![how-dns-works](../../assets/source-diagrams/chapter-I/domain-name-system/how-dns-works.png)
 
 DNS lookup involves the following eight steps:
 

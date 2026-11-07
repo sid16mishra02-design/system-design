@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Billing and catalog teams need independent databases. How will a checkout read both without assuming their writes and recovery happen together?
+Orders, catalog, and billing each own a database. A customer invoice needs facts from all three during a catalog outage, and finance insists yesterday’s purchase price must never change. Which service owns each meaning, where should cross-domain views be assembled, and which data should be copied as history rather than joined live?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -13,7 +13,7 @@ Federation (or functional partitioning) splits up databases by function. The fed
 
 All of the components in a federation are tied together by one or more federal schemas that express the commonality of data throughout the federation. These federated schemas are used to specify the information that can be shared by the federation components and to provide a common basis for communication among them.
 
-![database-federation](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/database-federation/database-federation.png)
+![database-federation](../../assets/source-diagrams/chapter-II/database-federation/database-federation.png)
 
 Federation also provides a cohesive, unified view of data derived from multiple sources. The data sources for federated systems can include databases and various other forms of structured and unstructured data.
 

@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A search customer should receive at most 100 requests per second, but ten app servers each enforce that allowance locally. What could the customer actually send? How much burst traffic is acceptable, and what should happen when allowance runs out?
+A bot creates ten connections to each of ten app servers. Every server allows 100 requests per second, so the “100 requests/second” customer limit quietly becomes 10,000. During the burst, real users time out. Whose identity consumes the allowance, where is it counted, how much bursting is acceptable, and what happens if the counter store fails?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -11,7 +11,7 @@ A search customer should receive at most 100 requests per second, but ten app se
 
 Rate limiting refers to preventing the frequency of an operation from exceeding a defined limit. In large-scale systems, rate limiting is commonly used to protect underlying services and resources. Rate limiting is generally used as a defensive mechanism in distributed systems, so that shared resources can maintain availability. It also protects our APIs from unintended or malicious overuse by limiting the number of requests that can reach our API in a given period of time.
 
-![rate-limiting](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/rate-limiting/rate-limiting.png)
+![rate-limiting](../../assets/source-diagrams/chapter-IV/rate-limiting/rate-limiting.png)
 
 ## Why do we need Rate Limiting?
 

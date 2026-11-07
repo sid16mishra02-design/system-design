@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A mobile developer needs to create an order without knowing your internal database structure. What information must their request contain, and what must your response guarantee? The service records the order but the response disappears. How should the developer retry without accidentally creating another order? Think about inputs, permissions, errors, and the difference between acceptance and completed work.
+A mobile team changes one field and accidentally breaks three partners. Another client retries a timed-out “create order” request and produces two orders. Everyone called the endpoint an API, but nobody agreed on its contract. What must callers know about inputs, outcomes, errors, compatibility, and safe repetition before either side changes independently?
 <!-- END INQUIRY -->
 
 ## A contract between two parts of a system

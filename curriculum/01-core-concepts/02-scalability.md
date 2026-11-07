@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Demand doubles; the database is saturated. Where should capacity grow?
+Your ticket sale opens at noon. Traffic jumps from 100 to 20,000 requests per second; application CPU stays calm while database waits climb and checkout freezes. The team proposes twenty more app servers. Where is capacity actually missing? How could adding callers make the outage worse, and what measurement would change your decision?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -13,7 +13,7 @@ Demand doubles; the database is saturated. Where should capacity grow?
 
 Scalability is the measure of how well a system responds to changes by adding or removing resources to meet demands.
 
-![scalability](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/scalability/scalability.png)
+![scalability](../../assets/source-diagrams/chapter-I/scalability/scalability.png)
 
 Let's discuss different types of scaling:
 

@@ -157,7 +157,7 @@ Here is our high-level estimate:
 
 This is the general data model which reflects our requirements.
 
-![twitter-datamodel](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/twitter/twitter-datamodel.png)
+![twitter-datamodel](../assets/source-diagrams/chapter-V/twitter/twitter-datamodel.png)
 
 We have the following tables:
 
@@ -315,7 +315,7 @@ Publishing is the step where the feed data is pushed according to each specific 
 
 - Pull Model (or Fan-out on load)
 
-![newsfeed-pull-model](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/twitter/newsfeed-pull-model.png)
+![newsfeed-pull-model](../assets/source-diagrams/chapter-V/twitter/newsfeed-pull-model.png)
 
 When a user creates a tweet, and a follower reloads their newsfeed, the feed is created and stored in memory. The most recent feed is only loaded when the user requests it. This approach reduces the number of write operations on our database.
 
@@ -323,7 +323,7 @@ The downside of this approach is that the users will not be able to view recent 
 
 - Push Model (or Fan-out on write)
 
-![newsfeed-push-model](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/twitter/newsfeed-push-model.png)
+![newsfeed-push-model](../assets/source-diagrams/chapter-V/twitter/newsfeed-push-model.png)
 
 In this model, once a user creates a tweet, it is "pushed" to all the follower's feeds immediately. This prevents the system from having to go through a user's entire followers list to check for updates.
 
@@ -441,7 +441,7 @@ But where can we store files at scale? Well, [object storage](../curriculum/03-d
 
 ## Identify and resolve bottlenecks
 
-![twitter-advanced-design](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/twitter/twitter-advanced-design.png)
+![twitter-advanced-design](../assets/source-diagrams/chapter-V/twitter/twitter-advanced-design.png)
 
 Let us identify and resolve bottlenecks such as single points of failure in our design:
 

@@ -156,7 +156,7 @@ Here is our high-level estimate:
 
 This is the general data model which reflects our requirements.
 
-![whatsapp-datamodel](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/whatsapp/whatsapp-datamodel.png)
+![whatsapp-datamodel](../assets/source-diagrams/chapter-V/whatsapp/whatsapp-datamodel.png)
 
 We have the following tables:
 
@@ -355,7 +355,7 @@ Handling read receipts can be tricky, for this use case we can wait for some sor
 
 Now that we have identified some core components, let's do the first draft of our system design.
 
-![whatsapp-basic-design](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/whatsapp/whatsapp-basic-design.png)
+![whatsapp-basic-design](../assets/source-diagrams/chapter-V/whatsapp/whatsapp-basic-design.png)
 
 ## Detailed design
 
@@ -416,7 +416,7 @@ We can use services like [Amazon API Gateway](https://aws.amazon.com/api-gateway
 
 ## Identify and resolve bottlenecks
 
-![whatsapp-advanced-design](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/whatsapp/whatsapp-advanced-design.png)
+![whatsapp-advanced-design](../assets/source-diagrams/chapter-V/whatsapp/whatsapp-advanced-design.png)
 
 Let us identify and resolve bottlenecks such as single points of failure in our design:
 

@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Your product page uses a fast copy of database prices. A reader fetches ₹500, pauses, and later stores it after another request updates the database to ₹550 and removes the old copy. Which value might readers now see? Who should load missing values and update writes? When may a write be acknowledged if persistence happens later?
+A popular product is read 100,000 times and updated once. Another value changes every second. The team wants one caching rule for both. Who should load a missing value, who persists a write, and when should a cached copy be updated or removed? What failure could make each policy lie?
 <!-- END INQUIRY -->
 
 ## Decide who reads and who updates the copy

@@ -4,7 +4,7 @@
     "path": "curriculum/01-core-concepts/01-what-is-system-design.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 43,
-    "teaching_words_now": 180,
+    "teaching_words_now": 227,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 45
@@ -14,7 +14,7 @@
     "path": "curriculum/01-core-concepts/02-scalability.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 32,
-    "teaching_words_now": 177,
+    "teaching_words_now": 221,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 50
@@ -24,7 +24,7 @@
     "path": "curriculum/01-core-concepts/03-availability.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 41,
-    "teaching_words_now": 239,
+    "teaching_words_now": 280,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 133
@@ -34,7 +34,7 @@
     "path": "curriculum/02-networking/01-ip.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 45,
-    "teaching_words_now": 238,
+    "teaching_words_now": 274,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 135
@@ -44,7 +44,7 @@
     "path": "curriculum/02-networking/02-osi-model.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 61,
-    "teaching_words_now": 194,
+    "teaching_words_now": 220,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 200
@@ -54,7 +54,7 @@
     "path": "curriculum/02-networking/03-tcp-and-udp.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 49,
-    "teaching_words_now": 227,
+    "teaching_words_now": 263,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 104
@@ -64,7 +64,7 @@
     "path": "curriculum/02-networking/04-domain-name-system-dns.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 50,
-    "teaching_words_now": 236,
+    "teaching_words_now": 272,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 504
@@ -74,7 +74,7 @@
     "path": "curriculum/02-networking/05-proxy.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 34,
-    "teaching_words_now": 244,
+    "teaching_words_now": 276,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 141
@@ -84,7 +84,7 @@
     "path": "curriculum/02-networking/08-load-balancing.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 50,
-    "teaching_words_now": 260,
+    "teaching_words_now": 293,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 339
@@ -94,7 +94,7 @@
     "path": "curriculum/02-networking/09-clustering.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 39,
-    "teaching_words_now": 184,
+    "teaching_words_now": 211,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 206
@@ -104,7 +104,7 @@
     "path": "curriculum/03-databases/01-storage.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 43,
-    "teaching_words_now": 193,
+    "teaching_words_now": 216,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 250
@@ -114,7 +114,7 @@
     "path": "curriculum/03-databases/02-databases-and-dbms.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 57,
-    "teaching_words_now": 158,
+    "teaching_words_now": 183,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 168
@@ -124,7 +124,7 @@
     "path": "curriculum/03-databases/03-sql-databases.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 52,
-    "teaching_words_now": 239,
+    "teaching_words_now": 271,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 120
@@ -134,7 +134,7 @@
     "path": "curriculum/03-databases/04-nosql-databases.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 59,
-    "teaching_words_now": 259,
+    "teaching_words_now": 286,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 159
@@ -144,7 +144,7 @@
     "path": "curriculum/03-databases/05-sql-vs-nosql-databases.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 43,
-    "teaching_words_now": 231,
+    "teaching_words_now": 266,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 125
@@ -154,7 +154,7 @@
     "path": "curriculum/03-databases/06-indexes.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 48,
-    "teaching_words_now": 249,
+    "teaching_words_now": 282,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 141
@@ -164,7 +164,7 @@
     "path": "curriculum/03-databases/07-normalization-and-denormalization.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 51,
-    "teaching_words_now": 297,
+    "teaching_words_now": 321,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 303
@@ -174,7 +174,7 @@
     "path": "curriculum/03-databases/08-transactions.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 43,
-    "teaching_words_now": 212,
+    "teaching_words_now": 241,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 94
@@ -184,7 +184,7 @@
     "path": "curriculum/03-databases/09-acid-and-base-consistency-models.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 49,
-    "teaching_words_now": 239,
+    "teaching_words_now": 271,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 135
@@ -194,7 +194,7 @@
     "path": "curriculum/03-databases/10-database-replication.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 64,
-    "teaching_words_now": 234,
+    "teaching_words_now": 261,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 112
@@ -204,7 +204,7 @@
     "path": "curriculum/03-databases/11-sharding.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 81,
-    "teaching_words_now": 219,
+    "teaching_words_now": 252,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 222
@@ -214,7 +214,7 @@
     "path": "curriculum/03-databases/12-consistent-hashing.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 53,
-    "teaching_words_now": 232,
+    "teaching_words_now": 261,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 279
@@ -224,7 +224,7 @@
     "path": "curriculum/03-databases/13-database-federation.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 37,
-    "teaching_words_now": 217,
+    "teaching_words_now": 248,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 90
@@ -234,7 +234,7 @@
     "path": "curriculum/04-distributed-data/01-cap-theorem.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 77,
-    "teaching_words_now": 228,
+    "teaching_words_now": 257,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 115
@@ -244,7 +244,7 @@
     "path": "curriculum/04-distributed-data/02-pacelc-theorem.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 27,
-    "teaching_words_now": 195,
+    "teaching_words_now": 224,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 51
@@ -254,7 +254,7 @@
     "path": "curriculum/04-distributed-data/03-distributed-transactions.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 50,
-    "teaching_words_now": 299,
+    "teaching_words_now": 317,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 196
@@ -264,7 +264,7 @@
     "path": "curriculum/05-caching/01-caching.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 74,
-    "teaching_words_now": 239,
+    "teaching_words_now": 243,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 380
@@ -274,7 +274,7 @@
     "path": "curriculum/05-caching/05-content-delivery-network-cdn.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 40,
-    "teaching_words_now": 285,
+    "teaching_words_now": 299,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 188
@@ -284,7 +284,7 @@
     "path": "curriculum/06-api-fundamentals/02-rest-graphql-grpc.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 47,
-    "teaching_words_now": 209,
+    "teaching_words_now": 219,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 441
@@ -294,7 +294,7 @@
     "path": "curriculum/06-api-fundamentals/03-api-gateway.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 45,
-    "teaching_words_now": 379,
+    "teaching_words_now": 400,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 163
@@ -304,7 +304,7 @@
     "path": "curriculum/06-api-fundamentals/04-idempotency.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 84,
-    "teaching_words_now": 296,
+    "teaching_words_now": 318,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 207
@@ -314,7 +314,7 @@
     "path": "curriculum/06-api-fundamentals/05-rate-limiting.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 50,
-    "teaching_words_now": 174,
+    "teaching_words_now": 192,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 239
@@ -324,7 +324,7 @@
     "path": "curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 47,
-    "teaching_words_now": 162,
+    "teaching_words_now": 176,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 234
@@ -334,7 +334,7 @@
     "path": "curriculum/07-asynchronous-communication/01-message-brokers.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 44,
-    "teaching_words_now": 253,
+    "teaching_words_now": 275,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 140
@@ -344,7 +344,7 @@
     "path": "curriculum/07-asynchronous-communication/02-message-queues.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 73,
-    "teaching_words_now": 286,
+    "teaching_words_now": 309,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 225
@@ -354,7 +354,7 @@
     "path": "curriculum/07-asynchronous-communication/03-publish-subscribe.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 62,
-    "teaching_words_now": 285,
+    "teaching_words_now": 295,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 181
@@ -364,7 +364,7 @@
     "path": "curriculum/08-architectural-patterns/01-n-tier-architecture.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 53,
-    "teaching_words_now": 192,
+    "teaching_words_now": 223,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 121
@@ -374,7 +374,7 @@
     "path": "curriculum/08-architectural-patterns/02-monoliths-and-microservices.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 47,
-    "teaching_words_now": 216,
+    "teaching_words_now": 228,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 389
@@ -384,7 +384,7 @@
     "path": "curriculum/08-architectural-patterns/03-event-driven-architecture-eda.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 38,
-    "teaching_words_now": 197,
+    "teaching_words_now": 228,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 108
@@ -394,7 +394,7 @@
     "path": "curriculum/08-architectural-patterns/04-event-sourcing.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 40,
-    "teaching_words_now": 200,
+    "teaching_words_now": 231,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 84
@@ -404,7 +404,7 @@
     "path": "curriculum/08-architectural-patterns/05-command-and-query-responsibility-segregation-cqrs.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 66,
-    "teaching_words_now": 205,
+    "teaching_words_now": 230,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 113
@@ -414,7 +414,7 @@
     "path": "curriculum/08-architectural-patterns/06-enterprise-service-bus-esb.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 54,
-    "teaching_words_now": 195,
+    "teaching_words_now": 227,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 92
@@ -424,7 +424,7 @@
     "path": "curriculum/08-architectural-patterns/07-virtual-machines-vms-and-containers.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 42,
-    "teaching_words_now": 190,
+    "teaching_words_now": 216,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 175
@@ -434,7 +434,7 @@
     "path": "curriculum/09-reliability-and-microservices/01-service-discovery.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 39,
-    "teaching_words_now": 197,
+    "teaching_words_now": 222,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 132
@@ -444,7 +444,7 @@
     "path": "curriculum/09-reliability-and-microservices/03-circuit-breaker.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 42,
-    "teaching_words_now": 195,
+    "teaching_words_now": 221,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 103
@@ -454,7 +454,7 @@
     "path": "curriculum/09-reliability-and-microservices/04-sla-slo-sli.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 33,
-    "teaching_words_now": 199,
+    "teaching_words_now": 232,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 80
@@ -464,7 +464,7 @@
     "path": "curriculum/09-reliability-and-microservices/05-disaster-recovery.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 45,
-    "teaching_words_now": 201,
+    "teaching_words_now": 235,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 101
@@ -474,7 +474,7 @@
     "path": "curriculum/10-security-and-location/01-ssl-tls-mtls.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 43,
-    "teaching_words_now": 193,
+    "teaching_words_now": 224,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 122
@@ -484,7 +484,7 @@
     "path": "curriculum/10-security-and-location/02-oauth-20-and-openid-connect-oidc.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 50,
-    "teaching_words_now": 190,
+    "teaching_words_now": 217,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 180
@@ -494,7 +494,7 @@
     "path": "curriculum/10-security-and-location/03-single-sign-on-sso.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 37,
-    "teaching_words_now": 215,
+    "teaching_words_now": 222,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 236
@@ -504,7 +504,7 @@
     "path": "curriculum/10-security-and-location/04-geohashing-and-quadtrees.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 41,
-    "teaching_words_now": 207,
+    "teaching_words_now": 228,
     "budget": "Clarity expansion approved",
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check",
     "initial_budget": 216
@@ -574,7 +574,7 @@
     "path": "curriculum/01-core-concepts/04-latency-vs-throughput-vs-bandwidth.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 165,
-    "teaching_words_now": 1151,
+    "teaching_words_now": 1143,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -584,7 +584,7 @@
     "path": "curriculum/01-core-concepts/05-reliability.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 170,
-    "teaching_words_now": 549,
+    "teaching_words_now": 543,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -594,7 +594,7 @@
     "path": "curriculum/01-core-concepts/06-spof.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 153,
-    "teaching_words_now": 473,
+    "teaching_words_now": 464,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -604,7 +604,7 @@
     "path": "curriculum/02-networking/06-httphttps.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 181,
-    "teaching_words_now": 544,
+    "teaching_words_now": 538,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -614,7 +614,7 @@
     "path": "curriculum/02-networking/07-checksums.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 165,
-    "teaching_words_now": 488,
+    "teaching_words_now": 481,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -624,7 +624,7 @@
     "path": "curriculum/03-databases/14-bloom-filters.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 183,
-    "teaching_words_now": 571,
+    "teaching_words_now": 566,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -634,7 +634,7 @@
     "path": "curriculum/05-caching/02-caching-strategies.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 175,
-    "teaching_words_now": 561,
+    "teaching_words_now": 556,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -644,7 +644,7 @@
     "path": "curriculum/05-caching/03-cache-eviction-policies.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 172,
-    "teaching_words_now": 532,
+    "teaching_words_now": 528,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -654,7 +654,7 @@
     "path": "curriculum/05-caching/04-distributed-caching.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 183,
-    "teaching_words_now": 542,
+    "teaching_words_now": 534,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -664,7 +664,7 @@
     "path": "curriculum/06-api-fundamentals/01-apis.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 161,
-    "teaching_words_now": 503,
+    "teaching_words_now": 497,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -674,7 +674,7 @@
     "path": "curriculum/06-api-fundamentals/07-webhooks.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 180,
-    "teaching_words_now": 532,
+    "teaching_words_now": 526,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -684,7 +684,7 @@
     "path": "curriculum/06-api-fundamentals/08-api-design.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 176,
-    "teaching_words_now": 494,
+    "teaching_words_now": 491,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -694,7 +694,7 @@
     "path": "curriculum/07-asynchronous-communication/04-change-data-capture-cdc.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 164,
-    "teaching_words_now": 527,
+    "teaching_words_now": 520,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -704,7 +704,7 @@
     "path": "curriculum/08-architectural-patterns/08-serverless-architecture.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 173,
-    "teaching_words_now": 482,
+    "teaching_words_now": 478,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -714,7 +714,7 @@
     "path": "curriculum/08-architectural-patterns/09-peer-to-peer-p2p-architecture.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 158,
-    "teaching_words_now": 517,
+    "teaching_words_now": 516,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -724,7 +724,7 @@
     "path": "curriculum/09-reliability-and-microservices/02-heartbeats.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 155,
-    "teaching_words_now": 501,
+    "teaching_words_now": 491,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -734,7 +734,7 @@
     "path": "curriculum/09-reliability-and-microservices/06-consensus-algorithms.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 188,
-    "teaching_words_now": 559,
+    "teaching_words_now": 556,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -744,7 +744,7 @@
     "path": "curriculum/09-reliability-and-microservices/07-distributed-locking.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 178,
-    "teaching_words_now": 551,
+    "teaching_words_now": 543,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -754,7 +754,7 @@
     "path": "curriculum/09-reliability-and-microservices/08-gossip-protocol.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 162,
-    "teaching_words_now": 529,
+    "teaching_words_now": 513,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"
@@ -764,7 +764,7 @@
     "path": "curriculum/09-reliability-and-microservices/09-distributed-tracing.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 180,
-    "teaching_words_now": 560,
+    "teaching_words_now": 549,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification",
     "initial_budget": "Approved exception"

@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A balance changed several times, and an auditor asks how it reached 70. Can you reconstruct it? How would rebuilding avoid charging or emailing someone again?
+An account balance is wrong, and auditors ask exactly how it became wrong six months ago. The database contains only today’s total. The team proposes storing every accepted change and rebuilding views, but email must not resend during replay. Which events are durable facts, how is current state derived, and which side effects must stay outside replay?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -11,7 +11,7 @@ A balance changed several times, and an auditor asks how it reached 70. Can you 
 
 Instead of storing just the current state of the data in a domain, use an append-only store to record the full series of actions taken on that data. The store acts as the system of record and can be used to materialize the domain objects.
 
-![event-sourcing](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/event-sourcing/event-sourcing.png)
+![event-sourcing](../../assets/source-diagrams/chapter-III/event-sourcing/event-sourcing.png)
 
 This can simplify tasks in complex domains, by avoiding the need to synchronize the data model and the business domain, while improving performance, scalability, and responsiveness. It can also provide consistency for transactional data, and maintain full audit trails and history that can enable compensating actions.
 

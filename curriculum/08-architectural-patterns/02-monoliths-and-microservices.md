@@ -3,7 +3,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-A shop's catalog team cannot release a small search change without coordinating a billing deployment. Catalog traffic also grows faster than checkout. Would splitting services solve both problems? What new failures could one order encounter? Which data should each team own?
+Catalog cannot release a search fix without coordinating a full application deploy, and its traffic grows ten times faster than billing. Leadership orders fifty microservices by Friday. What boundary would actually improve ownership or scaling, which data belongs behind it, and what new partial failures appear when one order crosses payment and inventory?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
@@ -13,7 +13,7 @@ A shop's catalog team cannot release a small search change without coordinating 
 
 A monolith is a self-contained and independent application. It is built as a single unit and is responsible for not just a particular task, but can perform every step needed to satisfy a business need.
 
-![monolith](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/monoliths-microservices/monolith.png)
+![monolith](../../assets/source-diagrams/chapter-III/monoliths-microservices/monolith.png)
 
 ### Advantages
 
@@ -45,7 +45,7 @@ This approach reduces the dependencies of a module in such as way that we can en
 
 A microservices architecture consists of a collection of small, autonomous services where each service is self-contained and should implement a single business capability within a bounded context. A bounded context is a natural division of business logic that provides an explicit boundary within which a domain model exists.
 
-![microservices](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/monoliths-microservices/microservices.png)
+![microservices](../../assets/source-diagrams/chapter-III/monoliths-microservices/microservices.png)
 
 Each service has a separate codebase, which can be managed by a small development team. Services can be deployed independently and a team can update an existing service without rebuilding and redeploying the entire application.
 
@@ -132,7 +132,7 @@ Service-oriented architecture (SOA) defines a way to make software components re
 
 ## Why you don't need microservices
 
-![architecture-range](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/monoliths-microservices/architecture-range.png)
+![architecture-range](../../assets/source-diagrams/chapter-III/monoliths-microservices/architecture-range.png)
 
 So, you might be wondering, monoliths seem like a bad idea to begin with, why would anyone use that?
 

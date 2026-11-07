@@ -5,7 +5,7 @@
 <!-- BEGIN INQUIRY -->
 ## Try solving this first
 
-Checkout responds quickly but sometimes returns errors. What counts as success? Which measured percentage would show whether the service meets its promise?
+The status page boasts 99.99% uptime, yet checkout was unusable for every customer during the biggest sale because responses took 30 seconds. Leadership says the SLA was met. What user event should be measured, over which window, which target drives engineering, and how much failure can the team spend before risky releases should pause?
 <!-- END INQUIRY -->
 
 <!-- BEGIN ORIGINAL TOPIC -->
