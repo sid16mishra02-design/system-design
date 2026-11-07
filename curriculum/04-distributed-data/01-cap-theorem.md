@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # CAP Theorem
 
@@ -44,12 +46,25 @@ An AP database delivers availability and partition tolerance at the expense of c
 **Example**: [Apache Cassandra](https://cassandra.apache.org), [CouchDB](https://couchdb.apache.org).
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![CAP: a choice during a partition](../../assets/animations/cap-partition.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/cap-partition.md) · [View the still sequence](../../assets/animations/cap-partition-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
-Two replicas cannot communicate. A writes “sold”; B receives a read. B can answer without confirming the latest write, or refuse/wait. CAP availability concerns requests to non-failing nodes during a partition, not monthly uptime.
+During a partition, two replicas cannot communicate. A confirms “sold”; B still has “available.” CAP consistency requires one-copy, real-time behavior, not instantaneous forwarding everywhere. CAP availability requires successful request completion at non-failing nodes; an error does not count.
 
-**Apply:** decide per operation. Preventing double-selling may require refusing some requests until coordination works. Browsing recommendations may accept older results. “Choose two” hides the important question: what happens during the network partition?
+**Apply:** ticket reservations need an authoritative decision preventing duplicate sales. Reject an uncoordinated sale rather than confirm it twice. Recommendations may instead serve older results. Choose per operation during the partition, not two labels for every situation.
 
-Self-check: which response protects the ticket-selling invariant?
+Self-check: what can B safely answer?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

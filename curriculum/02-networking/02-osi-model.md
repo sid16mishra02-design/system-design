@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # OSI Model
 
@@ -64,6 +66,8 @@ A browser cannot load your product page. Instead of blaming “the network,” s
 If the machine cannot reach its network, inspect local connectivity and routing. If a TCP connection cannot open, inspect ports, listeners, and filtering. If TLS verification fails, inspect identity and certificate configuration. If the server returns an HTTP error, inspect the application and its dependencies.
 
 Optimize the slow step you measured: reducing database query time does not repair failed routing, and adding network capacity does not fix incorrect application logic. End-to-end latency can include work at several layers.
+
+IP still operates between IP hosts on one LAN; same-LAN delivery does not remove the network layer.
 
 Self-check: if the server returns HTTP 500, what does that tell you about how far the request traveled?
 

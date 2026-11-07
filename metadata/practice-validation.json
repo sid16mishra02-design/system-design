@@ -1,0 +1,484 @@
+[
+  {
+    "topic": "Vertical vs horizontal scaling",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Larger machine vs more machines."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Check the shared database bottleneck."
+    },
+    "problem_solved": "Choose a capacity change for an overloaded stage without assuming that every shared dependency scales with it.",
+    "design_scenario": "A shop adds application servers while all requests still reach one saturated shared database.",
+    "application_steps": [
+      "Locate the saturated component rather than treating the whole system as one box.",
+      "Compare more resources on that component with distributing its work across instances.",
+      "Trace the shared database path and verify whether it remains the limiting stage after application scaling."
+    ],
+    "decision_or_tradeoff": "A larger instance has practical capacity limits; more instances require suitable work distribution and do not automatically increase shared database capacity.",
+    "needs_animation": false,
+    "animation_reason": "A static larger-machine versus multiple-machines diagram with the shared dependency highlighted is sufficient.",
+    "animations": [],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Concurrency vs parallelism",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Managing overlapping tasks vs executing tasks at the same time."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "One cook can alternate tasks; several cooks can work simultaneously."
+    },
+    "problem_solved": "Distinguish overlapping in-progress tasks from simultaneous execution when trying to remove waiting or add compute capacity.",
+    "design_scenario": "A product page makes independent remote calls; overlapping their waits differs from running CPU work on several cores.",
+    "application_steps": [
+      "Identify which tasks are independent and which depend on earlier results.",
+      "Overlap independent remote waits where appropriate, while bounding in-flight work.",
+      "For CPU work, determine whether simultaneous execution and available cores actually provide extra capacity.",
+      "Measure the critical path and throughput instead of equating more in-progress requests with faster completion."
+    ],
+    "decision_or_tradeoff": "Concurrency can hide waiting without adding simultaneous CPU execution; excess in-flight work can overload dependencies.",
+    "needs_animation": true,
+    "animation_reason": "A single-worker interleaving timeline versus multiple workers executing simultaneously exposes the distinction clearly.",
+    "animations": [
+      "concurrency-parallelism"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Long polling vs WebSockets",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Repeated waiting requests vs a persistent two-way connection."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Use message direction, frequency, and reconnect behavior to choose."
+    },
+    "problem_solved": "Select an update transport based on interaction direction, frequency, and recovery requirements rather than a universal faster/slower label.",
+    "design_scenario": "A frequently interactive editor exchanges updates both ways, while another client can use repeated held requests.",
+    "application_steps": [
+      "State whether messages travel one way or both ways and how frequently they are expected.",
+      "Compare a held request that is renewed after each response with a persistent two-way connection.",
+      "Define what happens after disconnection, including backoff and recovering missed updates.",
+      "Measure active connections, delivery delay, and buffer use."
+    ],
+    "decision_or_tradeoff": "Persistent communication avoids repeated request cycles but adds connection lifecycle and buffering responsibilities; neither transport supplies durable history automatically.",
+    "needs_animation": true,
+    "animation_reason": "Renewed long-poll requests and persistent bidirectional messages are behaviors over time; the existing real-time communication sequence can illustrate them.",
+    "animations": [
+      "realtime-protocols"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Batch vs stream processing",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Process accumulated records together vs process a continuing flow."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Nightly sales reports favor batches; live fraud signals need timely updates."
+    },
+    "problem_solved": "Choose processing cadence according to the age of data the business can tolerate and the overhead of processing it.",
+    "design_scenario": "A shop produces a nightly sales report and also evaluates time-sensitive fraud signals.",
+    "application_steps": [
+      "Specify the maximum acceptable delay separately for the report and the fraud signal.",
+      "Accumulate suitable report records for a batch while processing time-sensitive changes continuously.",
+      "Define replay and progress tracking so restarts do not lose or double-apply changes.",
+      "Measure waiting introduced by batching together with downstream freshness and processing cost."
+    ],
+    "decision_or_tradeoff": "Larger batches can amortize processing overhead but delay results; continuous processing favors freshness while requiring ongoing progress and failure management.",
+    "needs_animation": true,
+    "animation_reason": "Show identical arriving records waiting for a batch boundary versus entering continuous processing; CDC/replay timing provides a related existing sequence.",
+    "animations": [
+      "batch-stream"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Stateful vs stateless design",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Requests depend on server-local session state vs portable request context."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "With an external session store, another app server can handle the next request."
+    },
+    "problem_solved": "Avoid making a user's next request depend on the same application instance remaining available.",
+    "design_scenario": "A load balancer routes consecutive shopping-session requests to different application servers.",
+    "application_steps": [
+      "Identify session information that exists only in one application process.",
+      "Make required request context portable or place shared session data in a deliberately designed external store.",
+      "Route the next request to another instance and verify authorization and session behavior.",
+      "Account for availability, freshness, and access costs of the shared state dependency."
+    ],
+    "decision_or_tradeoff": "Stateless application instances simplify replacement and routing, but the system still has durable business state and may depend on shared session infrastructure.",
+    "needs_animation": true,
+    "animation_reason": "Route the same session first to A and then B, contrasting missing local memory with a shared store; the failure occurs between requests.",
+    "animations": [
+      "load-balancer"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Strong vs eventual consistency",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Reads reflect completed writes vs replicas converge after writes stop and communication recovers."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Profile display may tolerate lag; stock reservation needs an explicit correctness rule."
+    },
+    "problem_solved": "Choose observable data guarantees per operation while defining whether temporary stale reads are acceptable.",
+    "design_scenario": "A profile display may show an older value, while reserving the last ticket must preserve the no-duplicate-sale invariant.",
+    "application_steps": [
+      "State the operation's correctness invariant and acceptable staleness.",
+      "Allow profile reads to use lagging replicas only within the product's policy.",
+      "Require an authoritative reservation decision before confirming a sale; define failure behavior when coordination is unavailable.",
+      "For eventual behavior, state the convergence assumptions: writes stop, communication recovers, and the replication/reconciliation mechanism can complete."
+    ],
+    "decision_or_tradeoff": "Serving stale values can preserve useful access with less coordination; stronger read guarantees may require waiting or rejecting requests. Eventual consistency requires convergence under its assumptions, not permanent arbitrary staleness.",
+    "needs_animation": true,
+    "animation_reason": "Show a completed write, a lagging read, and later convergence; contrast with a partition that prevents an authoritative reservation decision.",
+    "animations": [
+      "replication",
+      "cap-partition"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Read-through vs write-through cache",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "The cache loads missed reads vs the cache layer persists writes synchronously."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "A product cache can load read misses and synchronously persist writes; these policies can be combined."
+    },
+    "problem_solved": "Assign cache loading and persistence responsibilities without mistaking complementary read and write policies for mutually exclusive designs.",
+    "design_scenario": "A product cache loads a price after a read miss, while a write path persists a later price update synchronously.",
+    "application_steps": [
+      "Trace who loads the backing store when a requested price is absent.",
+      "Separately trace when a write is considered persisted and acknowledged.",
+      "Combine read-through and write-through where the requirements warrant both.",
+      "Define concurrent update, failure, and stale-value behavior rather than assuming the combination guarantees perfect freshness."
+    ],
+    "decision_or_tradeoff": "Read-through moves miss-loading responsibility into a layer; write-through adds synchronous persistence work to writes. They solve different sides of access and may coexist.",
+    "needs_animation": true,
+    "animation_reason": "Separate read-miss arrows from write-and-persist arrows, then overlay both policies in one cache; the existing caching sequence can supply part of this explanation.",
+    "animations": [
+      "read-write-through"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Push vs pull",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Sender initiates delivery vs receiver requests updates."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "A webhook pushes payment news; polling repeatedly asks for it."
+    },
+    "problem_solved": "Decide who initiates update delivery and how to avoid unnecessary requests or unhandled delivery failures.",
+    "design_scenario": "A checkout needs payment status from an independent provider.",
+    "application_steps": [
+      "Compare receiving a provider webhook with periodically requesting status.",
+      "For push, verify the sender and durably accept events before acknowledgement according to the provider contract.",
+      "Handle duplicates and out-of-order events, or define polling frequency and acceptable status delay for pull.",
+      "Measure timely business completion rather than only endpoint response speed."
+    ],
+    "decision_or_tradeoff": "Push can avoid repeated empty polls but requires a reachable and recoverable receiver; pull gives the receiver control over requests while introducing polling load and delay.",
+    "needs_animation": true,
+    "animation_reason": "A provider-initiated webhook compared with repeated receiver-initiated checks makes request ownership and delay visible.",
+    "animations": [
+      "push-pull"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "REST vs RPC",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Resource-oriented interfaces vs calling defined operations."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Use resource reads for products; typed service operations can reserve inventory."
+    },
+    "problem_solved": "Choose an interface model without assuming it supplies the service's business correctness or storage consistency guarantees.",
+    "design_scenario": "A shop exposes product resources to clients and an inventory-reservation operation between cooperating services.",
+    "application_steps": [
+      "Identify whether clients primarily manipulate resources or invoke defined service operations.",
+      "Specify the product-read or reservation contract, including errors, authorization, and retries.",
+      "Keep inventory correctness independent of the interface label and enforce the invariant in the service/data design.",
+      "Measure end-to-end backend work rather than choosing solely from a REST-versus-RPC speed stereotype."
+    ],
+    "decision_or_tradeoff": "Resource semantics and typed operation contracts suit different client and service needs; neither automatically selects a consistency model.",
+    "needs_animation": false,
+    "animation_reason": "A static pair of resource and operation requests, with identical invariant requirements, is sufficient.",
+    "animations": [],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Synchronous vs asynchronous communication",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Caller waits for completion vs completion is decoupled from the initiating call."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Queued email can finish after the order confirmation."
+    },
+    "problem_solved": "Decide which work must finish before responding and which can safely complete later without misrepresenting business state.",
+    "design_scenario": "A shop confirms an order while an email worker sends its receipt later.",
+    "application_steps": [
+      "Specify what order confirmation guarantees and which email work may remain pending.",
+      "Durably record or enqueue the deferred work with recovery for the handoff.",
+      "Acknowledge completion at the appropriate stage and make repeated email jobs safe.",
+      "Monitor queue age and failure recovery instead of treating a fast initial response as proof that email completed."
+    ],
+    "decision_or_tradeoff": "Deferring work can shorten the initiating request but adds lag, queue state, retry handling, and truthful pending-status requirements.",
+    "needs_animation": true,
+    "animation_reason": "Show the order response returning before the email worker completes; queue delivery and acknowledgement sequences make the distinction concrete.",
+    "animations": [
+      "sync-async"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Latency vs throughput",
+    "path": "practice/TRADEOFFS.md",
+    "category": "11-tradeoffs",
+    "fundamental_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "Time for one operation vs operations completed per unit time."
+    },
+    "application_evidence": {
+      "anchor": "system-design-tradeoffs",
+      "quote": "More counters can serve more customers without shortening each individual checkout."
+    },
+    "problem_solved": "Avoid confusing increased total capacity with a shorter wait or execution time for each request.",
+    "design_scenario": "A checkout service adds workers and completes more requests per second, but each successful checkout still takes the same time.",
+    "application_steps": [
+      "Measure per-operation durations and completed operations per interval separately.",
+      "Trace the slow request's critical path before optimizing latency.",
+      "Add capacity or reduce service work where saturation limits throughput.",
+      "Retest under representative load and inspect waiting, tail latency, errors, and the next shared bottleneck."
+    ],
+    "decision_or_tradeoff": "More workers can increase completed requests without shortening individual service time; excessive concurrency can instead increase queuing and tail latency.",
+    "needs_animation": true,
+    "animation_reason": "A moving sequence can keep each customer's service duration constant while changing how many customers finish in the interval.",
+    "animations": [
+      "concurrency-parallelism",
+      "request-latency"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "System Design Interviews",
+    "path": "practice/INTERVIEW-APPROACH.md",
+    "category": "12-interview-method",
+    "fundamental_evidence": {
+      "anchor": "#requirements-clarifications",
+      "quote": "Asking questions about the exact scope of the problem, and clarifying functional requirements early in the interview is essential."
+    },
+    "problem_solved": "Turns an ambiguous design prompt into explicit scope, measurable requirements, defensible architecture, and a reasoned discussion of bottlenecks and failures.",
+    "design_scenario": "A practice design contains a 200 ms read whose repeated database queries consume 150 ms, so the candidate must justify an optimization rather than add unrelated components.",
+    "application_evidence": {
+      "anchor": "#turn-an-optimization-into-an-argument",
+      "quote": "Suppose a read currently takes 200 ms, with 150 ms spent on repeated database queries. Say what you would measure, propose caching or a query improvement, then explain freshness or write costs."
+    },
+    "application_steps": [
+      "Clarify scope, functional behavior, scale, latency, availability, and failure assumptions.",
+      "Estimate with units, define interfaces and data, then draw a complete request path.",
+      "Identify one observed bottleneck, propose a change, explain its new costs and failure modes, and compare the same workload before and after."
+    ],
+    "decision_or_tradeoff": "Optimize a demonstrated bottleneck with explicit freshness, write, or failure costs; a queue does not automatically shorten a synchronous database query.",
+    "needs_animation": false,
+    "animation_reason": "The structured method, timing guide, worked bottleneck example, and worksheet are adequately expressed as static steps; there is no system-state race that requires animation.",
+    "animations": [],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "URL Shortener",
+    "path": "practice/url-shortener.md",
+    "category": "13-system-designs",
+    "fundamental_evidence": {
+      "anchor": "#what-is-a-url-shortener",
+      "quote": "A URL shortener service creates an alias or a short URL for a long URL."
+    },
+    "problem_solved": "Creates unique short aliases and serves high-volume redirects while preserving update, deletion, and abuse rules.",
+    "design_scenario": "A campaign makes one link viral while a 20,000-redirects/second workload has a 95% cache hit rate; the link owner may later disable that link.",
+    "application_evidence": {
+      "anchor": "#optimize-the-bottleneck-you-measured",
+      "quote": "Under these simplified assumptions, database reads fall to about `20,000 \u00d7 0.05 = 1,000/second`."
+    },
+    "application_steps": [
+      "Create a mapping while enforcing short-code uniqueness in authoritative storage; retry generation after collisions.",
+      "Trace redirect service, cached mapping, database miss, and destination response, keeping acceptable delayed analytics off the critical path.",
+      "Measure miss load and viral-key behavior, coalesce simultaneous reloads, and enforce expiry or invalidation needed for edits and disabled links."
+    ],
+    "decision_or_tradeoff": "Local and shared caches reduce redirect and database work but create stale copies; long cache lifetimes can conflict with disabling or editing a link.",
+    "needs_animation": true,
+    "animation_reason": "Show cache hit and miss request paths, asynchronous analytics, and a disabled viral mapping remaining cached; this connects optimization to full request flow and invalidation correctness.",
+    "animations": [
+      "case-url-shortener"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "WhatsApp",
+    "path": "practice/whatsapp.md",
+    "category": "13-system-designs",
+    "fundamental_evidence": {
+      "anchor": "#follow-one-message",
+      "quote": "If the recipient is offline, retain the message for later retrieval."
+    },
+    "problem_solved": "Provides durable messaging across intermittent connections with explicit accepted, delivered, and read meanings, safe retries, and scalable recipient routing.",
+    "design_scenario": "A recipient disconnects after message 41 but before acknowledgement, reconnects through another server, and must resume without duplicate visible messages.",
+    "application_evidence": {
+      "anchor": "#test-ordering-and-failure",
+      "quote": "Pause a worker after it records a message but before it acknowledges processing. On restart, verify that redelivery does not create a second visible message."
+    },
+    "application_steps": [
+      "Record the message durably before acknowledging the chosen acceptance guarantee, and retain offline-recipient work.",
+      "Route to the server holding the current recipient connection, while handling stale connection-location information and reconnects.",
+      "Reuse stable message identifiers and enforce deduplication at the durable write, define ordering per conversation, and measure fanout attempts and backlog age."
+    ],
+    "decision_or_tradeoff": "Queueing absorbs bursts but does not add unlimited delivery capacity; conversation-scoped ordering permits parallel chats while global ordering adds coordination and a hot group can dominate work.",
+    "needs_animation": true,
+    "animation_reason": "Animate accepted versus delivered states, offline storage, lost acknowledgement, repeated delivery, and reconnect to a new connection server so duplicate handling is part of the whole message flow.",
+    "animations": [
+      "case-whatsapp"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Twitter",
+    "path": "practice/twitter.md",
+    "category": "13-system-designs",
+    "fundamental_evidence": {
+      "anchor": "#follow-one-post-and-one-feed-read",
+      "quote": "On a write, store the post durably, then distribute references to the followers' timelines if using precomputed feeds."
+    },
+    "problem_solved": "Delivers follower feeds with an explicit balance between publication fanout cost, read latency, freshness, and visibility enforcement.",
+    "design_scenario": "A chronological feed receives 1,000 posts/second with 300 followers per post, while a celebrity post creates a much larger fanout burst and some distribution workers lag.",
+    "application_evidence": {
+      "anchor": "#optimize-the-measured-bottleneck",
+      "quote": "One option is a mixed strategy: distribute ordinary authors' posts ahead of time, while merging very large authors' posts when a follower reads the feed."
+    },
+    "application_steps": [
+      "Store each post durably and decide whether follower timelines are precomputed references or assembled on reads.",
+      "Estimate timeline insertions per post and compare ordinary versus celebrity workloads before choosing a mixed fanout strategy.",
+      "Paginate and cache with correct visibility context, monitor post-to-feed lag, and enforce deletion or privacy rules even when old references remain."
+    ],
+    "decision_or_tradeoff": "Precomputed feeds make reads cheaper but amplify writes and lag; merging large authors at read time reduces massive write bursts while making reads perform additional work.",
+    "needs_animation": true,
+    "animation_reason": "Show publication, queued timeline fanout, delayed projection, and a follower read that merges a large-author path; then show why a deleted post reference must not expose content.",
+    "animations": [
+      "case-twitter"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Netflix",
+    "path": "practice/netflix.md",
+    "category": "13-system-designs",
+    "fundamental_evidence": {
+      "anchor": "#follow-upload-and-playback-separately",
+      "quote": "A rendition is one encoded version, such as a particular resolution and bitrate."
+    },
+    "problem_solved": "Prepares durable video variants and serves repeated media segments efficiently without placing encoding or large media transfers on the playback API path.",
+    "design_scenario": "A new title launches into cold regional caches while 2,000 concurrent viewers request roughly 4 megabits/second each.",
+    "application_evidence": {
+      "anchor": "#optimize-the-measured-bottleneck",
+      "quote": "Cache reusable segments near viewers through a CDN. A warm popular segment can serve many viewers without each request reaching origin storage."
+    },
+    "application_steps": [
+      "Store an upload and generate renditions in retry-safe background jobs; publish usable manifests only when required outputs are ready.",
+      "Trace playback manifest and media-segment requests separately from login and application APIs.",
+      "Use regionally reusable segments and appropriate cache keys, choose renditions for device and network conditions, and measure startup delay, buffering, quality, and origin traffic under cold caches."
+    ],
+    "decision_or_tradeoff": "More renditions improve adaptation while increasing encoding and storage; lower bitrates can reduce buffering at a quality cost, and warm-cache success does not establish cold-launch origin capacity.",
+    "needs_animation": true,
+    "animation_reason": "Animate upload-to-rendition preparation independently of manifest/segment playback, with CDN hits and cold misses; show that adding login servers does not remove media bandwidth demand.",
+    "animations": [
+      "case-netflix"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  },
+  {
+    "topic": "Uber",
+    "path": "practice/uber.md",
+    "category": "13-system-designs",
+    "fundamental_evidence": {
+      "anchor": "#follow-location-and-assignment-separately",
+      "quote": "Candidate discovery does not reserve a driver."
+    },
+    "problem_solved": "Finds suitably fresh nearby candidates and assigns a limited driver resource without letting simultaneous requests create conflicting assignments.",
+    "design_scenario": "Two passengers discover the same driver while location reports may be delayed, and a 100,000-driver fleet changes reporting frequency from five seconds to one second.",
+    "application_evidence": {
+      "anchor": "#protect-correctness-while-scaling",
+      "quote": "Use an atomic conditional update or another explicit coordination mechanism to move a driver from available to assigned."
+    },
+    "application_steps": [
+      "Index observed driver locations with timestamps and query neighboring spatial cells before checking exact distance and freshness.",
+      "Apply a conditional available-to-assigned transition to the selected candidate; if it fails, choose another candidate rather than trust the earlier search.",
+      "Tune update intervals and partitioning against observed movement, freshness needs, hotspot load, and matching latency; rehearse delayed updates and assignment timeouts."
+    ],
+    "decision_or_tradeoff": "Fresher updates increase bandwidth and write load; finer cells or partitions reduce some candidate work but add lookups and boundary coordination, and approximate discovery cannot replace authoritative assignment.",
+    "needs_animation": true,
+    "animation_reason": "Animate location update, neighboring-cell discovery, two simultaneous passenger selections, and the atomic assignment where only one wins; include stale locations and retrying another candidate.",
+    "animations": [
+      "case-uber"
+    ],
+    "validated_on": "2026-11-07",
+    "status": "Reviewed; definition and application evidenced"
+  }
+]

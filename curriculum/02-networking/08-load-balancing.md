@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Load Balancing
 
@@ -116,6 +118,19 @@ Following are some of the load balancing solutions commonly used in the industry
 - [HAProxy](http://www.haproxy.org)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Scale a service without losing sessions](../../assets/animations/load-balancer.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/load-balancer.md) · [View the still sequence](../../assets/animations/load-balancer-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: spread checkout requests
@@ -131,6 +146,8 @@ Use readiness checks that reflect whether an instance can accept traffic. When r
 Move shared session state to an appropriate store, or use a suitable stateless session design, when requests must move freely between instances. Sticky routing can reduce immediate disruption but does not make an instance's memory durable.
 
 Watch latency, errors, and load distribution per instance. Uneven traffic may come from long-lived connections or expensive requests, not just a poor balancing algorithm. Investigate the shared database before assuming another application instance will help.
+
+Basic DNS rotation alone has no health knowledge. Managed DNS routing can incorporate health checks, but cached answers and existing connections can delay failover. Check the actual routing policy. Layer 4 means transport-aware routing, not OSI network layer 3.
 
 Self-check: what happens to an in-flight purchase when its selected server disappears?
 

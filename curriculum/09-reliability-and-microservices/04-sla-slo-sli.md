@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # SLA, SLO, SLI
 
@@ -30,7 +32,7 @@ An SLI, or Service Level Indicator, is a key metric used to determine whether or
 
 SLI: measured successful-request percentage. SLO: your target, such as 99.9%. SLA: an agreement that may specify consequences.
 
-For checkout, define success and a latency threshold before counting requests. A fast error is not a successful purchase. Track user-visible failures and latency; improve the largest causes rather than optimizing an already fast component. An error budget helps decide whether more reliability work is needed.
+For checkout, define success and a latency threshold before counting requests. A fast error is not a successful purchase. Track user-visible failures and latency; improve the largest causes rather than optimizing an already fast component. An error budget is the permitted failure allowance within a measurement window.
 
 **Check:** which slow responses count as failures?
 

@@ -40,6 +40,19 @@ Sampling means keeping a subset of traces. A small uniform sample reduces volume
 
 Trace a deliberately slow test request across every expected boundary. Check for missing spans and broken parent relationships. Measure instrumentation overhead and confirm you can connect a slow request to relevant metrics and logs before relying on the system during an incident.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Find the slow part of a request](../../assets/animations/request-latency.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/request-latency.md) · [View the still sequence](../../assets/animations/request-latency-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://www.dynatrace.com/news/blog/what-is-distributed-tracing/)

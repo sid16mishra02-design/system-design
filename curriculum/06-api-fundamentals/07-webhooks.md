@@ -41,6 +41,19 @@ Verify signatures against the provider's specified representation, often the ori
 
 Test duplicate, reordered, invalidly signed, delayed, and crash-interrupted events. Measure acceptance latency separately from time until the business update completes, and monitor the oldest unprocessed event.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![A lost response must not mean two charges](../../assets/animations/idempotency.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/idempotency.md) · [View the still sequence](../../assets/animations/idempotency-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/webhooks)

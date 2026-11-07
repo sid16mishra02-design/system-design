@@ -43,6 +43,19 @@ The database recovery module can select one of the two operations after a transa
 If there isn't any roll-back or the transaction comes from the _committed state_, then the system is consistent and ready for a new transaction and the old transaction is terminated.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Two buyers, one remaining ticket](../../assets/animations/atomic-stock.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/atomic-stock.md) · [View the still sequence](../../assets/animations/atomic-stock-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: sell the last ticket once

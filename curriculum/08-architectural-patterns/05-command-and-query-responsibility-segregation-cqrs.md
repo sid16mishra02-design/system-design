@@ -46,6 +46,19 @@ Here are some scenarios where CQRS will be helpful:
 - Better security to ensure that only the right domain entities are performing writes on the data.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![CQRS: a read view can lag behind a write](../../assets/animations/cqrs.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/cqrs.md) · [View the still sequence](../../assets/animations/cqrs-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Different models for changing and reading

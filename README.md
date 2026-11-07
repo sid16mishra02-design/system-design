@@ -39,6 +39,10 @@ The 57 course and case-study lessons are reproduced directly on their reading pa
 
 The original topics retain 100% of their text. Added teaching guidance stays within 30% of each original topic's word count. The 20 new standalone lessons use the specifically approved exception to that addition limit. See the [content audit](CONTENT-AUDIT.md).
 
+## Validated topics and visual explanations
+
+See the [category × topic audit](TOPIC-VALIDATION.md) for each concept's problem, design scenario, application steps, tradeoff, and evidence in the lesson. Confusing sequences have [animated walkthroughs](animations/README.md), with still images and numbered text alternatives.
+
 ## Applied depth
 
 All 71 fundamentals and the six design/method readings have been reviewed for practical use and improvement guidance. See the [depth review](DEPTH-REVIEW.md) for coverage. Work through an optimization by stating the bottleneck, proposed change, cost, failure behavior, and measurement.

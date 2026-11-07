@@ -136,6 +136,74 @@ for entry in depth_review:
     check(entry['teaching_words_now'] == expected_counts.get(entry['topic']),
           f'Depth-review count mismatch: {entry["topic"]}')
 
+# The editorial audit is backed by exact quotes within real heading sections.
+topic_review = json.loads((ROOT/'metadata/topic-validation.json').read_text(encoding='utf-8'))
+practice_review = json.loads((ROOT/'metadata/practice-validation.json').read_text(encoding='utf-8'))
+animations = json.loads((ROOT/'metadata/animations.json').read_text(encoding='utf-8'))
+animation_by_id = {x['id']: x for x in animations}
+check(len(topic_review) == len(topics) and {x['topic'] for x in topic_review} == {x['title'] for x in topics},
+      'Category/topic audit must cover each foundational topic exactly once')
+expected_practice={x['comparison'] for x in comparisons} | cases | {'System Design Interviews'}
+check(len(practice_review)==17 and {x['topic'] for x in practice_review}==expected_practice,
+      'Practice audit must cover eleven comparisons, interview method, and five designs')
+check(len({x['category'] for x in topic_review+practice_review})==13,'Expected coverage of all thirteen categories')
+
+
+def evidence_section(text, anchor):
+    headings=[]
+    in_code=False
+    used=set()
+    offset=0
+    for line in text.splitlines(keepends=True):
+        if re.match(r'^\s*(```|~~~)', line):
+            in_code=not in_code
+        if not in_code:
+            match=re.match(r'^(#{1,6})\s+(.+?)\s*#*\s*$',line)
+            if match:
+                label=re.sub(r'\[([^]]+)\]\([^)]*\)',r'\1',match[2])
+                base=re.sub(r'[^\w\- ]','',label.lower()).replace(' ','-')
+                candidate=base
+                number=0
+                while candidate in used:
+                    number+=1;candidate=f'{base}-{number}'
+                used.add(candidate)
+                headings.append((offset,len(match[1]),candidate))
+        offset+=len(line)
+    for i,(start,level,name) in enumerate(headings):
+        if name==anchor:
+            stop=next((p for p,depth,_ in headings[i+1:] if depth<=level),len(text))
+            return text[start:stop]
+    return ''
+
+
+for entry in topic_review+practice_review:
+    text=(ROOT/entry['path']).read_text(encoding='utf-8')
+    for key in ['fundamental_evidence','application_evidence']:
+        evidence=entry[key]
+        section=evidence_section(text,evidence['anchor'].lstrip('#'))
+        check(bool(section) and evidence['quote'] in section,
+              f'{key} is not grounded at its heading: {entry["topic"]}')
+    check(bool(entry['problem_solved']) and bool(entry['design_scenario']) and len(entry['application_steps'])>=2,
+          f'Incomplete application audit: {entry["topic"]}')
+    check(not entry['needs_animation'] or bool(entry['animations']),f'Missing recommended animation: {entry["topic"]}')
+    for key in entry['animations']:
+        check(key in animation_by_id and entry['topic'] in animation_by_id[key]['topics'],
+              f'Animation is not associated with this topic: {entry["topic"]}')
+        if key in animation_by_id:
+            target=os.path.relpath(ROOT/animation_by_id[key]['gif'],(ROOT/entry['path']).parent).replace('\\','/')
+            # Main or related walkthrough is reachable from this lesson.
+            check(target in text or f'animations/{key}.md' in text,f'Walkthrough not linked: {entry["topic"]}')
+
+for entry in animations:
+    for field,hash_field in [('gif','gif_sha256'),('static','static_sha256')]:
+        path=ROOT/entry[field]
+        check(path.is_file() and hashlib.sha256(path.read_bytes()).hexdigest()==entry[hash_field],
+              f'Animation asset missing or changed: {entry[field]}')
+    check(entry['encoded_frame_count']>1 and entry['duration_ms']>0,f'Static file mislabeled as animation: {entry["id"]}')
+    check(entry['caption_words']==sum(words(s['caption']) for s in entry['steps']),f'Caption accounting mismatch: {entry["id"]}')
+    transcript=(ROOT/'animations'/f'{entry["id"]}.md').read_text(encoding='utf-8')
+    check(all(s['caption'] in transcript for s in entry['steps']),f'Missing text alternative: {entry["id"]}')
+
 # Source archives can remain for provenance, but are not required reading.
 for entry in topics:
     text = (ROOT/entry['path']).read_text(encoding='utf-8')
@@ -177,4 +245,5 @@ if errors:
     sys.exit(1)
 print(f'PASS: {len(manifest["files"])} unchanged source files; {len(audit)} verbatim inline readings and topic budgets; '
       f'{len(new_lessons)} original lessons; {len(topics)} local scheduled concepts; 154 daily rows; {link_count} local links.')
+print(f'PASS: {len(topic_review)} topic + {len(practice_review)} practice/comparison evidence reviews across 13 categories; {len(animations)} animation/still/text sets.')
 print('External resource access is not guaranteed; original source links are preserved.')

@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # OAuth 2.0 and OpenID Connect (OIDC)
 
@@ -56,18 +58,33 @@ The OpenID Connect (OIDC) protocol defines the following entities:
 Both OAuth 2.0 and OIDC are easy to implement and are JSON based, which is supported by most web and mobile applications. However, the OpenID Connect (OIDC) specification is more strict than that of basic OAuth.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![OAuth / OIDC: code, tokens, and audiences](../../assets/animations/oauth-oidc.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/oauth-oidc.md) · [View the still sequence](../../assets/animations/oauth-oidc-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Separate delegated permission from login identity
 
-A photo-printing app needs permission to read selected photos without receiving the user's password: OAuth authorization. OIDC adds a defined way for a client to learn an authenticated user's identity. An access token is for its intended resource API; an ID token conveys login identity to its intended client.
+A photo-printing app requests limited photo access without receiving the user's password: OAuth authorization. OIDC adds authenticated login identity. Access tokens belong at their intended API; ID tokens identify the user to their intended client. Access tokens need not be JWTs or last one hour; OIDC ID tokens are JWTs.
 
 ### Apply it
 
-For a browser or mobile login flow, use an appropriate standard authorization flow and a maintained implementation instead of inventing token handling. Validate issuer, audience, signature, and relevant token lifetime. Request only needed permissions. The API still checks ownership of the requested photo; a valid token is not permission to read every user's data.
+With an authorization-code flow, redirect the user to the provider, receive a code, and exchange it for tokens. Browser and mobile public clients use PKCE to protect that exchange. PKCE ties redemption to a secret created for that login attempt. Use maintained implementations, not homemade token handling.
 
-Cache provider signing keys according to their rotation behavior instead of fetching them for every request. Plan refresh and logout behavior explicitly; shortening token lifetime changes how often credentials must be renewed, not the meaning of authorization.
+Validate token issuer, audience, signature, and lifetime as applicable to the token's format and contract. Request only needed permissions. The photo API still checks photo ownership; a valid token does not grant access to every user's data.
 
-**Check:** which token would you present to the photo API, and what proves the caller may read this photo?
+Cache signing keys with rotation-aware refresh rather than fetching them per request. Choose token lifetime and refresh behavior against revocation needs.
+
+**Check:** which token belongs at the photo API, and who checks photo ownership?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Message Queues
 
@@ -83,6 +85,19 @@ Following are some widely used message queues:
 - [ZeroMQ](https://zeromq.org)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![A work queue can redeliver a job](../../assets/animations/work-queue.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/work-queue.md) · [View the still sequence](../../assets/animations/work-queue-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Smooth an uneven workload
@@ -99,11 +114,13 @@ flowchart LR
 
 ### Apply and improve it
 
-Give each job a stable identifier and deterministic output key. A repeated job should not create conflicting results. Acknowledge after durable completion, with the failure and retry behavior explicitly defined. A timeout or visibility lease should match realistic processing time and support renewal where required.
+Give each job a stable identifier and deterministic output key. Repeated jobs must be safe. Acknowledge after durable completion, with the failure and retry behavior explicitly defined. A timeout or visibility lease should match realistic processing time and support renewal where required.
 
 Increase worker count only while the downstream image store and database have capacity. More consumers can otherwise increase failures. Batch cheap operations when worthwhile, bound retries, and isolate repeatedly failing jobs for investigation instead of cycling them forever.
 
 Watch oldest-job age and processing rate. A queue absorbs a burst; it cannot make a permanently overloaded system catch up.
+
+At-least-once delivery permits repeats: one worker per delivery does not mean one lifetime execution.
 
 **Check:** if arrival rate stays above completion rate, what happens to waiting time?
 

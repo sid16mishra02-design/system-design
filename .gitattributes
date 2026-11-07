@@ -3,3 +3,5 @@ sources/** -text
 *.png binary
 *.jpg binary
 *.svg -text
+
+*.gif binary

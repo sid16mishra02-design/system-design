@@ -63,6 +63,19 @@ The same idea applies to asynchronous systems. Since message brokers usually gua
 Idempotency is not free. We need extra storage and lookups for keys, and additional logic to handle concurrent and in-flight requests. It is also worth remembering that _exactly-once_ processing is generally not achievable across a network, but _at-least-once_ delivery combined with idempotent processing gives us the same observable result, which is called _effectively-once_ processing.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![A lost response must not mean two charges](../../assets/animations/idempotency.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/idempotency.md) · [View the still sequence](../../assets/animations/idempotency-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Why retries need a business rule

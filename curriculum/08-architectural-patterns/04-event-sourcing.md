@@ -33,6 +33,19 @@ Following are the disadvantages of event sourcing:
 - Different events will contain different payloads.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Event sourcing: replay builds state](../../assets/animations/event-sourcing.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/event-sourcing.md) · [View the still sequence](../../assets/animations/event-sourcing-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Rebuild state from business history

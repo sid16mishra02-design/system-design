@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Sharding
 
@@ -82,6 +84,19 @@ Here are some reasons why sharding might be the right choice:
 - When more concurrent connections are required.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Sharding divides ownership of data](../../assets/animations/sharding.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/sharding.md) · [View the still sequence](../../assets/animations/sharding-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: divide a growing customer dataset
@@ -95,6 +110,8 @@ Partitioning divides data into parts; those parts may remain inside one database
 Choose a shard key from frequent queries and traffic. A customer identifier can keep one customer's orders together. A query across every customer may then need multiple shards and a merge step.
 
 Measure request distribution and data size per shard. Equal customer counts do not guarantee balanced load: one celebrity can attract half the requests. Plan key movement, growth, and cross-shard operations before running out of capacity. A better index or query may solve an immediate bottleneck with much less complexity.
+
+Sharding alone does not provide redundancy: losing an unreplicated shard loses access to its keys. Choose non-overlapping bounds that cover every allowed key.
 
 Self-check: which request can be routed to one shard directly, and which must contact several?
 

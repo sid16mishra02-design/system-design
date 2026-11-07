@@ -38,6 +38,19 @@ mTLS helps ensure that the traffic is secure and trusted in both directions betw
 Nowadays, mTLS is commonly used by microservices or distributed systems in a [zero trust security model](https://en.wikipedia.org/wiki/Zero_trust_security_model) to verify each other.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![TLS identity is separate from authorization](../../assets/animations/tls-mtls.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/tls-mtls.md) · [View the still sequence](../../assets/animations/tls-mtls-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Protect a connection and verify identities

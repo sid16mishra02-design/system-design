@@ -40,6 +40,19 @@ Below are some disadvantages of federated databases:
 - Query performance and scalability.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Sharding divides ownership of data](../../assets/animations/sharding.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/sharding.md) · [View the still sequence](../../assets/animations/sharding-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 Use separate databases for billing and catalog when those domains need independent ownership or scaling. Federation separates by function; sharding divides a dataset by a key.

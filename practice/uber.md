@@ -38,6 +38,19 @@ For a busy city center, equal geographic partitions may carry very unequal traff
 
 **Exercise:** delay a driver's location updates while allowing assignment traffic through. Explain which candidates you discard as too old, what happens when no acceptable candidate remains, and how a driver becomes available again after an assignment times out. Measure match latency, unsuccessful assignments, and location age together.
 
+<!-- BEGIN ANIMATION -->
+## Watch the design in action
+
+<details>
+<summary>Open the looping request-flow animation</summary>
+
+![Design example: near a rider does not mean available](../assets/animations/case-uber.gif)
+
+</details>
+
+[Read the numbered steps](../animations/case-uber.md) · [View the still sequence](../assets/animations/case-uber-steps.png)
+<!-- END ANIMATION -->
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

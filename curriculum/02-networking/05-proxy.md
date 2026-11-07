@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Proxy
 
@@ -71,6 +73,8 @@ A reverse proxy can route `/orders` to order servers, terminate TLS, and apply r
 ### Apply and improve
 
 Measure request duration, connection count, and queueing at the proxy before adding application servers. Set request size and timeout limits deliberately. Use connection reuse to avoid unnecessary setup work. Forward original client information only through a trusted chain; otherwise callers may forge identity-related headers.
+
+An HTTP load balancer can also be a reverse proxy; these roles can overlap.
 
 Self-check: which checks belong at the entry point, and which business permissions must still be checked by the service?
 

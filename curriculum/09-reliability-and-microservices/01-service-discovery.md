@@ -55,6 +55,19 @@ Here are some commonly used service discovery infrastructure tools:
 - [Apache Zookeeper](https://zookeeper.apache.org)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Discovery data can become stale](../../assets/animations/discovery-heartbeat.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/discovery-heartbeat.md) · [View the still sequence](../../assets/animations/discovery-heartbeat-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Find changing service instances

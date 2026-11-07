@@ -57,6 +57,19 @@ Here are some widely used CDNs:
 - [Fastly](https://www.fastly.com/products/cdn)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![CDN: origin miss, then nearby reuse](../../assets/animations/cdn-edge.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/cdn-edge.md) · [View the still sequence](../../assets/animations/cdn-edge-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: serve a popular image near viewers

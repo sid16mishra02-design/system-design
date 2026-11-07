@@ -49,6 +49,19 @@ In this type of disaster recovery, an organization sets up basic infrastructure 
 A hot site maintains up-to-date copies of data at all times. Hot sites are time-consuming to set up and more expensive than cold sites, but they dramatically reduce downtime.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Recovery time and data-loss targets differ](../../assets/animations/recovery-objectives.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/recovery-objectives.md) · [View the still sequence](../../assets/animations/recovery-objectives-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Test recovery, not just backup creation

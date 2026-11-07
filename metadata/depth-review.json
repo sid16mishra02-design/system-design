@@ -13,7 +13,7 @@
     "path": "curriculum/01-core-concepts/02-scalability.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 32,
-    "teaching_words_now": 35,
+    "teaching_words_now": 32,
     "budget": 50,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -22,7 +22,7 @@
     "path": "curriculum/01-core-concepts/03-availability.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 41,
-    "teaching_words_now": 123,
+    "teaching_words_now": 132,
     "budget": 133,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -40,7 +40,7 @@
     "path": "curriculum/02-networking/02-osi-model.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 61,
-    "teaching_words_now": 157,
+    "teaching_words_now": 174,
     "budget": 200,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -49,7 +49,7 @@
     "path": "curriculum/02-networking/03-tcp-and-udp.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 49,
-    "teaching_words_now": 103,
+    "teaching_words_now": 100,
     "budget": 104,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -58,7 +58,7 @@
     "path": "curriculum/02-networking/04-domain-name-system-dns.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 50,
-    "teaching_words_now": 192,
+    "teaching_words_now": 211,
     "budget": 504,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -67,7 +67,7 @@
     "path": "curriculum/02-networking/05-proxy.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 34,
-    "teaching_words_now": 124,
+    "teaching_words_now": 138,
     "budget": 141,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -76,7 +76,7 @@
     "path": "curriculum/02-networking/08-load-balancing.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 50,
-    "teaching_words_now": 197,
+    "teaching_words_now": 236,
     "budget": 339,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -130,7 +130,7 @@
     "path": "curriculum/03-databases/05-sql-vs-nosql-databases.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 43,
-    "teaching_words_now": 103,
+    "teaching_words_now": 119,
     "budget": 125,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -148,7 +148,7 @@
     "path": "curriculum/03-databases/07-normalization-and-denormalization.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 51,
-    "teaching_words_now": 181,
+    "teaching_words_now": 270,
     "budget": 303,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -166,7 +166,7 @@
     "path": "curriculum/03-databases/09-acid-and-base-consistency-models.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 49,
-    "teaching_words_now": 119,
+    "teaching_words_now": 134,
     "budget": 135,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -184,7 +184,7 @@
     "path": "curriculum/03-databases/11-sharding.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 81,
-    "teaching_words_now": 173,
+    "teaching_words_now": 196,
     "budget": 222,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -193,7 +193,7 @@
     "path": "curriculum/03-databases/12-consistent-hashing.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 53,
-    "teaching_words_now": 190,
+    "teaching_words_now": 209,
     "budget": 279,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -211,7 +211,7 @@
     "path": "curriculum/04-distributed-data/01-cap-theorem.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 77,
-    "teaching_words_now": 74,
+    "teaching_words_now": 81,
     "budget": 115,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -301,7 +301,7 @@
     "path": "curriculum/07-asynchronous-communication/01-message-brokers.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 44,
-    "teaching_words_now": 123,
+    "teaching_words_now": 137,
     "budget": 140,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -310,7 +310,7 @@
     "path": "curriculum/07-asynchronous-communication/02-message-queues.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 73,
-    "teaching_words_now": 185,
+    "teaching_words_now": 196,
     "budget": 225,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -319,7 +319,7 @@
     "path": "curriculum/07-asynchronous-communication/03-publish-subscribe.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 62,
-    "teaching_words_now": 160,
+    "teaching_words_now": 175,
     "budget": 181,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -409,7 +409,7 @@
     "path": "curriculum/09-reliability-and-microservices/04-sla-slo-sli.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 33,
-    "teaching_words_now": 77,
+    "teaching_words_now": 78,
     "budget": 80,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -436,7 +436,7 @@
     "path": "curriculum/10-security-and-location/02-oauth-20-and-openid-connect-oidc.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 50,
-    "teaching_words_now": 167,
+    "teaching_words_now": 176,
     "budget": 180,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -472,7 +472,7 @@
     "path": "practice/url-shortener.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 153,
-    "teaching_words_now": 532,
+    "teaching_words_now": 577,
     "budget": 774,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -481,7 +481,7 @@
     "path": "practice/whatsapp.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 152,
-    "teaching_words_now": 549,
+    "teaching_words_now": 593,
     "budget": 876,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -490,7 +490,7 @@
     "path": "practice/twitter.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 152,
-    "teaching_words_now": 553,
+    "teaching_words_now": 599,
     "budget": 898,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -499,7 +499,7 @@
     "path": "practice/netflix.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 152,
-    "teaching_words_now": 553,
+    "teaching_words_now": 597,
     "budget": 934,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -508,7 +508,7 @@
     "path": "practice/uber.md",
     "kind": "Preserved course with independent applied guidance",
     "teaching_words_before": 152,
-    "teaching_words_now": 550,
+    "teaching_words_now": 596,
     "budget": 917,
     "reviewed_for": "use case, application or optimization, tradeoff/failure, and a concrete check"
   },
@@ -517,7 +517,7 @@
     "path": "curriculum/01-core-concepts/04-latency-vs-throughput-vs-bandwidth.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 165,
-    "teaching_words_now": 1047,
+    "teaching_words_now": 1088,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -526,7 +526,7 @@
     "path": "curriculum/01-core-concepts/05-reliability.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 170,
-    "teaching_words_now": 434,
+    "teaching_words_now": 487,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -544,7 +544,7 @@
     "path": "curriculum/02-networking/06-httphttps.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 181,
-    "teaching_words_now": 441,
+    "teaching_words_now": 481,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -562,7 +562,7 @@
     "path": "curriculum/03-databases/14-bloom-filters.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 183,
-    "teaching_words_now": 465,
+    "teaching_words_now": 504,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -571,7 +571,7 @@
     "path": "curriculum/05-caching/02-caching-strategies.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 175,
-    "teaching_words_now": 465,
+    "teaching_words_now": 504,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -580,7 +580,7 @@
     "path": "curriculum/05-caching/03-cache-eviction-policies.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 172,
-    "teaching_words_now": 438,
+    "teaching_words_now": 478,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -589,7 +589,7 @@
     "path": "curriculum/05-caching/04-distributed-caching.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 183,
-    "teaching_words_now": 444,
+    "teaching_words_now": 483,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -607,7 +607,7 @@
     "path": "curriculum/06-api-fundamentals/07-webhooks.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 180,
-    "teaching_words_now": 434,
+    "teaching_words_now": 476,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -625,7 +625,7 @@
     "path": "curriculum/07-asynchronous-communication/04-change-data-capture-cdc.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 164,
-    "teaching_words_now": 425,
+    "teaching_words_now": 467,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -643,7 +643,7 @@
     "path": "curriculum/08-architectural-patterns/09-peer-to-peer-p2p-architecture.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 158,
-    "teaching_words_now": 420,
+    "teaching_words_now": 461,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -652,7 +652,7 @@
     "path": "curriculum/09-reliability-and-microservices/02-heartbeats.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 155,
-    "teaching_words_now": 402,
+    "teaching_words_now": 441,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -661,7 +661,7 @@
     "path": "curriculum/09-reliability-and-microservices/06-consensus-algorithms.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 188,
-    "teaching_words_now": 460,
+    "teaching_words_now": 500,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -670,7 +670,7 @@
     "path": "curriculum/09-reliability-and-microservices/07-distributed-locking.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 178,
-    "teaching_words_now": 452,
+    "teaching_words_now": 494,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -679,7 +679,7 @@
     "path": "curriculum/09-reliability-and-microservices/08-gossip-protocol.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 162,
-    "teaching_words_now": 426,
+    "teaching_words_now": 464,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   },
@@ -688,7 +688,7 @@
     "path": "curriculum/09-reliability-and-microservices/09-distributed-tracing.md",
     "kind": "Original expanded lesson",
     "teaching_words_before": 180,
-    "teaching_words_now": 458,
+    "teaching_words_now": 499,
     "budget": "Approved exception",
     "reviewed_for": "use case, worked flow or numbers, optimization and cost, verification"
   }

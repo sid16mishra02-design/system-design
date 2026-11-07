@@ -36,17 +36,17 @@
   },
   {
     "comparison": "Strong vs eventual consistency",
-    "choice": "Latest agreed writes vs potentially stale reads.",
+    "choice": "Reads reflect completed writes vs replicas converge after writes stop and communication recovers.",
     "example": "Profile display may tolerate lag; stock reservation needs an explicit correctness rule.",
     "topic": "CAP Theorem",
-    "words": 23
+    "words": 29
   },
   {
     "comparison": "Read-through vs write-through cache",
     "choice": "The cache loads missed reads vs the cache layer persists writes synchronously.",
-    "example": "These describe different operations and can be combined.",
+    "example": "A product cache can load read misses and synchronously persist writes; these policies can be combined.",
     "topic": "Caching Strategies",
-    "words": 24
+    "words": 32
   },
   {
     "comparison": "Push vs pull",
@@ -58,9 +58,9 @@
   {
     "comparison": "REST vs RPC",
     "choice": "Resource-oriented interfaces vs calling defined operations.",
-    "example": "An interface style does not determine consistency guarantees.",
+    "example": "Use resource reads for products; typed service operations can reserve inventory.",
     "topic": "REST, GraphQL, gRPC",
-    "words": 17
+    "words": 20
   },
   {
     "comparison": "Synchronous vs asynchronous communication",

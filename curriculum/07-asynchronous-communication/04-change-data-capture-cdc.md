@@ -34,6 +34,19 @@ Keep retained-log and replication-slot behavior under observation. Some systems 
 
 Test replay, connector downtime, a large initial snapshot, deletion, schema evolution, and destination failure. Compare downstream freshness, source overhead, retained-log size, and whether restarting produces missing or duplicated business effects.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![CDC: a committed change reaches a read view](../../assets/animations/cdc.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/cdc.md) · [View the still sequence](../../assets/animations/cdc-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/change-data-capture-cdc)

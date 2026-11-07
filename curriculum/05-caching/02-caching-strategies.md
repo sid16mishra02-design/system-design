@@ -43,6 +43,19 @@ Each mechanism adds complexity or cost. A perfectly fresh cache may require enou
 
 Track hit rate, load on the original store, response latency, stale-value incidents, and behavior during cache outages. A high hit rate is not sufficient if private data leaks across cache keys.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Cache-aside: hit, miss, and update](../../assets/animations/cache-aside.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/cache-aside.md) · [View the still sequence](../../assets/animations/cache-aside-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/caching-strategies)

@@ -34,6 +34,19 @@ Separate liveness from readiness. Liveness asks whether a process is operating; 
 
 Test a real crash, packet delay, a network partition, a long process pause, and an overloaded monitor. Record detection delay and false suspicions, then verify that any replacement action cannot violate the business invariant.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Discovery data can become stale](../../assets/animations/discovery-heartbeat.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/discovery-heartbeat.md) · [View the still sequence](../../assets/animations/discovery-heartbeat-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://blog.algomaster.io/p/heartbeats-in-distributed-systems)

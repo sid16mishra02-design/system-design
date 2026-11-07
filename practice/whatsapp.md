@@ -38,6 +38,19 @@ Pause a worker after it records a message but before it acknowledges processing.
 
 **Exercise:** a phone disconnects after receiving message 41 but before acknowledging it. It reconnects through another server. Describe how the client resumes, recognizes a repeated message 41, and discovers message 42. Then state what the sender sees throughout.
 
+<!-- BEGIN ANIMATION -->
+## Watch the design in action
+
+<details>
+<summary>Open the looping request-flow animation</summary>
+
+![Design example: accepted is not yet delivered](../assets/animations/case-whatsapp.gif)
+
+</details>
+
+[Read the numbered steps](../animations/case-whatsapp.md) · [View the still sequence](../assets/animations/case-whatsapp-steps.png)
+<!-- END ANIMATION -->
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

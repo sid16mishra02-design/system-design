@@ -34,6 +34,19 @@ Use peer selection and resynchronization behavior that eventually reconnect temp
 
 Measure how long an update takes to reach most or all reachable nodes, plus message volume. Test lost messages, network partitions, joining members, and old state returning after recovery. State convergence assumptions explicitly rather than promising instant agreement.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Gossip spreads knowledge gradually](../../assets/animations/gossip-spread.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/gossip-spread.md) · [View the still sequence](../../assets/animations/gossip-spread-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](http://highscalability.com/blog/2023/7/16/gossip-protocol-explained.html)

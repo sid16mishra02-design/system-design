@@ -30,6 +30,19 @@ In this state circuit breaker returns an error immediately without even invoking
 In this state, the circuit breaker allows a limited number of requests from the service to pass through and invoke the operation. If the requests are successful, then the circuit breaker will go to the closed state. However, if the requests continue to fail, then it goes back to the open state.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Circuit breaker: closed, open, half-open](../../assets/animations/circuit-breaker.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/circuit-breaker.md) · [View the still sequence](../../assets/animations/circuit-breaker-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Stop repeating a failing dependency call

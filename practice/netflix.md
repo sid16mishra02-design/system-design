@@ -38,6 +38,19 @@ Fail an encoding worker halfway through a rendition. The job should be safely re
 
 **Exercise:** a new popular title launches simultaneously in several regions. Identify which requests reach the application, which fetch media from caches, and which reach origin storage on misses. Explain how you prevent a burst of misses from overwhelming the origin without assuming every region is already warm.
 
+<!-- BEGIN ANIMATION -->
+## Watch the design in action
+
+<details>
+<summary>Open the looping request-flow animation</summary>
+
+![Design example: prepare video, then serve nearby](../assets/animations/case-netflix.gif)
+
+</details>
+
+[Read the numbered steps](../animations/case-netflix.md) · [View the still sequence](../assets/animations/case-netflix-steps.png)
+<!-- END ANIMATION -->
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

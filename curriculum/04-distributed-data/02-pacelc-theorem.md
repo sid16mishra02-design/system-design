@@ -16,6 +16,19 @@ PACELC theorem was developed to address a key limitation of the CAP theorem as i
 For example, according to the CAP theorem, a database can be considered available if a query returns a response after 30 days. Obviously, such latency would be unacceptable for any real-world application.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![PACELC: normal operation also matters](../../assets/animations/pacelc.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/pacelc.md) · [View the still sequence](../../assets/animations/pacelc-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 During a partition, consider availability versus consistency. Else, waiting for distant replicas can trade latency for consistency.

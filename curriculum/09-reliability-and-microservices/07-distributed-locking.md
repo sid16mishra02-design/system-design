@@ -36,6 +36,19 @@ Consider expressing correctness directly with a unique constraint, versioned con
 
 Pause an owner past expiry, disconnect it, race acquisitions, and resume old work after takeover. Measure contention and time waiting, and confirm stale owners cannot violate the protected invariant.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Lease expiry does not stop the old worker](../../assets/animations/fencing-token.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/fencing-token.md) · [View the still sequence](../../assets/animations/fencing-token-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 

@@ -83,6 +83,19 @@ These are some commonly used Identity Providers (IdP):
 - [OneLogin](https://www.onelogin.com)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![SSO does not mean one universal app session](../../assets/animations/single-sign-on.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/single-sign-on.md) · [View the still sequence](../../assets/animations/single-sign-on-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### One sign-in, several application sessions

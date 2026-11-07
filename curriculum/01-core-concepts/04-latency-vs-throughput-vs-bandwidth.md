@@ -85,6 +85,19 @@ At 100 megabits/second, dividing by eight gives a theoretical 12.5 megabytes/sec
 2. A page is slow because it makes five small, dependent calls to a distant region. Is more bandwidth the first fix? **Not necessarily: round-trip delay and call dependency may dominate.**
 3. An index lowers average latency but write errors rise sharply. Is the change successful? **Not yet: assess correctness, write cost, errors, and latency together.**
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Find the slow part of a request](../../assets/animations/request-latency.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/request-latency.md) · [View the still sequence](../../assets/animations/request-latency-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/latency-vs-throughput)

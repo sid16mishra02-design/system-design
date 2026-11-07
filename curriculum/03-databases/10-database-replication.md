@@ -49,6 +49,19 @@ The primary difference between synchronous and asynchronous replication is how t
 In contrast, asynchronous replication copies the data to the replica after the data is already written to the primary storage. Although the replication process may occur in near-real-time, it is more common for replication to occur on a scheduled basis and it is more cost-effective.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Replication is copying, not partitioning](../../assets/animations/replication.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/replication.md) · [View the still sequence](../../assets/animations/replication-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 Write an address on the primary, then read a lagging replica: the old address may appear. Replication copies data; sharding divides its ownership. Neither replaces backups.

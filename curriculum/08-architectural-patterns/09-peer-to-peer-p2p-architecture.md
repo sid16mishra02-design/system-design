@@ -34,6 +34,19 @@ Plan for peers behind routers and firewalls. Discovery, relays, or other connect
 
 Measure completion time, origin bandwidth saved, failed connections, and behavior when peers depart. Include low-upload and malicious peers. A successful lab transfer among permanently reachable peers does not prove that a public deployment will be robust.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Peers share verified pieces and may leave](../../assets/animations/p2p-pieces.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/p2p-pieces.md) · [View the still sequence](../../assets/animations/p2p-pieces-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://www.spiceworks.com/tech/networking/articles/what-is-peer-to-peer/)

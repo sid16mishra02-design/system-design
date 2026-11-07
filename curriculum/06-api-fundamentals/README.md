@@ -16,3 +16,5 @@ Follow the numbered order. Every topic opens a lesson in this repository. Read i
 | 8 | [API Design](08-api-design.md) | Original lesson + example |
 
 Before moving on: explain the topic without notes, draw its flow, and describe one failure or tradeoff. Use the next review day if you need more time.
+
+[Validation of fundamentals and system-design applications](../../TOPIC-VALIDATION.md) · [Animation index](../../animations/README.md)

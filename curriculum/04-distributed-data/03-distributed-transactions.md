@@ -93,6 +93,19 @@ There are two common implementation approaches:
 - Testing is difficult because all services must be running to simulate a transaction.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![A saga compensates a completed step](../../assets/animations/saga.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/saga.md) · [View the still sequence](../../assets/animations/saga-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: coordinate an order and its payment

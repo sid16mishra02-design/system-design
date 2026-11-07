@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Message Brokers
 
@@ -40,6 +42,19 @@ Here are some commonly used message brokers:
 - [ActiveMQ](https://activemq.apache.org)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![A work queue can redeliver a job](../../assets/animations/work-queue.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/work-queue.md) · [View the still sequence](../../assets/animations/work-queue-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### A real integration boundary
@@ -51,6 +66,8 @@ An order service sends work to messaging infrastructure. Billing and shipping co
 Decide whether one worker should perform each job or every independent subscriber should receive the event. Specify persistence, acknowledgement, ordering, and retry requirements before choosing a product.
 
 For throughput, batch messages when the added delay is acceptable. Limit consumers' in-flight work so a fast broker cannot overwhelm a slow database. Track backlog age, not just message count: ten old payment jobs can matter more than thousands of fresh analytics events.
+
+Streaming platforms can track consumer positions and support delivery guarantees; inspect each system’s contract.
 
 **Check:** what happens after a consumer performs work but crashes before acknowledging it?
 

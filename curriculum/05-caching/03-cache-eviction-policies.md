@@ -36,6 +36,19 @@ TTL tuning is a separate freshness/reuse decision. Very short lifetimes can caus
 
 Compare hit rate, memory use, origin requests, miss latency, and the cost of tracking access history. Do not declare success solely because LRU or LFU sounds more advanced. A simple policy can be sufficient when the working set fits comfortably.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![LRU and FIFO make different choices](../../assets/animations/cache-eviction.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/cache-eviction.md) · [View the still sequence](../../assets/animations/cache-eviction-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://blog.algomaster.io/p/7-cache-eviction-strategies)

@@ -28,6 +28,19 @@ In a sparse index, index records are created only for some of the records.
 Sparse indexes require less maintenance than dense indexes at write-time since they only contain a subset of the values. This lighter maintenance burden means that inserts, updates, and deletes will be faster. Having fewer entries also means that the index will use less memory. Finding data is slower since a scan across the page typically follows the binary search. Sparse indexes are also optional when working with ordered data.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![An index narrows the records to examine](../../assets/animations/index-lookup.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/index-lookup.md) · [View the still sequence](../../assets/animations/index-lookup-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: find a customer's recent orders

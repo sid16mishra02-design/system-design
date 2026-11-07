@@ -34,6 +34,19 @@ Plan updates and rebuilds. A filter that misses a recent insert can incorrectly 
 
 Measure actual absent-key frequency, authoritative reads avoided, false positives, filter memory, and update lag. A lower lookup count is beneficial only if correctness remains intact.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Bloom filter: no, or maybe](../../assets/animations/bloom-filter.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/bloom-filter.md) · [View the still sequence](../../assets/animations/bloom-filter-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/bloom-filters)

@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Consistent Hashing
 
@@ -149,6 +151,19 @@ Let's look at some examples where consistent hashing is used:
 - Load distribution across multiple storage hosts in [Amazon DynamoDB](https://aws.amazon.com/dynamodb).
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Consistent hashing: a node joins](../../assets/animations/consistent-hash.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/consistent-hash.md) · [View the still sequence](../../assets/animations/consistent-hash-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: reduce key movement when cache nodes change
@@ -162,6 +177,8 @@ Use this where membership changes and key movement is expensive, such as distrib
 Virtual nodes give one physical node several positions, helping balance ownership and accommodate different capacities. They do not eliminate hot individual keys: a viral video can dominate traffic even when key counts are evenly distributed.
 
 Measure misses, node load, and movement during additions or removals. Warm caches gradually or limit database pressure when reassignment creates misses. Replication and recovery remain separate design decisions.
+
+K/N is a balanced-case estimate, not an exact universal guarantee; movement depends on ring positions and key distribution.
 
 Self-check: if a single key receives most reads, what can improve besides redistributing the other keys?
 

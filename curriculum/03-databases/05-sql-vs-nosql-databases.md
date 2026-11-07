@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # SQL vs NoSQL databases
 
@@ -71,6 +73,8 @@ An order system needs relationships, integrity rules, and multi-record updates. 
 Write a small workload: create an order, list recent orders, and update stock. Compare how each candidate represents these operations and enforces their invariants. Measure representative queries and writes before assuming one category is faster.
 
 Avoid adding two database types simply because each sounds appropriate. Cross-store consistency, backups, and monitoring add work.
+
+SQL columns can be nullable; NoSQL includes structured graph and key-value models, not only document collections.
 
 Self-check: name the requirement that would make you reconsider your choice.
 

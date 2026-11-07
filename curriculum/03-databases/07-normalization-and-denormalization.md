@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Normalization and Denormalization
 
@@ -156,6 +158,19 @@ Below are some disadvantages of denormalization:
 - More chances of data inconsistency.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![An address update and duplicated data](../../assets/animations/normalization.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/normalization.md) · [View the still sequence](../../assets/animations/normalization-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: distinguish duplication from a meaningful snapshot
@@ -169,6 +184,12 @@ Begin with clear ownership of each fact and the queries the application needs. I
 For every duplicated current value, decide who updates each copy and what readers may see while updates propagate. For historical snapshots, decide when the snapshot is captured and whether later corrections are allowed. Those policies matter more than merely calling the schema normalized or denormalized.
 
 Avoid duplicating a field everywhere “for performance” without identifying the costly read and the resulting write complexity.
+
+### Clarify the key definitions
+
+A superkey is any column set that uniquely identifies a row. A candidate key is a minimal superkey; an alternate key is a candidate not chosen as primary. A foreign key can reference a suitable unique key, not only a primary key. A surrogate key can be chosen even when a natural key exists.
+
+Partial dependency means a non-key attribute depends on only part of a candidate key. With key `(order_id, product_id)`, `customer_id` depending only on `order_id` is partial; `quantity` depending on both is not.
 
 Self-check: should changing a profile address alter an order that was already shipped? Which address is each page supposed to show?
 

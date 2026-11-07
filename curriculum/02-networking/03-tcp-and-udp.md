@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # TCP and UDP
 
@@ -35,6 +37,19 @@ TCP provides ordered delivery of data from user to server (and vice versa), wher
 | Use cases           | HTTPS, HTTP, SMTP, POP, FTP, etc            | Video streaming, DNS, VoIP, etc    |
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Lost data: transport choices](../../assets/animations/tcp-udp.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/tcp-udp.md) · [View the still sequence](../../assets/animations/tcp-udp-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: match transport to the interaction
@@ -45,6 +60,6 @@ For live speech, a late sound packet may be less useful than a small gap. TCP su
 
 Measure loss, delay, and required ordering before choosing. Reuse connections where appropriate rather than repeatedly paying connection setup costs. With UDP, explicitly design congestion handling, loss tolerance, and message sizing; “no retransmission” is not automatically faster for the application.
 
-Self-check: a successful TCP transfer does not prove a payment was committed. Which application response does?
+Self-check: TCP can fail; successful delivery still does not prove a payment committed.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

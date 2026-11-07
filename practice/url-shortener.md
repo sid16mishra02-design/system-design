@@ -38,6 +38,19 @@ Track redirect latency percentiles, cache hit rate, database reads, and failed l
 
 **Exercise:** a link owner disables a widely shared link. Explain how a cached redirect, a browser-cached response, and an asynchronously processed analytics event behave. A fast redirect design still needs an explicit deletion and abuse policy.
 
+<!-- BEGIN ANIMATION -->
+## Watch the design in action
+
+<details>
+<summary>Open the looping request-flow animation</summary>
+
+![Design example: create and resolve a short URL](../assets/animations/case-url-shortener.gif)
+
+</details>
+
+[Read the numbered steps](../animations/case-url-shortener.md) · [View the still sequence](../assets/animations/case-url-shortener-steps.png)
+<!-- END ANIMATION -->
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

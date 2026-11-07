@@ -57,6 +57,19 @@ This issue happens when we use a naive _"get-then-set"_ approach, in which we re
 One way to avoid this problem is to use some sort of distributed locking mechanism around the key, preventing any other processes from accessing or writing to the counter. Though the lock will become a significant bottleneck and will not scale well. A better approach might be to use a _"set-then-get"_ approach, allowing us to quickly increment and check counter values without letting the atomic operations get in the way.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Token bucket: bursts have a limit](../../assets/animations/token-bucket.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/token-bucket.md) · [View the still sequence](../../assets/animations/token-bucket-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Choose what you are protecting

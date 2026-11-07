@@ -36,6 +36,19 @@ Keep TLS and authorization checks. Removing security is not an acceptable perfor
 
 Separate connection/setup time, time until the first response byte, and body transfer time. Compare response sizes, error rates, and latency percentiles under equivalent load. Check both new-connection and reused-connection requests.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![TLS identity is separate from authorization](../../assets/animations/tls-mtls.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/tls-mtls.md) · [View the still sequence](../../assets/animations/tls-mtls-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/http-https)

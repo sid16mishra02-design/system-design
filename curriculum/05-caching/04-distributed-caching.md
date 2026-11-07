@@ -42,6 +42,19 @@ Bound cache timeouts. If the cache is down, an unlimited fallback to the databas
 
 Measure hit rate per important key class, cache latency, value sizes, origin load, and latency during expiration bursts. Test a node loss and a complete cache outage. An optimization is incomplete if it works only while every cache component is healthy.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Cache-aside: hit, miss, and update](../../assets/animations/cache-aside.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/cache-aside.md) · [View the still sequence](../../assets/animations/cache-aside-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://blog.algomaster.io/p/distributed-caching)

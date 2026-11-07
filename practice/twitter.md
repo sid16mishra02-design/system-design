@@ -38,6 +38,19 @@ Delete a post after its reference has reached many timelines. Rendering should n
 
 **Exercise:** compare three quantities before and after an optimization: post-to-feed delay, feed-read latency, and timeline writes per post. Explain which requirement improved and which cost increased. A lower feed-read latency alone does not show that the whole design became cheaper or fresher.
 
+<!-- BEGIN ANIMATION -->
+## Watch the design in action
+
+<details>
+<summary>Open the looping request-flow animation</summary>
+
+![Design example: fanout makes feeds fast, at a cost](../assets/animations/case-twitter.gif)
+
+</details>
+
+[Read the numbered steps](../animations/case-twitter.md) · [View the still sequence](../assets/animations/case-twitter-steps.png)
+<!-- END ANIMATION -->
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

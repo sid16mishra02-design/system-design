@@ -70,6 +70,19 @@ Here are some widely used technologies for implementing event-driven architectur
 - [Google PubSub](https://cloud.google.com/pubsub)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Independent subscribers need their own copy](../../assets/animations/pub-sub.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/pub-sub.md) · [View the still sequence](../../assets/animations/pub-sub-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### An action can finish before its reactions

@@ -135,6 +135,19 @@ Here are some commonly used technologies for caching:
 - [Aerospike](https://aerospike.com)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Cache-aside: hit, miss, and update](../../assets/animations/cache-aside.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/cache-aside.md) · [View the still sequence](../../assets/animations/cache-aside-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: speed repeated product reads

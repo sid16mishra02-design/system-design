@@ -88,6 +88,19 @@ Below are some common uses of quadtrees:
 - Sparse data storage.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Nearby search must cross cell boundaries](../../assets/animations/nearby-search.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/nearby-search.md) · [View the still sequence](../../assets/animations/nearby-search-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Find nearby candidates before calculating exact distance

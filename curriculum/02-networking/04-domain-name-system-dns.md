@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Domain Name System (DNS)
 
@@ -121,6 +123,19 @@ These are some widely used managed DNS solutions:
 - [NS1](https://ns1.com/products/managed-dns)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![DNS: a name becomes an address](../../assets/animations/dns-lookup.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/dns-lookup.md) · [View the still sequence](../../assets/animations/dns-lookup-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: find the service before connecting
@@ -136,6 +151,8 @@ Your shop moves from server A to B. You update its DNS record, but some resolver
 For a planned move, lower the TTL ahead of time and allow the previous TTL to elapse before relying on shorter caching. Keep the old destination working through the transition when possible. Short TTLs can make changes propagate sooner through caches but increase lookup traffic; they do not guarantee instantaneous switching.
 
 When diagnosing a failure, inspect the actual answer and its remaining TTL. Distinguish missing or incorrect DNS records from an unreachable server at a correct address. Use redundant DNS service and avoid making recovery depend on a single unmanaged nameserver.
+
+Typically the client requests recursion from its resolver, which follows iterative referrals from root to TLD to authoritative servers.
 
 Self-check: why does changing a DNS record not instantly migrate an already-open connection?
 

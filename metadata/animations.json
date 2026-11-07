@@ -1,0 +1,4282 @@
+[
+  {
+    "id": "request-latency",
+    "title": "Find the slow part of a request",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Client"
+      },
+      {
+        "id": "a",
+        "label": "Application"
+      },
+      {
+        "id": "d",
+        "label": "Database"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A request begins. Its response time includes each sequential stage.",
+        "edge": [
+          "c",
+          "a"
+        ],
+        "updates": {
+          "c": "Waiting",
+          "a": "30 ms network"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Application work adds 70 ms before the database call.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "a": "70 ms own work",
+          "d": "Query: 100 ms"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Sequential total: 30 + 70 + 100 = 200 ms. This is one request latency.",
+        "edge": [
+          "d",
+          "c"
+        ],
+        "updates": {
+          "c": "Response: 200 ms"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A suitable index reduces only the query stage: 100 ms becomes 25 ms.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "d": "Query: 25 ms"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "New total: 125 ms. More completed requests per second is a separate measure.",
+        "edge": [
+          "d",
+          "c"
+        ],
+        "updates": {
+          "c": "Response: 125 ms"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Latency vs Throughput vs Bandwidth",
+      "Distributed Tracing",
+      "Latency vs throughput"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/request-latency.gif",
+    "static": "assets/animations/request-latency-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 28,
+    "gif_sha256": "53c70baeb3a2bca8eb40614c4956fe8d172599454da8b2763a531eadec3b396a",
+    "static_sha256": "8760e409baeb1077a7028665760512baff66d7d5e45826ad90d5662f1666501e",
+    "caption_words": 57
+  },
+  {
+    "id": "dns-lookup",
+    "title": "DNS: a name becomes an address",
+    "nodes": [
+      {
+        "id": "b",
+        "label": "Browser"
+      },
+      {
+        "id": "r",
+        "label": "Resolver"
+      },
+      {
+        "id": "n",
+        "label": "Authoritative DNS"
+      },
+      {
+        "id": "s",
+        "label": "Web server"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "The browser needs the address for shop.example.",
+        "edge": [
+          "b",
+          "r"
+        ],
+        "updates": {
+          "b": "shop.example",
+          "r": "Cache miss"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "On a miss, the resolver follows DNS delegation to the responsible server.",
+        "edge": [
+          "r",
+          "n"
+        ],
+        "updates": {
+          "n": "Address: 203.0.113.8"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The resolver returns the address and caches it for its TTL.",
+        "edge": [
+          "n",
+          "r"
+        ],
+        "updates": {
+          "r": "Cached address + TTL"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The browser can now connect to the web server. DNS did not carry the page.",
+        "edge": [
+          "b",
+          "s"
+        ],
+        "updates": {
+          "s": "Serve HTTP response"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A later lookup may use the cached answer until its TTL expires.",
+        "edge": [
+          "b",
+          "r"
+        ],
+        "updates": {
+          "r": "Cache hit"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Domain Name System (DNS)"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/dns-lookup.gif",
+    "static": "assets/animations/dns-lookup-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 30,
+    "gif_sha256": "b1c8437be7817d10bfec15b3df7b8b104697948f4b0ac1a36ec0155293b45941",
+    "static_sha256": "f5e0e116feceb7bc79c733bc0029e67f00dcdeeb83ce7339023396699279fa04",
+    "caption_words": 58
+  },
+  {
+    "id": "tcp-udp",
+    "title": "Lost data: transport choices",
+    "nodes": [
+      {
+        "id": "t",
+        "label": "TCP sender"
+      },
+      {
+        "id": "r",
+        "label": "TCP receiver"
+      },
+      {
+        "id": "u",
+        "label": "UDP sender"
+      },
+      {
+        "id": "v",
+        "label": "UDP receiver"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "TCP presents an ordered byte stream; a lost segment can delay delivery.",
+        "edge": [
+          "t",
+          "r"
+        ],
+        "updates": {
+          "t": "Bytes 1-3",
+          "r": "Bytes 1, then gap"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "TCP detects loss and retransmits; later bytes wait for the missing data.",
+        "edge": [
+          "t",
+          "r"
+        ],
+        "updates": {
+          "r": "Bytes 1, 2, 3 in order"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "UDP sends datagrams without a built-in delivery or ordering guarantee.",
+        "edge": [
+          "u",
+          "v"
+        ],
+        "updates": {
+          "u": "Datagrams A, B, C",
+          "v": "A arrives; B lost"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "Datagram C can arrive without transport waiting for B.",
+        "edge": [
+          "u",
+          "v"
+        ],
+        "updates": {
+          "v": "A and C available"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The UDP application chooses whether to recover, ignore, or reorder data.",
+        "edge": null,
+        "updates": {
+          "v": "Application policy"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "TCP and UDP"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/tcp-udp.gif",
+    "static": "assets/animations/tcp-udp-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 24,
+    "gif_sha256": "d205986823e0677d760eba343c9189ec94267b862db9077700a620272cf63589",
+    "static_sha256": "0199d11cde4b061cd4607e18e6c0a7a5d183cbadb7f3dd845cea61751a27e708",
+    "caption_words": 54
+  },
+  {
+    "id": "load-balancer",
+    "title": "Scale a service without losing sessions",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Client"
+      },
+      {
+        "id": "l",
+        "label": "Load balancer"
+      },
+      {
+        "id": "a",
+        "label": "App A"
+      },
+      {
+        "id": "b",
+        "label": "App B"
+      },
+      {
+        "id": "s",
+        "label": "Shared session store"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "The client sends a request to the service entry point.",
+        "edge": [
+          "c",
+          "l"
+        ],
+        "updates": {
+          "c": "Request 1",
+          "l": "Select healthy instance"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The load balancer routes the first request to App A.",
+        "edge": [
+          "l",
+          "a"
+        ],
+        "updates": {
+          "a": "Handle request 1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "App A keeps session state outside its own process.",
+        "edge": [
+          "a",
+          "s"
+        ],
+        "updates": {
+          "s": "Session for user 7"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A later request can be routed to App B.",
+        "edge": [
+          "l",
+          "b"
+        ],
+        "updates": {
+          "b": "Handle request 2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "App B retrieves the session instead of relying on App A memory.",
+        "edge": [
+          "b",
+          "s"
+        ],
+        "updates": {
+          "b": "Same session available"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "More app instances do not remove shared-store bottlenecks or failures.",
+        "edge": null,
+        "updates": {
+          "s": "Shared dependency"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Scalability",
+      "Load Balancing",
+      "Clustering",
+      "Stateful vs stateless design"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/load-balancer.gif",
+    "static": "assets/animations/load-balancer-steps.png",
+    "duration_ms": 45000,
+    "frame_count": 36,
+    "encoded_frame_count": 32,
+    "gif_sha256": "ddeec74352002b339f8bd69cfbfa77c285545680a6e5d455dc91e1785205f803",
+    "static_sha256": "a43fc218539795f59a017273cc2d59584ae56e53c595b88c2d7764f9786f3a25",
+    "caption_words": 60
+  },
+  {
+    "id": "cache-aside",
+    "title": "Cache-aside: hit, miss, and update",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Application"
+      },
+      {
+        "id": "c",
+        "label": "Cache"
+      },
+      {
+        "id": "d",
+        "label": "Database"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "The application checks the cache for product 42.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Missing",
+          "d": "Price: 500"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "On a miss, the application reads the authoritative database.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "a": "Loaded price: 500"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The application fills the cache for later reads.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Price: 500"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A write changes the database to 550; the cached copy is now old.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "d": "Price: 550",
+          "c": "Price: 500 (stale)"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Invalidate the old entry, then reload on a later miss. Races still need a policy.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Invalidated"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Caching",
+      "Caching Strategies",
+      "Distributed Caching"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/cache-aside.gif",
+    "static": "assets/animations/cache-aside-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 28,
+    "gif_sha256": "0187a644195e7449bf501a747da181d56cb33d6749fb3cff7dd63ba98fdc2470",
+    "static_sha256": "f30427a4a96546b89f2fa0c19e178cff25ef69644e326351d4cb9a6ff8eb4fc7",
+    "caption_words": 53
+  },
+  {
+    "id": "replication",
+    "title": "Replication is copying, not partitioning",
+    "nodes": [
+      {
+        "id": "w",
+        "label": "Writer"
+      },
+      {
+        "id": "p",
+        "label": "Primary"
+      },
+      {
+        "id": "r",
+        "label": "Replica"
+      },
+      {
+        "id": "c",
+        "label": "Reader"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Both copies initially show address V1.",
+        "edge": null,
+        "updates": {
+          "p": "Address V1",
+          "r": "Address V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A write commits V2 on the primary.",
+        "edge": [
+          "w",
+          "p"
+        ],
+        "updates": {
+          "p": "Address V2",
+          "r": "Address V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Before replication applies, a replica read can still return V1.",
+        "edge": [
+          "c",
+          "r"
+        ],
+        "updates": {
+          "c": "Reads older V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The replication stream applies the update on the replica.",
+        "edge": [
+          "p",
+          "r"
+        ],
+        "updates": {
+          "r": "Address V2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Both now show V2. Deletions can replicate too; replication is not a backup.",
+        "edge": [
+          "c",
+          "r"
+        ],
+        "updates": {
+          "c": "Reads V2"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Database Replication",
+      "Strong vs eventual consistency"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/replication.gif",
+    "static": "assets/animations/replication-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 26,
+    "gif_sha256": "2223773c3ad0eb6c34c231f7756590fe05cf8243a95a359a3155c89421fc9eed",
+    "static_sha256": "673e06a9788c04dfdada05d7ea8fa23822f679b801350edf20dd3b5ac1aba31b",
+    "caption_words": 45
+  },
+  {
+    "id": "atomic-stock",
+    "title": "Two buyers, one remaining ticket",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Buyer A"
+      },
+      {
+        "id": "b",
+        "label": "Buyer B"
+      },
+      {
+        "id": "d",
+        "label": "Stock row"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "There is one unit of product 42. Both buyers want it.",
+        "edge": null,
+        "updates": {
+          "d": "product 42: quantity 1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A performs an atomic update WHERE product_id = 42 AND quantity > 0.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "d": "quantity 0",
+          "a": "1 row changed"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "B executes the same conditional update after A.",
+        "edge": [
+          "b",
+          "d"
+        ],
+        "updates": {
+          "b": "0 rows changed"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Only A may confirm a reservation from these results.",
+        "edge": [
+          "d",
+          "a"
+        ],
+        "updates": {
+          "a": "Reserved",
+          "b": "Not reserved"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Related changes need a suitable transaction; external payment is another boundary.",
+        "edge": null,
+        "updates": {
+          "d": "Preserve the invariant"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Transactions",
+      "ACID and BASE consistency models"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/atomic-stock.gif",
+    "static": "assets/animations/atomic-stock-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 20,
+    "gif_sha256": "b066240acca33214d6f9d84c1a64a72ab8c52436312470af5f29b5a97773bc70",
+    "static_sha256": "fd1becd0036ba075114ef3b72d7bcbb2a90d0e015c66fc77fd6e9db6066c032f",
+    "caption_words": 50
+  },
+  {
+    "id": "normalization",
+    "title": "An address update and duplicated data",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Customer record"
+      },
+      {
+        "id": "o",
+        "label": "Current-order view"
+      },
+      {
+        "id": "h",
+        "label": "Historical order"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A normalized current view refers to the customer rather than copying every field.",
+        "edge": [
+          "o",
+          "c"
+        ],
+        "updates": {
+          "c": "Current address: A",
+          "o": "Customer ID: 7"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "An order can also retain the delivery address used at purchase time.",
+        "edge": [
+          "c",
+          "h"
+        ],
+        "updates": {
+          "h": "Purchase snapshot: A"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The customer changes their current address to B.",
+        "edge": null,
+        "updates": {
+          "c": "Current address: B"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A live join sees B; the past delivery snapshot should still show A.",
+        "edge": [
+          "o",
+          "c"
+        ],
+        "updates": {
+          "o": "Joined current: B",
+          "h": "Purchase snapshot: A"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Choose duplication by meaning and access pattern, not a universal rule.",
+        "edge": null,
+        "updates": {
+          "h": "History remains intact"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Normalization and Denormalization"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/normalization.gif",
+    "static": "assets/animations/normalization-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 21,
+    "gif_sha256": "de55dda9bfbdbe6707c54f85d18ccc2281077c2f71c117d55a896fd444d1644c",
+    "static_sha256": "a50bcbf0b231eec23d64755e55ccd4e8b1a2754aefdc7f587d627d11252ba16c",
+    "caption_words": 57
+  },
+  {
+    "id": "sharding",
+    "title": "Sharding divides ownership of data",
+    "nodes": [
+      {
+        "id": "r",
+        "label": "Router"
+      },
+      {
+        "id": "a",
+        "label": "Shard A"
+      },
+      {
+        "id": "b",
+        "label": "Shard B"
+      },
+      {
+        "id": "ar",
+        "label": "Replica of A"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Choose a shard from the customer identifier.",
+        "edge": null,
+        "updates": {
+          "a": "Customers 1-1000",
+          "b": "Customers 1001-2000"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Customer 42 is routed to A.",
+        "edge": [
+          "r",
+          "a"
+        ],
+        "updates": {
+          "a": "Owns customer 42"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Customer 1500 is routed to B, not to a duplicate of A.",
+        "edge": [
+          "r",
+          "b"
+        ],
+        "updates": {
+          "b": "Owns customer 1500"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A replica of A copies A data, not B data.",
+        "edge": [
+          "a",
+          "ar"
+        ],
+        "updates": {
+          "ar": "Copy of customers 1-1000"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A query across both customer ranges needs deliberate coordination.",
+        "edge": null,
+        "updates": {
+          "r": "Cross-shard query cost"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Sharding",
+      "Database Federation"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/sharding.gif",
+    "static": "assets/animations/sharding-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "79b618bd4029ce8b1cb1f98d7c793905e301d89e6e99dbd7ba608de109d89626",
+    "static_sha256": "e99c36625954ccceb9193e61656b2ea24665cfb13a630db3d1a386db2ebc5156",
+    "caption_words": 44
+  },
+  {
+    "id": "consistent-hash",
+    "title": "Consistent hashing: a node joins",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Node A"
+      },
+      {
+        "id": "b",
+        "label": "Node B"
+      },
+      {
+        "id": "c",
+        "label": "Node C"
+      },
+      {
+        "id": "d",
+        "label": "New node D"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Keys go clockwise to the next node. Key K at 170 maps to C at 260.",
+        "edge": null,
+        "updates": {
+          "a": "20 degrees",
+          "b": "140 degrees",
+          "c": "260 degrees",
+          "d": "Not yet a member"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "K is owned by C before the new node joins.",
+        "edge": [
+          "b",
+          "c"
+        ],
+        "updates": {
+          "c": "Owns key K"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "D joins at 200 degrees, between B and C.",
+        "edge": null,
+        "updates": {
+          "d": "200 degrees: joined"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "K at 170 now meets D first. Move the affected range from C to D.",
+        "edge": [
+          "c",
+          "d"
+        ],
+        "updates": {
+          "d": "Now owns key K",
+          "c": "Other ranges remain"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A key at 80 still maps to B. Not every key needs to move.",
+        "edge": null,
+        "updates": {
+          "b": "Key at 80 unchanged"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Consistent Hashing"
+    ],
+    "kind": "ring",
+    "gif": "assets/animations/consistent-hash.gif",
+    "static": "assets/animations/consistent-hash-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "56157f5b2b751b0af0b8bf716e85a91cad5252879ba115b45ea1f9025e22d0ce",
+    "static_sha256": "60133efc28cda3eaec7e0b830c7e3ab23bd2f3ffe58a27472d30bbb23d210a1f",
+    "caption_words": 64
+  },
+  {
+    "id": "bloom-filter",
+    "title": "Bloom filter: no, or maybe",
+    "nodes": [
+      {
+        "id": "q",
+        "label": "Lookup"
+      },
+      {
+        "id": "f",
+        "label": "Bloom filter"
+      },
+      {
+        "id": "s",
+        "label": "Authoritative store"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Insert A with illustrative hash positions 1, 4, and 8.",
+        "edge": [
+          "q",
+          "f"
+        ],
+        "updates": {
+          "f": "Set bits 1, 4, 8"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A query needing bit 2 finds zero: definitely absent from the represented set.",
+        "edge": [
+          "q",
+          "f"
+        ],
+        "updates": {
+          "q": "Needs bits 2, 6, 10",
+          "f": "Bit 2 is zero"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A different key X can map to bits 1, 4, and 8 too.",
+        "edge": [
+          "q",
+          "f"
+        ],
+        "updates": {
+          "q": "X needs bits 1, 4, 8",
+          "f": "All set: MAYBE"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Verify a positive result in real storage; a collision can mean X is absent.",
+        "edge": [
+          "q",
+          "s"
+        ],
+        "updates": {
+          "s": "X does not exist"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The filter saves absent-key reads, but is not the final membership authority.",
+        "edge": null,
+        "updates": {
+          "f": "No / maybe; not yes"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Bloom Filters"
+    ],
+    "kind": "bloom",
+    "gif": "assets/animations/bloom-filter.gif",
+    "static": "assets/animations/bloom-filter-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 25,
+    "gif_sha256": "82663cd3765c7dd2d44827a5dc73621f3d037cfb3f4c7b9e5d91439b96718d78",
+    "static_sha256": "e52f3de13add3f22c59b34f229d3ce84d98498154ce469d45e9909dff98e0ccf",
+    "caption_words": 62
+  },
+  {
+    "id": "cap-partition",
+    "title": "CAP: a choice during a partition",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Replica A"
+      },
+      {
+        "id": "n",
+        "label": "Network link"
+      },
+      {
+        "id": "b",
+        "label": "Replica B"
+      },
+      {
+        "id": "r",
+        "label": "Client at B"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Both replicas initially know that a ticket is available.",
+        "edge": null,
+        "updates": {
+          "a": "Available",
+          "b": "Available",
+          "n": "Connected"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A records sold, then communication to B is unavailable.",
+        "edge": [
+          "a",
+          "b"
+        ],
+        "updates": {
+          "a": "Sold",
+          "b": "Last known: available",
+          "n": "PARTITION"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "A request reaches non-failing B, which cannot confirm the current state at A.",
+        "edge": [
+          "r",
+          "b"
+        ],
+        "updates": {
+          "r": "Is the ticket available?"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Choice 1: answer without the latest write; consistency may be sacrificed.",
+        "edge": [
+          "b",
+          "r"
+        ],
+        "updates": {
+          "r": "Potentially stale answer"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Choice 2: refuse or wait; CAP availability is sacrificed for this request.",
+        "edge": [
+          "b",
+          "r"
+        ],
+        "updates": {
+          "r": "Cannot confirm now"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "CAP Theorem",
+      "Strong vs eventual consistency"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/cap-partition.gif",
+    "static": "assets/animations/cap-partition-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 25,
+    "gif_sha256": "814f4a54c4350fb7c45ac195aa05f1b10a28426c61c8a9ddcbfd8b62fb4cbf06",
+    "static_sha256": "2542f6f953e1a8906dcc68ff368009c377a3719a10b47775cbc5575c029d79a1",
+    "caption_words": 54
+  },
+  {
+    "id": "pacelc",
+    "title": "PACELC: normal operation also matters",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Client"
+      },
+      {
+        "id": "a",
+        "label": "Local replica"
+      },
+      {
+        "id": "b",
+        "label": "Distant replica"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Normal operation: waiting for distant coordination can cost latency.",
+        "edge": [
+          "a",
+          "b"
+        ],
+        "updates": {
+          "a": "Write pending",
+          "b": "Round-trip wait"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Coordinated completion can provide the chosen stronger guarantee.",
+        "edge": [
+          "b",
+          "a"
+        ],
+        "updates": {
+          "a": "Acknowledge after rule"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "An asynchronous path can respond sooner while the remote copy lags.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Earlier acknowledgement",
+          "b": "Older state possible"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "During a partition, availability versus consistency becomes a separate choice.",
+        "edge": [
+          "a",
+          "b"
+        ],
+        "updates": {
+          "a": "Partition policy",
+          "b": "Unreachable"
+        },
+        "blocked": true
+      }
+    ],
+    "topics": [
+      "PACELC Theorem"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/pacelc.gif",
+    "static": "assets/animations/pacelc-steps.png",
+    "duration_ms": 30000,
+    "frame_count": 24,
+    "encoded_frame_count": 23,
+    "gif_sha256": "5246d2a448e60d3204198f243ad8e2257b4e26dbd67e209ed2411ac246c91d26",
+    "static_sha256": "66db6e52dfbc7c0014fdd5120fdaf21d073b1fa713095aeb5bca15451004ff8d",
+    "caption_words": 38
+  },
+  {
+    "id": "saga",
+    "title": "A saga compensates a completed step",
+    "nodes": [
+      {
+        "id": "o",
+        "label": "Order service"
+      },
+      {
+        "id": "p",
+        "label": "Payment service"
+      },
+      {
+        "id": "s",
+        "label": "Stock service"
+      },
+      {
+        "id": "j",
+        "label": "Recovery state"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Record a pending order and a recoverable step identifier.",
+        "edge": [
+          "o",
+          "j"
+        ],
+        "updates": {
+          "o": "Pending",
+          "j": "Saga started"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A local payment operation commits successfully.",
+        "edge": [
+          "o",
+          "p"
+        ],
+        "updates": {
+          "p": "Charged once"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Stock reservation fails. Earlier committed work did not vanish.",
+        "edge": [
+          "o",
+          "s"
+        ],
+        "updates": {
+          "s": "Reservation failed"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "The saga issues a compensating refund with safe retry behavior.",
+        "edge": [
+          "o",
+          "p"
+        ],
+        "updates": {
+          "p": "Refund requested"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Record completion after confirmation; compensation can take time or fail too.",
+        "edge": [
+          "o",
+          "j"
+        ],
+        "updates": {
+          "j": "Compensation tracked"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Distributed Transactions",
+      "Reliability"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/saga.gif",
+    "static": "assets/animations/saga-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 29,
+    "gif_sha256": "6feda218818dced5170ad6fba9cc394e2ffbd22488497b789f8a2f23499a6c96",
+    "static_sha256": "0394a3553175ef63a8ce559618811b8cd1fd2aedca6c6837a487ee2744276597",
+    "caption_words": 45
+  },
+  {
+    "id": "cache-eviction",
+    "title": "LRU and FIFO make different choices",
+    "nodes": [
+      {
+        "id": "i",
+        "label": "Access sequence"
+      },
+      {
+        "id": "l",
+        "label": "LRU cache"
+      },
+      {
+        "id": "f",
+        "label": "FIFO cache"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Insert A, B, and C into caches with room for three equal-size entries.",
+        "edge": null,
+        "updates": {
+          "l": "Oldest: A, B, C",
+          "f": "Oldest: A, B, C"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Read A. LRU updates recency; FIFO keeps insertion order.",
+        "edge": [
+          "i",
+          "l"
+        ],
+        "updates": {
+          "l": "Oldest: B, C, A",
+          "f": "Oldest: A, B, C"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Insert D. LRU evicts B, the least recently used entry.",
+        "edge": [
+          "i",
+          "l"
+        ],
+        "updates": {
+          "l": "C, A, D; B evicted"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "FIFO evicts A, the earliest inserted entry.",
+        "edge": [
+          "i",
+          "f"
+        ],
+        "updates": {
+          "f": "B, C, D; A evicted"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Eviction frees memory. It does not establish that a cached price is current.",
+        "edge": null,
+        "updates": {
+          "i": "Freshness is separate"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Cache Eviction Policies"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/cache-eviction.gif",
+    "static": "assets/animations/cache-eviction-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 21,
+    "gif_sha256": "6408d2528b7c845e6e3560e0182d26636d90c6eb4110a63f1f6b071cdc664365",
+    "static_sha256": "b3ba19f278f2ac8b7f9eeabae019ab851f6a76bdd5534e7853295117ddc9b5a3",
+    "caption_words": 52
+  },
+  {
+    "id": "idempotency",
+    "title": "A lost response must not mean two charges",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Client"
+      },
+      {
+        "id": "a",
+        "label": "Payment API"
+      },
+      {
+        "id": "d",
+        "label": "Durable operation record"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "The client sends one payment attempt with idempotency key K.",
+        "edge": [
+          "c",
+          "a"
+        ],
+        "updates": {
+          "c": "Attempt K",
+          "a": "Validate request"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Atomically associate K with one payment operation and its recoverable result.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "d": "K -> one operation"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The response is lost after the operation succeeds.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "d": "K -> succeeded"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "The client retries using K and the same request body.",
+        "edge": [
+          "c",
+          "a"
+        ],
+        "updates": {
+          "a": "Same logical attempt"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Return or resume the recorded result, rather than create a second charge.",
+        "edge": [
+          "d",
+          "a"
+        ],
+        "updates": {
+          "a": "Reuse result for K"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Idempotency",
+      "Webhooks",
+      "Reliability"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/idempotency.gif",
+    "static": "assets/animations/idempotency-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 29,
+    "gif_sha256": "bb122e39202598a596f0d2dfe32e02ca975c05aee27a919ffcad9066c3ec374d",
+    "static_sha256": "3d829b87b561a7fef242cb8be6e2b546223c933758ad6c902b51c75d072405ab",
+    "caption_words": 51
+  },
+  {
+    "id": "token-bucket",
+    "title": "Token bucket: bursts have a limit",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Incoming requests"
+      },
+      {
+        "id": "b",
+        "label": "Token bucket"
+      },
+      {
+        "id": "s",
+        "label": "Service"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "This illustrative bucket holds three tokens and refills at one token/second.",
+        "edge": null,
+        "updates": {
+          "b": "Tokens: 3"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Request 1 consumes a token and is allowed.",
+        "edge": [
+          "c",
+          "s"
+        ],
+        "updates": {
+          "b": "Tokens: 2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Two more requests consume the remaining tokens.",
+        "edge": [
+          "c",
+          "s"
+        ],
+        "updates": {
+          "b": "Tokens: 0"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A new immediate request is rejected or delayed by the chosen policy.",
+        "edge": [
+          "c",
+          "b"
+        ],
+        "updates": {
+          "c": "No token available"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "After one second, one token is available again, up to the bucket capacity.",
+        "edge": [
+          "b",
+          "s"
+        ],
+        "updates": {
+          "b": "One token refilled"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Rate Limiting"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/token-bucket.gif",
+    "static": "assets/animations/token-bucket-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 23,
+    "gif_sha256": "c0fc5abf10fce658353c60f58d5c9d00fdb855ec386b4b4bdb93e68162addd1d",
+    "static_sha256": "7b166b6050da444770eb39c596828351e731febedbdfcf4f883fa96f9a7cbade",
+    "caption_words": 52
+  },
+  {
+    "id": "realtime-protocols",
+    "title": "Which way do live updates travel?",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Browser"
+      },
+      {
+        "id": "s",
+        "label": "Server"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Long polling: browser sends a request; the server may hold its response.",
+        "edge": [
+          "c",
+          "s"
+        ],
+        "updates": {
+          "c": "Waiting request",
+          "s": "Response held"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A response arrives; the browser starts another request for later updates.",
+        "edge": [
+          "s",
+          "c"
+        ],
+        "updates": {
+          "c": "Issue next long poll"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Separate SSE example: server events arrive over a streaming HTTP response.",
+        "edge": [
+          "s",
+          "c"
+        ],
+        "updates": {
+          "s": "HTTP event stream",
+          "c": "Receives one-way events"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Separate WebSocket example: after setup, the browser can send a message.",
+        "edge": [
+          "c",
+          "s"
+        ],
+        "updates": {
+          "c": "Two-way channel",
+          "s": "WebSocket ready"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The server can send messages back on the same WebSocket connection.",
+        "edge": [
+          "s",
+          "c"
+        ],
+        "updates": {
+          "s": "Two-way channel"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Long polling, WebSockets, Server-Sent Events (SSE)",
+      "Long polling vs WebSockets"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/realtime-protocols.gif",
+    "static": "assets/animations/realtime-protocols-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 30,
+    "gif_sha256": "9a83d91798aa417e849f2be12ce9f939029de1385f19a97bb5e967d2085b1155",
+    "static_sha256": "615002e4800146126e8acabc6fcf2f0c73eb42a4e54b60408eb816843e50c4ec",
+    "caption_words": 56
+  },
+  {
+    "id": "work-queue",
+    "title": "A work queue can redeliver a job",
+    "nodes": [
+      {
+        "id": "p",
+        "label": "Producer"
+      },
+      {
+        "id": "q",
+        "label": "Work queue"
+      },
+      {
+        "id": "a",
+        "label": "Worker A"
+      },
+      {
+        "id": "b",
+        "label": "Worker B"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "One logical job enters a queue shared by competing workers.",
+        "edge": [
+          "p",
+          "q"
+        ],
+        "updates": {
+          "q": "Job J waiting"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Worker A receives J and writes the result.",
+        "edge": [
+          "q",
+          "a"
+        ],
+        "updates": {
+          "a": "Result written"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A crashes before acknowledging. The queue may redeliver J.",
+        "edge": [
+          "a",
+          "q"
+        ],
+        "updates": {
+          "q": "J available again"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "Worker B receives J and checks the durable result or deduplication rule.",
+        "edge": [
+          "q",
+          "b"
+        ],
+        "updates": {
+          "b": "Recognize repeated J"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Safe repeated processing avoids a duplicate business effect.",
+        "edge": [
+          "b",
+          "q"
+        ],
+        "updates": {
+          "q": "J acknowledged"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Message Brokers",
+      "Message Queues"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/work-queue.gif",
+    "static": "assets/animations/work-queue-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 29,
+    "gif_sha256": "e0113fcff48ec120fb08afc90b78e3574f39c26c8876676fdb42d4725cf67041",
+    "static_sha256": "3b0f4b9026e359d9fc3d0bee363d21134e2e485af397ecbe8da1b13924f2520b",
+    "caption_words": 47
+  },
+  {
+    "id": "pub-sub",
+    "title": "Independent subscribers need their own copy",
+    "nodes": [
+      {
+        "id": "p",
+        "label": "Order publisher"
+      },
+      {
+        "id": "t",
+        "label": "Topic / broker"
+      },
+      {
+        "id": "b",
+        "label": "Billing subscription"
+      },
+      {
+        "id": "s",
+        "label": "Shipping subscription"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Publish OrderPlaced once to a topic.",
+        "edge": [
+          "p",
+          "t"
+        ],
+        "updates": {
+          "t": "Event E"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The billing subscription receives its own logical delivery.",
+        "edge": [
+          "t",
+          "b"
+        ],
+        "updates": {
+          "b": "Bill order"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The shipping subscription receives its own logical delivery.",
+        "edge": [
+          "t",
+          "s"
+        ],
+        "updates": {
+          "s": "Prepare shipment"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Workers within one subscription may compete; independent subscriptions do not.",
+        "edge": null,
+        "updates": {
+          "b": "Own progress / retry",
+          "s": "Own progress / retry"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Timing and delivery guarantees depend on the broker and configuration.",
+        "edge": null,
+        "updates": {
+          "t": "Push or pull varies"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Publish-Subscribe",
+      "Event-Driven Architecture (EDA)"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/pub-sub.gif",
+    "static": "assets/animations/pub-sub-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "8dcace48adafe97e1e51d4dc0526d06f247dd3ad065dfb0aada5156a9eeffb16",
+    "static_sha256": "a64b351d3e2e4e7f160fcd75f566261e40eab253a9a35c2e1f1e275ff50941ad",
+    "caption_words": 42
+  },
+  {
+    "id": "cdc",
+    "title": "CDC: a committed change reaches a read view",
+    "nodes": [
+      {
+        "id": "d",
+        "label": "Source database"
+      },
+      {
+        "id": "c",
+        "label": "CDC connector"
+      },
+      {
+        "id": "q",
+        "label": "Change stream"
+      },
+      {
+        "id": "s",
+        "label": "Search index"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A database transaction commits a product price change.",
+        "edge": null,
+        "updates": {
+          "d": "Product 42: price 550"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The connector reads the corresponding durable-log position.",
+        "edge": [
+          "d",
+          "c"
+        ],
+        "updates": {
+          "c": "Read committed change"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A change record reaches the stream; downstream work can lag.",
+        "edge": [
+          "c",
+          "q"
+        ],
+        "updates": {
+          "q": "Change E waiting",
+          "s": "Old price 500"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The consumer applies the change using an appropriate id/version rule.",
+        "edge": [
+          "q",
+          "s"
+        ],
+        "updates": {
+          "s": "Price 550"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Recovery may replay records. Consumers must handle duplicates safely.",
+        "edge": [
+          "q",
+          "s"
+        ],
+        "updates": {
+          "s": "Repeat E: safe update"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Change Data Capture (CDC)"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/cdc.gif",
+    "static": "assets/animations/cdc-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 26,
+    "gif_sha256": "bdf1b38e77c1c2e45ff3998acee20de3d0a9909e53b9cc188de726a1823d4b9f",
+    "static_sha256": "16ac738f3449ad0d8548aa022985fc9f603570e4c2f90ad436bbf0401f8840e7",
+    "caption_words": 45
+  },
+  {
+    "id": "event-sourcing",
+    "title": "Event sourcing: replay builds state",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Commands"
+      },
+      {
+        "id": "l",
+        "label": "Event history"
+      },
+      {
+        "id": "v",
+        "label": "Account view"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Append Deposited(100) to the durable event history.",
+        "edge": [
+          "c",
+          "l"
+        ],
+        "updates": {
+          "l": "Deposited 100"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Apply the event to the derived balance.",
+        "edge": [
+          "l",
+          "v"
+        ],
+        "updates": {
+          "v": "Balance 100"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Append Withdrawn(30), then update the view.",
+        "edge": [
+          "c",
+          "l"
+        ],
+        "updates": {
+          "l": "Deposit 100; withdraw 30"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The current balance is 70.",
+        "edge": [
+          "l",
+          "v"
+        ],
+        "updates": {
+          "v": "Balance 70"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Replay rebuilds the view; avoid repeating external side effects such as email.",
+        "edge": [
+          "l",
+          "v"
+        ],
+        "updates": {
+          "v": "Rebuilt balance 70"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Event Sourcing"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/event-sourcing.gif",
+    "static": "assets/animations/event-sourcing-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 30,
+    "gif_sha256": "c9a18c80ca6e648e4211cec6e36b1b68c369b488ed0cffb5d1cad94965fe8cff",
+    "static_sha256": "880777fcbd8d0a742d2bce5e5d037bc3de837f8f70a17cf9b96850fae0207bdd",
+    "caption_words": 39
+  },
+  {
+    "id": "cqrs",
+    "title": "CQRS: a read view can lag behind a write",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Create-order command"
+      },
+      {
+        "id": "w",
+        "label": "Write model"
+      },
+      {
+        "id": "e",
+        "label": "Update event"
+      },
+      {
+        "id": "r",
+        "label": "Order-list view"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A command creates order 42 in the write model.",
+        "edge": [
+          "c",
+          "w"
+        ],
+        "updates": {
+          "w": "Order 42 committed"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "An update event waits for processing.",
+        "edge": [
+          "w",
+          "e"
+        ],
+        "updates": {
+          "e": "Update queued",
+          "r": "Order 42 not yet shown"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A list read can temporarily show the old view.",
+        "edge": null,
+        "updates": {
+          "r": "Read view is behind"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The projector applies the update to the read view.",
+        "edge": [
+          "e",
+          "r"
+        ],
+        "updates": {
+          "r": "Order 42 now listed"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "CQRS separates read and write responsibilities; event sourcing is optional.",
+        "edge": null,
+        "updates": {
+          "w": "Write responsibility",
+          "r": "Read responsibility"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Command and Query Responsibility Segregation (CQRS)"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/cqrs.gif",
+    "static": "assets/animations/cqrs-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "f0a49c1971d7ec70a7dd7b9c219de425ccf466a3713de7f46e07b071a48d8ca1",
+    "static_sha256": "0a46918b87565469d91ee6ed57623474048600dac265588b31c0a9adf411225d",
+    "caption_words": 43
+  },
+  {
+    "id": "circuit-breaker",
+    "title": "Circuit breaker: closed, open, half-open",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Caller"
+      },
+      {
+        "id": "b",
+        "label": "Circuit breaker"
+      },
+      {
+        "id": "s",
+        "label": "Slow dependency"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Closed: calls reach the dependency and failures are measured.",
+        "edge": [
+          "a",
+          "s"
+        ],
+        "updates": {
+          "b": "CLOSED",
+          "s": "Repeated failures"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The configured failure rule opens the circuit.",
+        "edge": [
+          "a",
+          "b"
+        ],
+        "updates": {
+          "b": "OPEN: reject fast"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "During the open interval, new calls use a safe fallback or fail explicitly.",
+        "edge": [
+          "a",
+          "b"
+        ],
+        "updates": {
+          "a": "No unsafe success claim"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "After a delay, half-open allows limited probe calls.",
+        "edge": [
+          "b",
+          "s"
+        ],
+        "updates": {
+          "b": "HALF-OPEN: probes"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Successful probes can close it; failing probes can open it again.",
+        "edge": [
+          "s",
+          "b"
+        ],
+        "updates": {
+          "b": "CLOSED after success"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Circuit breaker"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/circuit-breaker.gif",
+    "static": "assets/animations/circuit-breaker-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 27,
+    "gif_sha256": "976465f5faf62eb0e271ba0e5917cfe111060a2894001314882182fb3478f39d",
+    "static_sha256": "0cf4a391912cc2198f6a91ad1a0500492726060198ff79d286e0f3035fb34be6",
+    "caption_words": 48
+  },
+  {
+    "id": "discovery-heartbeat",
+    "title": "Discovery data can become stale",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Caller"
+      },
+      {
+        "id": "r",
+        "label": "Service registry"
+      },
+      {
+        "id": "a",
+        "label": "Orders instance A"
+      },
+      {
+        "id": "b",
+        "label": "Orders instance B"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A and B register reachable endpoints; health information is refreshed.",
+        "edge": [
+          "a",
+          "r"
+        ],
+        "updates": {
+          "r": "A and B registered"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The caller discovers candidate orders endpoints.",
+        "edge": [
+          "c",
+          "r"
+        ],
+        "updates": {
+          "c": "Candidates: A, B"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A fails after discovery; a previously returned endpoint can now be stale.",
+        "edge": [
+          "c",
+          "a"
+        ],
+        "updates": {
+          "a": "Unavailable"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "A health timeout marks A suspect; the registry can stop advertising it.",
+        "edge": [
+          "r",
+          "a"
+        ],
+        "updates": {
+          "r": "A suspect; B remains"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "A retry to B must respect the operation retry/idempotency policy.",
+        "edge": [
+          "c",
+          "b"
+        ],
+        "updates": {
+          "b": "Handle safe retry"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Service Discovery",
+      "HeartBeats"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/discovery-heartbeat.gif",
+    "static": "assets/animations/discovery-heartbeat-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 28,
+    "gif_sha256": "78f2c675b47cfcc85ac1b44c83bf7d1a4126be37ff9edded169923cf846e7e2c",
+    "static_sha256": "3d0880b8079a86b0db74845cc99f58f3753abdb6745d2e6f126056c9a04ea388",
+    "caption_words": 51
+  },
+  {
+    "id": "recovery-objectives",
+    "title": "Recovery time and data-loss targets differ",
+    "nodes": [
+      {
+        "id": "b",
+        "label": "Last backup"
+      },
+      {
+        "id": "f",
+        "label": "Failure"
+      },
+      {
+        "id": "r",
+        "label": "Restore"
+      },
+      {
+        "id": "s",
+        "label": "Service restored"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A recoverable backup exists at 10:00.",
+        "edge": null,
+        "updates": {
+          "b": "Data through 10:00"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The service fails at 10:20; newer data may need another recoverable log.",
+        "edge": [
+          "b",
+          "f"
+        ],
+        "updates": {
+          "f": "Failure at 10:20"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Without newer recoverable data, this scenario loses up to 20 minutes.",
+        "edge": null,
+        "updates": {
+          "b": "Recovery point: 10:00"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Restore and validation take until 11:00.",
+        "edge": [
+          "f",
+          "r"
+        ],
+        "updates": {
+          "r": "Restore + validate"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Observed recovery took 40 minutes. RPO/RTO are targets, not these observations.",
+        "edge": [
+          "r",
+          "s"
+        ],
+        "updates": {
+          "s": "Available at 11:00"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Disaster recovery"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/recovery-objectives.gif",
+    "static": "assets/animations/recovery-objectives-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "aacc6db4c036d27dd34ab8992eb30d848a7b17b6870050e68cd358dadae1beec",
+    "static_sha256": "f13f7f22173c6c08cab08abcddf2198326259beffbe0241ce54b86d92f3aa2e3",
+    "caption_words": 50
+  },
+  {
+    "id": "oauth-oidc",
+    "title": "OAuth / OIDC: code, tokens, and audiences",
+    "nodes": [
+      {
+        "id": "u",
+        "label": "User browser"
+      },
+      {
+        "id": "a",
+        "label": "Client application"
+      },
+      {
+        "id": "i",
+        "label": "Identity provider"
+      },
+      {
+        "id": "p",
+        "label": "Protected API"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "The browser signs in at the provider; the client does not receive that password.",
+        "edge": [
+          "u",
+          "i"
+        ],
+        "updates": {
+          "i": "User authentication"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "An authorization-code flow returns a code to the client redirect.",
+        "edge": [
+          "i",
+          "a"
+        ],
+        "updates": {
+          "a": "Authorization code"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The client exchanges the code with the required checks, such as PKCE.",
+        "edge": [
+          "a",
+          "i"
+        ],
+        "updates": {
+          "i": "Validate exchange"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "With OIDC, the client can receive an ID token; an access token targets an API.",
+        "edge": [
+          "i",
+          "a"
+        ],
+        "updates": {
+          "a": "ID token / access token"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The API validates the access token and enforces authorization.",
+        "edge": [
+          "a",
+          "p"
+        ],
+        "updates": {
+          "p": "Check access + ownership"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "OAuth 2.0 and OpenID Connect (OIDC)"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/oauth-oidc.gif",
+    "static": "assets/animations/oauth-oidc-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 30,
+    "gif_sha256": "aa05997e69c88ff209f0afb859b3d2d35a606caf4f308bd1b4a12ba07e7283aa",
+    "static_sha256": "ecbdf29e348fb67fc0d85048f3618bbc498d5254d68277235d4e81a8961c27fa",
+    "caption_words": 60
+  },
+  {
+    "id": "single-sign-on",
+    "title": "SSO does not mean one universal app session",
+    "nodes": [
+      {
+        "id": "u",
+        "label": "Browser"
+      },
+      {
+        "id": "i",
+        "label": "Identity provider"
+      },
+      {
+        "id": "a",
+        "label": "Payroll app"
+      },
+      {
+        "id": "b",
+        "label": "Email app"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "The user authenticates at the identity provider.",
+        "edge": [
+          "u",
+          "i"
+        ],
+        "updates": {
+          "i": "Provider session exists"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Payroll establishes its own application session using the sign-in result.",
+        "edge": [
+          "i",
+          "a"
+        ],
+        "updates": {
+          "a": "Payroll session"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Email can reuse the provider session for sign-in, then create its own session.",
+        "edge": [
+          "i",
+          "b"
+        ],
+        "updates": {
+          "b": "Email session"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Logging out of payroll may end only the payroll session.",
+        "edge": [
+          "u",
+          "a"
+        ],
+        "updates": {
+          "a": "Logged out",
+          "b": "Still signed in"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Global logout needs an explicit plan for provider and application sessions.",
+        "edge": null,
+        "updates": {
+          "i": "Separate logout policy"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Single Sign-On (SSO)"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/single-sign-on.gif",
+    "static": "assets/animations/single-sign-on-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 26,
+    "gif_sha256": "8e96f0de40576ec9cc3f12964406d31ab231ccf93735489afa778da7f135a1f5",
+    "static_sha256": "683b90b18b497659df24e60ab3bded9ffcb847539619decfbf3dde2c44cf977d",
+    "caption_words": 51
+  },
+  {
+    "id": "tls-mtls",
+    "title": "TLS identity is separate from authorization",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Client"
+      },
+      {
+        "id": "s",
+        "label": "Server"
+      },
+      {
+        "id": "z",
+        "label": "Authorization rules"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "During TLS setup, the client validates the server certificate and identity.",
+        "edge": [
+          "s",
+          "c"
+        ],
+        "updates": {
+          "c": "Verify server identity"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The protected connection carries application traffic.",
+        "edge": [
+          "c",
+          "s"
+        ],
+        "updates": {
+          "s": "Encrypted in transit"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "With mTLS, the server also validates a client certificate.",
+        "edge": [
+          "c",
+          "s"
+        ],
+        "updates": {
+          "s": "Verify client identity"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "An authenticated client still needs permission for the requested operation.",
+        "edge": [
+          "s",
+          "z"
+        ],
+        "updates": {
+          "z": "May this user read order 42?"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Valid identity does not grant unlimited access to every record.",
+        "edge": [
+          "z",
+          "s"
+        ],
+        "updates": {
+          "s": "Enforce operation policy"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "SSL, TLS, mTLS",
+      "HTTP/HTTPS"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/tls-mtls.gif",
+    "static": "assets/animations/tls-mtls-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 30,
+    "gif_sha256": "b7f4e0bbc5ec0033dda89d39d432d594518d7d812c14138f1f6ec4584660abcb",
+    "static_sha256": "340376df8efc761ff96e42fbd295755d39fa6df6ca999aa44d351f9034e54bc9",
+    "caption_words": 46
+  },
+  {
+    "id": "nearby-search",
+    "title": "Nearby search must cross cell boundaries",
+    "nodes": [
+      {
+        "id": "u",
+        "label": "Rider"
+      },
+      {
+        "id": "a",
+        "label": "Cell A"
+      },
+      {
+        "id": "b",
+        "label": "Neighbor cell B"
+      },
+      {
+        "id": "d",
+        "label": "Nearby driver"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A rider is close to the edge of cell A.",
+        "edge": null,
+        "updates": {
+          "u": "Near boundary",
+          "a": "Rider cell"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The nearest driver is across the boundary in cell B.",
+        "edge": null,
+        "updates": {
+          "b": "Adjacent cell",
+          "d": "Close, but in B"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Searching only A misses that driver.",
+        "edge": [
+          "u",
+          "a"
+        ],
+        "updates": {
+          "a": "No matching driver"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Search intersecting neighbor cells, then filter by actual distance.",
+        "edge": [
+          "u",
+          "b"
+        ],
+        "updates": {
+          "b": "Candidate driver found"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Grid prefixes and quadtrees are candidate indexes, not exact distance tests.",
+        "edge": [
+          "b",
+          "d"
+        ],
+        "updates": {
+          "d": "Validate distance + availability"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Geohashing and Quadtrees"
+    ],
+    "kind": "grid",
+    "gif": "assets/animations/nearby-search.gif",
+    "static": "assets/animations/nearby-search-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 5,
+    "gif_sha256": "18a065b9baa7a52cf5eeb62e583579768fb8e0737f5106493b8a64cf34bd6ded",
+    "static_sha256": "02f6b0a04eec3599091f836db15db16b1f79a313f1c317178e26f746577c1efc",
+    "caption_words": 46
+  },
+  {
+    "id": "raft-majority",
+    "title": "Raft: minority isolation stops safe progress",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Voter A"
+      },
+      {
+        "id": "b",
+        "label": "Voter B"
+      },
+      {
+        "id": "c",
+        "label": "Voter C"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A is leader in this illustrative three-voter crash-fault group.",
+        "edge": null,
+        "updates": {
+          "a": "Leader: term 1",
+          "b": "Follower",
+          "c": "Follower"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Raft replicates and commits entries using its log, term, and majority rules.",
+        "edge": [
+          "a",
+          "b"
+        ],
+        "updates": {
+          "a": "Entry X committed",
+          "b": "Entry X stored"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A becomes isolated. A alone cannot commit conflicting new decisions.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "a": "Isolated minority"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "B and C can elect a leader when protocol and timing conditions permit.",
+        "edge": [
+          "b",
+          "c"
+        ],
+        "updates": {
+          "b": "Leader: later term",
+          "c": "Majority participant"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Only the communicating majority can progress under the protocol rules.",
+        "edge": [
+          "b",
+          "c"
+        ],
+        "updates": {
+          "b": "Commit rule enforced"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Consensus Algorithms"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/raft-majority.gif",
+    "static": "assets/animations/raft-majority-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 24,
+    "gif_sha256": "5c1aebacf3cee67aa81602284fbcc65777908b7d3c94fa68c119617c5bf82370",
+    "static_sha256": "9875a8f26f91218803ba02a203bea4deadcf1116b8990f1e74d25aa6dbc72d76",
+    "caption_words": 54
+  },
+  {
+    "id": "fencing-token",
+    "title": "Lease expiry does not stop the old worker",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Worker A"
+      },
+      {
+        "id": "b",
+        "label": "Worker B"
+      },
+      {
+        "id": "l",
+        "label": "Lease authority"
+      },
+      {
+        "id": "s",
+        "label": "Protected store"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A receives ownership token 10, then pauses.",
+        "edge": [
+          "l",
+          "a"
+        ],
+        "updates": {
+          "a": "Token 10; paused"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A lease expires; B acquires a newer token 11.",
+        "edge": [
+          "l",
+          "b"
+        ],
+        "updates": {
+          "b": "Token 11"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The store accepts B and records the newer fencing token.",
+        "edge": [
+          "b",
+          "s"
+        ],
+        "updates": {
+          "s": "Newest accepted: 11"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A resumes and sends a stale write carrying token 10.",
+        "edge": [
+          "a",
+          "s"
+        ],
+        "updates": {
+          "a": "Old worker resumed"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "The store rejects 10 because it enforces fencing. Issuing tokens alone is not enough.",
+        "edge": [
+          "s",
+          "a"
+        ],
+        "updates": {
+          "a": "Stale write rejected"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Distributed Locking"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/fencing-token.gif",
+    "static": "assets/animations/fencing-token-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 29,
+    "gif_sha256": "0a443c25f386f8ef5973048d063975742fe988deab9c9bdd57e49b258dc12259",
+    "static_sha256": "7a7d35ad7e4f71a8a8da8fc0e57b6a285be64565641ee434df7e7b96f104e6bb",
+    "caption_words": 50
+  },
+  {
+    "id": "gossip-spread",
+    "title": "Gossip spreads knowledge gradually",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Node A"
+      },
+      {
+        "id": "b",
+        "label": "Node B"
+      },
+      {
+        "id": "c",
+        "label": "Node C"
+      },
+      {
+        "id": "d",
+        "label": "Node D"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A learns a new membership observation, version V2.",
+        "edge": null,
+        "updates": {
+          "a": "Knows V2",
+          "b": "Knows V1",
+          "c": "Knows V1",
+          "d": "Knows V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A exchanges information with B.",
+        "edge": [
+          "a",
+          "b"
+        ],
+        "updates": {
+          "b": "Knows V2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "B later exchanges with C; D may still have old information.",
+        "edge": [
+          "b",
+          "c"
+        ],
+        "updates": {
+          "c": "Knows V2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A reachable peer exchange eventually reaches D under convergence assumptions.",
+        "edge": [
+          "c",
+          "d"
+        ],
+        "updates": {
+          "d": "Knows V2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Spreading observations is not consensus on one committed transaction history.",
+        "edge": null,
+        "updates": {
+          "a": "Temporary disagreement allowed"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Gossip Protocol"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/gossip-spread.gif",
+    "static": "assets/animations/gossip-spread-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "0f60c9901ddca7145511b448211e5dbf35c6b3f27ab2df6dd4fb4a0f3399e3db",
+    "static_sha256": "073c035ed58ca0ff902710796244b49d741de83abd17c8b345c4938534471728",
+    "caption_words": 44
+  },
+  {
+    "id": "availability-failover",
+    "title": "A replacement helps only if traffic reaches it",
+    "nodes": [
+      {
+        "id": "u",
+        "label": "User"
+      },
+      {
+        "id": "r",
+        "label": "Request router"
+      },
+      {
+        "id": "a",
+        "label": "App A"
+      },
+      {
+        "id": "b",
+        "label": "App B"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Two app instances can handle the same request contract.",
+        "edge": null,
+        "updates": {
+          "a": "Healthy",
+          "b": "Healthy standby"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The router initially selects A.",
+        "edge": [
+          "r",
+          "a"
+        ],
+        "updates": {
+          "a": "Handles request"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A stops responding. A second box alone does not redirect traffic.",
+        "edge": [
+          "r",
+          "a"
+        ],
+        "updates": {
+          "a": "Unavailable"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "A configured health and routing policy switches suitable traffic to B.",
+        "edge": [
+          "r",
+          "b"
+        ],
+        "updates": {
+          "b": "Handles new requests"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Test shared dependencies too. Both apps can fail if their common database fails.",
+        "edge": [
+          "b",
+          "u"
+        ],
+        "updates": {
+          "u": "Response restored"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Availability"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/availability-failover.gif",
+    "static": "assets/animations/availability-failover-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 25,
+    "gif_sha256": "4990110fbacbfdd3b6acdf6f3fe2f8ea27eee201af1f640531c0273aed6c7fb7",
+    "static_sha256": "b09dc4ddcb2fcc44d6525d6511625c3ea6b0e88423f5f3451b3f3e67d28d1441",
+    "caption_words": 49
+  },
+  {
+    "id": "index-lookup",
+    "title": "An index narrows the records to examine",
+    "nodes": [
+      {
+        "id": "q",
+        "label": "Query"
+      },
+      {
+        "id": "t",
+        "label": "Table rows"
+      },
+      {
+        "id": "i",
+        "label": "Customer-ID index"
+      },
+      {
+        "id": "r",
+        "label": "Matching rows"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Find orders for customer 7 in a hypothetical table with one million rows.",
+        "edge": null,
+        "updates": {
+          "q": "WHERE customer_id = 7",
+          "t": "1,000,000 orders"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Without a useful access path, the engine may inspect the full table.",
+        "edge": [
+          "q",
+          "t"
+        ],
+        "updates": {
+          "t": "Scan many rows"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A suitable index maps customer 7 to candidate records.",
+        "edge": [
+          "q",
+          "i"
+        ],
+        "updates": {
+          "i": "7 -> row IDs 12, 81, 99"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Read or validate the matching records as required by the execution plan.",
+        "edge": [
+          "i",
+          "r"
+        ],
+        "updates": {
+          "r": "3 candidate records"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The index costs storage and write maintenance; measure the actual query plan.",
+        "edge": null,
+        "updates": {
+          "i": "Maintain on writes"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Indexes"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/index-lookup.gif",
+    "static": "assets/animations/index-lookup-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "439d548ec5d9945b514cf31db92a126d5ac05b58b30fb415519d51a1d26cbd6b",
+    "static_sha256": "d54ea49d061eb9ed6c910f3206a5dd309e2ea9e8383b0cd656cb92241eb0d2b1",
+    "caption_words": 58
+  },
+  {
+    "id": "cdn-edge",
+    "title": "CDN: origin miss, then nearby reuse",
+    "nodes": [
+      {
+        "id": "u",
+        "label": "Viewer"
+      },
+      {
+        "id": "e",
+        "label": "Nearby CDN edge"
+      },
+      {
+        "id": "o",
+        "label": "Origin server"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A viewer requests a public video segment from the nearby edge.",
+        "edge": [
+          "u",
+          "e"
+        ],
+        "updates": {
+          "e": "Segment not cached"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "On a miss, the edge obtains the allowed content from the origin.",
+        "edge": [
+          "e",
+          "o"
+        ],
+        "updates": {
+          "o": "Public segment V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The edge stores the response according to its caching policy.",
+        "edge": [
+          "o",
+          "e"
+        ],
+        "updates": {
+          "e": "Cached segment V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A later viewer request can be served without another origin fetch.",
+        "edge": [
+          "e",
+          "u"
+        ],
+        "updates": {
+          "u": "Nearby cached response"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Versions, expiry, and access rules still matter. Private files need protection.",
+        "edge": null,
+        "updates": {
+          "e": "Freshness + access policy"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Content Delivery Network (CDN)"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/cdn-edge.gif",
+    "static": "assets/animations/cdn-edge-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 26,
+    "gif_sha256": "a7c32920f80fecfbf0b0865fc07a3603bf6f00f56c46a1b942409fbaa4d06892",
+    "static_sha256": "b84c2b9942a9e8781811bab5be70e07c2fd301c0471c6e032d59f26b8ace4f43",
+    "caption_words": 55
+  },
+  {
+    "id": "p2p-pieces",
+    "title": "Peers share verified pieces and may leave",
+    "nodes": [
+      {
+        "id": "o",
+        "label": "File origin"
+      },
+      {
+        "id": "a",
+        "label": "Peer A"
+      },
+      {
+        "id": "b",
+        "label": "Peer B"
+      },
+      {
+        "id": "c",
+        "label": "Peer C"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A trusted file description identifies the pieces and their expected digests.",
+        "edge": [
+          "o",
+          "a"
+        ],
+        "updates": {
+          "a": "Pieces 1, 2",
+          "b": "Piece 3",
+          "c": "No pieces yet"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "C downloads a useful piece from A and verifies it.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Verified piece 1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "C obtains another useful piece from B.",
+        "edge": [
+          "b",
+          "c"
+        ],
+        "updates": {
+          "c": "Verified pieces 1, 3"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A leaves before sending piece 2. Discovery must locate another source.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "a": "Disconnected",
+          "c": "Still needs piece 2"
+        },
+        "blocked": true
+      },
+      {
+        "caption": "Peers reduce origin traffic only when useful sources remain reachable.",
+        "edge": [
+          "o",
+          "c"
+        ],
+        "updates": {
+          "c": "Fallback source for piece 2"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Peer-to-Peer (P2P) Architecture"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/p2p-pieces.gif",
+    "static": "assets/animations/p2p-pieces-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 29,
+    "gif_sha256": "487cfa09a261e58c5af0a2f7df703013648979c06a7d80c1c03324fd30319d59",
+    "static_sha256": "29a97bbd5af922dac983d5e8797cd0741cc3b092c720601d2e576c655c270969",
+    "caption_words": 49
+  },
+  {
+    "id": "case-url-shortener",
+    "title": "Design example: create and resolve a short URL",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Client"
+      },
+      {
+        "id": "a",
+        "label": "Short-link service"
+      },
+      {
+        "id": "d",
+        "label": "Mapping database"
+      },
+      {
+        "id": "k",
+        "label": "Lookup cache"
+      },
+      {
+        "id": "t",
+        "label": "Destination site"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Creation: validate the destination and allocate a short key with a collision policy.",
+        "edge": [
+          "c",
+          "a"
+        ],
+        "updates": {
+          "c": "Create short link",
+          "a": "Allocate key K"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Persist K -> destination under a uniqueness rule before confirming creation.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "d": "K -> destination saved"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Resolution: a later request for K checks the fast lookup cache.",
+        "edge": [
+          "a",
+          "k"
+        ],
+        "updates": {
+          "k": "Miss for K"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "On a miss, retrieve the mapping and fill the cache using a freshness policy.",
+        "edge": [
+          "d",
+          "k"
+        ],
+        "updates": {
+          "k": "K -> destination cached"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The service returns an HTTP redirect; the client requests the destination.",
+        "edge": [
+          "c",
+          "t"
+        ],
+        "updates": {
+          "c": "Follow validated redirect",
+          "t": "Serve destination"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Later cache hits reduce mapping reads; expiry, deletion, and abuse still need policies.",
+        "edge": [
+          "k",
+          "a"
+        ],
+        "updates": {
+          "a": "Resolve hit for K"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "URL Shortener"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/case-url-shortener.gif",
+    "static": "assets/animations/case-url-shortener-steps.png",
+    "duration_ms": 45000,
+    "frame_count": 36,
+    "encoded_frame_count": 36,
+    "gif_sha256": "b8cd523620bc8b190589fb1693aaedd3bcf1ee1445238ecb8ed3c697076adc0f",
+    "static_sha256": "ecd523c8c3566d5294817756c4d41f90577a36749f51631d59ea0c1a60f95640",
+    "caption_words": 72
+  },
+  {
+    "id": "case-whatsapp",
+    "title": "Design example: accepted is not yet delivered",
+    "nodes": [
+      {
+        "id": "s",
+        "label": "Sender"
+      },
+      {
+        "id": "a",
+        "label": "Chat service"
+      },
+      {
+        "id": "d",
+        "label": "Message store"
+      },
+      {
+        "id": "q",
+        "label": "Delivery work"
+      },
+      {
+        "id": "r",
+        "label": "Recipient"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "The sender submits one logical message using a stable message identifier.",
+        "edge": [
+          "s",
+          "a"
+        ],
+        "updates": {
+          "s": "Message M42"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Persist the message and recovery state before promising durable acceptance.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "d": "M42 persisted"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Acknowledge acceptance, which is different from recipient delivery.",
+        "edge": [
+          "a",
+          "s"
+        ],
+        "updates": {
+          "s": "Accepted by service"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Use a recoverable handoff for delivery work; do not lose work between stores.",
+        "edge": [
+          "d",
+          "q"
+        ],
+        "updates": {
+          "q": "Deliver M42"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "An online recipient receives M42; offline clients need later retrieval.",
+        "edge": [
+          "q",
+          "r"
+        ],
+        "updates": {
+          "r": "M42 received"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A retry or reconnect can repeat M42. Deduplicate at the durable/client boundary.",
+        "edge": [
+          "q",
+          "r"
+        ],
+        "updates": {
+          "r": "Repeated M42 recognized"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "WhatsApp"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/case-whatsapp.gif",
+    "static": "assets/animations/case-whatsapp-steps.png",
+    "duration_ms": 45000,
+    "frame_count": 36,
+    "encoded_frame_count": 36,
+    "gif_sha256": "cab43caa9d8636c96fe9f39e7b14f50d53b1320e2e8a1dd38fc99f30b43e41a2",
+    "static_sha256": "068a60a96b9eb52caa66f0660b731663dd4a53fd43bedcc6db1b726df8997b8b",
+    "caption_words": 65
+  },
+  {
+    "id": "case-twitter",
+    "title": "Design example: fanout makes feeds fast, at a cost",
+    "nodes": [
+      {
+        "id": "w",
+        "label": "Post writer"
+      },
+      {
+        "id": "p",
+        "label": "Post store"
+      },
+      {
+        "id": "q",
+        "label": "Fanout work"
+      },
+      {
+        "id": "t",
+        "label": "Follower timelines"
+      },
+      {
+        "id": "a",
+        "label": "Feed service"
+      },
+      {
+        "id": "r",
+        "label": "Feed reader"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Persist a new post with its author and stable identifier.",
+        "edge": [
+          "w",
+          "p"
+        ],
+        "updates": {
+          "p": "Post P recorded"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Schedule recoverable fanout work rather than blocking on every follower.",
+        "edge": [
+          "p",
+          "q"
+        ],
+        "updates": {
+          "q": "Distribute references to P"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Fanout updates follower timelines, which can temporarily lag.",
+        "edge": [
+          "q",
+          "t"
+        ],
+        "updates": {
+          "t": "Post references ready"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A reader asks the feed service for a bounded page.",
+        "edge": [
+          "r",
+          "a"
+        ],
+        "updates": {
+          "r": "Read next feed page"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Read prepared timeline references, then retrieve authorized post content.",
+        "edge": [
+          "a",
+          "t"
+        ],
+        "updates": {
+          "a": "Serve prepared page"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Very large authors may need another fanout policy; a hybrid trades write work for read work.",
+        "edge": [
+          "p",
+          "a"
+        ],
+        "updates": {
+          "a": "Merge selected read-time posts"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Twitter"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/case-twitter.gif",
+    "static": "assets/animations/case-twitter-steps.png",
+    "duration_ms": 45000,
+    "frame_count": 36,
+    "encoded_frame_count": 36,
+    "gif_sha256": "8a7103286e83ee21db6a75909dd4eff15b4af656f6c9e78040c984d5c4c1e409",
+    "static_sha256": "7a5614b8978d5340f35cd69be3fc4ab5bcc0827f992e670814befa8428e4f5ce",
+    "caption_words": 63
+  },
+  {
+    "id": "case-netflix",
+    "title": "Design example: prepare video, then serve nearby",
+    "nodes": [
+      {
+        "id": "s",
+        "label": "Object storage"
+      },
+      {
+        "id": "e",
+        "label": "Encoding work"
+      },
+      {
+        "id": "o",
+        "label": "Origin service"
+      },
+      {
+        "id": "c",
+        "label": "CDN edge"
+      },
+      {
+        "id": "v",
+        "label": "Viewer"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "An uploaded video is kept in durable object storage.",
+        "edge": null,
+        "updates": {
+          "s": "Original video stored"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Encoding work creates suitable versions and segments; retries must be safe.",
+        "edge": [
+          "s",
+          "e"
+        ],
+        "updates": {
+          "e": "Encode versions"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Prepared segments become available to the origin delivery path.",
+        "edge": [
+          "e",
+          "o"
+        ],
+        "updates": {
+          "o": "Versioned segments ready"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A viewer requests a segment from the CDN edge.",
+        "edge": [
+          "v",
+          "c"
+        ],
+        "updates": {
+          "c": "Segment miss"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "On a miss, the edge fetches allowed content from the origin.",
+        "edge": [
+          "o",
+          "c"
+        ],
+        "updates": {
+          "c": "Segment cached"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Nearby reuse reduces origin delivery load; cold caches and access control still matter.",
+        "edge": [
+          "c",
+          "v"
+        ],
+        "updates": {
+          "v": "Play segment"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Netflix"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/case-netflix.gif",
+    "static": "assets/animations/case-netflix-steps.png",
+    "duration_ms": 45000,
+    "frame_count": 36,
+    "encoded_frame_count": 32,
+    "gif_sha256": "4914051fb51f38f8c6939aa6621af7a3ad56a5d67671d401b5b825e30083fb67",
+    "static_sha256": "221c354c92c32bcc4f6d519f44c7222cd50366e85b13b4dc75e6ff6a5bb10c81",
+    "caption_words": 62
+  },
+  {
+    "id": "case-uber",
+    "title": "Design example: near a rider does not mean available",
+    "nodes": [
+      {
+        "id": "r",
+        "label": "Rider"
+      },
+      {
+        "id": "a",
+        "label": "Dispatch service"
+      },
+      {
+        "id": "g",
+        "label": "Location index"
+      },
+      {
+        "id": "s",
+        "label": "Assignment store"
+      },
+      {
+        "id": "d",
+        "label": "Driver"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "The rider requests a trip with a pickup location.",
+        "edge": [
+          "r",
+          "a"
+        ],
+        "updates": {
+          "a": "Find nearby candidates"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Search intersecting spatial cells and filter by actual distance and freshness.",
+        "edge": [
+          "a",
+          "g"
+        ],
+        "updates": {
+          "g": "Candidate driver D"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Check current availability and conditionally claim the driver.",
+        "edge": [
+          "a",
+          "s"
+        ],
+        "updates": {
+          "s": "D claimed for trip T"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Notify the selected driver and track acceptance or timeout.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "d": "Trip offer T"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Another request must not also claim D. Stale location data is not an assignment guarantee.",
+        "edge": [
+          "r",
+          "s"
+        ],
+        "updates": {
+          "s": "Conflicting claim rejected"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Expired offers need an explicit release/retry policy before another assignment.",
+        "edge": [
+          "a",
+          "s"
+        ],
+        "updates": {
+          "s": "Transition by trip state"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Uber"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/case-uber.gif",
+    "static": "assets/animations/case-uber-steps.png",
+    "duration_ms": 45000,
+    "frame_count": 36,
+    "encoded_frame_count": 36,
+    "gif_sha256": "7ab6b41e122c2b9b6b5b6012d3be8d21f37867a95b341c13d2ef68bddc5d70d8",
+    "static_sha256": "bc2c6681fa0a946c5d17b96a4749a1f2f5d93bdd6aca6827bad0a1909961af77",
+    "caption_words": 63
+  },
+  {
+    "id": "concurrency-parallelism",
+    "title": "Interleaving is different from simultaneous execution",
+    "nodes": [
+      {
+        "id": "q",
+        "label": "Tasks"
+      },
+      {
+        "id": "s",
+        "label": "One execution unit"
+      },
+      {
+        "id": "a",
+        "label": "Execution unit A"
+      },
+      {
+        "id": "b",
+        "label": "Execution unit B"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "One execution unit starts A. Both tasks need two model time units of CPU work.",
+        "edge": null,
+        "updates": {},
+        "blocked": false
+      },
+      {
+        "caption": "The same execution unit switches to B. Task lifetimes overlap, but work is interleaved.",
+        "edge": null,
+        "updates": {},
+        "blocked": false
+      },
+      {
+        "caption": "It resumes A, which finishes after its second unit of work.",
+        "edge": null,
+        "updates": {},
+        "blocked": false
+      },
+      {
+        "caption": "It resumes B. Both tasks finish after four model time units.",
+        "edge": null,
+        "updates": {},
+        "blocked": false
+      },
+      {
+        "caption": "Separate alternative: two available execution units run A and B at the same time.",
+        "edge": null,
+        "updates": {},
+        "blocked": false
+      },
+      {
+        "caption": "Both finish after two model units in this idealized CPU-only example.",
+        "edge": null,
+        "updates": {},
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Concurrency vs parallelism",
+      "Latency vs throughput"
+    ],
+    "kind": "workers",
+    "gif": "assets/animations/concurrency-parallelism.gif",
+    "static": "assets/animations/concurrency-parallelism-steps.png",
+    "duration_ms": 45000,
+    "frame_count": 36,
+    "encoded_frame_count": 6,
+    "gif_sha256": "9a6e3120c77759be2d2ac1b35072ea33b0098d695876f8d400f2c4c3f6acbd13",
+    "static_sha256": "298e14b6cd2efe53a74e398f145ecba8cba04105674d1327c5956b3da9ebaff2",
+    "caption_words": 76
+  },
+  {
+    "id": "batch-stream",
+    "title": "Batch and streaming organize the same arrivals differently",
+    "nodes": [
+      {
+        "id": "e",
+        "label": "Incoming records"
+      },
+      {
+        "id": "b",
+        "label": "Batch buffer"
+      },
+      {
+        "id": "w",
+        "label": "Batch processor"
+      },
+      {
+        "id": "s",
+        "label": "Stream processor"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Compare two alternatives for the same arriving records.",
+        "edge": null,
+        "updates": {
+          "b": "Empty",
+          "s": "Waiting for arrivals"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "E1 waits for a batch boundary; a streaming path can begin E1 now.",
+        "edge": [
+          "e",
+          "b"
+        ],
+        "updates": {
+          "b": "E1 waiting",
+          "s": "Process E1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "E2 joins the buffer; the streaming path can handle it as it arrives.",
+        "edge": [
+          "e",
+          "s"
+        ],
+        "updates": {
+          "b": "E1, E2 waiting",
+          "s": "Process E2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "At its boundary, the batch processor receives the accumulated group.",
+        "edge": [
+          "b",
+          "w"
+        ],
+        "updates": {
+          "w": "Process E1 + E2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Batching amortizes overhead but adds waiting. Streaming still has processing delay.",
+        "edge": null,
+        "updates": {
+          "b": "Start next batch",
+          "s": "Continue processing"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Batch vs stream processing"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/batch-stream.gif",
+    "static": "assets/animations/batch-stream-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "e5fbb883a0640787d16ea9bec04b879964e47a416c381c4becbfdd538ca0a20f",
+    "static_sha256": "1b7136330e78f16a6519d9d8dd0eca353e2c945f32af5386f82103688ee6a749",
+    "caption_words": 55
+  },
+  {
+    "id": "read-write-through",
+    "title": "Read-through and write-through can be combined",
+    "nodes": [
+      {
+        "id": "a",
+        "label": "Application"
+      },
+      {
+        "id": "c",
+        "label": "Cache layer"
+      },
+      {
+        "id": "d",
+        "label": "Backing database"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Read-through: the application asks the cache layer for a missing value.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Read miss"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The cache layer loads it from the backing database.",
+        "edge": [
+          "c",
+          "d"
+        ],
+        "updates": {
+          "d": "Authoritative value V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The layer caches V1 and returns it to the application.",
+        "edge": [
+          "d",
+          "c"
+        ],
+        "updates": {
+          "c": "Cache contains V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Write-through: the application sends a new value through that layer.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Write V2 pending"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The layer synchronously persists the write according to its write policy.",
+        "edge": [
+          "c",
+          "d"
+        ],
+        "updates": {
+          "d": "Persisted V2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "After the required writes succeed, acknowledge. Failure ordering still needs a policy.",
+        "edge": [
+          "c",
+          "a"
+        ],
+        "updates": {
+          "c": "Cache V2",
+          "a": "Write acknowledged"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Read-through vs write-through cache"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/read-write-through.gif",
+    "static": "assets/animations/read-write-through-steps.png",
+    "duration_ms": 45000,
+    "frame_count": 36,
+    "encoded_frame_count": 36,
+    "gif_sha256": "5ae93e2e01a9416070cf5ba9dad20c7b0d3614ac57ec3aa25a4d5dba564141a6",
+    "static_sha256": "70d424b4feff8e098d8cfd0ecf1d8aa976096a4a65fa2c5fdb288ce6bb400901",
+    "caption_words": 63
+  },
+  {
+    "id": "push-pull",
+    "title": "Who initiates the update: sender or receiver?",
+    "nodes": [
+      {
+        "id": "p",
+        "label": "Provider: push"
+      },
+      {
+        "id": "r",
+        "label": "Push receiver"
+      },
+      {
+        "id": "q",
+        "label": "Polling receiver"
+      },
+      {
+        "id": "s",
+        "label": "Provider: pull"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "Both alternatives begin with the receiver knowing version V1.",
+        "edge": null,
+        "updates": {
+          "p": "Current V1",
+          "r": "Knows V1",
+          "q": "Knows V1",
+          "s": "Current V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The provider records V2 and initiates a push notification.",
+        "edge": [
+          "p",
+          "r"
+        ],
+        "updates": {
+          "p": "Current V2",
+          "r": "Receives V2",
+          "s": "Current V2"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The polling receiver can remain on V1 until its next check.",
+        "edge": null,
+        "updates": {
+          "q": "Still knows V1"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The polling receiver initiates a request asking for updates.",
+        "edge": [
+          "q",
+          "s"
+        ],
+        "updates": {
+          "q": "Request latest version"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The pull response now supplies V2. Poll interval and retry behavior affect delay.",
+        "edge": [
+          "s",
+          "q"
+        ],
+        "updates": {
+          "q": "Receives V2"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Push vs pull"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/push-pull.gif",
+    "static": "assets/animations/push-pull-steps.png",
+    "duration_ms": 37500,
+    "frame_count": 30,
+    "encoded_frame_count": 22,
+    "gif_sha256": "2aa32d5c79a038a6de7d1442e0dc982df927a8161bd8f6b6183f19e5a75f1308",
+    "static_sha256": "3b50fe16decd56f83bb65dc7380bd6344432ae085b3c01c95188ba306b33636f",
+    "caption_words": 51
+  },
+  {
+    "id": "sync-async",
+    "title": "An order response can precede email completion",
+    "nodes": [
+      {
+        "id": "c",
+        "label": "Client"
+      },
+      {
+        "id": "a",
+        "label": "Order API"
+      },
+      {
+        "id": "d",
+        "label": "Order database"
+      },
+      {
+        "id": "q",
+        "label": "Delivery queue"
+      },
+      {
+        "id": "w",
+        "label": "Email worker"
+      }
+    ],
+    "steps": [
+      {
+        "caption": "A client submits an order request.",
+        "edge": [
+          "c",
+          "a"
+        ],
+        "updates": {
+          "a": "Validate order"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Persist the order and recoverable email work record under the required atomic rule.",
+        "edge": [
+          "a",
+          "d"
+        ],
+        "updates": {
+          "d": "Order + work saved"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Asynchronous choice: acknowledge order creation, not email completion.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Order created"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "A recoverable handoff queues email work.",
+        "edge": [
+          "d",
+          "q"
+        ],
+        "updates": {
+          "q": "Email work waiting"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "The worker can finish the email later and must tolerate retries.",
+        "edge": [
+          "q",
+          "w"
+        ],
+        "updates": {
+          "w": "Email processed"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "Separate synchronous choice: the caller waits for required downstream work.",
+        "edge": [
+          "a",
+          "w"
+        ],
+        "updates": {
+          "a": "Waiting for email result"
+        },
+        "blocked": false
+      },
+      {
+        "caption": "That response is delayed by the downstream result and its failure behavior.",
+        "edge": [
+          "a",
+          "c"
+        ],
+        "updates": {
+          "c": "Later synchronous response"
+        },
+        "blocked": false
+      }
+    ],
+    "topics": [
+      "Synchronous vs asynchronous communication"
+    ],
+    "kind": "flow",
+    "gif": "assets/animations/sync-async.gif",
+    "static": "assets/animations/sync-async-steps.png",
+    "duration_ms": 52500,
+    "frame_count": 42,
+    "encoded_frame_count": 42,
+    "gif_sha256": "6d57ab7cb26e8c1caace4a7dad60cf978132b066d81cc5871bbe23c22918d770",
+    "static_sha256": "199c257d375ca7b36cb2a27d72f7ff27285220bab93cf977046d15a0e431024c",
+    "caption_words": 66
+  }
+]

@@ -104,6 +104,19 @@ Let's understand how server-sent events work:
 - Does not support binary data.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Which way do live updates travel?](../../assets/animations/realtime-protocols.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/realtime-protocols.md) · [View the still sequence](../../assets/animations/realtime-protocols-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Match the direction of communication

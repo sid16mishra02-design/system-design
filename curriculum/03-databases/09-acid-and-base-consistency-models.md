@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # ACID and BASE consistency models
 
@@ -56,6 +58,19 @@ Given BASE's loose consistency, developers need to be more knowledgeable and rig
 On the other hand, planning around BASE limitations can sometimes be a major disadvantage when compared to the simplicity of ACID transactions. A fully ACID database is the perfect fit for use cases where data reliability and consistency are essential.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Two buyers, one remaining ticket](../../assets/animations/atomic-stock.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/atomic-stock.md) · [View the still sequence](../../assets/animations/atomic-stock-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: choose guarantees for a particular operation
@@ -67,6 +82,8 @@ For checkout, enforce stock and payment-related rules explicitly. A recommendati
 ### Apply and improve
 
 State the invariant, acceptable staleness, and failure behavior. Use stronger coordination where correctness requires it, and measure the latency or availability cost. Eventual convergence requires the system's update and conflict-handling mechanisms to work.
+
+Isolation levels differ; transactions can contend, and weaker levels need not behave like serial execution.
 
 Self-check: can an order commit correctly while a replica still shows yesterday's list?
 

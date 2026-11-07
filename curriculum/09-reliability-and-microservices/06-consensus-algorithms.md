@@ -36,6 +36,19 @@ Use a well-understood implementation rather than improvising election and commit
 
 Measure commit latency and throughput, then test leader loss, partitions, delayed messages, and recovery. Verify that committed history remains consistent across failover; a fast benchmark with no failures does not establish protocol safety.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Raft: minority isolation stops safe progress](../../assets/animations/raft-majority.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/raft-majority.md) · [View the still sequence](../../assets/animations/raft-majority-steps.png)
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://medium.com/@sourabhatta1819/consensus-in-distributed-system-ac79f8ba2b8c)

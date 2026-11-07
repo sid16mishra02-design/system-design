@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Publish-Subscribe
 
@@ -62,6 +64,19 @@ Here are some commonly used publish-subscribe technologies:
 - [Google Pub/Sub](https://cloud.google.com/pubsub)
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Independent subscribers need their own copy](../../assets/animations/pub-sub.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/pub-sub.md) · [View the still sequence](../../assets/animations/pub-sub-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### One event, several independent reactions
@@ -81,6 +96,8 @@ flowchart TD
 Define the event's meaning and versioned fields so consumers do not depend on incidental database details. Give events identifiers and make consumers tolerate retries. Use durable subscriptions or retained history when a temporarily offline consumer must catch up; ephemeral broadcast alone does not guarantee that.
 
 Scale each subscription against its own backlog and downstream capacity. Partition related events consistently when their ordering matters, and avoid assuming a global order across independent partitions. A slow analytics consumer should not need to block payment processing.
+
+Some systems let consumers pull retained records; pub/sub does not inherently require immediate push.
 
 **Check:** if billing and shipping compete on the same work queue, which business action might never happen?
 

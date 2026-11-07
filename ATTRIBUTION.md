@@ -41,3 +41,7 @@ Reproduced excerpts retain the original CC BY-NC-ND 4.0 license, including its d
 ## Applied-depth expansion — 2026-11-07
 
 Independent teaching guidance was expanded across all 71 foundations and six case-study/method readings with practical uses, worked scenarios, conditional optimization, and verification. Preserved original passages remain unchanged. Existing-topic additions, including allocated comparison text, remain within their per-topic 30% limit; the twenty standalone lessons retain the approved exception. Coverage and counts appear in DEPTH-REVIEW.md.
+
+## Requested visual layer — 2026-11-07
+
+The newly requested animations and their transcripts are independent teaching media under the root GPL-3.0 license. Their captions and narrative states are recorded in metadata/animations.json. They are additional visual explanations, tracked separately from the earlier source-topic prose addition allowance. The prose audit continues to measure independent lesson prose and allocated comparison rows; it does not claim that lesson prose plus all newly requested animation transcripts fits the old 30% allowance. Preserved excerpts and source archives remain unchanged apart from the already documented technical relocation of course cross-reference URLs.

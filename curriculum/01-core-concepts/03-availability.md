@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Availability
 
@@ -62,6 +64,19 @@ Both high availability and fault tolerance apply to methods for providing high u
 A fault-tolerant system has no service interruption but a significantly higher cost, while a highly available system has minimal service interruption. Fault-tolerance requires full hardware redundancy as if the main system fails, with no loss in uptime, another system should take over.
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![A replacement helps only if traffic reaches it](../../assets/animations/availability-failover.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/availability-failover.md) · [View the still sequence](../../assets/animations/availability-failover-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: keep checkout reachable
@@ -73,6 +88,8 @@ Two checkout servers can help if traffic automatically switches away from a fail
 Trace the complete customer request and identify shared dependencies. Add health checks, replacement capacity, and tested failover where they remove a real failure point. Keep enough spare capacity for the surviving servers to carry traffic. During a payment outage, browsing may remain available while checkout reports a temporary failure.
 
 Define success before calculating availability: a fast error or stale answer may not satisfy the operation's requirements. Measure successful requests and their latency, not just whether a process is running.
+
+The parallel formula assumes independent failures and effective failover.
 
 Self-check: what still works after one dependency fails?
 

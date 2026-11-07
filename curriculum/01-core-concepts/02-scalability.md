@@ -1,5 +1,7 @@
 [← Category](README.md) · [Schedule](../../SCHEDULE.md)
 
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
 <!-- BEGIN ORIGINAL TOPIC -->
 # Scalability
 
@@ -43,8 +45,21 @@ Horizontal scaling (also known as scaling out) expands a system's scale by addin
 - Increased load on downstream services
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Scale a service without losing sessions](../../assets/animations/load-balancer.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/load-balancer.md) · [View the still sequence](../../assets/animations/load-balancer-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
-Checkout handles 100 requests/second. A larger server scales vertically; extra servers scale horizontally. First measure CPU, database, and waiting time. Add capacity at the actual bottleneck; more app servers cannot fix an overloaded database.
+Checkout handles 100 requests/second. Scale up with a larger server; scale out with extra servers. Measure CPU, database load, and waiting. Expand the bottleneck. Scaling alone does not determine data consistency.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -36,6 +36,21 @@ Extra replicas, logs, and recovery jobs add operational cost. More components ar
 
 Deliberately interrupt the flow after each durable step in a test environment. Confirm that retrying preserves the invariant and eventually resolves the order's state. Count duplicate charges, permanently stuck orders, and recovery time—not just successful HTTP responses.
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![A saga compensates a completed step](../../assets/animations/saga.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/saga.md) · [View the still sequence](../../assets/animations/saga-steps.png)
+
+Related walkthrough: [A lost response must not mean two charges](../../animations/idempotency.md).
+<!-- END ANIMATION -->
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/reliability)

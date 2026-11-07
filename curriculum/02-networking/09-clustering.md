@@ -69,6 +69,19 @@ Clustering is commonly used in the industry, and often many technologies offer s
 - Cache (e.g. [Redis](https://redis.io/docs/manual/scaling))
 <!-- END ORIGINAL TOPIC -->
 
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+<details>
+<summary>Open the looping animation</summary>
+
+![Scale a service without losing sessions](../../assets/animations/load-balancer.gif)
+
+</details>
+
+[Read the numbered steps](../../animations/load-balancer.md) · [View the still sequence](../../assets/animations/load-balancer-steps.png)
+<!-- END ANIMATION -->
+
 ## Make it concrete
 
 ### Use it: coordinate several machines for one job
