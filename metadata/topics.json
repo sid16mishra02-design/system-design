@@ -1,0 +1,570 @@
+[
+  {
+    "id": 1,
+    "category": "01-core-concepts",
+    "title": "What is system design?",
+    "resource_only": false,
+    "path": "curriculum/01-core-concepts/01-what-is-system-design.md",
+    "url": "sources/karan/README.md#what-is-system-design"
+  },
+  {
+    "id": 2,
+    "category": "01-core-concepts",
+    "title": "Scalability",
+    "resource_only": false,
+    "path": "curriculum/01-core-concepts/02-scalability.md",
+    "url": "sources/karan/README.md#scalability"
+  },
+  {
+    "id": 3,
+    "category": "01-core-concepts",
+    "title": "Availability",
+    "resource_only": false,
+    "path": "curriculum/01-core-concepts/03-availability.md",
+    "url": "sources/karan/README.md#availability"
+  },
+  {
+    "id": 4,
+    "category": "01-core-concepts",
+    "title": "Latency vs Throughput vs Bandwidth",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/latency-vs-throughput"
+  },
+  {
+    "id": 5,
+    "category": "01-core-concepts",
+    "title": "Reliability",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/reliability"
+  },
+  {
+    "id": 6,
+    "category": "01-core-concepts",
+    "title": "SPOF",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/single-point-of-failure-spof"
+  },
+  {
+    "id": 7,
+    "category": "02-networking",
+    "title": "IP",
+    "resource_only": false,
+    "path": "curriculum/02-networking/01-ip.md",
+    "url": "sources/karan/README.md#ip"
+  },
+  {
+    "id": 8,
+    "category": "02-networking",
+    "title": "OSI Model",
+    "resource_only": false,
+    "path": "curriculum/02-networking/02-osi-model.md",
+    "url": "sources/karan/README.md#osi-model"
+  },
+  {
+    "id": 9,
+    "category": "02-networking",
+    "title": "TCP and UDP",
+    "resource_only": false,
+    "path": "curriculum/02-networking/03-tcp-and-udp.md",
+    "url": "sources/karan/README.md#tcp-and-udp"
+  },
+  {
+    "id": 10,
+    "category": "02-networking",
+    "title": "Domain Name System (DNS)",
+    "resource_only": false,
+    "path": "curriculum/02-networking/04-domain-name-system-dns.md",
+    "url": "sources/karan/README.md#domain-name-system-dns"
+  },
+  {
+    "id": 11,
+    "category": "02-networking",
+    "title": "Proxy",
+    "resource_only": false,
+    "path": "curriculum/02-networking/05-proxy.md",
+    "url": "sources/karan/README.md#proxy"
+  },
+  {
+    "id": 12,
+    "category": "02-networking",
+    "title": "HTTP/HTTPS",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/http-https"
+  },
+  {
+    "id": 13,
+    "category": "02-networking",
+    "title": "Checksums",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/checksums"
+  },
+  {
+    "id": 14,
+    "category": "02-networking",
+    "title": "Load Balancing",
+    "resource_only": false,
+    "path": "curriculum/02-networking/08-load-balancing.md",
+    "url": "sources/karan/README.md#load-balancing"
+  },
+  {
+    "id": 15,
+    "category": "02-networking",
+    "title": "Clustering",
+    "resource_only": false,
+    "path": "curriculum/02-networking/09-clustering.md",
+    "url": "sources/karan/README.md#clustering"
+  },
+  {
+    "id": 16,
+    "category": "03-databases",
+    "title": "Storage",
+    "resource_only": false,
+    "path": "curriculum/03-databases/01-storage.md",
+    "url": "sources/karan/README.md#storage"
+  },
+  {
+    "id": 17,
+    "category": "03-databases",
+    "title": "Databases and DBMS",
+    "resource_only": false,
+    "path": "curriculum/03-databases/02-databases-and-dbms.md",
+    "url": "sources/karan/README.md#databases-and-dbms"
+  },
+  {
+    "id": 18,
+    "category": "03-databases",
+    "title": "SQL databases",
+    "resource_only": false,
+    "path": "curriculum/03-databases/03-sql-databases.md",
+    "url": "sources/karan/README.md#sql-databases"
+  },
+  {
+    "id": 19,
+    "category": "03-databases",
+    "title": "NoSQL databases",
+    "resource_only": false,
+    "path": "curriculum/03-databases/04-nosql-databases.md",
+    "url": "sources/karan/README.md#nosql-databases"
+  },
+  {
+    "id": 20,
+    "category": "03-databases",
+    "title": "SQL vs NoSQL databases",
+    "resource_only": false,
+    "path": "curriculum/03-databases/05-sql-vs-nosql-databases.md",
+    "url": "sources/karan/README.md#sql-vs-nosql-databases"
+  },
+  {
+    "id": 21,
+    "category": "03-databases",
+    "title": "Indexes",
+    "resource_only": false,
+    "path": "curriculum/03-databases/06-indexes.md",
+    "url": "sources/karan/README.md#indexes"
+  },
+  {
+    "id": 22,
+    "category": "03-databases",
+    "title": "Normalization and Denormalization",
+    "resource_only": false,
+    "path": "curriculum/03-databases/07-normalization-and-denormalization.md",
+    "url": "sources/karan/README.md#normalization-and-denormalization"
+  },
+  {
+    "id": 23,
+    "category": "03-databases",
+    "title": "Transactions",
+    "resource_only": false,
+    "path": "curriculum/03-databases/08-transactions.md",
+    "url": "sources/karan/README.md#transactions"
+  },
+  {
+    "id": 24,
+    "category": "03-databases",
+    "title": "ACID and BASE consistency models",
+    "resource_only": false,
+    "path": "curriculum/03-databases/09-acid-and-base-consistency-models.md",
+    "url": "sources/karan/README.md#acid-and-base-consistency-models"
+  },
+  {
+    "id": 25,
+    "category": "03-databases",
+    "title": "Database Replication",
+    "resource_only": false,
+    "path": "curriculum/03-databases/10-database-replication.md",
+    "url": "sources/karan/README.md#database-replication"
+  },
+  {
+    "id": 26,
+    "category": "03-databases",
+    "title": "Sharding",
+    "resource_only": false,
+    "path": "curriculum/03-databases/11-sharding.md",
+    "url": "sources/karan/README.md#sharding"
+  },
+  {
+    "id": 27,
+    "category": "03-databases",
+    "title": "Consistent Hashing",
+    "resource_only": false,
+    "path": "curriculum/03-databases/12-consistent-hashing.md",
+    "url": "sources/karan/README.md#consistent-hashing"
+  },
+  {
+    "id": 28,
+    "category": "03-databases",
+    "title": "Database Federation",
+    "resource_only": false,
+    "path": "curriculum/03-databases/13-database-federation.md",
+    "url": "sources/karan/README.md#database-federation"
+  },
+  {
+    "id": 29,
+    "category": "03-databases",
+    "title": "Bloom Filters",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/bloom-filters"
+  },
+  {
+    "id": 30,
+    "category": "04-distributed-data",
+    "title": "CAP Theorem",
+    "resource_only": false,
+    "path": "curriculum/04-distributed-data/01-cap-theorem.md",
+    "url": "sources/karan/README.md#cap-theorem"
+  },
+  {
+    "id": 31,
+    "category": "04-distributed-data",
+    "title": "PACELC Theorem",
+    "resource_only": false,
+    "path": "curriculum/04-distributed-data/02-pacelc-theorem.md",
+    "url": "sources/karan/README.md#pacelc-theorem"
+  },
+  {
+    "id": 32,
+    "category": "04-distributed-data",
+    "title": "Distributed Transactions",
+    "resource_only": false,
+    "path": "curriculum/04-distributed-data/03-distributed-transactions.md",
+    "url": "sources/karan/README.md#distributed-transactions"
+  },
+  {
+    "id": 33,
+    "category": "05-caching",
+    "title": "Caching",
+    "resource_only": false,
+    "path": "curriculum/05-caching/01-caching.md",
+    "url": "sources/karan/README.md#caching"
+  },
+  {
+    "id": 34,
+    "category": "05-caching",
+    "title": "Caching Strategies",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/caching-strategies"
+  },
+  {
+    "id": 35,
+    "category": "05-caching",
+    "title": "Cache Eviction Policies",
+    "resource_only": true,
+    "path": null,
+    "url": "https://blog.algomaster.io/p/7-cache-eviction-strategies"
+  },
+  {
+    "id": 36,
+    "category": "05-caching",
+    "title": "Distributed Caching",
+    "resource_only": true,
+    "path": null,
+    "url": "https://blog.algomaster.io/p/distributed-caching"
+  },
+  {
+    "id": 37,
+    "category": "05-caching",
+    "title": "Content Delivery Network (CDN)",
+    "resource_only": false,
+    "path": "curriculum/05-caching/05-content-delivery-network-cdn.md",
+    "url": "sources/karan/README.md#content-delivery-network-cdn"
+  },
+  {
+    "id": 38,
+    "category": "06-api-fundamentals",
+    "title": "APIs",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/what-is-an-api"
+  },
+  {
+    "id": 39,
+    "category": "06-api-fundamentals",
+    "title": "REST, GraphQL, gRPC",
+    "resource_only": false,
+    "path": "curriculum/06-api-fundamentals/02-rest-graphql-grpc.md",
+    "url": "sources/karan/README.md#rest-graphql-grpc"
+  },
+  {
+    "id": 40,
+    "category": "06-api-fundamentals",
+    "title": "API Gateway",
+    "resource_only": false,
+    "path": "curriculum/06-api-fundamentals/03-api-gateway.md",
+    "url": "sources/karan/README.md#api-gateway"
+  },
+  {
+    "id": 41,
+    "category": "06-api-fundamentals",
+    "title": "Idempotency",
+    "resource_only": false,
+    "path": "curriculum/06-api-fundamentals/04-idempotency.md",
+    "url": "sources/karan/README.md#idempotency"
+  },
+  {
+    "id": 42,
+    "category": "06-api-fundamentals",
+    "title": "Rate Limiting",
+    "resource_only": false,
+    "path": "curriculum/06-api-fundamentals/05-rate-limiting.md",
+    "url": "sources/karan/README.md#rate-limiting"
+  },
+  {
+    "id": 43,
+    "category": "06-api-fundamentals",
+    "title": "Long polling, WebSockets, Server-Sent Events (SSE)",
+    "resource_only": false,
+    "path": "curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md",
+    "url": "sources/karan/README.md#long-polling-websockets-server-sent-events-sse"
+  },
+  {
+    "id": 44,
+    "category": "06-api-fundamentals",
+    "title": "Webhooks",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/webhooks"
+  },
+  {
+    "id": 45,
+    "category": "06-api-fundamentals",
+    "title": "API Design",
+    "resource_only": true,
+    "path": null,
+    "url": "https://abdulrwahab.medium.com/api-architecture-best-practices-for-designing-rest-apis-bf907025f5f"
+  },
+  {
+    "id": 46,
+    "category": "07-asynchronous-communication",
+    "title": "Message Brokers",
+    "resource_only": false,
+    "path": "curriculum/07-asynchronous-communication/01-message-brokers.md",
+    "url": "sources/karan/README.md#message-brokers"
+  },
+  {
+    "id": 47,
+    "category": "07-asynchronous-communication",
+    "title": "Message Queues",
+    "resource_only": false,
+    "path": "curriculum/07-asynchronous-communication/02-message-queues.md",
+    "url": "sources/karan/README.md#message-queues"
+  },
+  {
+    "id": 48,
+    "category": "07-asynchronous-communication",
+    "title": "Publish-Subscribe",
+    "resource_only": false,
+    "path": "curriculum/07-asynchronous-communication/03-publish-subscribe.md",
+    "url": "sources/karan/README.md#publish-subscribe"
+  },
+  {
+    "id": 49,
+    "category": "07-asynchronous-communication",
+    "title": "Change Data Capture (CDC)",
+    "resource_only": true,
+    "path": null,
+    "url": "https://algomaster.io/learn/system-design/change-data-capture-cdc"
+  },
+  {
+    "id": 50,
+    "category": "08-architectural-patterns",
+    "title": "N-tier architecture",
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/01-n-tier-architecture.md",
+    "url": "sources/karan/README.md#n-tier-architecture"
+  },
+  {
+    "id": 51,
+    "category": "08-architectural-patterns",
+    "title": "Monoliths and Microservices",
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/02-monoliths-and-microservices.md",
+    "url": "sources/karan/README.md#monoliths-and-microservices"
+  },
+  {
+    "id": 52,
+    "category": "08-architectural-patterns",
+    "title": "Event-Driven Architecture (EDA)",
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/03-event-driven-architecture-eda.md",
+    "url": "sources/karan/README.md#event-driven-architecture-eda"
+  },
+  {
+    "id": 53,
+    "category": "08-architectural-patterns",
+    "title": "Event Sourcing",
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/04-event-sourcing.md",
+    "url": "sources/karan/README.md#event-sourcing"
+  },
+  {
+    "id": 54,
+    "category": "08-architectural-patterns",
+    "title": "Command and Query Responsibility Segregation (CQRS)",
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/05-command-and-query-responsibility-segregation-cqrs.md",
+    "url": "sources/karan/README.md#command-and-query-responsibility-segregation-cqrs"
+  },
+  {
+    "id": 55,
+    "category": "08-architectural-patterns",
+    "title": "Enterprise Service Bus (ESB)",
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/06-enterprise-service-bus-esb.md",
+    "url": "sources/karan/README.md#enterprise-service-bus-esb"
+  },
+  {
+    "id": 56,
+    "category": "08-architectural-patterns",
+    "title": "Virtual Machines (VMs) and Containers",
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/07-virtual-machines-vms-and-containers.md",
+    "url": "sources/karan/README.md#virtual-machines-vms-and-containers"
+  },
+  {
+    "id": 57,
+    "category": "08-architectural-patterns",
+    "title": "Serverless Architecture",
+    "resource_only": true,
+    "path": null,
+    "url": "https://blog.algomaster.io/p/2edeb23b-cfa5-4b24-845e-3f6f7a39d162"
+  },
+  {
+    "id": 58,
+    "category": "08-architectural-patterns",
+    "title": "Peer-to-Peer (P2P) Architecture",
+    "resource_only": true,
+    "path": null,
+    "url": "https://www.spiceworks.com/tech/networking/articles/what-is-peer-to-peer/"
+  },
+  {
+    "id": 59,
+    "category": "09-reliability-and-microservices",
+    "title": "Service Discovery",
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/01-service-discovery.md",
+    "url": "sources/karan/README.md#service-discovery"
+  },
+  {
+    "id": 60,
+    "category": "09-reliability-and-microservices",
+    "title": "HeartBeats",
+    "resource_only": true,
+    "path": null,
+    "url": "https://blog.algomaster.io/p/heartbeats-in-distributed-systems"
+  },
+  {
+    "id": 61,
+    "category": "09-reliability-and-microservices",
+    "title": "Circuit breaker",
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/03-circuit-breaker.md",
+    "url": "sources/karan/README.md#circuit-breaker"
+  },
+  {
+    "id": 62,
+    "category": "09-reliability-and-microservices",
+    "title": "SLA, SLO, SLI",
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/04-sla-slo-sli.md",
+    "url": "sources/karan/README.md#sla-slo-sli"
+  },
+  {
+    "id": 63,
+    "category": "09-reliability-and-microservices",
+    "title": "Disaster recovery",
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/05-disaster-recovery.md",
+    "url": "sources/karan/README.md#disaster-recovery"
+  },
+  {
+    "id": 64,
+    "category": "09-reliability-and-microservices",
+    "title": "Consensus Algorithms",
+    "resource_only": true,
+    "path": null,
+    "url": "https://medium.com/@sourabhatta1819/consensus-in-distributed-system-ac79f8ba2b8c"
+  },
+  {
+    "id": 65,
+    "category": "09-reliability-and-microservices",
+    "title": "Distributed Locking",
+    "resource_only": true,
+    "path": null,
+    "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+  },
+  {
+    "id": 66,
+    "category": "09-reliability-and-microservices",
+    "title": "Gossip Protocol",
+    "resource_only": true,
+    "path": null,
+    "url": "http://highscalability.com/blog/2023/7/16/gossip-protocol-explained.html"
+  },
+  {
+    "id": 67,
+    "category": "09-reliability-and-microservices",
+    "title": "Distributed Tracing",
+    "resource_only": true,
+    "path": null,
+    "url": "https://www.dynatrace.com/news/blog/what-is-distributed-tracing/"
+  },
+  {
+    "id": 68,
+    "category": "10-security-and-location",
+    "title": "SSL, TLS, mTLS",
+    "resource_only": false,
+    "path": "curriculum/10-security-and-location/01-ssl-tls-mtls.md",
+    "url": "sources/karan/README.md#ssl-tls-mtls"
+  },
+  {
+    "id": 69,
+    "category": "10-security-and-location",
+    "title": "OAuth 2.0 and OpenID Connect (OIDC)",
+    "resource_only": false,
+    "path": "curriculum/10-security-and-location/02-oauth-20-and-openid-connect-oidc.md",
+    "url": "sources/karan/README.md#oauth-20-and-openid-connect-oidc"
+  },
+  {
+    "id": 70,
+    "category": "10-security-and-location",
+    "title": "Single Sign-On (SSO)",
+    "resource_only": false,
+    "path": "curriculum/10-security-and-location/03-single-sign-on-sso.md",
+    "url": "sources/karan/README.md#single-sign-on-sso"
+  },
+  {
+    "id": 71,
+    "category": "10-security-and-location",
+    "title": "Geohashing and Quadtrees",
+    "resource_only": false,
+    "path": "curriculum/10-security-and-location/04-geohashing-and-quadtrees.md",
+    "url": "sources/karan/README.md#geohashing-and-quadtrees"
+  }
+]

@@ -1,0 +1,5 @@
+* text=auto
+sources/** -text
+*.png binary
+*.jpg binary
+*.svg -text

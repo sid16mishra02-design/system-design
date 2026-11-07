@@ -1,0 +1,218 @@
+{
+  "sources": {
+    "karan": {
+      "repository": "https://github.com/karanpratapsingh/system-design",
+      "commit": "6dcea405d41401bfbe4031b6b80f7a2d87b712ba"
+    },
+    "ashish": {
+      "repository": "https://github.com/ashishps1/awesome-system-design-resources",
+      "commit": "58bf0b48badf1e6d62d1e3d024e9578ff809c95f"
+    }
+  },
+  "files": [
+    {
+      "path": "sources/karan/diagrams/api-gateway.excalidraw",
+      "sha256": "1f4b4b285d92143896c1bf14b959871814857c8ecc1d4a666e76faeab1ce63bf"
+    },
+    {
+      "path": "sources/karan/diagrams/caching.excalidraw",
+      "sha256": "13ac4f7650c5a252269b52268d7d4b8ca4c54c4bce86fdd5452565f6b0fd0cab"
+    },
+    {
+      "path": "sources/karan/diagrams/cap.excalidraw",
+      "sha256": "8b69e7b8b977ecbbf31e8301b352708346e60fc674813855576c9b85a55faf7a"
+    },
+    {
+      "path": "sources/karan/diagrams/cdn.excalidraw",
+      "sha256": "255e8eb301bc8dc58e38d1c3aed7c45af139d621f26a46023f42de401f114b17"
+    },
+    {
+      "path": "sources/karan/diagrams/circuit-breaker.excalidraw",
+      "sha256": "fe0bd94802b95a2d2976d93bac01478e12479ff1edb930874f8b4de21aa5112d"
+    },
+    {
+      "path": "sources/karan/diagrams/clustering.excalidraw",
+      "sha256": "cd8108bc52862ad006ce005c1f4d657dd078b5a7a96bdcba5c608806031280c0"
+    },
+    {
+      "path": "sources/karan/diagrams/consistent-hashing.excalidraw",
+      "sha256": "3349d8d4026fc3ecd4023778169cc9b9c20da48ac091668f28f2ed601b87ed3b"
+    },
+    {
+      "path": "sources/karan/diagrams/cqrs.excalidraw",
+      "sha256": "2060e4469b7f467c2539ca8449ce5308115b839b784dd8994ca864ad87941889"
+    },
+    {
+      "path": "sources/karan/diagrams/database-replication.excalidraw",
+      "sha256": "5c501fb0fa5094edfa0776a43058758e1c5e5f77d012beff7ae598d5612580e5"
+    },
+    {
+      "path": "sources/karan/diagrams/db-dbms.excalidraw",
+      "sha256": "2d0dc0c63aa63d62263f0f156ecb2b5408c28b938c31761f12b7eca2af6f6637"
+    },
+    {
+      "path": "sources/karan/diagrams/disaster-recovery.excalidraw",
+      "sha256": "71605606d6b0bfde46af85f940c18a4f32feac012be2d358062b4ec6736fbc6a"
+    },
+    {
+      "path": "sources/karan/diagrams/distributed-transactions.excalidraw",
+      "sha256": "cbbb06e142b85b2f7ff1b23e68165e9d87f5703ae6c6a663f7f58d3029eadb6b"
+    },
+    {
+      "path": "sources/karan/diagrams/domain-name-system.excalidraw",
+      "sha256": "243301468391f570ede16968bb99994af8642014a9bd97b2134c70a4baacd8a4"
+    },
+    {
+      "path": "sources/karan/diagrams/enterprise-service-bus.excalidraw",
+      "sha256": "1dae0a38b3c85bc4530adb24f657c1d5093936df9a778cf5455c8980143b55fd"
+    },
+    {
+      "path": "sources/karan/diagrams/event-driven-architecture.excalidraw",
+      "sha256": "56144b95f724ae160be686dd2cbe8c93c3db3294b598b64507f33bdd16e279f2"
+    },
+    {
+      "path": "sources/karan/diagrams/event-sourcing.excalidraw",
+      "sha256": "d3f15df8151887333c6db38fa73647b389f9640a7cb8ee14ee0a7bafbd17412f"
+    },
+    {
+      "path": "sources/karan/diagrams/federated-database.excalidraw",
+      "sha256": "e3a1508ba2aa9d81031a0218bcfff13fbebd2334a696244d2903b86839d77463"
+    },
+    {
+      "path": "sources/karan/diagrams/geohashing-quadtrees.excalidraw",
+      "sha256": "734b24dc90caf2e71ca0c0ab1eb222cf5f786b2fe7952663cc955a3e3923ff83"
+    },
+    {
+      "path": "sources/karan/diagrams/indexes.excalidraw",
+      "sha256": "73cf7eefdf6ab3962f3045eb9c5ba78bbef0298cbf700f251025399da49ba511"
+    },
+    {
+      "path": "sources/karan/diagrams/library.excalidrawlib",
+      "sha256": "92616c0e15ff26d6963d56f96bf57815aaf7d2aa29b285509b47c2c0f61e4fd1"
+    },
+    {
+      "path": "sources/karan/diagrams/load-balancing.excalidraw",
+      "sha256": "33040ad8b16042cf841bacd545ad1b497b88d28f7a7ad3a668ad41203302f59d"
+    },
+    {
+      "path": "sources/karan/diagrams/lp-ws-sse.excalidraw",
+      "sha256": "b67f239ed6a31697cae6d3f89bd550d522a09ff3a76f4cb3306d7c717cec514e"
+    },
+    {
+      "path": "sources/karan/diagrams/message-brokers.excalidraw",
+      "sha256": "52940ab611585fadc21ee682e5e6276f78f54e1c8cbf7b3a0d95f0df0c180e1d"
+    },
+    {
+      "path": "sources/karan/diagrams/message-queues.excalidraw",
+      "sha256": "829f3aa7980e3a4cf9c659f62a2cb79cd5742d410ec907953fe0f539a6794104"
+    },
+    {
+      "path": "sources/karan/diagrams/monoliths-microservices.excalidraw",
+      "sha256": "10efde49be73a5696e7c7001883c386e1f3c3fb3ba833a3d62d70eb9027c874c"
+    },
+    {
+      "path": "sources/karan/diagrams/n-tier-architecture.excalidraw",
+      "sha256": "04e8b701c58b8cdc53091d30d7d993bdc6cde43b38141a1354e328f450b08db1"
+    },
+    {
+      "path": "sources/karan/diagrams/netflix.excalidraw",
+      "sha256": "2851b1aca80c79d17b9b677b06a2bbe6a4e0684c28d1fc154d83653a43861a17"
+    },
+    {
+      "path": "sources/karan/diagrams/oauth-openid-connect.excalidraw",
+      "sha256": "1ad60418a3864c6988291b89810321e4e2c78b21f75c782ddb64381baf428007"
+    },
+    {
+      "path": "sources/karan/diagrams/osi.excalidraw",
+      "sha256": "8540a8301f49c29a11e21abfdc0e6af1b23806518acf5e4ab137d7bbeef35a6a"
+    },
+    {
+      "path": "sources/karan/diagrams/pacelc.excalidraw",
+      "sha256": "01be2b2c6e511c3fef59cabe17679217b22e2761c6efff83af0dbe5e30709242"
+    },
+    {
+      "path": "sources/karan/diagrams/proxy.excalidraw",
+      "sha256": "52e5f45642db701d9148abd8d58049a57ee5bdb54f9a88db7d8bd10a3558c8a6"
+    },
+    {
+      "path": "sources/karan/diagrams/pubsub.excalidraw",
+      "sha256": "47939529e0bb410b2019fe18256e675330fac4eb1b807b7a4c1bdf7ee3852805"
+    },
+    {
+      "path": "sources/karan/diagrams/rate-limiting.excalidraw",
+      "sha256": "9820ab3858728fee4834f058ee576402eb789225e591c986dd6186e52e11ffcb"
+    },
+    {
+      "path": "sources/karan/diagrams/README.md",
+      "sha256": "de8bfc6af0cce24da9c029a4da810e9e04bce162bd7620021a2859c7bd27660e"
+    },
+    {
+      "path": "sources/karan/diagrams/scaling.excalidraw",
+      "sha256": "360d8be0aa9b01f35945aaa142a354f886e845cf2fb15bfd9a86208acbc62e34"
+    },
+    {
+      "path": "sources/karan/diagrams/service-discovery.excalidraw",
+      "sha256": "bc7fcb3e520d18fd525594b0203443b22c58147343bbc13c42127c1f4e7c6be7"
+    },
+    {
+      "path": "sources/karan/diagrams/sharding.excalidraw",
+      "sha256": "c76f5d4459b3506c030646d384d5e2235606a28ed79c83bfb8b6188aea99823c"
+    },
+    {
+      "path": "sources/karan/diagrams/sso.excalidraw",
+      "sha256": "77c216ec3e2daabc97142bfc9380cfcb494627c3a834f61340e9ded5b52ff771"
+    },
+    {
+      "path": "sources/karan/diagrams/tcp-udp.excalidraw",
+      "sha256": "6c97bff2f16eae9b67d16417e75211eacc82cc7a8547c3bc11a0b0830ae582a5"
+    },
+    {
+      "path": "sources/karan/diagrams/transactions.excalidraw",
+      "sha256": "fe30494391d65d056b2c3c914ce1c55a1c5f0e06a9c7976904855d93fe81d369"
+    },
+    {
+      "path": "sources/karan/diagrams/twitter.excalidraw",
+      "sha256": "92b4014079eba4b2f95d00a90fc421a44d2bad44f36a97cca9de721bf8f5ff4c"
+    },
+    {
+      "path": "sources/karan/diagrams/uber.excalidraw",
+      "sha256": "b09326458a889f81057be064be4c1c8153b828fe06c55983c81390622cdeb0ea"
+    },
+    {
+      "path": "sources/karan/diagrams/url-shortener.excalidraw",
+      "sha256": "17cc1d0ae734b0ec5adc76ea6534e46414fd2b6d6c9f4839ebb47deb37df5f51"
+    },
+    {
+      "path": "sources/karan/diagrams/virtualization-containerization.excalidraw",
+      "sha256": "f61b61a0c6469d9c058682f45d02ba4ffe9e6ffce8d1dd55b56be0f7d3b5e2d0"
+    },
+    {
+      "path": "sources/karan/diagrams/whatsapp.excalidraw",
+      "sha256": "5e8fab6885de93f2d7427469d83e86bc729420fef8ceb6f7877332e9c7831c6f"
+    },
+    {
+      "path": "sources/karan/LICENSE",
+      "sha256": "cc28874dc381e09a05d5175a7ab11dac848dedc78b5eea35ed4a26d96b6751d0"
+    },
+    {
+      "path": "sources/karan/README.md",
+      "sha256": "62532e4901d8ff339029722c9c4c23bfc10063f05978febdd199617ca59f504e"
+    },
+    {
+      "path": "sources/ashish/diagrams/interview-template.png",
+      "sha256": "3eb255d9a97dd9cda40a7972728724653910f25e3e92ae149756b68a5980967c"
+    },
+    {
+      "path": "sources/ashish/diagrams/system-design-github.png",
+      "sha256": "cfc36cbb952510c2177197aa621132234f585d11975d3bdc03460a15348c88b9"
+    },
+    {
+      "path": "sources/ashish/LICENSE",
+      "sha256": "230184f60bae2feaf244f10a8bac053c8ff33a183bcc365b4d8b876d2b7f4809"
+    },
+    {
+      "path": "sources/ashish/README.md",
+      "sha256": "fa181fb9dcd52c75e85c51f60eca7be54a0ad19ced6f4fad96cac2f4db25accd"
+    }
+  ]
+}

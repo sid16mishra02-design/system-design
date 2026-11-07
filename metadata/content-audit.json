@@ -1,0 +1,521 @@
+[
+  {
+    "topic": "What is system design?",
+    "source": "sources/karan/README.md#what-is-system-design",
+    "original_words": 151,
+    "changed_original_words": 0,
+    "added_explanatory_words": 43,
+    "added_percent": 28.48,
+    "companion_path": "curriculum/01-core-concepts/01-what-is-system-design.md"
+  },
+  {
+    "topic": "Scalability",
+    "source": "sources/karan/README.md#scalability",
+    "original_words": 167,
+    "changed_original_words": 0,
+    "added_explanatory_words": 32,
+    "added_percent": 19.16,
+    "companion_path": "curriculum/01-core-concepts/02-scalability.md"
+  },
+  {
+    "topic": "Availability",
+    "source": "sources/karan/README.md#availability",
+    "original_words": 446,
+    "changed_original_words": 0,
+    "added_explanatory_words": 41,
+    "added_percent": 9.19,
+    "companion_path": "curriculum/01-core-concepts/03-availability.md"
+  },
+  {
+    "topic": "IP",
+    "source": "sources/karan/README.md#ip",
+    "original_words": 451,
+    "changed_original_words": 0,
+    "added_explanatory_words": 45,
+    "added_percent": 9.98,
+    "companion_path": "curriculum/02-networking/01-ip.md"
+  },
+  {
+    "topic": "OSI Model",
+    "source": "sources/karan/README.md#osi-model",
+    "original_words": 667,
+    "changed_original_words": 0,
+    "added_explanatory_words": 0,
+    "added_percent": 0.0,
+    "companion_path": "curriculum/02-networking/02-osi-model.md"
+  },
+  {
+    "topic": "TCP and UDP",
+    "source": "sources/karan/README.md#tcp-and-udp",
+    "original_words": 347,
+    "changed_original_words": 0,
+    "added_explanatory_words": 49,
+    "added_percent": 14.12,
+    "companion_path": "curriculum/02-networking/03-tcp-and-udp.md"
+  },
+  {
+    "topic": "Domain Name System (DNS)",
+    "source": "sources/karan/README.md#domain-name-system-dns",
+    "original_words": 1682,
+    "changed_original_words": 0,
+    "added_explanatory_words": 50,
+    "added_percent": 2.97,
+    "companion_path": "curriculum/02-networking/04-domain-name-system-dns.md"
+  },
+  {
+    "topic": "Proxy",
+    "source": "sources/karan/README.md#proxy",
+    "original_words": 471,
+    "changed_original_words": 0,
+    "added_explanatory_words": 34,
+    "added_percent": 7.22,
+    "companion_path": "curriculum/02-networking/05-proxy.md"
+  },
+  {
+    "topic": "Load Balancing",
+    "source": "sources/karan/README.md#load-balancing",
+    "original_words": 1131,
+    "changed_original_words": 0,
+    "added_explanatory_words": 50,
+    "added_percent": 4.42,
+    "companion_path": "curriculum/02-networking/08-load-balancing.md"
+  },
+  {
+    "topic": "Clustering",
+    "source": "sources/karan/README.md#clustering",
+    "original_words": 688,
+    "changed_original_words": 0,
+    "added_explanatory_words": 39,
+    "added_percent": 5.67,
+    "companion_path": "curriculum/02-networking/09-clustering.md"
+  },
+  {
+    "topic": "Storage",
+    "source": "sources/karan/README.md#storage",
+    "original_words": 834,
+    "changed_original_words": 0,
+    "added_explanatory_words": 43,
+    "added_percent": 5.16,
+    "companion_path": "curriculum/03-databases/01-storage.md"
+  },
+  {
+    "topic": "Databases and DBMS",
+    "source": "sources/karan/README.md#databases-and-dbms",
+    "original_words": 563,
+    "changed_original_words": 0,
+    "added_explanatory_words": 0,
+    "added_percent": 0.0,
+    "companion_path": "curriculum/03-databases/02-databases-and-dbms.md"
+  },
+  {
+    "topic": "SQL databases",
+    "source": "sources/karan/README.md#sql-databases",
+    "original_words": 401,
+    "changed_original_words": 0,
+    "added_explanatory_words": 0,
+    "added_percent": 0.0,
+    "companion_path": "curriculum/03-databases/03-sql-databases.md"
+  },
+  {
+    "topic": "NoSQL databases",
+    "source": "sources/karan/README.md#nosql-databases",
+    "original_words": 530,
+    "changed_original_words": 0,
+    "added_explanatory_words": 0,
+    "added_percent": 0.0,
+    "companion_path": "curriculum/03-databases/04-nosql-databases.md"
+  },
+  {
+    "topic": "SQL vs NoSQL databases",
+    "source": "sources/karan/README.md#sql-vs-nosql-databases",
+    "original_words": 417,
+    "changed_original_words": 0,
+    "added_explanatory_words": 43,
+    "added_percent": 10.31,
+    "companion_path": "curriculum/03-databases/05-sql-vs-nosql-databases.md"
+  },
+  {
+    "topic": "Indexes",
+    "source": "sources/karan/README.md#indexes",
+    "original_words": 472,
+    "changed_original_words": 0,
+    "added_explanatory_words": 48,
+    "added_percent": 10.17,
+    "companion_path": "curriculum/03-databases/06-indexes.md"
+  },
+  {
+    "topic": "Normalization and Denormalization",
+    "source": "sources/karan/README.md#normalization-and-denormalization",
+    "original_words": 1012,
+    "changed_original_words": 0,
+    "added_explanatory_words": 51,
+    "added_percent": 5.04,
+    "companion_path": "curriculum/03-databases/07-normalization-and-denormalization.md"
+  },
+  {
+    "topic": "Transactions",
+    "source": "sources/karan/README.md#transactions",
+    "original_words": 316,
+    "changed_original_words": 0,
+    "added_explanatory_words": 43,
+    "added_percent": 13.61,
+    "companion_path": "curriculum/03-databases/08-transactions.md"
+  },
+  {
+    "topic": "ACID and BASE consistency models",
+    "source": "sources/karan/README.md#acid-and-base-consistency-models",
+    "original_words": 451,
+    "changed_original_words": 0,
+    "added_explanatory_words": 49,
+    "added_percent": 10.86,
+    "companion_path": "curriculum/03-databases/09-acid-and-base-consistency-models.md"
+  },
+  {
+    "topic": "Database Replication",
+    "source": "sources/karan/README.md#database-replication",
+    "original_words": 374,
+    "changed_original_words": 0,
+    "added_explanatory_words": 64,
+    "added_percent": 17.11,
+    "companion_path": "curriculum/03-databases/10-database-replication.md"
+  },
+  {
+    "topic": "Sharding",
+    "source": "sources/karan/README.md#sharding",
+    "original_words": 742,
+    "changed_original_words": 0,
+    "added_explanatory_words": 81,
+    "added_percent": 10.92,
+    "companion_path": "curriculum/03-databases/11-sharding.md"
+  },
+  {
+    "topic": "Consistent Hashing",
+    "source": "sources/karan/README.md#consistent-hashing",
+    "original_words": 932,
+    "changed_original_words": 0,
+    "added_explanatory_words": 53,
+    "added_percent": 5.69,
+    "companion_path": "curriculum/03-databases/12-consistent-hashing.md"
+  },
+  {
+    "topic": "Database Federation",
+    "source": "sources/karan/README.md#database-federation",
+    "original_words": 303,
+    "changed_original_words": 0,
+    "added_explanatory_words": 37,
+    "added_percent": 12.21,
+    "companion_path": "curriculum/03-databases/13-database-federation.md"
+  },
+  {
+    "topic": "CAP Theorem",
+    "source": "sources/karan/README.md#cap-theorem",
+    "original_words": 386,
+    "changed_original_words": 0,
+    "added_explanatory_words": 77,
+    "added_percent": 19.95,
+    "companion_path": "curriculum/04-distributed-data/01-cap-theorem.md"
+  },
+  {
+    "topic": "PACELC Theorem",
+    "source": "sources/karan/README.md#pacelc-theorem",
+    "original_words": 171,
+    "changed_original_words": 0,
+    "added_explanatory_words": 27,
+    "added_percent": 15.79,
+    "companion_path": "curriculum/04-distributed-data/02-pacelc-theorem.md"
+  },
+  {
+    "topic": "Distributed Transactions",
+    "source": "sources/karan/README.md#distributed-transactions",
+    "original_words": 656,
+    "changed_original_words": 0,
+    "added_explanatory_words": 50,
+    "added_percent": 7.62,
+    "companion_path": "curriculum/04-distributed-data/03-distributed-transactions.md"
+  },
+  {
+    "topic": "Caching",
+    "source": "sources/karan/README.md#caching",
+    "original_words": 1267,
+    "changed_original_words": 0,
+    "added_explanatory_words": 74,
+    "added_percent": 5.84,
+    "companion_path": "curriculum/05-caching/01-caching.md"
+  },
+  {
+    "topic": "Content Delivery Network (CDN)",
+    "source": "sources/karan/README.md#content-delivery-network-cdn",
+    "original_words": 628,
+    "changed_original_words": 0,
+    "added_explanatory_words": 40,
+    "added_percent": 6.37,
+    "companion_path": "curriculum/05-caching/05-content-delivery-network-cdn.md"
+  },
+  {
+    "topic": "REST, GraphQL, gRPC",
+    "source": "sources/karan/README.md#rest-graphql-grpc",
+    "original_words": 1473,
+    "changed_original_words": 0,
+    "added_explanatory_words": 47,
+    "added_percent": 3.19,
+    "companion_path": "curriculum/06-api-fundamentals/02-rest-graphql-grpc.md"
+  },
+  {
+    "topic": "API Gateway",
+    "source": "sources/karan/README.md#api-gateway",
+    "original_words": 546,
+    "changed_original_words": 0,
+    "added_explanatory_words": 45,
+    "added_percent": 8.24,
+    "companion_path": "curriculum/06-api-fundamentals/03-api-gateway.md"
+  },
+  {
+    "topic": "Idempotency",
+    "source": "sources/karan/README.md#idempotency",
+    "original_words": 693,
+    "changed_original_words": 0,
+    "added_explanatory_words": 84,
+    "added_percent": 12.12,
+    "companion_path": "curriculum/06-api-fundamentals/04-idempotency.md"
+  },
+  {
+    "topic": "Rate Limiting",
+    "source": "sources/karan/README.md#rate-limiting",
+    "original_words": 799,
+    "changed_original_words": 0,
+    "added_explanatory_words": 50,
+    "added_percent": 6.26,
+    "companion_path": "curriculum/06-api-fundamentals/05-rate-limiting.md"
+  },
+  {
+    "topic": "Long polling, WebSockets, Server-Sent Events (SSE)",
+    "source": "sources/karan/README.md#long-polling-websockets-server-sent-events-sse",
+    "original_words": 781,
+    "changed_original_words": 0,
+    "added_explanatory_words": 47,
+    "added_percent": 6.02,
+    "companion_path": "curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md"
+  },
+  {
+    "topic": "Message Brokers",
+    "source": "sources/karan/README.md#message-brokers",
+    "original_words": 467,
+    "changed_original_words": 0,
+    "added_explanatory_words": 44,
+    "added_percent": 9.42,
+    "companion_path": "curriculum/07-asynchronous-communication/01-message-brokers.md"
+  },
+  {
+    "topic": "Message Queues",
+    "source": "sources/karan/README.md#message-queues",
+    "original_words": 753,
+    "changed_original_words": 0,
+    "added_explanatory_words": 73,
+    "added_percent": 9.69,
+    "companion_path": "curriculum/07-asynchronous-communication/02-message-queues.md"
+  },
+  {
+    "topic": "Publish-Subscribe",
+    "source": "sources/karan/README.md#publish-subscribe",
+    "original_words": 605,
+    "changed_original_words": 0,
+    "added_explanatory_words": 62,
+    "added_percent": 10.25,
+    "companion_path": "curriculum/07-asynchronous-communication/03-publish-subscribe.md"
+  },
+  {
+    "topic": "N-tier architecture",
+    "source": "sources/karan/README.md#n-tier-architecture",
+    "original_words": 406,
+    "changed_original_words": 0,
+    "added_explanatory_words": 0,
+    "added_percent": 0.0,
+    "companion_path": "curriculum/08-architectural-patterns/01-n-tier-architecture.md"
+  },
+  {
+    "topic": "Monoliths and Microservices",
+    "source": "sources/karan/README.md#monoliths-and-microservices",
+    "original_words": 1298,
+    "changed_original_words": 0,
+    "added_explanatory_words": 47,
+    "added_percent": 3.62,
+    "companion_path": "curriculum/08-architectural-patterns/02-monoliths-and-microservices.md"
+  },
+  {
+    "topic": "Event-Driven Architecture (EDA)",
+    "source": "sources/karan/README.md#event-driven-architecture-eda",
+    "original_words": 360,
+    "changed_original_words": 0,
+    "added_explanatory_words": 38,
+    "added_percent": 10.56,
+    "companion_path": "curriculum/08-architectural-patterns/03-event-driven-architecture-eda.md"
+  },
+  {
+    "topic": "Event Sourcing",
+    "source": "sources/karan/README.md#event-sourcing",
+    "original_words": 280,
+    "changed_original_words": 0,
+    "added_explanatory_words": 40,
+    "added_percent": 14.29,
+    "companion_path": "curriculum/08-architectural-patterns/04-event-sourcing.md"
+  },
+  {
+    "topic": "Command and Query Responsibility Segregation (CQRS)",
+    "source": "sources/karan/README.md#command-and-query-responsibility-segregation-cqrs",
+    "original_words": 377,
+    "changed_original_words": 0,
+    "added_explanatory_words": 66,
+    "added_percent": 17.51,
+    "companion_path": "curriculum/08-architectural-patterns/05-command-and-query-responsibility-segregation-cqrs.md"
+  },
+  {
+    "topic": "Enterprise Service Bus (ESB)",
+    "source": "sources/karan/README.md#enterprise-service-bus-esb",
+    "original_words": 307,
+    "changed_original_words": 0,
+    "added_explanatory_words": 0,
+    "added_percent": 0.0,
+    "companion_path": "curriculum/08-architectural-patterns/06-enterprise-service-bus-esb.md"
+  },
+  {
+    "topic": "Virtual Machines (VMs) and Containers",
+    "source": "sources/karan/README.md#virtual-machines-vms-and-containers",
+    "original_words": 585,
+    "changed_original_words": 0,
+    "added_explanatory_words": 42,
+    "added_percent": 7.18,
+    "companion_path": "curriculum/08-architectural-patterns/07-virtual-machines-vms-and-containers.md"
+  },
+  {
+    "topic": "Service Discovery",
+    "source": "sources/karan/README.md#service-discovery",
+    "original_words": 443,
+    "changed_original_words": 0,
+    "added_explanatory_words": 39,
+    "added_percent": 8.8,
+    "companion_path": "curriculum/09-reliability-and-microservices/01-service-discovery.md"
+  },
+  {
+    "topic": "Circuit breaker",
+    "source": "sources/karan/README.md#circuit-breaker",
+    "original_words": 344,
+    "changed_original_words": 0,
+    "added_explanatory_words": 42,
+    "added_percent": 12.21,
+    "companion_path": "curriculum/09-reliability-and-microservices/03-circuit-breaker.md"
+  },
+  {
+    "topic": "SLA, SLO, SLI",
+    "source": "sources/karan/README.md#sla-slo-sli",
+    "original_words": 267,
+    "changed_original_words": 0,
+    "added_explanatory_words": 33,
+    "added_percent": 12.36,
+    "companion_path": "curriculum/09-reliability-and-microservices/04-sla-slo-sli.md"
+  },
+  {
+    "topic": "Disaster recovery",
+    "source": "sources/karan/README.md#disaster-recovery",
+    "original_words": 339,
+    "changed_original_words": 0,
+    "added_explanatory_words": 45,
+    "added_percent": 13.27,
+    "companion_path": "curriculum/09-reliability-and-microservices/05-disaster-recovery.md"
+  },
+  {
+    "topic": "SSL, TLS, mTLS",
+    "source": "sources/karan/README.md#ssl-tls-mtls",
+    "original_words": 408,
+    "changed_original_words": 0,
+    "added_explanatory_words": 43,
+    "added_percent": 10.54,
+    "companion_path": "curriculum/10-security-and-location/01-ssl-tls-mtls.md"
+  },
+  {
+    "topic": "OAuth 2.0 and OpenID Connect (OIDC)",
+    "source": "sources/karan/README.md#oauth-20-and-openid-connect-oidc",
+    "original_words": 601,
+    "changed_original_words": 0,
+    "added_explanatory_words": 50,
+    "added_percent": 8.32,
+    "companion_path": "curriculum/10-security-and-location/02-oauth-20-and-openid-connect-oidc.md"
+  },
+  {
+    "topic": "Single Sign-On (SSO)",
+    "source": "sources/karan/README.md#single-sign-on-sso",
+    "original_words": 789,
+    "changed_original_words": 0,
+    "added_explanatory_words": 37,
+    "added_percent": 4.69,
+    "companion_path": "curriculum/10-security-and-location/03-single-sign-on-sso.md"
+  },
+  {
+    "topic": "Geohashing and Quadtrees",
+    "source": "sources/karan/README.md#geohashing-and-quadtrees",
+    "original_words": 723,
+    "changed_original_words": 0,
+    "added_explanatory_words": 41,
+    "added_percent": 5.67,
+    "companion_path": "curriculum/10-security-and-location/04-geohashing-and-quadtrees.md"
+  },
+  {
+    "topic": "System Design Interviews",
+    "source": "sources/karan/README.md#system-design-interviews",
+    "original_words": 877,
+    "changed_original_words": 0,
+    "added_explanatory_words": 123,
+    "added_percent": 14.03,
+    "companion_path": "practice/INTERVIEW-APPROACH.md",
+    "measurement": "full_companion"
+  },
+  {
+    "topic": "URL Shortener",
+    "source": "sources/karan/README.md#url-shortener",
+    "original_words": 2581,
+    "changed_original_words": 0,
+    "added_explanatory_words": 159,
+    "added_percent": 6.16,
+    "companion_path": "practice/url-shortener.md",
+    "measurement": "full_companion"
+  },
+  {
+    "topic": "WhatsApp",
+    "source": "sources/karan/README.md#whatsapp",
+    "original_words": 2922,
+    "changed_original_words": 0,
+    "added_explanatory_words": 157,
+    "added_percent": 5.37,
+    "companion_path": "practice/whatsapp.md",
+    "measurement": "full_companion"
+  },
+  {
+    "topic": "Twitter",
+    "source": "sources/karan/README.md#twitter",
+    "original_words": 2995,
+    "changed_original_words": 0,
+    "added_explanatory_words": 157,
+    "added_percent": 5.24,
+    "companion_path": "practice/twitter.md",
+    "measurement": "full_companion"
+  },
+  {
+    "topic": "Netflix",
+    "source": "sources/karan/README.md#netflix",
+    "original_words": 3116,
+    "changed_original_words": 0,
+    "added_explanatory_words": 157,
+    "added_percent": 5.04,
+    "companion_path": "practice/netflix.md",
+    "measurement": "full_companion"
+  },
+  {
+    "topic": "Uber",
+    "source": "sources/karan/README.md#uber",
+    "original_words": 3058,
+    "changed_original_words": 0,
+    "added_explanatory_words": 157,
+    "added_percent": 5.13,
+    "companion_path": "practice/uber.md",
+    "measurement": "full_companion"
+  }
+]
