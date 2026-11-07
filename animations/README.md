@@ -2,7 +2,7 @@
 
 [← Learning path](../README.md) · [Topic validation](../TOPIC-VALIDATION.md)
 
-Animations are visible by default, play automatically, and repeat with exactly one second per step. Each shows the surrounding architecture, active request or event flow, changing state, and a design tradeoff. Follow the numbered explanation or open the full-resolution still sequence to study at your own pace. These are illustrative architectures, not performance benchmarks or complete protocol simulations.
+Animations are visible by default, play automatically, and repeat with four seconds per step. Motion shows the active path, then the finished state pauses for reading. Each frame focuses on what happened, why it matters, and what comes next. Follow the numbered explanation or open the full-resolution still sequence to study at your own pace. These are illustrative architectures, not performance benchmarks or complete protocol simulations.
 
 | Walkthrough | Lessons using it |
 | --- | --- |

@@ -41,7 +41,7 @@ The original topics retain 100% of their text. Scenario-first questions and the 
 
 ## Validated topics and visual explanations
 
-See the [category × topic audit](TOPIC-VALIDATION.md) for each concept's problem, design scenario, application steps, tradeoff, and evidence in the lesson. Confusing sequences have [animated walkthroughs](animations/README.md) that are visible by default, loop automatically, and spend one second on each step. The whole architecture remains visible as paths and state change. Still images and numbered explanations support slower study.
+See the [category × topic audit](TOPIC-VALIDATION.md) for each concept's problem, design scenario, application steps, tradeoff, and evidence in the lesson. Confusing sequences have [animated walkthroughs](animations/README.md) that are visible by default and loop automatically. Each step gets four seconds: the path moves first, then the completed state pauses for reading. Frames focus on what happened, why it matters, and what comes next. Still images and numbered explanations support slower study.
 
 ## Applied depth
 

@@ -1,4 +1,4 @@
-"""Render authored architecture walkthroughs: exactly one second per stage, infinite loop.
+"""Render authored architecture walkthroughs: four readable seconds per stage.
 
 Explanatory storyboards, not measurements or protocol simulators.
 Definitions: metadata/animation-stories.json. Dependency: Pillow.
@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / 'assets/animations'
 W, H = 1600, 1000
 FRAMES_PER_STEP, FRAME_MS = 20, 50
-STEP_MS = FRAMES_PER_STEP * FRAME_MS
+STEP_MS = 4000
+FINAL_FRAME_MS = STEP_MS - (FRAMES_PER_STEP - 1) * FRAME_MS
 INK, MUTED, BLUE, TEAL, RED, AMBER, BG = '#172D49', '#536782', '#2467E8', '#07866F', '#C44251', '#B26A0C', '#EDF3FC'
 FONT = next((p for p in ['C:/Windows/Fonts/segoeui.ttf', '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'] if Path(p).exists()), 'DejaVuSans.ttf')
 BOLD = next((p for p in ['C:/Windows/Fonts/seguisb.ttf', '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'] if Path(p).exists()), FONT)
@@ -175,15 +176,15 @@ def scene(story,index,state):
     d.text((32,13),'SYSTEM DESIGN  /  CONCEPT IN MOTION',font=font(14,True),fill='#9ABDED')
     title_size=34 if len(story['title'])<65 else 29
     write(d,(30,34),story['title'],title_size,1500,'white',True,1)
-    write(d,(32,84),story['objective'],21,1500,'#CBDAED',maxlines=1)
-    card(d,(30,145,1178,213),radius=14,shadow=False)
-    d.rounded_rectangle((42,157,131,201),radius=11,fill=color)
-    d.text((59,163),f'{index+1:02} / {len(story["steps"]):02}',font=font(19,True),fill='white')
-    write(d,(149,153),step['title'],22,992,INK,True,1)
-    write(d,(149,182),step['caption'],17,995,MUTED,maxlines=1)
-    card(d,(1198,145,1570,213),radius=14,shadow=False,fill='#DCE9FC')
-    d.text((1219,155),'1 SECOND / STEP',font=font(18,True),fill=BLUE)
-    d.text((1219,183),'Automatic playback · repeats',font=font(17),fill=MUTED)
+    write(d,(32,84),story['objective'],20,1500,'#CBDAED',maxlines=1)
+    card(d,(30,145,1178,226),radius=14,shadow=False)
+    d.rounded_rectangle((42,157,144,214),radius=11,fill=color)
+    d.text((58,164),f'STEP {index+1}',font=font(19,True),fill='white')
+    write(d,(164,151),step['title'],23,970,INK,True,1)
+    write(d,(164,184),'Here, '+step['caption'][0].lower()+step['caption'][1:],18,970,MUTED,maxlines=2,leading=21)
+    card(d,(1198,145,1570,226),radius=14,shadow=False,fill='#DCE9FC')
+    d.text((1219,156),'4 SECONDS / STEP',font=font(18,True),fill=BLUE)
+    d.text((1219,188),'Moves, pauses to read, repeats',font=font(16),fill=MUTED)
     card(d,(30,230,1178,718))
     for x in range(48,1170,20):
         for y in range(244,710,20):d.ellipse((x,y,x+1,y+1),fill='#DCE5F2')
@@ -200,11 +201,10 @@ def scene(story,index,state):
         d.rounded_rectangle((x1+11,y1+10,x1+50,y1+49),radius=9,fill='#EEF4FD')
         icon(d,x1+17,y1+16,node['label'],color if selected else MUTED)
         write(d,(x1+60,y1+11),node['label'],20,166,INK,True,2,23)
-        write(d,(x1+14,y1+58),node['role'],15,207,MUTED,maxlines=1)
-        d.rounded_rectangle((x1+9,y1+82,x2-9,y2-8),radius=7,
+        d.rounded_rectangle((x1+9,y1+58,x2-9,y2-8),radius=7,
             fill='#FDE9EC' if warning and changed else '#E4F4EE' if changed else '#F0F4FA')
-        write(d,(x1+16,y1+85),state[node['id']],17,198,
-            RED if warning and changed else TEAL if changed else INK,True,2,19)
+        write(d,(x1+16,y1+66),state[node['id']],18,198,
+            RED if warning and changed else TEAL if changed else INK,True,2,21)
     label_boxes=[]
     for i in active:
         x,y=path_at(routes[i],.5);label=story['links'][i]['label'];tw=d.textlength(label,font=font(15,True))
@@ -218,24 +218,29 @@ def scene(story,index,state):
         label_boxes.append(box)
         d.rounded_rectangle(box,radius=6,fill='white',outline='#D4E0F0')
         d.text((x-tw/2,y-27),label,font=font(15,True),fill=color)
-    card(d,(1198,230,1570,884))
-    d.text((1220,253),'WHERE IT FITS',font=font(15,True),fill=BLUE)
-    write(d,(1220,281),story['scenario'],22,326,INK,True,4)
-    d.line((1220,406,1548,406),fill='#DCE5F2',width=2)
-    d.text((1220,427),'WHAT CHANGES NOW',font=font(15,True),fill=color)
-    write(d,(1220,456),step['insight'],22,326,INK,True,5)
-    d.line((1220,616,1548,616),fill='#DCE5F2',width=2)
-    d.text((1220,639),'DESIGN TRADEOFF',font=font(15,True),fill=AMBER)
-    write(d,(1220,669),story['tradeoff'],21,326,MUTED,maxlines=6)
-    d.text((1220,846),'Blue: active   Red: risk / failure',font=font(15),fill=MUTED)
-    mechanism(d,step)
-    count=len(story['steps']);gap=7;width=(1540-gap*(count-1))/count
-    for j,s in enumerate(story['steps']):
-        x=30+j*(width+gap)
-        fill=color if j==index else '#BED2ED' if j<index else '#DBE5F3'
-        d.rounded_rectangle((x,908,x+width,916),radius=4,fill=fill)
-        write(d,(x,923),f'{j+1:02}  {s["title"]}',14,width-5,INK if j==index else MUTED,j==index,2,18)
-    d.text((30,976),'Illustrative architecture · Timing shows the teaching sequence, not system performance · Text and stills below',font=font(14),fill=MUTED)
+    card(d,(1198,243,1570,718))
+    d.text((1220,266),'WHY THIS STEP MATTERS',font=font(15,True),fill=color)
+    write(d,(1220,300),step['insight'],24,326,INK,True,5,30)
+    d.line((1220,470,1548,470),fill='#DCE5F2',width=2)
+    d.text((1220,493),'NOTICE',font=font(15,True),fill=TEAL)
+    for fact_i,fact in enumerate(step['detail'][:2]):
+        d.ellipse((1222,531+76*fact_i,1232,541+76*fact_i),fill=TEAL)
+        write(d,(1245,519+76*fact_i),fact,19,293,MUTED,maxlines=3,leading=24)
+    card(d,(30,736,1570,884),shadow=False,fill='#E2ECFA')
+    d.text((54,756),f'STEP {index+1} OF {len(story["steps"])}',font=font(16,True),fill=color)
+    write(d,(54,788),step['caption'],23,970,INK,True,3,29)
+    if index+1 < len(story['steps']):
+        d.text((1112,756),'NEXT',font=font(15,True),fill=BLUE)
+        write(d,(1112,787),story['steps'][index+1]['title'],21,410,INK,True,3,27)
+    else:
+        d.text((1112,756),'LOOP',font=font(15,True),fill=BLUE)
+        write(d,(1112,787),'Return to step 1 and replay the flow.',21,410,INK,True,3,27)
+    count=len(story['steps']);gap=9;width=(1540-gap*(count-1))/count
+    for j in range(count):
+        x=30+j*(width+gap);fill=color if j==index else '#BFD1E9' if j<index else '#D9E4F2'
+        d.rounded_rectangle((x,916,x+width,927),radius=5,fill=fill)
+        d.text((x+max(0,(width-10)/2),938),str(j+1),font=font(14,True),fill=INK if j==index else MUTED)
+    d.text((30,976),'Illustrative architecture · Four seconds show the teaching step, not system performance · Full text and stills below',font=font(14),fill=MUTED)
     return image,routes
 
 def animate(base,routes,step,phase):
@@ -252,14 +257,15 @@ def animate(base,routes,step,phase):
     return Image.alpha_composite(image,layer).convert('RGB')
 
 def render(story):
-    state={n['id']:n['initial'] for n in story['nodes']};frames=[];stills=[]
+    state={n['id']:n['initial'] for n in story['nodes']};frames=[];durations=[];stills=[]
     for i,step in enumerate(story['steps']):
         state.update(step['updates']);base,routes=scene(story,i,state);stills.append(base)
         for j in range(FRAMES_PER_STEP):
             im=animate(base,routes,step,(j+.5)/FRAMES_PER_STEP)
             frames.append(im.quantize(colors=128,method=Image.Quantize.FASTOCTREE))
+            durations.append(FINAL_FRAME_MS if j==FRAMES_PER_STEP-1 else FRAME_MS)
     path=DEST/(story['id']+'.gif')
-    frames[0].save(path,save_all=True,append_images=frames[1:],duration=FRAME_MS,loop=0,optimize=True,disposal=1)
+    frames[0].save(path,save_all=True,append_images=frames[1:],duration=durations,loop=0,optimize=True,disposal=1)
     # Full-resolution states in one column preserve small diagram labels.
     board=Image.new('RGB',(W,(H+16)*len(stills)),BG)
     for i,im in enumerate(stills):board.paste(im,(0,i*(H+16)))

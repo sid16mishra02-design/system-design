@@ -1,4 +1,4 @@
-"""Decode all frames and verify one-second stages, infinite loops, and visible embeds."""
+"""Decode all frames and verify four-second stages, infinite loops, and visible embeds."""
 from pathlib import Path
 from PIL import Image
 import json
@@ -20,8 +20,8 @@ for story in stories:
         assert all(0<=i<len(story['links']) for i in step['active']),story['id']
         assert step['caption'] and step['insight'] and len(step['detail'])>=2,story['id']
 for item in entries:
-    assert item['step_duration_ms']==1000,item['id']
-    assert item['duration_ms']==1000*len(item['steps']),item['id']
+    assert item['step_duration_ms']==4000,item['id']
+    assert item['duration_ms']==4000*len(item['steps']),item['id']
     assert all(item[k]==next(s for s in stories if s['id']==item['id'])[k]
                for k in ['nodes','links','steps','objective','scenario','tradeoff','topics']),item['id']
     with Image.open(root/item['gif']) as gif:
@@ -35,7 +35,7 @@ for item in entries:
             frame_ms=gif.info.get('duration',0)
             assert frame_ms>0,item['id']
             # Encoding may merge identical motionless frames, never adjacent stages.
-            assert duration//1000==(duration+frame_ms-1)//1000,(item['id'],duration,frame_ms)
+            assert duration//4000==(duration+frame_ms-1)//4000,(item['id'],duration,frame_ms)
             duration+=frame_ms
         assert duration==item['duration_ms'],(item['id'],duration)
         assert gif.info.get('loop')==0,item['id']
@@ -46,4 +46,4 @@ for path in list((root/'animations').glob('*.md'))+list((root/'curriculum').rglo
     text=path.read_text(encoding='utf-8')
     for block in re.findall(r'<details\b[^>]*>.*?</details>',text,re.S):
         assert '.gif)' not in block,f'Animation hidden behind a toggle: {path}'
-print(f'PASS: all {len(entries)} GIFs loop forever at exactly 1000 ms per stage; every frame decoded, stills checked, embeds visible by default.')
+print(f'PASS: all {len(entries)} GIFs loop forever at exactly 4000 ms per stage; every frame decoded, stills checked, embeds visible by default.')
