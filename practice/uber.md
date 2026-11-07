@@ -1,0 +1,487 @@
+# Uber: week 21
+
+[← Schedule](../SCHEDULE.md) · [Design worksheet](../templates/DESIGN.md)
+
+## Try solving this first
+
+A rider requests a trip near a map-cell boundary. Two riders can see the same nearby driver, whose last location is already several seconds old. How would you find candidates without missing a driver across the boundary? What must happen before you promise either rider that this driver is theirs?
+
+## Work through the design
+
+1. **Day 1:** Without a solution, define scope, functional requirements, and measurable constraints.
+2. **Day 2:** Estimate requests, storage, and bandwidth. Show units and assumptions. Define APIs and data entities.
+3. **Day 3:** Draw a complete request flow. Justify storage, cache, communication, and partition choices.
+4. **Day 4:** Read the complete worked design below. Compare assumptions; investigate one difference rather than replacing your work.
+5. **Day 5:** Revise the design for a component failure and a tenfold traffic increase. Record two tradeoffs.
+6. **Day 6:** Explain the design from a blank page and record one remaining uncertainty.
+7. **Day 7:** Rest or optional catch-up.
+
+Finish when you can follow one write and one read end to end, account for your main capacity estimate, and explain a failure response. Treat source estimates as worked assumptions to inspect, not production specifications to memorize.
+
+## Apply the design to a real workload
+
+### Where this becomes useful
+
+This case applies to ride matching, courier dispatch, and nearby-service discovery. There are two distinct problems: keeping track of changing locations and assigning limited resources correctly. A nearby-driver search can tolerate some approximation; assigning the same driver to two active trips may violate a business invariant.
+
+### Follow location and assignment separately
+
+Drivers send location updates. A location index finds candidates near a passenger; the system then filters candidates using availability and freshness. Candidate discovery does not reserve a driver. A separate conditional state transition must establish that the selected driver is still available when assignment occurs.
+
+### Optimize the measured bottleneck
+
+Suppose **100,000 active drivers** send an update every **five seconds**. That produces approximately **20,000 updates/second**. Reducing the interval to one second increases update load to **100,000/second**. Fresher locations cost bandwidth, processing, and storage; they are not free improvements.
+
+An adaptive update policy can send more frequently during active movement and less often while stationary, within the product's freshness requirements. Record when a location was observed, not just when the server received it: a delayed network message can otherwise look misleadingly fresh.
+
+Use a spatial index to narrow candidates instead of computing the distance to every driver. Search neighboring cells as well as the passenger's cell, then apply an actual distance check. Two nearby positions may sit on opposite cell boundaries. Finer cells reduce the area per cell but may require examining more cells to cover the search radius.
+
+### Protect correctness while scaling
+
+Two passenger requests may choose the same candidate simultaneously. Use an atomic conditional update or another explicit coordination mechanism to move a driver from available to assigned. If the condition fails, choose another candidate rather than relying on the earlier search result. A cached location entry is not authoritative proof of availability.
+
+For a busy city center, equal geographic partitions may carry very unequal traffic. Measure update and matching load per region. Partitioning more finely can help some hotspots, but adds boundary searches and coordination; increasing partition count is not a universal cure.
+
+**Exercise:** delay a driver's location updates while allowing assignment traffic through. Explain which candidates you discard as too old, what happens when no acceptable candidate remains, and how a driver becomes available again after an assignment times out. Measure match latency, unsuccessful assignments, and location age together.
+
+<!-- BEGIN ANIMATION -->
+## Watch the design in action
+
+![Ride matching: fresh candidates are not reservations](../assets/animations/case-uber.gif)
+
+[Read the numbered steps](../animations/case-uber.md) · [View the still sequence](../assets/animations/case-uber-steps.png)
+<!-- END ANIMATION -->
+
+## Complete lesson
+
+<!-- BEGIN ORIGINAL TOPIC -->
+# Uber
+
+Let's design an [Uber](https://uber.com) like ride-hailing service, similar to services like [Lyft](https://www.lyft.com), [OLA Cabs](https://www.olacabs.com), etc.
+
+## What is Uber?
+
+Uber is a mobility service provider, allowing users to book rides and a driver to transport them in a way similar to a taxi. It is available on the web and mobile platforms such as Android and iOS.
+
+## Requirements
+
+Our system should meet the following requirements:
+
+### Functional requirements
+
+We will design our system for two types of users: Customers and Drivers.
+
+**Customers**
+
+- Customers should be able to see all the cabs in the vicinity with an ETA and pricing information.
+- Customers should be able to book a cab to a destination.
+- Customers should be able to see the location of the driver.
+
+**Drivers**
+
+- Drivers should be able to accept or deny the customer-requested ride.
+- Once a driver accepts the ride, they should see the pickup location of the customer.
+- Drivers should be able to mark the trip as complete on reaching the destination.
+
+### Non-functional requirements
+
+- High reliability.
+- High availability with minimal latency.
+- The system should be scalable and efficient.
+
+### Extended requirements
+
+- Customers can rate the trip after it's completed.
+- Payment processing.
+- Metrics and analytics.
+
+## Estimation and Constraints
+
+Let's start with the estimation and constraints.
+
+_Note: Make sure to check any scale or traffic-related assumptions with your interviewer._
+
+### Traffic
+
+Let us assume we have 100 million daily active users (DAU) with 1 million drivers and on average our platform enables 10 million rides daily.
+
+If on average each user performs 10 actions (such as request a check available rides, fares, book rides, etc.) we will have to handle 1 billion requests daily.
+
+$$
+100 \space million \times 10 \space actions = 1 \space billion/day
+$$
+
+**What would be Requests Per Second (RPS) for our system?**
+
+1 billion requests per day translate into 12K requests per second.
+
+$$
+\frac{1 \space billion}{(24 \space hrs \times 3600 \space seconds)} = \sim 12K \space requests/second
+$$
+
+### Storage
+
+If we assume each message on average is 400 bytes, we will require about 400 GB of database storage every day.
+
+$$
+1 \space billion \times 400 \space bytes = \sim 400 \space GB/day
+$$
+
+And for 10 years, we will require about 1.4 PB of storage.
+
+$$
+400 \space GB \times 10 \space years \times 365 \space days = \sim 1.4 \space PB
+$$
+
+### Bandwidth
+
+As our system is handling 400 GB of ingress every day, we will require a minimum bandwidth of around 5 MB per second.
+
+$$
+\frac{400 \space GB}{(24 \space hrs \times 3600 \space seconds)} = \sim 5 \space MB/second
+$$
+
+### High-level estimate
+
+Here is our high-level estimate:
+
+| Type                      | Estimate    |
+| ------------------------- | ----------- |
+| Daily active users (DAU)  | 100 million |
+| Requests per second (RPS) | 12K/s       |
+| Storage (per day)         | ~400 GB     |
+| Storage (10 years)        | ~1.4 PB     |
+| Bandwidth                 | ~5 MB/s     |
+
+## Data model design
+
+This is the general data model which reflects our requirements.
+
+![uber-datamodel](../assets/source-diagrams/chapter-V/uber/uber-datamodel.png)
+
+We have the following tables:
+
+**customers**
+
+This table will contain a customer's information such as `name`, `email`, and other details.
+
+**drivers**
+
+This table will contain a driver's information such as `name`, `email`, `dob` and other details.
+
+**trips**
+
+This table represents the trip taken by the customer and stores data such as `source`, `destination`, and `status` of the trip.
+
+**cabs**
+
+This table stores data such as the registration number, and type (like Uber Go, Uber XL, etc.) of the cab that the driver will be driving.
+
+**ratings**
+
+As the name suggests, this table stores the `rating` and `feedback` for the trip.
+
+**payments**
+
+The payments table contains the payment-related data with the corresponding `tripID`.
+
+### What kind of database should we use?
+
+While our data model seems quite relational, we don't necessarily need to store everything in a single database, as this can limit our scalability and quickly become a bottleneck.
+
+We will split the data between different services each having ownership over a particular table. Then we can use a relational database such as [PostgreSQL](https://www.postgresql.org) or a distributed NoSQL database such as [Apache Cassandra](https://cassandra.apache.org/_/index.html) for our use case.
+
+## API design
+
+Let us do a basic API design for our services:
+
+### Request a Ride
+
+Through this API, customers will be able to request a ride.
+
+```tsx
+requestRide(customerID: UUID, source: Tuple<float>, destination: Tuple<float>, cabType: Enum<string>, paymentMethod: Enum<string>): Ride
+```
+
+**Parameters**
+
+Customer ID (`UUID`): ID of the customer.
+
+Source (`Tuple<float>`): Tuple containing the latitude and longitude of the trip's starting location.
+
+Destination (`Tuple<float>`): Tuple containing the latitude and longitude of the trip's destination.
+
+**Returns**
+
+Result (`Ride`): Associated ride information of the trip.
+
+### Cancel the Ride
+
+This API will allow customers to cancel the ride.
+
+```tsx
+cancelRide(customerID: UUID, reason?: string): boolean
+```
+
+**Parameters**
+
+Customer ID (`UUID`): ID of the customer.
+
+Reason (`string`): Reason for canceling the ride _(optional)_.
+
+**Returns**
+
+Result (`boolean`): Represents whether the operation was successful or not.
+
+### Accept or Deny the Ride
+
+This API will allow the driver to accept or deny the trip.
+
+```tsx
+acceptRide(driverID: UUID, rideID: UUID): boolean
+denyRide(driverID: UUID, rideID: UUID): boolean
+```
+
+**Parameters**
+
+Driver ID (`UUID`): ID of the driver.
+
+Ride ID (`UUID`): ID of the customer requested ride.
+
+**Returns**
+
+Result (`boolean`): Represents whether the operation was successful or not.
+
+### Start or End the Trip
+
+Using this API, a driver will be able to start and end the trip.
+
+```tsx
+startTrip(driverID: UUID, tripID: UUID): boolean
+endTrip(driverID: UUID, tripID: UUID): boolean
+```
+
+**Parameters**
+
+Driver ID (`UUID`): ID of the driver.
+
+Trip ID (`UUID`): ID of the requested trip.
+
+**Returns**
+
+Result (`boolean`): Represents whether the operation was successful or not.
+
+### Rate the Trip
+
+This API will enable customers to rate the trip.
+
+```tsx
+rateTrip(customerID: UUID, tripID: UUID, rating: int, feedback?: string): boolean
+```
+
+**Parameters**
+
+Customer ID (`UUID`): ID of the customer.
+
+Trip ID (`UUID`): ID of the completed trip.
+
+Rating (`int`): Rating of the trip.
+
+Feedback (`string`): Feedback about the trip by the customer _(optional)_.
+
+**Returns**
+
+Result (`boolean`): Represents whether the operation was successful or not.
+
+## High-level design
+
+Now let us do a high-level design of our system.
+
+### Architecture
+
+We will be using [microservices architecture](../curriculum/08-architectural-patterns/02-monoliths-and-microservices.md#microservices) since it will make it easier to horizontally scale and decouple our services. Each service will have ownership of its own data model. Let's try to divide our system into some core services.
+
+**Customer Service**
+
+This service handles customer-related concerns such as authentication and customer information.
+
+**Driver Service**
+
+This service handles driver-related concerns such as authentication and driver information.
+
+**Ride Service**
+
+This service will be responsible for ride matching and quadtree aggregation. It will be discussed in detail separately.
+
+**Trip Service**
+
+This service handles trip-related functionality in our system.
+
+**Payment Service**
+
+This service will be responsible for handling payments in our system.
+
+**Notification Service**
+
+This service will simply send push notifications to the users. It will be discussed in detail separately.
+
+**Analytics Service**
+
+This service will be used for metrics and analytics use cases.
+
+**What about inter-service communication and service discovery?**
+
+Since our architecture is microservices-based, services will be communicating with each other as well. Generally, REST or HTTP performs well but we can further improve the performance using [gRPC](../curriculum/06-api-fundamentals/02-rest-graphql-grpc.md#grpc) which is more lightweight and efficient.
+
+[Service discovery](../curriculum/09-reliability-and-microservices/01-service-discovery.md) is another thing we will have to take into account. We can also use a service mesh that enables managed, observable, and secure communication between individual services.
+
+_Note: Learn more about [REST, GraphQL, gRPC](../curriculum/06-api-fundamentals/02-rest-graphql-grpc.md) and how they compare with each other._
+
+### How is the service expected to work?
+
+Here's how our service is expected to work:
+
+![uber-working](../assets/source-diagrams/chapter-V/uber/uber-working.png)
+
+1. Customer requests a ride by specifying the source, destination, cab type, payment method, etc.
+2. Ride service registers this request, finds nearby drivers, and calculates the estimated time of arrival (ETA).
+3. The request is then broadcasted to the nearby drivers for them to accept or deny.
+4. If the driver accepts, the customer is notified about the live location of the driver with the estimated time of arrival (ETA) while they wait for pickup.
+5. The customer is picked up and the driver can start the trip.
+6. Once the destination is reached, the driver will mark the ride as complete and collect payment.
+7. After the payment is complete, the customer can leave a rating and feedback for the trip if they like.
+
+### Location Tracking
+
+How do we efficiently send and receive live location data from the client (customers and drivers) to our backend? We have two different options:
+
+**Pull model**
+
+The client can periodically send an HTTP request to servers to report its current location and receive ETA and pricing information. This can be achieved via something like [Long polling](../curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md#long-polling).
+
+**Push model**
+
+The client opens a long-lived connection with the server and once new data is available it will be pushed to the client. We can use [WebSockets](../curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md#websockets) or [Server-Sent Events (SSE)](../curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md#server-sent-events-sse) for this.
+
+The pull model approach is not scalable as it will create unnecessary request overhead on our servers and most of the time the response will be empty, thus wasting our resources. To minimize latency, using the push model with [WebSockets](../curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md#websockets) is a better choice because then we can push data to the client once it's available without any delay, given that the connection is open with the client. Also, WebSockets provide full-duplex communication, unlike [Server-Sent Events (SSE)](../curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md#server-sent-events-sse) which are only unidirectional.
+
+Additionally, the client application should have some sort of background job mechanism to ping GPS location while the application is in the background.
+
+_Note: Learn more about [Long polling, WebSockets, Server-Sent Events (SSE)](../curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md)._
+
+### Ride Matching
+
+We need a way to efficiently store and query nearby drivers. Let's explore different solutions we can incorporate into our design.
+
+**SQL**
+
+We already have access to the latitude and longitude of our customers, and with databases like [PostgreSQL](https://www.postgresql.org) and [MySQL](https://www.mysql.com) we can perform a query to find nearby driver locations given a latitude and longitude (X, Y) within a radius (R).
+
+```sql
+SELECT * FROM locations WHERE lat BETWEEN X-R AND X+R AND long BETWEEN Y-R AND Y+R
+```
+
+However, this is not scalable, and performing this query on large datasets will be quite slow.
+
+**Geohashing**
+
+[Geohashing](../curriculum/10-security-and-location/04-geohashing-and-quadtrees.md#geohashing) is a [geocoding](https://en.wikipedia.org/wiki/Address_geocoding) method used to encode geographic coordinates such as latitude and longitude into short alphanumeric strings. It was created by [Gustavo Niemeyer](https://twitter.com/gniemeyer) in 2008.
+
+Geohash is a hierarchical spatial index that uses Base-32 alphabet encoding, the first character in a geohash identifies the initial location as one of the 32 cells. This cell will also contain 32 cells. This means that to represent a point, the world is recursively divided into smaller and smaller cells with each additional bit until the desired precision is attained. The precision factor also determines the size of the cell.
+
+![geohashing](../assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/geohashing.png)
+
+For example, San Francisco with coordinates `37.7564, -122.4016` can be represented in geohash as `9q8yy9mf`.
+
+Now, using the customer's geohash we can determine the nearest available driver by simply comparing it with the driver's geohash. For better performance, we will index and store the geohash of the driver in memory for faster retrieval.
+
+**Quadtrees**
+
+A [Quadtree](../curriculum/10-security-and-location/04-geohashing-and-quadtrees.md#quadtrees) is a tree data structure in which each internal node has exactly four children. They are often used to partition a two-dimensional space by recursively subdividing it into four quadrants or regions. Each child or leaf node stores spatial information. Quadtrees are the two-dimensional analog of [Octrees](https://en.wikipedia.org/wiki/Octree) which are used to partition three-dimensional space.
+
+![quadtree](../assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/quadtree.png)
+
+Quadtrees enable us to search points within a two-dimensional range efficiently, where those points are defined as latitude/longitude coordinates or as cartesian (x, y) coordinates.
+
+We can save further computation by only subdividing a node after a certain threshold.
+
+![quadtree-subdivision](../assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/quadtree-subdivision.png)
+
+[Quadtree](../curriculum/10-security-and-location/04-geohashing-and-quadtrees.md#quadtrees) seems perfect for our use case, we can update the Quadtree every time we receive a new location update from the driver. To reduce the load on the quadtree servers we can use an in-memory datastore such as [Redis](https://redis.io) to cache the latest updates. And with the application of mapping algorithms such as the [Hilbert curve](https://en.wikipedia.org/wiki/Hilbert_curve), we can perform efficient range queries to find nearby drivers for the customer.
+
+**What about race conditions?**
+
+Race conditions can easily occur when a large number of customers will be requesting rides simultaneously. To avoid this, we can wrap our ride matching logic in a [Mutex](<https://en.wikipedia.org/wiki/Lock_(computer_science)>) to avoid any race conditions. Furthermore, every action should be transactional in nature.
+
+_For more details, refer to [Transactions](../curriculum/03-databases/08-transactions.md) and [Distributed Transactions](../curriculum/04-distributed-data/03-distributed-transactions.md)._
+
+**How to find the best drivers nearby?**
+
+Once we have a list of nearby drivers from the Quadtree servers, we can perform some sort of ranking based on parameters like average ratings, relevance, past customer feedback, etc. This will allow us to broadcast notifications to the best available drivers first.
+
+**Dealing with high demand**
+
+In cases of high demand, we can use the concept of Surge Pricing. Surge pricing is a dynamic pricing method where prices are temporarily increased as a reaction to increased demand and mostly limited supply. This surge price can be added to the base price of the trip.
+
+_For more details, learn how [surge pricing works](https://www.uber.com/us/en/drive/driver-app/how-surge-works) with Uber._
+
+### Payments
+
+Handling payments at scale is challenging, to simplify our system we can use a third-party payment processor like [Stripe](https://stripe.com) or [PayPal](https://www.paypal.com). Once the payment is complete, the payment processor will redirect the user back to our application and we can set up a [webhook](https://en.wikipedia.org/wiki/Webhook) to capture all the payment-related data.
+
+### Notifications
+
+Push notifications will be an integral part of our platform. We can use a message queue or a message broker such as [Apache Kafka](https://kafka.apache.org) with the notification service to dispatch requests to [Firebase Cloud Messaging (FCM)](https://firebase.google.com/docs/cloud-messaging) or [Apple Push Notification Service (APNS)](https://developer.apple.com/documentation/usernotifications) which will handle the delivery of the push notifications to user devices.
+
+_For more details, refer to the [WhatsApp](whatsapp.md#notifications) system design where we discuss push notifications in detail._
+
+## Detailed design
+
+It's time to discuss our design decisions in detail.
+
+### Data Partitioning
+
+To scale out our databases we will need to partition our data. Horizontal partitioning (aka [Sharding](../curriculum/03-databases/11-sharding.md)) can be a good first step. We can shard our database either based on existing [partition schemes](../curriculum/03-databases/11-sharding.md#partitioning-criteria) or regions. If we divide the locations into regions using let's say zip codes, we can effectively store all the data in a given region on a fixed node. But this can still cause uneven data and load distribution, we can solve this using [Consistent hashing](../curriculum/03-databases/12-consistent-hashing.md).
+
+_For more details, refer to [Sharding](../curriculum/03-databases/11-sharding.md) and [Consistent Hashing](../curriculum/03-databases/12-consistent-hashing.md)._
+
+### Metrics and Analytics
+
+Recording analytics and metrics is one of our extended requirements. We can capture the data from different services and run analytics on the data using [Apache Spark](https://spark.apache.org) which is an open-source unified analytics engine for large-scale data processing. Additionally, we can store critical metadata in the views table to increase data points within our data.
+
+### Caching
+
+In a location services-based platform, caching is important. We have to be able to cache the recent locations of the customers and drivers for fast retrieval. We can use solutions like [Redis](https://redis.io) or [Memcached](https://memcached.org) but what kind of cache eviction policy would best fit our needs?
+
+**Which cache eviction policy to use?**
+
+[Least Recently Used (LRU)](<https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)>) can be a good policy for our system. In this policy, we discard the least recently used key first.
+
+**How to handle cache miss?**
+
+Whenever there is a cache miss, our servers can hit the database directly and update the cache with the new entries.
+
+_For more details, refer to [Caching](../curriculum/05-caching/01-caching.md)._
+
+## Identify and resolve bottlenecks
+
+![uber-advanced-design](../assets/source-diagrams/chapter-V/uber/uber-advanced-design.png)
+
+Let us identify and resolve bottlenecks such as single points of failure in our design:
+
+- "What if one of our services crashes?"
+- "How will we distribute our traffic between our components?"
+- "How can we reduce the load on our database?"
+- "How to improve the availability of our cache?"
+- "How can we make our notification system more robust?"
+
+To make our system more resilient we can do the following:
+
+- Running multiple instances of each of our services.
+- Introducing [load balancers](../curriculum/02-networking/08-load-balancing.md) between clients, servers, databases, and cache servers.
+- Using multiple read replicas for our databases.
+- Multiple instances and replicas for our distributed cache.
+- Exactly once delivery and message ordering is challenging in a distributed system, we can use a dedicated [message broker](../curriculum/07-asynchronous-communication/01-message-brokers.md) such as [Apache Kafka](https://kafka.apache.org) or [NATS](https://nats.io) to make our notification system more robust.
+<!-- END ORIGINAL TOPIC -->
+
+[Credits and license](../ATTRIBUTION.md). The complete lesson above is reproduced unchanged; practice instructions are independent.

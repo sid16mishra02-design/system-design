@@ -1,0 +1,74 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Checkout slows while product browsing stays fast. The browser, application logic, and database run on separate machines, and each order line triggers another network call. The team wants to scale every tier equally. Which responsibility is actually waiting, which boundary creates the repeated trips, and could a logical layer remain in the same deployment?
+<!-- END INQUIRY -->
+
+<!-- BEGIN ORIGINAL TOPIC -->
+# N-tier architecture
+
+N-tier architecture divides an application into logical layers and physical tiers. Layers are a way to separate responsibilities and manage dependencies. Each layer has a specific responsibility. A higher layer can use services in a lower layer, but not the other way around.
+
+![n-tier-architecture](../../assets/source-diagrams/chapter-III/n-tier-architecture/n-tier-architecture.png)
+
+Tiers are physically separated, running on separate machines. A tier can call to another tier directly, or use asynchronous messaging. Although each layer might be hosted in its own tier, that's not required. Several layers might be hosted on the same tier. Physically separating the tiers improves scalability and resiliency and adds latency from the additional network communication.
+
+An N-tier architecture can be of two types:
+
+- In a closed layer architecture, a layer can only call the next layer immediately down.
+- In an open layer architecture, a layer can call any of the layers below it.
+
+A closed-layer architecture limits the dependencies between layers. However, it might create unnecessary network traffic, if one layer simply passes requests along to the next layer.
+
+## Types of N-Tier architectures
+
+Let's look at some examples of N-Tier architecture:
+
+### 3-Tier architecture
+
+3-Tier is widely used and consists of the following different layers:
+
+- **Presentation layer**: Handles user interactions with the application.
+- **Business Logic layer**: Accepts the data from the application layer, validates it as per business logic and passes it to the data layer.
+- **Data Access layer**: Receives the data from the business layer and performs the necessary operation on the database.
+
+### 2-Tier architecture
+
+In this architecture, the presentation layer runs on the client and communicates with a data store. There is no business logic layer or immediate layer between client and server.
+
+### Single Tier or 1-Tier architecture
+
+It is the simplest one as it is equivalent to running the application on a personal computer. All of the required components for an application to run are on a single application or server.
+
+## Advantages
+
+Here are some advantages of using N-tier architecture:
+
+- Can improve availability.
+- Better security as layers can behave like a firewall.
+- Separate tiers allow us to scale them as needed.
+- Improve maintenance as different people can manage different tiers.
+
+## Disadvantages
+
+Below are some disadvantages of N-tier architecture:
+
+- Increased complexity of the system as a whole.
+- Increased network latency as the number of tiers increases.
+- Expensive as every tier will have its own hardware cost.
+- Difficult to manage network security.
+<!-- END ORIGINAL TOPIC -->
+
+## Make it concrete
+
+Layers separate responsibilities; tiers separate deployed processes or machines. Browser, application server, and database form three tiers, not merely three folders.
+
+Keep order validation in the application and authoritative records in the database. Scale the measured bottleneck, not every tier equally. Fetch needed order lines in a bounded request instead of adding one network round trip per line. Network boundaries add latency and timeouts; independent deployment is not free.
+
+Follow one purchase: the browser submits quantities, the application checks business rules, and the database commits authoritative changes. The response returns through those same boundaries. A database timeout can therefore leave the caller uncertain even though the database may have committed; safe retry behavior is still needed.
+
+If rendering is expensive, adding rendering capacity may help. If every instance waits for one slow database query, more application instances may increase the queue instead. Measure per-tier service time, resource use, and downstream waiting before deciding which tier to scale. Separate deployment when its isolation or scaling benefit justifies the extra operations.
+
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

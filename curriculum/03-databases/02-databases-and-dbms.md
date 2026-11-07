@@ -1,0 +1,83 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+Support sees an order marked “shipped” whose customer record never existed and whose payment reference appears twice. The service wrote several files successfully, but no component enforced relationships or coordinated concurrent updates. Which facts need querying, which rules must remain true, and what should manage access when two workers change them together?
+<!-- END INQUIRY -->
+
+<!-- BEGIN ORIGINAL TOPIC -->
+# Databases and DBMS
+
+## What is a Database?
+
+A database is an organized collection of structured information, or data, typically stored electronically in a computer system. A database is usually controlled by a Database Management System (DBMS). Together, the data and the DBMS, along with the applications that are associated with them, are referred to as a database system, often shortened to just database.
+
+## What is DBMS?
+
+A database typically requires a comprehensive database software program known as a Database Management System (DBMS). A DBMS serves as an interface between the database and its end-users or programs, allowing users to retrieve, update, and manage how the information is organized and optimized. A DBMS also facilitates oversight and control of databases, enabling a variety of administrative operations such as performance monitoring, tuning, and backup and recovery.
+
+## Components
+
+Here are some common components found across different databases:
+
+### Schema
+
+The role of a schema is to define the shape of a data structure, and specify what kinds of data can go where. Schemas can be strictly enforced across the entire database, loosely enforced on part of the database, or they might not exist at all.
+
+### Table
+
+Each table contains various columns just like in a spreadsheet. A table can have as meager as two columns and upwards of a hundred or more columns, depending upon the kind of information being put in the table.
+
+### Column
+
+A column contains a set of data values of a particular type, one value for each row of the database. A column may contain text values, numbers, enums, timestamps, etc.
+
+### Row
+
+Data in a table is recorded in rows. There can be thousands or millions of rows in a table having any particular information.
+
+## Types
+
+![database-types](../../assets/source-diagrams/chapter-II/databases-and-dbms/database-types.png)
+
+Below are different types of databases:
+
+- **[SQL](03-sql-databases.md)**
+- **[NoSQL](04-nosql-databases.md)**
+  - Document
+  - Key-value
+  - Graph
+  - Timeseries
+  - Wide column
+  - Multi-model
+
+SQL and NoSQL databases are broad topics and will be discussed separately in [SQL databases](03-sql-databases.md) and [NoSQL databases](04-nosql-databases.md). Learn how they compare to each other in [SQL vs NoSQL databases](05-sql-vs-nosql-databases.md).
+
+## Challenges
+
+Some common challenges faced while running databases at scale:
+
+- **Absorbing significant increases in data volume**: The explosion of data coming in from sensors, connected machines, and dozens of other sources.
+- **Ensuring data security**: Data breaches are happening everywhere these days, it's more important than ever to ensure that data is secure but also easily accessible to users.
+- **Keeping up with demand**: Companies need real-time access to their data to support timely decision-making and to take advantage of new opportunities.
+- **Managing and maintaining the database and infrastructure**: As databases become more complex and data volumes grow, companies are faced with the expense of hiring additional talent to manage their databases.
+- **Removing limits on scalability**: A business needs to grow if it's going to survive, and its data management must grow along with it. But it's very difficult to predict how much capacity the company will need, particularly with on-premises databases.
+- **Ensuring data residency, data sovereignty, or latency requirements**: Some organizations have use cases that are better suited to run on-premises. In those cases, engineered systems that are pre-configured and pre-optimized for running the database are ideal.
+<!-- END ORIGINAL TOPIC -->
+
+## Make it concrete
+
+### Use it: keep related facts correct and retrievable
+
+A shop needs to find orders by customer, update order status, and prevent an order from referencing a nonexistent customer. The database stores the facts; the DBMS manages querying, concurrency, persistence, and the rules it supports.
+
+### Apply and improve
+
+List the operations before choosing a product: lookup by identifier, list recent orders, change status, and calculate reports. Specify which operations must see fresh data and which can tolerate delay.
+
+Begin optimization with slow queries and access patterns. Appropriate indexes, bounded result sets, and fewer unnecessary round trips can help before adding machines. Check whether the system is waiting on disk, locks, CPU, or connections; those require different fixes.
+
+Self-check: how does “get one order” differ from scanning every order to produce a report?
+
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

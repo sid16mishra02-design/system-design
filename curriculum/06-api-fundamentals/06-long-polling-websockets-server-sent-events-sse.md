@@ -1,0 +1,131 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A collaborative editor sends cursor moves both ways every second; a delivery tracker only needs occasional server updates. After a train enters a tunnel, thousands of clients reconnect together and some updates are missing. Which direction and frequency does each product need, how is progress resumed, and who applies backpressure?
+<!-- END INQUIRY -->
+
+<!-- BEGIN ORIGINAL TOPIC -->
+# Long polling, WebSockets, Server-Sent Events (SSE)
+
+Web applications were initially developed around a client-server model, where the web client is always the initiator of transactions like requesting data from the server. Thus, there was no mechanism for the server to independently send, or push, data to the client without the client first making a request. Let's discuss some approaches to overcome this problem.
+
+## Long polling
+
+HTTP Long polling is a technique used to push information to a client as soon as possible from the server. As a result, the server does not have to wait for the client to send a request.
+
+In Long polling, the server does not close the connection once it receives a request from the client. Instead, the server responds only if any new message is available or a timeout threshold is reached.
+
+![long-polling](../../assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/long-polling.png)
+
+Once the client receives a response, it immediately sends a new request to the server to have a new pending connection to send data to the client, and the operation is repeated. With this approach, the server emulates a real-time server push feature.
+
+### Working
+
+Let's understand how long polling works:
+
+1. The client makes an initial request and waits for a response.
+2. The server receives the request and delays sending anything until an update is available.
+3. Once an update is available, the response is sent to the client.
+4. The client receives the response and makes a new request immediately or after some defined interval to establish a connection again.
+
+### Advantages
+
+Here are some advantages of long polling:
+
+- Easy to implement, good for small-scale projects.
+- Nearly universally supported.
+
+### Disadvantages
+
+A major downside of long polling is that it is usually not scalable. Below are some of the other reasons:
+
+- Creates a new connection each time, which can be intensive on the server.
+- Reliable message ordering can be an issue for multiple requests.
+- Increased latency as the server needs to wait for a new request.
+
+## WebSockets
+
+WebSocket provides full-duplex communication channels over a single TCP connection. It is a persistent connection between a client and a server that both parties can use to start sending data at any time.
+
+The client establishes a WebSocket connection through a process known as the WebSocket handshake. If the process succeeds, then the server and client can exchange data in both directions at any time. The WebSocket protocol enables the communication between a client and a server with lower overheads, facilitating real-time data transfer from and to the server.
+
+![websockets](../../assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/websockets.png)
+
+This is made possible by providing a standardized way for the server to send content to the client without being asked and allowing for messages to be passed back and forth while keeping the connection open.
+
+### Working
+
+Let's understand how WebSockets work:
+
+1. The client initiates a WebSocket handshake process by sending a request.
+2. The request also contains an [HTTP Upgrade](https://en.wikipedia.org/wiki/HTTP/1.1_Upgrade_header) header that allows the request to switch to the WebSocket protocol (`ws://`).
+3. The server sends a response to the client, acknowledging the WebSocket handshake request.
+4. A WebSocket connection will be opened once the client receives a successful handshake response.
+5. Now the client and server can start sending data in both directions allowing real-time communication.
+6. The connection is closed once the server or the client decides to close the connection.
+
+### Advantages
+
+Below are some advantages of WebSockets:
+
+- Full-duplex asynchronous messaging.
+- Better origin-based security model.
+- Lightweight for both client and server.
+
+### Disadvantages
+
+Let's discuss some disadvantages of WebSockets:
+
+- Terminated connections aren't automatically recovered.
+- Older browsers don't support WebSockets (becoming less relevant).
+
+## Server-Sent Events (SSE)
+
+Server-Sent Events (SSE) is a way of establishing long-term communication between client and server that enables the server to proactively push data to the client.
+
+![server-sent-events](../../assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/server-sent-events.png)
+
+It is unidirectional, meaning once the client sends the request it can only receive the responses without the ability to send new requests over the same connection.
+
+### Working
+
+Let's understand how server-sent events work:
+
+1. The client makes a request to the server.
+2. The connection between client and server is established and it remains open.
+3. The server sends responses or events to the client when new data is available.
+
+### Advantages
+
+- Simple to implement and use for both client and server.
+- Supported by most browsers.
+- No trouble with firewalls.
+
+### Disadvantages
+
+- Unidirectional nature can be limiting.
+- Limitation for the maximum number of open connections.
+- Does not support binary data.
+<!-- END ORIGINAL TOPIC -->
+
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+![Live updates: compare complete connection lifecycles](../../assets/animations/realtime-protocols.gif)
+
+[Read the numbered steps](../../animations/realtime-protocols.md) · [View the still sequence](../../assets/animations/realtime-protocols-steps.png)
+<!-- END ANIMATION -->
+
+## Make it concrete
+
+SSE streams server-to-client events. WebSockets support a persistent two-way channel. Long polling holds a client request until an update or timeout, then renews it. Choose by direction, frequency, client support, and operations.
+
+These transports do not automatically provide durable history. Give updates sequence positions and recover after the last confirmed position, or reload a current snapshot when history is unavailable. Reconnect with backoff to avoid a synchronized retry storm.
+
+A scoreboard can sometimes combine rapid changes into the latest useful state; chat may need to preserve individual messages. Bound per-client buffers so slow clients cannot consume unlimited memory. Set heartbeats and idle behavior appropriate to intervening proxies.
+
+Measure active connections, delivery delay, reconnect rate, and queued bytes. Requests per second alone does not describe this workload.
+
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

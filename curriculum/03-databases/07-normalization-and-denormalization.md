@@ -1,0 +1,197 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+> **Reading note:** some statements in the preserved passage need clarification. Read [Make it concrete](#make-it-concrete) with it.
+
+<!-- BEGIN INQUIRY -->
+## Try solving this first
+
+A customer changes their address after an order ships. The profile should show the new address; the invoice must preserve the old delivery address. One engineer removes all duplication, while another copies the address into five tables. Which fact is current state, which is history, and who updates every intentional copy?
+<!-- END INQUIRY -->
+
+<!-- BEGIN ORIGINAL TOPIC -->
+# Normalization and Denormalization
+
+## Terms
+
+Before we go any further, let's look at some commonly used terms in normalization and denormalization.
+
+### Keys
+
+**Primary key**: Column or group of columns that can be used to uniquely identify every row of the table.
+
+**Composite key**: A primary key made up of multiple columns.
+
+**Super key**: Set of all keys that can uniquely identify all the rows present in a table.
+
+**Candidate key**: Attributes that identify rows uniquely in a table.
+
+**Foreign key**: It is a reference to a primary key of another table.
+
+**Alternate key**: Keys that are not primary keys are known as alternate keys.
+
+**Surrogate key**: A system-generated value that uniquely identifies each entry in a table when no other column was able to hold properties of a primary key.
+
+### Dependencies
+
+**Partial dependency**: Occurs when the primary key determines some other attributes.
+
+**Functional dependency**: It is a relationship that exists between two attributes, typically between the primary key and non-key attribute within a table.
+
+**Transitive functional dependency**: Occurs when some non-key attribute determines some other attribute.
+
+### Anomalies
+
+Database anomaly happens when there is a flaw in the database due to incorrect planning or storing everything in a flat database. This is generally addressed by the process of normalization.
+
+There are three types of database anomalies:
+
+**Insertion anomaly**: Occurs when we are not able to insert certain attributes in the database without the presence of other attributes.
+
+**Update anomaly**: Occurs in case of data redundancy and partial update. In other words, a correct update of the database needs other actions such as addition, deletion, or both.
+
+**Deletion anomaly**: Occurs where deletion of some data requires deletion of other data.
+
+**Example**
+
+Let's consider the following table which is not normalized:
+
+| ID  | Name   | Role              | Team |
+| --- | ------ | ----------------- | ---- |
+| 1   | Peter  | Software Engineer | A    |
+| 2   | Brian  | DevOps Engineer   | B    |
+| 3   | Hailey | Product Manager   | C    |
+| 4   | Hailey | Product Manager   | C    |
+| 5   | Steve  | Frontend Engineer | D    |
+
+Let's imagine, we hired a new person "John" but they might not be assigned a team immediately. This will cause an _insertion anomaly_ as the team attribute is not yet present.
+
+Next, let's say Hailey from Team C got promoted, to reflect that change in the database, we will need to update 2 rows to maintain consistency which can cause an _update anomaly_.
+
+Finally, we would like to remove Team B but to do that we will also need to remove additional information such as name and role, this is an example of a _deletion anomaly_.
+
+## Normalization
+
+Normalization is the process of organizing data in a database. This includes creating tables and establishing relationships between those tables according to rules designed both to protect the data and to make the database more flexible by eliminating redundancy and inconsistent dependency.
+
+### Why do we need normalization?
+
+The goal of normalization is to eliminate redundant data and ensure data is consistent. A fully normalized database allows its structure to be extended to accommodate new types of data without changing the existing structure too much. As a result, applications interacting with the database are minimally affected.
+
+### Normal forms
+
+Normal forms are a series of guidelines to ensure that the database is normalized. Let's discuss some essential normal forms:
+
+**1NF**
+
+For a table to be in the first normal form (1NF), it should follow the following rules:
+
+- Repeating groups are not permitted.
+- Identify each set of related data with a primary key.
+- Set of related data should have a separate table.
+- Mixing data types in the same column is not permitted.
+
+**2NF**
+
+For a table to be in the second normal form (2NF), it should follow the following rules:
+
+- Satisfies the first normal form (1NF).
+- Should not have any partial dependency.
+
+**3NF**
+
+For a table to be in the third normal form (3NF), it should follow the following rules:
+
+- Satisfies the second normal form (2NF).
+- Transitive functional dependencies are not permitted.
+
+**BCNF**
+
+Boyce-Codd normal form (or BCNF) is a slightly stronger version of the third normal form (3NF) used to address certain types of anomalies not dealt with by 3NF as originally defined. Sometimes it is also known as the 3.5 normal form (3.5NF).
+
+For a table to be in the Boyce-Codd normal form (BCNF), it should follow the following rules:
+
+- Satisfies the third normal form (3NF).
+- For every functional dependency X → Y, X should be the super key.
+
+_There are more normal forms such as 4NF, 5NF, and 6NF but we won't discuss them here. Check out this [amazing video](https://www.youtube.com/watch?v=GFQaEYEc8_8) that goes into detail._
+
+In a relational database, a relation is often described as _"normalized"_ if it meets the third normal form. Most 3NF relations are free of insertion, update, and deletion anomalies.
+
+As with many formal rules and specifications, real-world scenarios do not always allow for perfect compliance. If you decide to violate one of the first three rules of normalization, make sure that your application anticipates any problems that could occur, such as redundant data and inconsistent dependencies.
+
+### Advantages
+
+Here are some advantages of normalization:
+
+- Reduces data redundancy.
+- Better data design.
+- Increases data consistency.
+- Enforces referential integrity.
+
+### Disadvantages
+
+Let's look at some disadvantages of normalization:
+
+- Data design is complex.
+- Slower performance.
+- Maintenance overhead.
+- Require more joins.
+
+## Denormalization
+
+Denormalization is a database optimization technique in which we add redundant data to one or more tables. This can help us avoid costly joins in a relational database. It attempts to improve read performance at the expense of some write performance. Redundant copies of the data are written in multiple tables to avoid expensive joins.
+
+Once data becomes distributed with techniques such as federation and sharding, managing joins across the network further increases complexity. Denormalization might circumvent the need for such complex joins.
+
+_Note: Denormalization does not mean reversing normalization._
+
+### Advantages
+
+Let's look at some advantages of denormalization:
+
+- Retrieving data is faster.
+- Writing queries is easier.
+- Reduction in number of tables.
+- Convenient to manage.
+
+### Disadvantages
+
+Below are some disadvantages of denormalization:
+
+- Expensive inserts and updates.
+- Increases complexity of database design.
+- Increases data redundancy.
+- More chances of data inconsistency.
+<!-- END ORIGINAL TOPIC -->
+
+<!-- BEGIN ANIMATION -->
+## Watch the sequence
+
+![Normalize current facts; preserve historical snapshots](../../assets/animations/normalization.gif)
+
+[Read the numbered steps](../../animations/normalization.md) · [View the still sequence](../../assets/animations/normalization-steps.png)
+<!-- END ANIMATION -->
+
+## Make it concrete
+
+### Use it: distinguish duplication from a meaningful snapshot
+
+Store a customer's current profile address once and reference the customer from orders: less duplication when the profile changes. Copy the delivery address onto each order: a historical record of where that specific order was sent. This snapshot intentionally means something different from the customer's current address.
+
+### Apply and improve
+
+Begin with clear ownership of each fact and the queries the application needs. If a frequently used screen requires expensive joins, first inspect its queries and indexes. Then consider a deliberate read model or duplicated field when measurements justify it.
+
+For every duplicated current value, decide who updates each copy and what readers may see while updates propagate. For historical snapshots, decide when the snapshot is captured and whether later corrections are allowed. Those policies matter more than merely calling the schema normalized or denormalized.
+
+Avoid duplicating a field everywhere “for performance” without identifying the costly read and the resulting write complexity.
+
+### Clarify the key definitions
+
+A superkey is any column set that uniquely identifies a row. A candidate key is a minimal superkey; an alternate key is a candidate not chosen as primary. A foreign key can reference a suitable unique key, not only a primary key. A surrogate key can be chosen even when a natural key exists.
+
+Partial dependency means a non-key attribute depends on only part of a candidate key. With key `(order_id, product_id)`, `customer_id` depending only on `order_id` is partial; `quantity` depending on both is not.
+
+Self-check: should changing a profile address alter an order that was already shipped? Which address is each page supposed to show?
+
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

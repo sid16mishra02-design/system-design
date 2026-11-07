@@ -1,0 +1,494 @@
+[
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/caching.png",
+    "path": "assets/source-diagrams/chapter-I/caching/caching.png",
+    "sha256": "7976570ad4405ac53793938609e52d45d3365d3b160c96065a2c904466d978bf",
+    "bytes": 392509
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/distributed-cache.png",
+    "path": "assets/source-diagrams/chapter-I/caching/distributed-cache.png",
+    "sha256": "a99f14de9224a10c2d66e33a7c4930d9114ddafcc901c313fe5e58708a541715",
+    "bytes": 853688
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/global-cache.png",
+    "path": "assets/source-diagrams/chapter-I/caching/global-cache.png",
+    "sha256": "0d509d311faf68ce81ee35f3801978a5faa264d643158823a1a53705f5b21112",
+    "bytes": 700708
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/write-around-cache.png",
+    "path": "assets/source-diagrams/chapter-I/caching/write-around-cache.png",
+    "sha256": "b9644d48e2f86292f083d99052df74e6b18d279408c1f398e54f656027cfef43",
+    "bytes": 398177
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/write-back-cache.png",
+    "path": "assets/source-diagrams/chapter-I/caching/write-back-cache.png",
+    "sha256": "6b7e5c34ccfb987e67e5e2c3bf389c77b376633476bfe8118017bc868794cea1",
+    "bytes": 335758
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/caching/write-through-cache.png",
+    "path": "assets/source-diagrams/chapter-I/caching/write-through-cache.png",
+    "sha256": "3788155733598e329421ff799a91d6e594b953843e9b6f4847e42585ede70ceb",
+    "bytes": 333352
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/clustering/active-active.png",
+    "path": "assets/source-diagrams/chapter-I/clustering/active-active.png",
+    "sha256": "b252b602af28b64ed454c16cdbe10afd8d1694ecb5c92f39a9c2f08cf83ddfc4",
+    "bytes": 782760
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/clustering/active-passive.png",
+    "path": "assets/source-diagrams/chapter-I/clustering/active-passive.png",
+    "sha256": "db5263e4e5d680d1747ba3cf548b5757384994be0f51bdc98db794e97eee339c",
+    "bytes": 588173
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/clustering/cluster.png",
+    "path": "assets/source-diagrams/chapter-I/clustering/cluster.png",
+    "sha256": "74d6581a663db0bdcfb5db9cc07ecdbdcdff46d3de2b4cf004f70ecb98f35c8c",
+    "bytes": 1178745
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/content-delivery-network/cdn-map.png",
+    "path": "assets/source-diagrams/chapter-I/content-delivery-network/cdn-map.png",
+    "sha256": "2b2990d222c66f7da322fe4a76252b49f16e96731aeca3f673e005f66d046229",
+    "bytes": 738593
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/content-delivery-network/cdn.png",
+    "path": "assets/source-diagrams/chapter-I/content-delivery-network/cdn.png",
+    "sha256": "ae623ed8ab363301d5055c35313c7f9ac7995f80c9bbbde2cc51fd1bfb9d82c5",
+    "bytes": 1252756
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/domain-name-system/how-dns-works.png",
+    "path": "assets/source-diagrams/chapter-I/domain-name-system/how-dns-works.png",
+    "sha256": "e52ba72a9432a7adcd38727382d002b71c58bcd0e9b386cf89d8125ccf2f1e68",
+    "bytes": 969516
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/load-balancing/load-balancer-layers.png",
+    "path": "assets/source-diagrams/chapter-I/load-balancing/load-balancer-layers.png",
+    "sha256": "2221238376ed066e72d154dcd6d922d594f765e9a08085df457ae458a86d5a40",
+    "bytes": 687203
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/load-balancing/load-balancer.png",
+    "path": "assets/source-diagrams/chapter-I/load-balancing/load-balancer.png",
+    "sha256": "7292825dd52c66576a114a3d417445d2d0b1ae288c75b7b130ba3d93899ec44f",
+    "bytes": 462612
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/load-balancing/redundant-load-balancer.png",
+    "path": "assets/source-diagrams/chapter-I/load-balancing/redundant-load-balancer.png",
+    "sha256": "efb2be741c30953ab38b993f900643b764def48ecfbea8b33c04c7d9d77357ad",
+    "bytes": 516775
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/osi-model/osi-model.png",
+    "path": "assets/source-diagrams/chapter-I/osi-model/osi-model.png",
+    "sha256": "5abf68961eb48c095096e923801ebd261f4981f7d5314e7aaab18ab55d1bf141",
+    "bytes": 691500
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/proxy/forward-proxy.png",
+    "path": "assets/source-diagrams/chapter-I/proxy/forward-proxy.png",
+    "sha256": "7ae33975f186d6ac233cb1969a1a46d270dc9270baeda8cda550406c83d68a00",
+    "bytes": 764322
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/proxy/reverse-proxy.png",
+    "path": "assets/source-diagrams/chapter-I/proxy/reverse-proxy.png",
+    "sha256": "648365da8a4ffd37fce02cc856119262e0c70e2e357e34c39600a7eadbd0ed43",
+    "bytes": 838567
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/scalability/scalability.png",
+    "path": "assets/source-diagrams/chapter-I/scalability/scalability.png",
+    "sha256": "68b4970e6ac0a7d48422af98dd809b4553a60be6d4909f3661ab3189dc4a5415",
+    "bytes": 1011336
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/tcp-and-udp/tcp.png",
+    "path": "assets/source-diagrams/chapter-I/tcp-and-udp/tcp.png",
+    "sha256": "b248c2a4f99249227615009f1ba996b2655a2901bccadaeb18e0d053739d3762",
+    "bytes": 748785
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/tcp-and-udp/udp.png",
+    "path": "assets/source-diagrams/chapter-I/tcp-and-udp/udp.png",
+    "sha256": "2f61f630b34cf0a94e17d9bcc2e700210e3459b533dfcc99c215aa9b7ed628c7",
+    "bytes": 749881
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/cap-theorem/cap-theorem.png",
+    "path": "assets/source-diagrams/chapter-II/cap-theorem/cap-theorem.png",
+    "sha256": "e7f6d1ceb257bd7186a5ad0060b85110052b60590554067fe54a2f3d24ea3448",
+    "bytes": 1482459
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/consistent-hashing/consistent-hashing.png",
+    "path": "assets/source-diagrams/chapter-II/consistent-hashing/consistent-hashing.png",
+    "sha256": "5cb1d9665f0cda4bb0b5a047ef6795519380abc103ae19373725962bcc67e417",
+    "bytes": 678207
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/consistent-hashing/simple-hashing.png",
+    "path": "assets/source-diagrams/chapter-II/consistent-hashing/simple-hashing.png",
+    "sha256": "67760014004de40f99a715b3c36b9fcc473cc37ff59b1a06093e3e254dad65f1",
+    "bytes": 1035888
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/consistent-hashing/virtual-nodes.png",
+    "path": "assets/source-diagrams/chapter-II/consistent-hashing/virtual-nodes.png",
+    "sha256": "fe17b7b3dffbd67afe87be21baf879338b99ab9d6e245dcc6ef731a406bb8578",
+    "bytes": 700435
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/database-federation/database-federation.png",
+    "path": "assets/source-diagrams/chapter-II/database-federation/database-federation.png",
+    "sha256": "371735e018dd95007aa32aaffd3186a0c06e321b3468c79f32504d77a7eed13b",
+    "bytes": 1044602
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/database-replication/master-master-replication.png",
+    "path": "assets/source-diagrams/chapter-II/database-replication/master-master-replication.png",
+    "sha256": "2c2795cee26bcdd832d303bc49613ad3938bfd8ab96142b3dc8672fd2a7ed7ca",
+    "bytes": 775719
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/database-replication/master-slave-replication.png",
+    "path": "assets/source-diagrams/chapter-II/database-replication/master-slave-replication.png",
+    "sha256": "01c983fe940f4a4dd19b44f79f2d14f8204113f596572d14fd222f0951f0dcd2",
+    "bytes": 764290
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/databases-and-dbms/database-types.png",
+    "path": "assets/source-diagrams/chapter-II/databases-and-dbms/database-types.png",
+    "sha256": "71ebabffd8611ae415214d7793855ff1b2d40c1180d30080cbce528e558333a7",
+    "bytes": 417066
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/distributed-transactions/sagas.png",
+    "path": "assets/source-diagrams/chapter-II/distributed-transactions/sagas.png",
+    "sha256": "deb139ee79e8d37d39bce33db7d70eaa31ce6bb64ae5562be643d1b90af449ee",
+    "bytes": 633134
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/distributed-transactions/three-phase-commit.png",
+    "path": "assets/source-diagrams/chapter-II/distributed-transactions/three-phase-commit.png",
+    "sha256": "1caec270e392e72c8d4b2b8c8414c794c82bd0cc95c46eacb5feca36280a5c93",
+    "bytes": 974594
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/distributed-transactions/two-phase-commit.png",
+    "path": "assets/source-diagrams/chapter-II/distributed-transactions/two-phase-commit.png",
+    "sha256": "c22751eb086f22a588000f19a48dbceb77f53734345208c3df7e69c279633b5b",
+    "bytes": 1203123
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/indexes/dense-index.png",
+    "path": "assets/source-diagrams/chapter-II/indexes/dense-index.png",
+    "sha256": "875029c7fb85e5dfa2c7ad6d72d34b0244d19c6c0418b92497a05881b5feaf9e",
+    "bytes": 1018715
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/indexes/indexes.png",
+    "path": "assets/source-diagrams/chapter-II/indexes/indexes.png",
+    "sha256": "573fcc513ece5f2f85ed393d76c3d1687e733ff97d4a69bb747f39d676bc3778",
+    "bytes": 705640
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/indexes/sparse-index.png",
+    "path": "assets/source-diagrams/chapter-II/indexes/sparse-index.png",
+    "sha256": "57261d94e0403530d6e2090ed70e6710f32d3bf430ff02be1e09f10066d7389b",
+    "bytes": 1001525
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/pacelc-theorem/pacelc-theorem.png",
+    "path": "assets/source-diagrams/chapter-II/pacelc-theorem/pacelc-theorem.png",
+    "sha256": "17b5bf86032acce1a7ea6123cc68099b1d2f2f3fd66b022cd474dbb05f4378dd",
+    "bytes": 948980
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/sharding/sharding.png",
+    "path": "assets/source-diagrams/chapter-II/sharding/sharding.png",
+    "sha256": "16806728d0f421e2b5c4980c4fdf57e07cb4e39d53ea0ec31e7708d800b8ceb0",
+    "bytes": 1368937
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/transactions/transaction-states.png",
+    "path": "assets/source-diagrams/chapter-II/transactions/transaction-states.png",
+    "sha256": "04bc99f652c4b80f9e73fdd887a1613669194dd0b1d02bf80b6b8e3f62437c1c",
+    "bytes": 1335198
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/api-gateway/api-gateway.png",
+    "path": "assets/source-diagrams/chapter-III/api-gateway/api-gateway.png",
+    "sha256": "21d48931c3490f919fc0e79ccff95f96faf12f77a2a5134db9524e0efe3230a3",
+    "bytes": 996373
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/api-gateway/backend-for-frontend.png",
+    "path": "assets/source-diagrams/chapter-III/api-gateway/backend-for-frontend.png",
+    "sha256": "1ada4a9995e93988c362f680924ce216bcdba7d876cd44668b9839f9da3d45d5",
+    "bytes": 1024226
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/command-and-query-responsibility-segregation/command-and-query-responsibility-segregation.png",
+    "path": "assets/source-diagrams/chapter-III/command-and-query-responsibility-segregation/command-and-query-responsibility-segregation.png",
+    "sha256": "c8d55912d88ad5b73dde73192c85176395cad7ea29f7055c2e37bb0b4ac3ddd5",
+    "bytes": 505539
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/enterprise-service-bus/enterprise-service-bus.png",
+    "path": "assets/source-diagrams/chapter-III/enterprise-service-bus/enterprise-service-bus.png",
+    "sha256": "65293e216fc698fd6a59e9b208d60cc53b6f7a04231d6e3dd7fb40d9b5a159ab",
+    "bytes": 819165
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/event-driven-architecture/event-driven-architecture.png",
+    "path": "assets/source-diagrams/chapter-III/event-driven-architecture/event-driven-architecture.png",
+    "sha256": "90094a700cd42557c21562837e293499c8594a60007ee550362e552213c2c154",
+    "bytes": 859817
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/event-sourcing/event-sourcing.png",
+    "path": "assets/source-diagrams/chapter-III/event-sourcing/event-sourcing.png",
+    "sha256": "e1468cc460c201bf317f95058feaa2a60a16d9d7fe8c519acca1e21aa3978678",
+    "bytes": 998351
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/long-polling-websockets-server-sent-events/long-polling.png",
+    "path": "assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/long-polling.png",
+    "sha256": "e15f44edd86cec317b732210a705eb5517895e4dc3a8b851cf10669e7956aca0",
+    "bytes": 664066
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/long-polling-websockets-server-sent-events/server-sent-events.png",
+    "path": "assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/server-sent-events.png",
+    "sha256": "74912d7444094ec8efcfa154c617eeb0ffb5737becbf5b0d1e9e3c7cf380bf1b",
+    "bytes": 756041
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/long-polling-websockets-server-sent-events/websockets.png",
+    "path": "assets/source-diagrams/chapter-III/long-polling-websockets-server-sent-events/websockets.png",
+    "sha256": "4e86796b90f6601ad45febc350020b59dd949b2151cdd45297689f9c48fdd058",
+    "bytes": 765799
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/message-brokers/message-broker.png",
+    "path": "assets/source-diagrams/chapter-III/message-brokers/message-broker.png",
+    "sha256": "fd1a17b3aa2f0ba82ea693ca1839377be8159b47ce83398125253ad82c399283",
+    "bytes": 881440
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/message-queues/message-queue.png",
+    "path": "assets/source-diagrams/chapter-III/message-queues/message-queue.png",
+    "sha256": "5fa5a7bcedf7cf847dd0b7726f32fb509c843cd2633e9de427c765f61ac2d4ea",
+    "bytes": 536232
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/monoliths-microservices/architecture-range.png",
+    "path": "assets/source-diagrams/chapter-III/monoliths-microservices/architecture-range.png",
+    "sha256": "417c4fb734f20a2538f5f16caa502e9fc196921effadce42cad1c5f553c2a3fb",
+    "bytes": 597679
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/monoliths-microservices/microservices.png",
+    "path": "assets/source-diagrams/chapter-III/monoliths-microservices/microservices.png",
+    "sha256": "18c48a536ce86431b8aeaf17115343fd6cbe5cdca5a1a60e7e16662559d46553",
+    "bytes": 1271331
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/monoliths-microservices/monolith.png",
+    "path": "assets/source-diagrams/chapter-III/monoliths-microservices/monolith.png",
+    "sha256": "a9b3d15234bbab110e48b142b2fe31ca3f4649c6240d5092603001296d2f96a9",
+    "bytes": 871759
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/n-tier-architecture/n-tier-architecture.png",
+    "path": "assets/source-diagrams/chapter-III/n-tier-architecture/n-tier-architecture.png",
+    "sha256": "a69f256a6f17e32606e3510ba0bae67493ba75790f11d59562f9897ea52fb502",
+    "bytes": 732843
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/publish-subscribe/publish-subscribe.png",
+    "path": "assets/source-diagrams/chapter-III/publish-subscribe/publish-subscribe.png",
+    "sha256": "ce0b2acf3f7f4e02899efbb12d1adb99ed5589f6319c1ec98024bfad442c191e",
+    "bytes": 962377
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/circuit-breaker/circuit-breaker.png",
+    "path": "assets/source-diagrams/chapter-IV/circuit-breaker/circuit-breaker.png",
+    "sha256": "bb9fb613242d2b16fb2a069a054d8b979a63f9dfe2dd72b61858f35e2e11724c",
+    "bytes": 812513
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/disaster-recovery/disaster-recovery.png",
+    "path": "assets/source-diagrams/chapter-IV/disaster-recovery/disaster-recovery.png",
+    "sha256": "fe072b3a05a1787b48943aea8229053946897f3dcf737a995cc42d72dc3ed3d7",
+    "bytes": 280352
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/geohashing-and-quadtrees/geohashing.png",
+    "path": "assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/geohashing.png",
+    "sha256": "352cfa7e9b6370447ec513c84ef7ab2fbae9c15ff700a24e77f347592c690710",
+    "bytes": 2414232
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/geohashing-and-quadtrees/quadtree-subdivision.png",
+    "path": "assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/quadtree-subdivision.png",
+    "sha256": "58ed78ada5dfd9d5e9b7e970c3b7c1719fcd4666970bc0eac51e7a87e72e541c",
+    "bytes": 326845
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/geohashing-and-quadtrees/quadtree.png",
+    "path": "assets/source-diagrams/chapter-IV/geohashing-and-quadtrees/quadtree.png",
+    "sha256": "cff043841b4ed4b7f7d269357dfd602af9e9d8ad969684207857649b656883a8",
+    "bytes": 831438
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/oauth2-and-openid-connect/oauth2.png",
+    "path": "assets/source-diagrams/chapter-IV/oauth2-and-openid-connect/oauth2.png",
+    "sha256": "d5906513304549c79335c679a31ec1945d7af63096b09a57e89798518db4382c",
+    "bytes": 950684
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/rate-limiting/rate-limiting.png",
+    "path": "assets/source-diagrams/chapter-IV/rate-limiting/rate-limiting.png",
+    "sha256": "16521f94576e5837d24a89735ae57cb941086124d99bd3075e67e0a074093e57",
+    "bytes": 507788
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/service-discovery/client-side-service-discovery.png",
+    "path": "assets/source-diagrams/chapter-IV/service-discovery/client-side-service-discovery.png",
+    "sha256": "aa686c11b85589f5003bc434524c9bfd8d75ebdf574a5db7445cad57440d2790",
+    "bytes": 748585
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/service-discovery/server-side-service-discovery.png",
+    "path": "assets/source-diagrams/chapter-IV/service-discovery/server-side-service-discovery.png",
+    "sha256": "4e1dceac2186f2d6d6b8a5d68842ddd5b850d0a062276e59bf917482b223ff26",
+    "bytes": 878232
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/single-sign-on/sso.png",
+    "path": "assets/source-diagrams/chapter-IV/single-sign-on/sso.png",
+    "sha256": "b82bc2612c5ce1e9df9553fbe60edfe7dc1ef77438f779b11d45e50ba9232355",
+    "bytes": 834802
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/virtual-machines-and-containers/virtualization-vs-containerization.png",
+    "path": "assets/source-diagrams/chapter-IV/virtual-machines-and-containers/virtualization-vs-containerization.png",
+    "sha256": "d3b5c3e9f16fbe66e766919141dac9e86dfb1276c4ae66196033d9a0ed9449c2",
+    "bytes": 1904368
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/netflix/file-chunking.png",
+    "path": "assets/source-diagrams/chapter-V/netflix/file-chunking.png",
+    "sha256": "57fac95570998e12d65400a80f35d22c4f42d6c0922f09a7178da6d2b3de46f8",
+    "bytes": 421318
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/netflix/netflix-advanced-design.png",
+    "path": "assets/source-diagrams/chapter-V/netflix/netflix-advanced-design.png",
+    "sha256": "0788b3e93a47f213d109b164f20e0e27d70adaa6bc804b2fe4e146a3a8aca142",
+    "bytes": 1817190
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/netflix/netflix-datamodel.png",
+    "path": "assets/source-diagrams/chapter-V/netflix/netflix-datamodel.png",
+    "sha256": "cec7b91440d61b0b18966c093820bb1802cee7feee2519a813b792b9e5dd132e",
+    "bytes": 580315
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/netflix/video-processing-pipeline.png",
+    "path": "assets/source-diagrams/chapter-V/netflix/video-processing-pipeline.png",
+    "sha256": "93659e658d55ab65057d45cedd0d1253278af515078ef8706d6a391f5fac9094",
+    "bytes": 865555
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/twitter/newsfeed-pull-model.png",
+    "path": "assets/source-diagrams/chapter-V/twitter/newsfeed-pull-model.png",
+    "sha256": "6dad036ef4b258ea6b904aef35296baaac48be71a72db3336be6607be464ebfc",
+    "bytes": 858680
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/twitter/newsfeed-push-model.png",
+    "path": "assets/source-diagrams/chapter-V/twitter/newsfeed-push-model.png",
+    "sha256": "2f425dd30955b140be3ee7e4bd5291856850d09e8fa7d4250e84be52fddd4207",
+    "bytes": 421643
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/twitter/twitter-advanced-design.png",
+    "path": "assets/source-diagrams/chapter-V/twitter/twitter-advanced-design.png",
+    "sha256": "d8fd692aadfe523b8ea9607633b29ed126c6b635eb9387c830fbff1d0a82f1d8",
+    "bytes": 1772822
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/twitter/twitter-datamodel.png",
+    "path": "assets/source-diagrams/chapter-V/twitter/twitter-datamodel.png",
+    "sha256": "b8a62aff291934d36f161fc2205c2582ac8b4ff680ee905d4bf538c1f23c564b",
+    "bytes": 616808
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/uber/uber-advanced-design.png",
+    "path": "assets/source-diagrams/chapter-V/uber/uber-advanced-design.png",
+    "sha256": "e3b8c46ed38a942fbf595b8b552158ef613ee549e782e66033d07f7ad2519cc3",
+    "bytes": 1472142
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/uber/uber-datamodel.png",
+    "path": "assets/source-diagrams/chapter-V/uber/uber-datamodel.png",
+    "sha256": "08a832e9728390674616a710c7fe2a22310c34aea0046c5ed4b30bd653016d79",
+    "bytes": 661352
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/uber/uber-working.png",
+    "path": "assets/source-diagrams/chapter-V/uber/uber-working.png",
+    "sha256": "20157e459b8286902a34803f86c947c7fc4a6cefaff3147180f2987efb16e39f",
+    "bytes": 875999
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/url-shortener/url-shortener-advanced-design.png",
+    "path": "assets/source-diagrams/chapter-V/url-shortener/url-shortener-advanced-design.png",
+    "sha256": "1d54003edff4c2877f4b8d8e3cb80cc9e9e4c86f03a0dd80c29397947c6f0e80",
+    "bytes": 1728548
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/url-shortener/url-shortener-basic-design.png",
+    "path": "assets/source-diagrams/chapter-V/url-shortener/url-shortener-basic-design.png",
+    "sha256": "785bf36d9d8f4f23e6b914da7bd96d0ad8bb926083acc882b687026aeb56a72e",
+    "bytes": 713540
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/url-shortener/url-shortener-datamodel.png",
+    "path": "assets/source-diagrams/chapter-V/url-shortener/url-shortener-datamodel.png",
+    "sha256": "49b32df3bbf0a86829717562412455cc4cc77ffb48264869c0bd822f07eae560",
+    "bytes": 231892
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/whatsapp/whatsapp-advanced-design.png",
+    "path": "assets/source-diagrams/chapter-V/whatsapp/whatsapp-advanced-design.png",
+    "sha256": "e2f3de2cfa520bfe12ac447951fa4a4e194c1757742d52a46eb68304b867b3df",
+    "bytes": 1576899
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/whatsapp/whatsapp-basic-design.png",
+    "path": "assets/source-diagrams/chapter-V/whatsapp/whatsapp-basic-design.png",
+    "sha256": "3e327b4125fbea3d40a3a36208ac59d597a68f939cda55ba9abc90bfef56cb1c",
+    "bytes": 1281680
+  },
+  {
+    "source_url": "https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-V/whatsapp/whatsapp-datamodel.png",
+    "path": "assets/source-diagrams/chapter-V/whatsapp/whatsapp-datamodel.png",
+    "sha256": "f96fe0616dba5f6fbab5e7bdde1880a5332b087e5b0d2110761398a129ce3376",
+    "bytes": 525268
+  }
+]
