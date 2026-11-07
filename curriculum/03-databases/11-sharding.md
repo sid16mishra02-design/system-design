@@ -84,17 +84,18 @@ Here are some reasons why sharding might be the right choice:
 
 ## Make it concrete
 
-Customers 1–1000 live on shard A and 1001–2000 on B. Replicas of A hold the same customer range; B holds a different range. Cross-shard joins and uneven traffic become design concerns.
+### Use it: divide a growing customer dataset
 
-```mermaid
-flowchart TD
-  Q["Customer lookup"] --> K["Shard key"]
-  K -->|"IDs 1–1000"| A["Shard A"]
-  K -->|"IDs 1001–2000"| B["Shard B"]
-  A --> AR["Replica of A"]
-  B --> BR["Replica of B"]
-```
+Customers 1–1000 live on shard A and 1001–2000 on B. A replica of A keeps another copy of A's range; B owns a different range. Replication and sharding solve different problems.
 
-Self-check: if one celebrity receives half the traffic, does dividing users equally guarantee balanced load?
+Partitioning divides data into parts; those parts may remain inside one database instance. Sharding commonly places parts across independently managed nodes or instances. Define what the terms mean in the particular product you use.
+
+### Apply and improve
+
+Choose a shard key from frequent queries and traffic. A customer identifier can keep one customer's orders together. A query across every customer may then need multiple shards and a merge step.
+
+Measure request distribution and data size per shard. Equal customer counts do not guarantee balanced load: one celebrity can attract half the requests. Plan key movement, growth, and cross-shard operations before running out of capacity. A better index or query may solve an immediate bottleneck with much less complexity.
+
+Self-check: which request can be routed to one shard directly, and which must contact several?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

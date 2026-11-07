@@ -18,8 +18,10 @@ For example, according to the CAP theorem, a database can be considered availabl
 
 ## Make it concrete
 
-During a partition, choose availability or consistency. Else, replication can trade latency for consistency: waiting for distant replicas costs time.
+During a partition, consider availability versus consistency. Else, waiting for distant replicas can trade latency for consistency.
 
-Self-check: does CAP alone describe normal-operation latency?
+**Apply:** a global profile service may permit stale regional reads; a fresh balance check may wait. Measure normal-operation delay as well as partition behavior.
+
+Self-check: what changes without a partition?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -137,16 +137,26 @@ Here are some commonly used technologies for caching:
 
 ## Make it concrete
 
-Price in database: ₹500. Cache: ₹450. A fast cache hit can still be wrong. Sketch cache-aside: read cache → on miss read database → fill cache. Then trace a price update and decide when the old cache entry disappears.
+### Use it: speed repeated product reads
+
+Price in database: ₹500. Cache: ₹450. A fast cache hit can still be wrong. Cache-aside means the application checks the cache, loads the database on a miss, then fills the cache. The cache does not automatically know when the database changes.
 
 ```mermaid
 flowchart LR
-  C["Read price"] --> K["Cache"]
-  K -->|"hit"| H["Return cached value"]
-  K -->|"miss"| D["Read database"]
+  A["Application"] --> C["Check cache"]
+  C -->|"hit"| H["Return cached value"]
+  C -->|"miss"| D["Application reads database"]
   D --> F["Fill cache and return"]
 ```
 
-Self-check: what happens if the database update succeeds but cache invalidation fails?
+### Apply and improve
+
+Cache data whose repeated reads justify the extra moving parts. Choose a key that includes every input affecting the result, including user or tenant identity where needed. Set a freshness policy: update or invalidate the old entry after a successful write, and use a TTL to bound some stale copies. A TTL alone does not guarantee immediate correctness.
+
+Measure hit rate, miss latency, cache memory, and database load. A high hit rate on cheap requests may matter less than caching an expensive frequently repeated query. Avoid flooding the database when many callers miss the same key; combine concurrent loads or stagger expiry when appropriate.
+
+Plan a cache outage and verify that authoritative writes remain correct. For checkout, confirm the actual payable price rather than trusting a potentially stale product-page copy.
+
+Self-check: what happens when the database update succeeds but invalidation fails?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

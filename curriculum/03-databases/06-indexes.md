@@ -30,8 +30,16 @@ Sparse indexes require less maintenance than dense indexes at write-time since t
 
 ## Make it concrete
 
-A book index narrows where you look; it does not replace the pages. A database index similarly speeds selected lookups while consuming storage and adding write work. An index on city may help filtering but not every possible query.
+### Use it: find a customer's recent orders
 
-Self-check: why can adding many indexes slow order creation?
+A book index narrows where you look; it does not replace the pages. For `WHERE customer_id = ? ORDER BY created_at DESC`, an index beginning with those fields may avoid examining unrelated orders. The exact benefit depends on the database and query plan.
+
+### Apply and improve
+
+Inspect how many rows the query scans and returns. Compare its plan and timing before and after adding the candidate index using representative data. An index on city may help one filter but not every possible query.
+
+Indexes consume space and add write work because inserts and updates must maintain them. Remove genuinely unused indexes only after checking the workloads they support.
+
+Self-check: why can adding indexes speed reads while slowing order creation?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

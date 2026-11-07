@@ -21,8 +21,8 @@ also makes it easier to reason about and manage architectural changes as the sys
 
 ## Make it concrete
 
-Picture a food-ordering app: customers place orders, restaurants accept them, and couriers collect them. Draw those three flows. Ask what happens if the payment service stops. The design must satisfy requirements even when parts fail.
+Design a food-ordering app by tracing order → payment → restaurant. First specify correct charging, acceptable response time, and failure behavior. Then choose components that meet those needs. If payment times out, prevent duplicate charges before adding faster servers.
 
-Self-check: name one requirement before choosing a database.
+Self-check: which requirement justifies each component?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

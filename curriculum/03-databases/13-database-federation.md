@@ -42,8 +42,10 @@ Below are some disadvantages of federated databases:
 
 ## Make it concrete
 
-Keep billing in one database and product catalog in another. Federation separates databases by function; sharding divides a dataset by a key.
+Use separate databases for billing and catalog when those domains need independent ownership or scaling. Federation separates by function; sharding divides a dataset by a key.
 
-Self-check: is putting customer IDs 1–1000 in a separate database functional federation or sharding?
+**Apply:** assign each fact an owner, then define how cross-domain reads and updates work. Avoid repeatedly joining remote databases in a latency-sensitive request; a read model may help, with explicit freshness rules. Separate databases also mean separate backups and recovery coordination.
+
+Self-check: is moving customers 1–1000 to another database functional federation or sharding?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

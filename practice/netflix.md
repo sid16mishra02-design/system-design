@@ -12,6 +12,32 @@
 
 Finish when you can follow one write and one read end to end, account for your main capacity estimate, and explain a failure response. Treat source estimates as worked assumptions to inspect, not production specifications to memorize.
 
+## Apply the design to a real workload
+
+### Where this becomes useful
+
+Use this case for recorded video courses, entertainment streaming, and media libraries. Separate two workloads: preparing an uploaded video and serving an already prepared video to viewers. A user starting playback should not wait for the system to encode the entire uploaded source file.
+
+### Follow upload and playback separately
+
+An upload enters durable storage, then background jobs generate suitable versions of the video. A rendition is one encoded version, such as a particular resolution and bitrate. Playback retrieves a manifest describing available segments and versions, then fetches media segments from a delivery layer near the viewer. The exact protocol can vary; explain the roles before memorizing product names.
+
+### Optimize the measured bottleneck
+
+Video serving is often a data-transfer problem. Under an illustrative assumption of **2,000 concurrent viewers at 4 megabits/second each**, aggregate media traffic is roughly **8 gigabits/second**, excluding protocol overhead and bitrate variation. Adding application servers for the login API does not directly remove this media-delivery requirement.
+
+Cache reusable segments near viewers through a CDN. A warm popular segment can serve many viewers without each request reaching origin storage. The tradeoff includes cache cost, regional misses, invalidation, and access control. If every segment URL is unique for reasons unrelated to access requirements, examine whether the chosen cache key is preventing safe reuse.
+
+Provide multiple renditions so a player can adapt to changing connection conditions. Lower bitrate can reduce buffering, but reduces visual quality. More renditions improve choice while increasing encoding work and stored data. Choose versions using device needs, network conditions, and actual viewing patterns.
+
+### Test both quality and recovery
+
+Measure startup delay, time spent buffering, playback errors, achieved quality, and origin traffic. A higher cache hit rate is helpful only if the user experience and delivery cost also improve. Test cold regional caches rather than measuring only warmed traffic.
+
+Fail an encoding worker halfway through a rendition. The job should be safely retryable, and unfinished outputs should not appear as ready-to-play content. An atomic publication step can expose a completed manifest only when its required outputs are usable.
+
+**Exercise:** a new popular title launches simultaneously in several regions. Identify which requests reach the application, which fetch media from caches, and which reach origin storage on misses. Explain how you prevent a burst of misses from overwhelming the origin without assuming every region is already warm.
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

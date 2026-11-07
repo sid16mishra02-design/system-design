@@ -85,16 +85,26 @@ Following are some widely used message queues:
 
 ## Make it concrete
 
-Three image workers compete for jobs from one logical queue. A worker crashes after saving an image but before acknowledgement. The job can be delivered again, so processing must tolerate repeats. Acknowledgement timing affects loss and duplication.
+### Smooth an uneven workload
+
+A photo service receives 1,000 uploads in a burst. It puts thumbnail jobs in a queue so a bounded worker pool can process them without keeping upload requests open until every thumbnail finishes.
 
 ```mermaid
 flowchart LR
-  Q["Job queue"] --> W["Worker saves image"]
+  Q["Thumbnail queue"] --> W["Worker writes thumbnail"]
   W --> X["Crash before acknowledgement"]
-  X --> R["Job redelivered"]
-  R --> I["Check existing output"]
+  X --> R["Job delivered again"]
+  R --> I["Reuse or verify existing output"]
 ```
 
-Self-check: how can an image job detect that its output already exists?
+### Apply and improve it
+
+Give each job a stable identifier and deterministic output key. A repeated job should not create conflicting results. Acknowledge after durable completion, with the failure and retry behavior explicitly defined. A timeout or visibility lease should match realistic processing time and support renewal where required.
+
+Increase worker count only while the downstream image store and database have capacity. More consumers can otherwise increase failures. Batch cheap operations when worthwhile, bound retries, and isolate repeatedly failing jobs for investigation instead of cycling them forever.
+
+Watch oldest-job age and processing rate. A queue absorbs a burst; it cannot make a permanently overloaded system catch up.
+
+**Check:** if arrival rate stays above completion rate, what happens to waiting time?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

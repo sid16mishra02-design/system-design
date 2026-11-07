@@ -42,8 +42,16 @@ Here are some commonly used message brokers:
 
 ## Make it concrete
 
-A broker is infrastructure; a queue or topic describes messaging behavior it offers. One product may support both work queues and publish-subscribe. Product names alone do not determine delivery semantics.
+### A real integration boundary
 
-Self-check: must every subscriber receive the event, or should one worker perform the job?
+An order service sends work to messaging infrastructure. Billing and shipping consume it later. The broker stores or routes messages according to its configured guarantees; a queue or topic describes the delivery pattern offered.
+
+### Apply it
+
+Decide whether one worker should perform each job or every independent subscriber should receive the event. Specify persistence, acknowledgement, ordering, and retry requirements before choosing a product.
+
+For throughput, batch messages when the added delay is acceptable. Limit consumers' in-flight work so a fast broker cannot overwhelm a slow database. Track backlog age, not just message count: ten old payment jobs can matter more than thousands of fresh analytics events.
+
+**Check:** what happens after a consumer performs work but crashes before acknowledging it?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

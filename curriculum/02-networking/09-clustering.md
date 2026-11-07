@@ -71,8 +71,18 @@ Clustering is commonly used in the industry, and often many technologies offer s
 
 ## Make it concrete
 
-Three servers form a cluster only when they cooperate for a purpose. A load balancer can distribute traffic across independent servers; coordination, replication, and failover require additional mechanisms.
+### Use it: coordinate several machines for one job
 
-Self-check: what must happen to requests when one member stops responding?
+Three servers form a useful cluster when they cooperate for a purpose, such as processing jobs or keeping copies of data. Putting machines behind a load balancer does not itself define coordination, replication, or recovery.
+
+Suppose three workers process independent photo-resizing jobs. Adding a worker can increase throughput until shared storage, the queue, or another resource becomes the bottleneck. A database cluster has different coordination needs because nodes may need to agree on data changes.
+
+### Apply and improve
+
+State how work is assigned, how failed members are detected, and whether unfinished work can be reassigned safely. Avoid duplicate side effects when a failed worker's task is retried. Size the remaining members to handle a failure, rather than running every node at its limit.
+
+Measure useful work completed, coordination overhead, and recovery time. More nodes can add communication cost and operational complexity.
+
+Self-check: which work can continue independently, and which decisions need coordination?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -18,8 +18,28 @@ Use consistent error shapes so clients can respond sensibly. Avoid exposing inte
 
 **Check:** a response saying “success” is incomplete unless the contract states what succeeded. Was the order durably created, or merely accepted for later processing?
 
+## Where this comes into play
+
+Use explicit API design whenever clients will outlive one implementation version. A predictable contract reduces repeated integrations, accidental information exposure, and uncertainty during failures.
+
+## Work through a list endpoint
+
+Suppose an account has a million orders. Returning every row consumes database work, memory, bandwidth, and client processing. Instead, enforce a maximum page size and return a continuation cursor. Use a stable ordering, such as creation time plus a unique identifier, so equal timestamps have a tie-breaker.
+
+Concurrent inserts and deletes can still affect the view while a client pages through it. State whether the API offers a stable snapshot or a changing live list. A cursor is not automatically an immutable snapshot, and an encoded cursor should not grant access to someone else's data.
+
+## How to optimize the contract
+
+Bound payload size, expensive filters, and query complexity. Select indexes or data models for real access patterns rather than exposing arbitrary internal queries. Consider conditional reads or caching where the representation and access policy permit it.
+
+Add idempotency behavior to operations that clients may safely retry, and define which errors are worth retrying. Preserve compatibility: adding a required field or changing a field's meaning can break an older client even when the endpoint path is unchanged.
+
+## How to verify improvement
+
+Test a large dataset, equal ordering values, concurrent changes, invalid cursors, unauthorized access, and repeated writes. Compare bytes transferred, database rows examined, and end-to-end latency. A smaller response is helpful only if clients can still complete the intended task correctly.
+
 ## Optional further reading
 
 - [Additional explanation](https://abdulrwahab.medium.com/api-architecture-best-practices-for-designing-rest-apis-bf907025f5f)
 
-The lesson above is complete enough for this curriculum; external links are for deeper study.
+Optional references provide more detail; they are not required to follow this lesson.

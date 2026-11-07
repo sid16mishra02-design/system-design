@@ -12,6 +12,32 @@
 
 Finish when you can follow one write and one read end to end, account for your main capacity estimate, and explain a failure response. Treat source estimates as worked assumptions to inspect, not production specifications to memorize.
 
+## Apply the design to a real workload
+
+### Where this becomes useful
+
+This case also applies to activity feeds, professional networks, and subscription updates. Start with a chronological feed so that delivery and storage choices are understandable before introducing ranking. Ask whether a recently published post must appear immediately, and how edits, deletion, and privacy changes should affect existing feeds.
+
+### Follow one post and one feed read
+
+On a write, store the post durably, then distribute references to the followers' timelines if using precomputed feeds. On a read, fetch a bounded page of timeline references and retrieve the permitted post content. A reference avoids copying the entire post into every timeline, but content lookup and access checks still cost work.
+
+### Optimize the measured bottleneck
+
+Assume **1,000 new posts/second** and **300 followers per post**. Precomputing every follower timeline implies approximately **300,000 timeline insertions/second**, before retries and other work. This simplified average is only a starting estimate. A celebrity posting to millions of followers creates a very different burst.
+
+One option is a mixed strategy: distribute ordinary authors' posts ahead of time, while merging very large authors' posts when a follower reads the feed. This reduces enormous write bursts but makes reads do more work. Select a threshold from actual fanout cost, reading frequency, and acceptable feed delay rather than copying an arbitrary follower count.
+
+Cache popular post content and paginate feeds. Cache keys must include the relevant user or visibility context where responses differ. Otherwise a speed improvement can become a privacy bug. Storing a giant complete feed response is also costly to refresh; bounded pages or timeline identifiers often provide more controllable work.
+
+### Test freshness and failures
+
+Delay the distribution workers, then publish a post. The post may exist while followers' precomputed feeds have not caught up. Show an understandable product state and decide whether the author's own view needs an immediate read-after-write path.
+
+Delete a post after its reference has reached many timelines. Rendering should not reveal deleted or newly restricted content merely because an old reference remains. Removing every reference synchronously can be expensive; preserving the access rule at read time is still necessary.
+
+**Exercise:** compare three quantities before and after an optimization: post-to-feed delay, feed-read latency, and timeline writes per post. Explain which requirement improved and which cost increased. A lower feed-read latency alone does not show that the whole design became cheaper or fresher.
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

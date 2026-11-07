@@ -37,3 +37,7 @@ The learning route contains complete local lesson text, rather than redirecting 
 The 20 former link-only topics now have original lessons, under the root GPL-3.0 license. Their external article links remain direct and optional; those articles have not been copied or quoted. The learner explicitly approved an exception to the 30% addition limit for these 20 new lessons. Existing source-topic examples and practice guidance remain within that limit. Repeated checkpoint text on concept pages is included in the addition count.
 
 Reproduced excerpts retain the original CC BY-NC-ND 4.0 license, including its disclaimer of warranties. See the retained license text. Section 2(a)(1)(A) permits sharing unchanged material in whole or in part for noncommercial purposes; this edition keeps copied passages unchanged and identifies independent material separately.
+
+## Applied-depth expansion — 2026-11-07
+
+Independent teaching guidance was expanded across all 71 foundations and six case-study/method readings with practical uses, worked scenarios, conditional optimization, and verification. Preserved original passages remain unchanged. Existing-topic additions, including allocated comparison text, remain within their per-topic 30% limit; the twenty standalone lessons retain the approved exception. Coverage and counts appear in DEPTH-REVIEW.md.

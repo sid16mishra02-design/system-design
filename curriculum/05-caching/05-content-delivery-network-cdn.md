@@ -59,8 +59,18 @@ Here are some widely used CDNs:
 
 ## Make it concrete
 
-A CDN caches a video near viewers; your application cache might hold user-profile query results. Both reduce repeated work, but their keys, access controls, and invalidation differ.
+### Use it: serve a popular image near viewers
 
-Self-check: why should a private invoice never be cached as a public file?
+A CDN can keep copies at locations closer to users. A viewer requests an image; an edge location serves a cached copy or fetches the original when needed. This can reduce origin traffic and long-distance transfer time.
+
+### Apply and improve
+
+Start with frequently requested static assets. Define cache keys and cache-control behavior deliberately. Versioned names, such as `logo-v2.png`, let new pages request new content without depending entirely on purging an old cached name.
+
+Measure cache hit ratio, origin requests, response time, and geography. A CDN may not solve a slow personalized database query. Decide what is safe to share: a private invoice must not become a publicly reusable cache entry. Authentication and signed access require deliberate configuration.
+
+Trace an update: new bytes at the origin do not automatically replace all existing edge copies immediately. Plan expiration, versioning, or invalidation for the required freshness.
+
+Self-check: what can the CDN safely serve if the origin is temporarily unavailable?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

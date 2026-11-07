@@ -12,6 +12,32 @@
 
 Finish when you can follow one write and one read end to end, account for your main capacity estimate, and explain a failure response. Treat source estimates as worked assumptions to inspect, not production specifications to memorize.
 
+## Apply the design to a real workload
+
+### Where this becomes useful
+
+This case applies to ride matching, courier dispatch, and nearby-service discovery. There are two distinct problems: keeping track of changing locations and assigning limited resources correctly. A nearby-driver search can tolerate some approximation; assigning the same driver to two active trips may violate a business invariant.
+
+### Follow location and assignment separately
+
+Drivers send location updates. A location index finds candidates near a passenger; the system then filters candidates using availability and freshness. Candidate discovery does not reserve a driver. A separate conditional state transition must establish that the selected driver is still available when assignment occurs.
+
+### Optimize the measured bottleneck
+
+Suppose **100,000 active drivers** send an update every **five seconds**. That produces approximately **20,000 updates/second**. Reducing the interval to one second increases update load to **100,000/second**. Fresher locations cost bandwidth, processing, and storage; they are not free improvements.
+
+An adaptive update policy can send more frequently during active movement and less often while stationary, within the product's freshness requirements. Record when a location was observed, not just when the server received it: a delayed network message can otherwise look misleadingly fresh.
+
+Use a spatial index to narrow candidates instead of computing the distance to every driver. Search neighboring cells as well as the passenger's cell, then apply an actual distance check. Two nearby positions may sit on opposite cell boundaries. Finer cells reduce the area per cell but may require examining more cells to cover the search radius.
+
+### Protect correctness while scaling
+
+Two passenger requests may choose the same candidate simultaneously. Use an atomic conditional update or another explicit coordination mechanism to move a driver from available to assigned. If the condition fails, choose another candidate rather than relying on the earlier search result. A cached location entry is not authoritative proof of availability.
+
+For a busy city center, equal geographic partitions may carry very unequal traffic. Measure update and matching load per region. Partitioning more finely can help some hotspots, but adds boundary searches and coordination; increasing partition count is not a universal cure.
+
+**Exercise:** delay a driver's location updates while allowing assignment traffic through. Explain which candidates you discard as too old, what happens when no acceptable candidate remains, and how a driver becomes available again after an assignment times out. Measure match latency, unsuccessful assignments, and location age together.
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

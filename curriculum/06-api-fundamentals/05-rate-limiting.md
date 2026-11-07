@@ -59,8 +59,20 @@ One way to avoid this problem is to use some sort of distributed locking mechani
 
 ## Make it concrete
 
-Limit: 100 requests per minute. A fixed window may allow 100 just before a boundary and 100 just after. A token bucket controls refill and permits a configured burst. Two independent server-local counters can exceed a global limit.
+### Choose what you are protecting
 
-Self-check: is your rule per user, per IP, per instance, or global?
+A public search API allows 100 requests per second per customer. This limits one customer's load. A separate global limit may protect the database when many customers become busy together. An IP-only limit can unfairly group users sharing a network.
+
+Suppose ten application instances each allow 100 requests per second locally. A customer reaching all ten might get 1,000 requests per second. A global rule needs coordinated accounting or a deliberately partitioned budget.
+
+### Apply and tune it
+
+Choose a token bucket when controlled bursts are acceptable: capacity controls burst size, and refill controls the sustained allowance. A fixed window is simpler, but permits traffic on both sides of a window boundary to arrive close together.
+
+Return a clear throttling response and a useful retry instruction where appropriate. Clients should back off rather than immediately repeat the request. Monitor rejected requests, downstream saturation, and normal customer behavior before adjusting limits.
+
+Decide what happens when the limiter's shared store is unavailable. Allowing everything preserves access but risks overload; rejecting everything protects capacity but blocks legitimate users.
+
+**Check:** state the key, time interval, burst allowance, and failure policy before naming an algorithm.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

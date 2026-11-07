@@ -72,8 +72,16 @@ Here are some widely used technologies for implementing event-driven architectur
 
 ## Make it concrete
 
-An order service publishes OrderPlaced; shipping reacts later. The order response can return before shipping finishes. Plan for delayed, duplicate, and out-of-order events.
+### An action can finish before its reactions
 
-Self-check: what should the order page show while shipping has not yet processed the event?
+The order service records an order; shipping reacts to OrderPlaced later. The customer can see “order accepted, shipping pending” while that work is unfinished.
+
+### Apply it
+
+Coordinate recording the order and publishing its event, for example with a transactional outbox, so a crash does not leave an order with no event. Give events identifiers and consumers safe retry behavior. Expect delay and possible reordering.
+
+Scale consumers using backlog age and downstream capacity. More workers do not help if every worker waits on the same overloaded database.
+
+**Check:** how will the order page describe an unprocessed shipping event?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

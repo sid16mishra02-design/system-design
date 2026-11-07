@@ -90,8 +90,18 @@ Below are some common uses of quadtrees:
 
 ## Make it concrete
 
-Two nearby cafés can fall on opposite grid boundaries. A matching geohash prefix is a useful candidate filter, not a complete distance test. Search neighboring cells and calculate actual distances.
+### Find nearby candidates before calculating exact distance
 
-Self-check: why can searching only one cell miss the closest driver?
+A ride app needs drivers near a customer. A geohash encodes location into grid cells; a quadtree repeatedly subdivides an area so populated regions can be searched at finer resolution. Both help narrow candidates rather than calculating every driver's distance.
+
+Two nearby drivers can lie on opposite cell boundaries. Searching only the customer's geohash cell may miss the closer driver.
+
+### Apply and improve it
+
+Search the relevant cell and neighboring cells, then calculate actual distances for the candidates. Choose cell precision against the search radius and driver density: coarse cells return too many candidates; overly fine cells require more cell lookups. Expand outward when too few eligible drivers are found.
+
+In a quadtree, split busy regions while setting sensible depth or occupancy limits. Frequent location changes add update work, so measure index maintenance as well as lookup speed. Reject stale location records or treat them according to the application's tolerance; a fast result using an old position can still be wrong.
+
+**Check:** how do you avoid missing a driver just across the grid boundary?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -275,8 +275,18 @@ Well, the answer is none of them. There is no silver bullet as each of these tec
 
 ## Make it concrete
 
-Imagine fetching a profile and recent orders. REST may expose separate resources, GraphQL lets a client request selected fields, and gRPC defines typed remote calls. These are interface choices, not guarantees of speed or correctness.
+### Use a concrete client requirement
 
-Self-check: which choice fits your clients, streaming needs, tooling, and operational constraints?
+A shopping app needs product names, prices, and stock. With REST, it might request a product resource and then an inventory resource. With GraphQL, it can ask for selected fields through a schema. With gRPC, cooperating services call operations defined by a typed contract, such as checking inventory for a list of product IDs.
+
+These are different interface models, not a ranking from slowest to fastest. REST commonly uses HTTP's resource and caching behavior. GraphQL gives clients control over requested fields, but server resolvers still determine how much database work happens. gRPC is useful for typed service communication and supported streaming patterns; client compatibility and operations still matter.
+
+### Apply and improve it
+
+Suppose a page displays 30 products. After one query lists them, a GraphQL resolver fetching stock separately for each product may add 30 database calls: the N+1 problem. Batch stock lookups by product IDs. For a REST endpoint, a bounded batch endpoint or an appropriate cached product view can address the same workload. For a gRPC inventory call, consider batching IDs and reusing connections rather than opening one for every product.
+
+Measure end-to-end latency, bytes transferred, database calls, and failure behavior under a representative request. Returning fewer bytes does not help much if database work dominates. Whichever interface you choose, enforce authorization for the actual data requested and bound expensive queries.
+
+**Check:** which part of your product page is costly: extra network trips, oversized responses, or repeated database work? Pick the optimization that addresses that measured cause.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

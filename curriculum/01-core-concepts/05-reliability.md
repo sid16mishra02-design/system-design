@@ -14,8 +14,30 @@ Draw payment request → recorded payment → order update. Mark what happens if
 
 **Check:** a backup exists, but restoring it takes a day. It improves recovery options; it does not prove the service can remain available during a failure.
 
+## Where this comes into play
+
+Use reliability reasoning whenever a user action spans multiple steps: creating an order, charging a payment, reserving stock, or sending a notification. The question is what the user can safely rely on when a step fails or a result is uncertain.
+
+## Worked failure and recovery
+
+Suppose payment succeeds but the order worker stops before updating the order. A naive retry can charge again. A more deliberate flow records a stable operation identifier, makes payment retries reuse it, and resumes the order update from durable state. A reconciliation job periodically compares recorded orders and payments to find unresolved states. This handles uncertainty explicitly instead of assuming every timeout means failure.
+
+## How to improve the design
+
+- Define the invariant first: for example, one successful charge per order attempt.
+- Put durable boundaries around accepted work. A successful response should mean exactly what the API contract promises.
+- Use timeouts and bounded retries with backoff, which means waiting longer between repeated attempts. Retrying every failed call immediately can overload a recovering dependency.
+- Test failover and restore procedures, including what data may be missing afterward.
+- Separate optional work. A receipt email failure should not necessarily make a completed payment appear to have failed.
+
+Extra replicas, logs, and recovery jobs add operational cost. More components are useful only when their failure behavior is understood.
+
+## How to verify improvement
+
+Deliberately interrupt the flow after each durable step in a test environment. Confirm that retrying preserves the invariant and eventually resolves the order's state. Count duplicate charges, permanently stuck orders, and recovery time—not just successful HTTP responses.
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/reliability)
 
-The lesson above is complete enough for this curriculum; external links are for deeper study.
+Optional references provide more detail; they are not required to follow this lesson.

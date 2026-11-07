@@ -58,8 +58,16 @@ Both OAuth 2.0 and OIDC are easy to implement and are JSON based, which is suppo
 
 ## Make it concrete
 
-A photo-printing app needs permission to read your photos without receiving your password: OAuth authorization. “Sign in with…” can use OIDC to convey identity. Access tokens and ID tokens have different audiences and purposes.
+### Separate delegated permission from login identity
 
-Self-check: which token is intended for an API, and which conveys login identity to the client?
+A photo-printing app needs permission to read selected photos without receiving the user's password: OAuth authorization. OIDC adds a defined way for a client to learn an authenticated user's identity. An access token is for its intended resource API; an ID token conveys login identity to its intended client.
+
+### Apply it
+
+For a browser or mobile login flow, use an appropriate standard authorization flow and a maintained implementation instead of inventing token handling. Validate issuer, audience, signature, and relevant token lifetime. Request only needed permissions. The API still checks ownership of the requested photo; a valid token is not permission to read every user's data.
+
+Cache provider signing keys according to their rotation behavior instead of fetching them for every request. Plan refresh and logout behavior explicitly; shortening token lifetime changes how often credentials must be renewed, not the meaning of authorization.
+
+**Check:** which token would you present to the photo API, and what proves the caller may read this photo?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

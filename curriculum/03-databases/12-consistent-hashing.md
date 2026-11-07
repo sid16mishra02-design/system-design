@@ -151,8 +151,18 @@ Let's look at some examples where consistent hashing is used:
 
 ## Make it concrete
 
-With hash(key) modulo N, changing N can move many keys. On a hash ring, adding a node typically reassigns only part of the key space. Virtual nodes improve balance; they do not eliminate hot individual keys.
+### Use it: reduce key movement when cache nodes change
 
-Self-check: if one cached video becomes viral, does a balanced key count guarantee balanced request load?
+With `hash(key) modulo N`, changing the number of nodes can remap many keys. On a consistent-hash ring, adding a node typically changes ownership of only part of the key space. Think of assigning numbered lockers around a circle: a new attendant takes responsibility for a neighboring range, rather than reshuffling every locker.
+
+### Apply and improve
+
+Use this where membership changes and key movement is expensive, such as distributing cache ownership. All participants need a compatible view of the ring and the same key-to-owner rules. Plan how data becomes available at its new owner and what happens while clients disagree about membership.
+
+Virtual nodes give one physical node several positions, helping balance ownership and accommodate different capacities. They do not eliminate hot individual keys: a viral video can dominate traffic even when key counts are evenly distributed.
+
+Measure misses, node load, and movement during additions or removals. Warm caches gradually or limit database pressure when reassignment creates misses. Replication and recovery remain separate design decisions.
+
+Self-check: if a single key receives most reads, what can improve besides redistributing the other keys?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

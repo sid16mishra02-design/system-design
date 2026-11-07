@@ -40,8 +40,14 @@ Nowadays, mTLS is commonly used by microservices or distributed systems in a [ze
 
 ## Make it concrete
 
-HTTPS uses TLS to protect data in transit. With usual server authentication, the client verifies the server. With mTLS, the server also verifies a client certificate. Encryption does not replace authorization.
+### Protect a connection and verify identities
 
-Self-check: does possessing a valid certificate grant permission to delete every user?
+HTTPS uses TLS to protect data in transit. Usually, a client verifies the server certificate. With mTLS, the server also verifies a client certificate, useful for identifying calling services.
+
+Use supported TLS configurations, automate certificate renewal, and monitor expiry. Connection reuse can reduce repeated handshake work when suitable; bypassing certificate verification is not a valid optimization. A gateway that terminates TLS creates a new internal connection whose protection must be designed separately.
+
+Encryption does not replace authorization: an identified service still needs permission for an operation.
+
+**Check:** where is traffic decrypted, and which identity is authorized at the next hop?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

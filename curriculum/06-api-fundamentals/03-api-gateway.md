@@ -79,8 +79,16 @@ Following are some widely used gateways technologies:
 
 ## Make it concrete
 
-Draw mobile client → gateway → orders service. The gateway can authenticate and route a request, while the orders service still enforces ownership rules. Passing the gateway does not prove a user may read every order.
+### Where it helps
 
-Self-check: where should “this order belongs to this user” be checked?
+A mobile client calls one gateway, which routes `/orders` to the orders service and `/products` to the catalog. Shared authentication checks and request limits can live at this entry point instead of being independently implemented by every client.
+
+### Apply it carefully
+
+Suppose a product page needs catalog and stock data. A gateway can combine those responses, reducing client round trips. It also becomes responsible for deadlines and partial responses: what should the page show if stock is slow?
+
+Keep business rules in the responsible service. Passing gateway authentication does not authorize a customer to read another customer's order. Bound request sizes, propagate request identifiers, and set downstream timeouts. Avoid unlimited retries, which can multiply traffic during an outage. Run redundant gateway instances and measure gateway latency separately from downstream latency.
+
+**Check:** if the gateway fails, can clients reach any service through the supported entry path?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

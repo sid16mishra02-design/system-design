@@ -10,6 +10,14 @@ For a 45-minute practice session, try 5 minutes clarifying requirements, 5 estim
 
 Ask what must work, at what scale, how quickly, and under which failures. Explain why each component exists. A reasonable design with clear assumptions is more useful than a diagram copied from memory.
 
+## Turn an optimization into an argument
+
+Suppose a read currently takes 200 ms, with 150 ms spent on repeated database queries. Say what you would measure, propose caching or a query improvement, then explain freshness or write costs. Adding a queue will not automatically shorten a synchronous database query.
+
+Use this sequence: **requirement → observed bottleneck → proposed change → expected effect → new failure mode → verification**. For example, compare latency percentiles and database work under the same workload before and after the change. State assumptions; invented round numbers are useful estimates, not production facts.
+
+In a practice interview, optimize one demonstrated bottleneck before adding more components. Explain why the current design meets the required scale and when you would revisit it.
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

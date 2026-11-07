@@ -123,8 +123,20 @@ These are some widely used managed DNS solutions:
 
 ## Make it concrete
 
-Follow this lookup: browser → resolver → cached answer, or authoritative lookup → IP address → server connection. DNS finds an address; it does not carry the web page. A cached answer can outlive a server change until its TTL expires.
+### Use it: find the service before connecting
 
-Self-check: why might two users temporarily reach different addresses for the same hostname?
+Draw browser → resolver → cached answer or authoritative lookup → IP address → server connection. DNS finds an address; it does not carry the web page. The application's HTTP request starts after address resolution and the necessary connection setup.
+
+### Worked change
+
+Your shop moves from server A to B. You update its DNS record, but some resolvers still hold A's address until their cached answer expires. A user reaching A and another reaching B can both be following valid cached information.
+
+### Apply and improve
+
+For a planned move, lower the TTL ahead of time and allow the previous TTL to elapse before relying on shorter caching. Keep the old destination working through the transition when possible. Short TTLs can make changes propagate sooner through caches but increase lookup traffic; they do not guarantee instantaneous switching.
+
+When diagnosing a failure, inspect the actual answer and its remaining TTL. Distinguish missing or incorrect DNS records from an unreachable server at a correct address. Use redundant DNS service and avoid making recovery depend on a single unmanaged nameserver.
+
+Self-check: why does changing a DNS record not instantly migrate an already-open connection?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

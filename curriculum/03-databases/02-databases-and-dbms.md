@@ -62,8 +62,16 @@ Some common challenges faced while running databases at scale:
 
 ## Make it concrete
 
-A database is the organized data; a database management system is the software that stores, queries, and controls access to it. Think of the books as data and the library’s catalog and lending system as management tools. The analogy describes roles, not exact implementation.
+### Use it: keep related facts correct and retrievable
 
-Self-check: is PostgreSQL the stored order data, or the software managing that data?
+A shop needs to find orders by customer, update order status, and prevent an order from referencing a nonexistent customer. The database stores the facts; the DBMS manages querying, concurrency, persistence, and the rules it supports.
+
+### Apply and improve
+
+List the operations before choosing a product: lookup by identifier, list recent orders, change status, and calculate reports. Specify which operations must see fresh data and which can tolerate delay.
+
+Begin optimization with slow queries and access patterns. Appropriate indexes, bounded result sets, and fewer unnecessary round trips can help before adding machines. Check whether the system is waiting on disk, locks, CPU, or connections; those require different fixes.
+
+Self-check: how does “get one order” differ from scanning every order to produce a report?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -118,8 +118,20 @@ Following are some of the load balancing solutions commonly used in the industry
 
 ## Make it concrete
 
-Draw client → load balancer → servers A/B → shared database. Adding B spreads application work but does not double database capacity. If A holds sessions in memory, a later request routed to B may lose its session.
+### Use it: spread checkout requests
 
-Self-check: where could session state live so either server can handle the next request?
+Draw client → load balancer → servers A/B → shared database. Adding B spreads application work but does not double database capacity. If A holds sessions only in memory, a later request sent to B may lose its session.
+
+### Apply and improve
+
+Start with healthy instances and a routing policy that matches the workload. Round robin is simple; least-connections can help when connections differ in duration. Neither automatically understands the actual business work behind a request.
+
+Use readiness checks that reflect whether an instance can accept traffic. When removing an instance, stop new requests and allow active work to finish. Keep spare capacity so the remaining servers can handle a failure.
+
+Move shared session state to an appropriate store, or use a suitable stateless session design, when requests must move freely between instances. Sticky routing can reduce immediate disruption but does not make an instance's memory durable.
+
+Watch latency, errors, and load distribution per instance. Uneven traffic may come from long-lived connections or expensive requests, not just a poor balancing algorithm. Investigate the shared database before assuming another application instance will help.
+
+Self-check: what happens to an in-flight purchase when its selected server disappears?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

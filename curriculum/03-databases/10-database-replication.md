@@ -51,15 +51,17 @@ In contrast, asynchronous replication copies the data to the replica after the d
 
 ## Make it concrete
 
-Write an address on the primary, then immediately read a lagging replica: the old address may appear. Replication copies data; sharding divides ownership of data. Neither automatically substitutes for backups.
+Write an address on the primary, then read a lagging replica: the old address may appear. Replication copies data; sharding divides its ownership. Neither replaces backups.
 
 ```mermaid
 flowchart LR
-  W["Write new address"] --> P["Primary: new"]
-  P -->|"replication lag"| R["Replica: old until applied"]
+  W["Update address"] --> P["Primary: new"]
+  P -->|"apply later"| R["Replica: temporarily old"]
   U["Immediate read"] --> R
 ```
 
-Self-check: what happens if an accidental deletion is copied to every replica?
+**Apply:** send freshness-sensitive reads to an appropriate authoritative path. Use replicas for reads that tolerate their lag; monitor that lag and test failover. Synchronous acknowledgement can wait for selected replicas, increasing write latency; it does not mean every reader always sees identical data.
+
+Self-check: what if an accidental deletion reaches every replica?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

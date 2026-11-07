@@ -46,16 +46,10 @@ An AP database delivers availability and partition tolerance at the expense of c
 
 ## Make it concrete
 
-Two replicas cannot communicate. A client writes “sold” on A; B receives a read. B can answer without confirming the latest write, or refuse/wait. CAP’s availability concerns every request to a non-failing node during a partition, not monthly uptime.
+Two replicas cannot communicate. A writes “sold”; B receives a read. B can answer without confirming the latest write, or refuse/wait. CAP availability concerns requests to non-failing nodes during a partition, not monthly uptime.
 
-```mermaid
-flowchart LR
-  A["A: sold"] -.- P["Partition: no communication"]
-  P -.- B["B: last known available"]
-  B --> C["Reply without latest write"]
-  B --> D["Refuse or wait"]
-```
+**Apply:** decide per operation. Preventing double-selling may require refusing some requests until coordination works. Browsing recommendations may accept older results. “Choose two” hides the important question: what happens during the network partition?
 
-Self-check: which guarantee does each choice sacrifice during that partition?
+Self-check: which response protects the ticket-selling invariant?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

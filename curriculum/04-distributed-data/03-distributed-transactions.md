@@ -95,8 +95,20 @@ There are two common implementation approaches:
 
 ## Make it concrete
 
-An order and payment span services. Two-phase commit coordinates a commit decision; a saga uses local commits and compensating actions. Refunding a payment compensates for an order failure; it does not erase every external effect, such as an email.
+### Use it: coordinate an order and its payment
 
-Self-check: what should a customer see while compensation is still running?
+The order service records an order; a separate payment service charges the customer. A local database transaction cannot automatically make both services commit together.
+
+Two-phase commit coordinates participants around a commit decision. A saga commits local steps and uses compensating actions when a later step fails. Refunding a charge compensates for an order failure; it does not erase every external effect, such as a receipt email.
+
+### Apply and improve
+
+Write the steps, retry behavior, and compensation for each partial outcome before choosing a mechanism. Give repeated commands stable identifiers and make processing tolerate duplicates. Record enough durable state to resume after a crash and to distinguish “failed” from “outcome unknown.”
+
+Reduce unnecessary coordination by keeping a business invariant inside one owner or transaction where practical. When services must coordinate, expose a truthful intermediate status, such as payment pending, rather than falsely reporting a completed order.
+
+Measure stuck work and provide reconciliation for outcomes automation cannot immediately settle.
+
+Self-check: if the charge succeeded but its response was lost, why is immediately charging again unsafe?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

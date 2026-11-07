@@ -58,8 +58,16 @@ On the other hand, planning around BASE limitations can sometimes be a major dis
 
 ## Make it concrete
 
-ACID consistency means a transaction preserves declared invariants. Distributed consistency describes what different readers observe across replicas. These are different uses of “consistency.” A replicated SQL database can use ACID locally while replicas lag.
+### Use it: choose guarantees for a particular operation
 
-Self-check: can an order commit correctly while a replica still shows the old order list?
+ACID consistency means a transaction preserves declared invariants. Distributed consistency describes what readers observe across copies. These are different uses of “consistency.” A database can support ACID transactions while an asynchronous read replica lags.
+
+For checkout, enforce stock and payment-related rules explicitly. A recommendation list may tolerate briefly stale data. Do not infer either guarantee merely from a SQL or NoSQL label.
+
+### Apply and improve
+
+State the invariant, acceptable staleness, and failure behavior. Use stronger coordination where correctness requires it, and measure the latency or availability cost. Eventual convergence requires the system's update and conflict-handling mechanisms to work.
+
+Self-check: can an order commit correctly while a replica still shows yesterday's list?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

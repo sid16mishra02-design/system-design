@@ -85,8 +85,20 @@ These are some commonly used Identity Providers (IdP):
 
 ## Make it concrete
 
-Sign into the identity provider once, then access payroll and email through separate application sessions. Logging out of payroll may not end the provider session or email session.
+### One sign-in, several application sessions
 
-Self-check: which sessions must be invalidated for organization-wide logout?
+An employee signs into an identity provider, then opens payroll and email without entering a separate password for each. Each application trusts identity information through an agreed protocol, but still owns its permissions and often maintains its own session.
+
+Logging out of payroll may end only the payroll session. The identity-provider session or email session can remain active. “Single sign-on” does not automatically mean a single universal logout.
+
+### Apply it across an organization
+
+Map identity-provider accounts to local accounts using stable identifiers. Decide which roles grant payroll access rather than treating every authenticated employee as an administrator. Define what happens when employment ends, group membership changes, or the provider is unavailable.
+
+Reuse an existing valid application session according to policy instead of performing a fresh provider interaction for every page. Balance that convenience against how quickly access revocation must take effect. Monitor login failures, session expiry, and provisioning delays separately.
+
+Use explicit logout and revocation requirements when choosing session lifetimes. Do not assume changing a provider password instantly terminates every previously established application session.
+
+**Check:** after disabling an employee, what prevents an already open payroll session from remaining usable?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

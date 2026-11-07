@@ -106,8 +106,20 @@ Let's understand how server-sent events work:
 
 ## Make it concrete
 
-A sports scoreboard needs server → browser updates: SSE may fit. A collaborative cursor needs frequent two-way updates: WebSockets may fit. Long polling repeats requests after responses or timeouts. Reconnection, missed updates, and authentication still need design.
+### Match the direction of communication
 
-Self-check: which direction does each message travel in your use case?
+A sports scoreboard mainly sends server updates to browsers: SSE can fit. A collaborative editor sends frequent changes in both directions: WebSockets can fit. Long polling keeps a request open until an update or timeout, then the client asks again.
+
+These mechanisms carry updates; they do not automatically provide a durable message history. A closed connection can leave a gap.
+
+### Apply and improve it
+
+Give updates sequence numbers or event identifiers. After reconnecting, a client can request events after its last confirmed position, or reload a current snapshot when history is unavailable. Reconnect with backoff so an outage does not produce a synchronized rush of new connections.
+
+For a scoreboard, combine rapid score changes into the latest useful state instead of sending every intermediate render instruction. For a chat, preserve the messages themselves. Bound per-client buffers: a slow client must not consume unlimited server memory. Use heartbeats and idle timeouts appropriate to intervening proxies.
+
+Measure active connections, delivery delay, reconnect frequency, and queued bytes; ordinary requests per second does not describe this workload completely.
+
+**Check:** if a client disconnects for thirty seconds, how does it discover what it missed?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

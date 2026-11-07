@@ -68,8 +68,18 @@ HDFS is designed to reliably store very large files across machines in a large c
 
 ## Make it concrete
 
-A photo belongs naturally in object storage; its owner and upload time can live in a database. Block storage exposes blocks; file storage exposes directories and files. Storage interfaces solve different access problems.
+### Use it: separate file bytes from searchable facts
 
-Self-check: which component answers “show this user’s latest ten photos”?
+Store a product photo in object storage. Store its object key, owner, size, and upload status in the database. The database answers “show this user's latest ten photos”; object storage serves the corresponding bytes.
+
+Block storage exposes blocks for an operating system or database to manage. File storage exposes files and directories. Object storage usually exposes objects addressed by keys. These interfaces suit different access patterns.
+
+### Apply and improve
+
+Measure object size, read/write frequency, required durability, and retrieval delay. Large sequential transfers and small random updates have different needs. Avoid making every image request pass through an application server if authorized direct delivery or a CDN fits the requirement.
+
+For an upload, decide when its metadata becomes visible. If writing the object succeeds but recording its database row fails, cleanup or reconciliation must handle the orphaned object. A storage choice does not make cross-system steps atomic.
+
+Self-check: what must be preserved in backups—the bytes, the metadata, or both?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

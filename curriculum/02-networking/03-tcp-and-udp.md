@@ -37,8 +37,14 @@ TCP provides ordered delivery of data from user to server (and vice versa), wher
 
 ## Make it concrete
 
-Think of live speech: a late packet may be less useful than a missing sound. TCP provides an ordered byte stream and retransmits losses; UDP leaves delivery and ordering to higher layers. UDP applications can still implement reliability.
+### Use it: match transport to the interaction
 
-Self-check: does a TCP connection guarantee that a payment was processed?
+For live speech, a late sound packet may be less useful than a small gap. TCP supplies an ordered byte stream with loss recovery; UDP leaves delivery and ordering to higher layers. UDP applications can still implement reliability.
+
+### Apply and improve
+
+Measure loss, delay, and required ordering before choosing. Reuse connections where appropriate rather than repeatedly paying connection setup costs. With UDP, explicitly design congestion handling, loss tolerance, and message sizing; “no retransmission” is not automatically faster for the application.
+
+Self-check: a successful TCP transfer does not prove a payment was committed. Which application response does?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

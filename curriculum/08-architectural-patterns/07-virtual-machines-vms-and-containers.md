@@ -60,8 +60,18 @@ Instead of virtualizing the underlying hardware, containers virtualize the opera
 
 ## Make it concrete
 
-Two VMs can run different guest kernels. Containers normally share their host kernel while isolating processes and resources. A small container image does not imply an isolated guest operating system.
+### Choose the boundary you need
 
-Self-check: what extra boundary does a VM provide compared with a container?
+Two VMs can run separate guest kernels. Containers normally share the host kernel while isolating processes and resource usage. A smaller image does not make a container a separate guest operating system.
+
+For a shop with many application workers, containers can make packaging and replacement predictable. A workload requiring a different kernel or a stronger isolation boundary may call for VMs; containers can also run inside VMs.
+
+### Apply and improve it
+
+Set CPU and memory budgets based on measured workload. An unbounded worker can starve neighboring work; a memory limit that is too small can cause repeated restarts. Separate durable state from disposable application instances, and verify readiness before sending traffic to a replacement.
+
+Smaller images can shorten distribution, but startup also includes initialization, dependency connections, and warm-up. Measure that full path instead of assuming image size alone predicts readiness.
+
+**Check:** where does an in-progress job resume after its container is replaced?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

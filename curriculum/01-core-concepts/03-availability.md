@@ -64,8 +64,16 @@ A fault-tolerant system has no service interruption but a significantly higher c
 
 ## Make it concrete
 
-A service may respond successfully while returning stale information. Availability measures successful service access; freshness is a separate concern. Redundant servers help only if traffic can reach a healthy one.
+### Use it: keep checkout reachable
 
-Self-check: what if both servers share the same failed power supply?
+Two checkout servers can help if traffic automatically switches away from a failed one. They offer little protection against a shared failed database, power supply, or deployment error.
+
+### Apply and improve
+
+Trace the complete customer request and identify shared dependencies. Add health checks, replacement capacity, and tested failover where they remove a real failure point. Keep enough spare capacity for the surviving servers to carry traffic. During a payment outage, browsing may remain available while checkout reports a temporary failure.
+
+Define success before calculating availability: a fast error or stale answer may not satisfy the operation's requirements. Measure successful requests and their latency, not just whether a process is running.
+
+Self-check: what still works after one dependency fails?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

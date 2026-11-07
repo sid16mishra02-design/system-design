@@ -12,6 +12,32 @@
 
 Finish when you can follow one write and one read end to end, account for your main capacity estimate, and explain a failure response. Treat source estimates as worked assumptions to inspect, not production specifications to memorize.
 
+## Apply the design to a real workload
+
+### Where this becomes useful
+
+Short links appear in messages, marketing campaigns, and QR codes. The important workload is often many redirects for each new link. A campaign can suddenly make one short code much more popular than all the others; an average traffic estimate can hide that spike.
+
+### Follow one redirect
+
+Trace browser → redirect service → cached mapping → destination response. On a cache miss, the service reads the mapping database and fills the cache. Keep click analytics off this critical path when delayed analytics are acceptable: enqueue the event and process it separately. The redirect should not wait for a slow reporting query.
+
+### Optimize the bottleneck you measured
+
+Suppose the service receives **20,000 redirect requests/second** and the cache hit rate is **95%**. Under these simplified assumptions, database reads fall to about `20,000 × 0.05 = 1,000/second`. This estimates read load; it does not prove the database can sustain it. Measure actual latency, query cost, and peak misses.
+
+For a viral key, distributing ordinary keys more evenly may not help. Multiple application instances can keep a short-lived local copy, reducing calls to the shared cache. The cost is another stale copy to invalidate. If redirects are editable or links can be disabled, decide how quickly all copies must reflect that change before choosing long cache lifetimes.
+
+On creation, enforce short-code uniqueness in the authoritative database. If randomly generated codes collide, retry generation rather than overwriting an existing mapping. A code being difficult to guess is not an authorization mechanism for private destinations.
+
+### Test the tradeoff
+
+Expire a popular cache entry while traffic is high. If every caller simultaneously queries the database, the cache has merely postponed the spike. Coordinate concurrent loads for that key and test whether a fallback can serve traffic within the freshness policy.
+
+Track redirect latency percentiles, cache hit rate, database reads, and failed lookups. Compare before and after using the same workload. If cache hit rate rises but database reads do not fall, investigate additional queries or ineffective cache keys.
+
+**Exercise:** a link owner disables a widely shared link. Explain how a cached redirect, a browser-cached response, and an asynchronously processed analytics event behave. A fast redirect design still needs an explicit deletion and abuse policy.
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

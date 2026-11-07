@@ -6,7 +6,7 @@ A complete, category-based path for understanding system design fundamentals. Re
 
 1. Set your study window in the [22-week schedule](SCHEDULE.md). Default: 60–90 minutes, five study days plus a review day and a rest day.
 2. Start at category 01 below and follow the numbered topics. The schedule gives the exact week and day.
-3. Each topic page contains its full explanation. Read it on the page, then work through **Make it concrete** when present. Article and video links are optional extra reading.
+3. Each topic page contains its full explanation. Read it on the page, then work through **Make it concrete** when present. Article and video links are optional extra reading. The applied sections explain where the concept helps, how to improve a design using it, and how to check the result.
 4. Keep a [daily note](templates/DAILY.md) and update the [progress tracker](PROGRESS.md). Move unfinished work forward when you need more time.
 
 You do not need to finish a topic in one sitting. Move on when you can explain it simply, draw its flow, and describe a failure or tradeoff. Follow this one path; open the extra library to answer a specific question.
@@ -35,9 +35,13 @@ Complete the foundations, produce five independent case-study worksheets, then e
 
 ## How the lessons are written
 
-The 57 course and case-study lessons are reproduced directly on their reading pages, with the original text preserved and separate examples or practice guidance. Another 20 lessons fill the topics that were previously only external links. They use plain explanations, a concrete scenario, and a check of a common misunderstanding.
+The 57 course and case-study lessons are reproduced directly on their reading pages, with the original text preserved and separate examples or practice guidance. Another 20 lessons fill the topics that were previously only external links. They include plain explanations, worked scenarios, practical uses, optimization choices with their costs, and checks of common misunderstandings.
 
 The original topics retain 100% of their text. Added teaching guidance stays within 30% of each original topic's word count. The 20 new standalone lessons use the specifically approved exception to that addition limit. See the [content audit](CONTENT-AUDIT.md).
+
+## Applied depth
+
+All 71 fundamentals and the six design/method readings have been reviewed for practical use and improvement guidance. See the [depth review](DEPTH-REVIEW.md) for coverage. Work through an optimization by stating the bottleneck, proposed change, cost, failure behavior, and measurement.
 
 ## Extra reading and credits
 

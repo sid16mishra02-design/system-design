@@ -158,8 +158,18 @@ Below are some disadvantages of denormalization:
 
 ## Make it concrete
 
-Store a customer’s address once and orders reference the customer: less duplication. Copy an address onto each order: faster historical reads and a record of the delivery address at purchase time. That snapshot has different meaning from the customer’s current address.
+### Use it: distinguish duplication from a meaningful snapshot
 
-Self-check: should changing a profile address alter an already-shipped order?
+Store a customer's current profile address once and reference the customer from orders: less duplication when the profile changes. Copy the delivery address onto each order: a historical record of where that specific order was sent. This snapshot intentionally means something different from the customer's current address.
+
+### Apply and improve
+
+Begin with clear ownership of each fact and the queries the application needs. If a frequently used screen requires expensive joins, first inspect its queries and indexes. Then consider a deliberate read model or duplicated field when measurements justify it.
+
+For every duplicated current value, decide who updates each copy and what readers may see while updates propagate. For historical snapshots, decide when the snapshot is captured and whether later corrections are allowed. Those policies matter more than merely calling the schema normalized or denormalized.
+
+Avoid duplicating a field everywhere “for performance” without identifying the costly read and the resulting write complexity.
+
+Self-check: should changing a profile address alter an order that was already shipped? Which address is each page supposed to show?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

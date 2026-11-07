@@ -57,8 +57,16 @@ Here are some commonly used service discovery infrastructure tools:
 
 ## Make it concrete
 
-Orders has three changing server addresses. Discovery answers “where can I call orders?” Load balancing answers “which instance should receive this call?” Health information can be stale.
+### Find changing service instances
 
-Self-check: what happens if a discovered instance dies before the request arrives?
+The orders service has three instances whose addresses change during deployment. Discovery supplies usable destinations; load balancing chooses among them. A discovered address can become stale before the request reaches it.
+
+### Apply it
+
+Use readiness checks that reflect whether an instance can accept work, not merely whether its process exists. During replacement, stop sending new work and allow bounded draining where needed.
+
+Caching discovery results reduces lookup traffic but delays learning about changes. Choose refresh behavior with that tradeoff in mind. Clients still need deadlines and safe retry behavior; repeatedly selecting the same failed destination defeats failover.
+
+**Check:** how will a long-lived client notice a replacement instance?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

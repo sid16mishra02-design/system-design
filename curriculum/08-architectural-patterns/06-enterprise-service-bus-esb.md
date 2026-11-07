@@ -37,8 +37,12 @@ Below are some widely used Enterprise Service Bus (ESB) technologies:
 
 ## Make it concrete
 
-Imagine billing speaks one message format and shipping another. An integration bus can transform and route their messages. A broker primarily moves messages; an ESB commonly adds integration functions. Exact product features vary. Central integration can simplify connections while concentrating operational dependency.
+### Integrate unlike systems
 
-Self-check: if the bus stops, which business flows can continue without it?
+Billing uses one message format; legacy shipping uses another. An ESB can transform fields and route messages between them. A broker mainly carries messages, although product features overlap.
+
+Apply transformations at clear integration boundaries. Keep changing business rules from accumulating in one central bus. Measure transformation cost and queue delay, and bound retries so one failed endpoint cannot monopolize processing. Redundant instances help only when routing state and failover also work.
+
+**Check:** if the bus stops, which business flows still work independently?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -14,8 +14,28 @@ The expected value must also come from a trusted source. An attacker who can rep
 
 **Check:** if two computed values differ, the files differ. Equal ordinary checksums do not mathematically guarantee that every byte is identical.
 
+## Where this comes into play
+
+Integrity checks are useful for downloaded packages, uploaded files, stored objects, replication, and restored backups. Choose the mechanism for the threat: accidental corruption is different from malicious replacement.
+
+## Worked example: a multi-part upload
+
+Imagine a 1 GB archive uploaded in ten chunks. Each chunk can have its own verified digest so a damaged chunk can be retransmitted without repeating the entire upload. A full-file digest verifies the final assembled byte sequence. Per-chunk checks alone do not establish that the chunks were assembled in the correct order.
+
+Store an expected digest with trustworthy metadata. A checksum that arrives through the same compromised channel as the replacement file may not establish authenticity; authenticated delivery or a verified digital signature addresses a different part of that problem.
+
+## How to improve efficiency without losing the guarantee
+
+Calculate a digest incrementally while streaming bytes rather than loading the whole file into memory. For large uploads, choose chunk sizes that balance retransmission cost, metadata overhead, and parallelism. Verify the final object after assembly when that matches the integrity requirement.
+
+Use a cryptographic digest when resistance to deliberate tampering matters. Do not pick a weak checksum solely because it is faster, and do not treat any checksum as encryption. Verification detects disagreement; it cannot recover the original bytes on its own.
+
+## How to verify improvement
+
+Test one flipped byte, a missing chunk, reordered chunks, and an untrusted expected value. Record memory usage, verification time, and whether the chosen checks detect each relevant failure.
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/checksums)
 
-The lesson above is complete enough for this curriculum; external links are for deeper study.
+Optional references provide more detail; they are not required to follow this lesson.

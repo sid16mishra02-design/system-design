@@ -45,8 +45,14 @@ If there isn't any roll-back or the transaction comes from the _committed state_
 
 ## Make it concrete
 
-Two buyers see one ticket. A transaction boundary alone does not prevent overselling: use an appropriate isolation level, locking, or an atomic conditional update. “Read stock; subtract one” can race.
+### Use it: sell the last ticket once
 
-Self-check: how would UPDATE stock SET quantity = quantity - 1 WHERE quantity > 0 help?
+Two buyers both read stock = 1. A transaction boundary alone does not prevent overselling; isolation and the actual statements matter.
+
+An atomic conditional update such as `UPDATE stock SET quantity = quantity - 1 WHERE product_id = ? AND quantity > 0` lets the application check whether a row was changed before confirming success. Group related database changes when they must commit together.
+
+Keep transactions short, use suitable locking or isolation, and retry conflicts safely. External payment is a separate coordination problem.
+
+Self-check: what prevents both buyers receiving confirmation?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

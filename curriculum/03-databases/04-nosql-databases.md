@@ -154,8 +154,16 @@ Multi-model databases combine different database models (i.e. relational, graph,
 
 ## Make it concrete
 
-A product document might keep varied product attributes together; a key-value store might retrieve a session by its identifier. Both may be called NoSQL, but their access patterns and guarantees differ. Pick the data model for the questions you must answer, not because “NoSQL scales.”
+### Use it: choose a data model for an access pattern
 
-Self-check: does one successful key lookup prove that every cross-record query will be efficient?
+A product catalog might store each product as a document with different attributes. A key-value store might retrieve a session by its identifier. A graph database might explore relationships. These are different models within the broad NoSQL label.
+
+### Apply and improve
+
+Sketch the actual reads and writes. If almost every lookup uses a product identifier, organize data around that key. If queries repeatedly need relationships across many records, check the chosen database's query and indexing support rather than assuming it will behave like a relational join.
+
+Choose partition keys that spread real traffic, not merely record counts. Verify transaction scope, consistency options, and limits for the particular database. NoSQL does not automatically mean no schema, no transactions, or unlimited horizontal scale.
+
+Self-check: what query becomes expensive with your chosen representation?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

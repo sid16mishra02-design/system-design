@@ -127,6 +127,15 @@ for entry in new_lessons:
     check(words(teaching) == entry['words'], f'Original lesson word count mismatch: {entry["topic"]}')
     check('## Optional further reading' in text, f'Unmarked external references: {entry["topic"]}')
 
+depth_review = json.loads((ROOT/'metadata/depth-review.json').read_text(encoding='utf-8'))
+expected_counts = {x['topic']: x['inline_teaching_words'] for x in audit}
+expected_counts.update({x['topic']: x['words'] for x in new_lessons})
+check(len(depth_review) == 77 and {x['topic'] for x in depth_review} == set(expected_counts),
+      'Applied-depth review must cover every foundation and case/method lesson')
+for entry in depth_review:
+    check(entry['teaching_words_now'] == expected_counts.get(entry['topic']),
+          f'Depth-review count mismatch: {entry["topic"]}')
+
 # Source archives can remain for provenance, but are not required reading.
 for entry in topics:
     text = (ROOT/entry['path']).read_text(encoding='utf-8')

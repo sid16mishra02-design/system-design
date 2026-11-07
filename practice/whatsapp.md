@@ -12,6 +12,32 @@
 
 Finish when you can follow one write and one read end to end, account for your main capacity estimate, and explain a failure response. Treat source estimates as worked assumptions to inspect, not production specifications to memorize.
 
+## Apply the design to a real workload
+
+### Where this becomes useful
+
+Use this case for any messaging product that must work across intermittent connections: customer support, team chat, or a delivery app. The hard requirement is not merely moving text quickly. Users need clear meaning for accepted, delivered, and read messages, even when a phone disconnects.
+
+### Follow one message
+
+Trace sender → messaging service → durable message record → recipient connection. If the recipient is offline, retain the message for later retrieval. Define an acknowledgement carefully: “the service safely accepted this message” is different from “the recipient received it.” A sender retry after a lost acknowledgement should reuse a stable message identifier so the service can recognize the same logical send.
+
+### Optimize the measured bottleneck
+
+Keep active connections on servers designed for long-lived connections, and route delivery to the server currently holding the recipient's connection. Avoid asking every connection server whether it has that recipient. Connection-location information can become stale, so reconnect and fallback behavior still matter.
+
+Group traffic changes the arithmetic. If a hypothetical group receives **100 messages/second** and has **2,000 recipients per message**, that creates roughly **200,000 recipient-delivery attempts/second**, before retries. Queueing can absorb a burst but does not create unlimited delivery capacity. Measure queue age, not just queue length: a backlog of small jobs and a backlog of large jobs can take different times to drain.
+
+For large attachments, separate message metadata from the media bytes. Store the media once and deliver an authorized reference, rather than repeatedly copying the whole attachment through the message-processing path. The cost is a separate media-access and lifecycle policy.
+
+### Test ordering and failure
+
+If the product promises conversation ordering, define what is ordered and assign sequence information within that conversation. A single global ordering mechanism for every chat can become unnecessary coordination. Parallelize independent conversations while checking that one hot group cannot starve ordinary chats.
+
+Pause a worker after it records a message but before it acknowledges processing. On restart, verify that redelivery does not create a second visible message. Deduplication must be enforced where the durable result is written; a temporary in-memory check can disappear during a crash.
+
+**Exercise:** a phone disconnects after receiving message 41 but before acknowledging it. It reconnects through another server. Describe how the client resumes, recognizes a repeated message 41, and discovers message 42. Then state what the sender sees throughout.
+
 ## Complete lesson
 
 <!-- BEGIN ORIGINAL TOPIC -->

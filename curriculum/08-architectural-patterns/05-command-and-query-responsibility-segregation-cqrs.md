@@ -48,16 +48,16 @@ Here are some scenarios where CQRS will be helpful:
 
 ## Make it concrete
 
-An order command updates the write model; an event updates a separate order-list view. The view can lag. CQRS separates write and read responsibilities; it does not require event sourcing.
+### Different models for changing and reading
 
-```mermaid
-flowchart LR
-  C["Create order"] --> W["Write model"]
-  W --> E["Event"]
-  E -->|"asynchronous update"| V["Read view"]
-  Q["List orders"] --> V
-```
+A create-order command updates the write model. An event updates a separate, customer-friendly order-list view. CQRS separates those responsibilities; it does not require event sourcing.
 
-Self-check: how will a user understand an order temporarily missing from the read view?
+### Apply it
+
+Optimize the read view for actual queries, such as recent orders by customer, instead of making every screen join the write model. Keep projection updates idempotent and monitor lag. After creating an order, show its confirmed identifier and a pending-view state rather than pretending the read view updated instantly.
+
+Extra models add synchronization and recovery work; a simple CRUD application may not benefit.
+
+**Check:** how would you rebuild a lost read view?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

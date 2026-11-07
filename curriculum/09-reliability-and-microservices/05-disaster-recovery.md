@@ -51,8 +51,12 @@ A hot site maintains up-to-date copies of data at all times. Hot sites are time-
 
 ## Make it concrete
 
-Backups every hour imply up to roughly one hour of data loss if no newer recoverable log exists: RPO. Restoring in two hours concerns RTO. Backups that have never been restored do not prove recovery works.
+### Test recovery, not just backup creation
 
-Self-check: which target changes when restore automation becomes faster?
+With successful hourly backups and no newer recoverable log, possible data loss is roughly an hour: RPO. Restoring service within two hours concerns RTO.
+
+Choose targets from business loss tolerance. Rehearse restoring data, application configuration, credentials, and traffic routing in an isolated recovery exercise. Measure when users can work again, not when files finish copying. Faster restore automation improves RTO; more frequent recoverable data capture improves RPO. Protect backups from the same accidental deletion or compromise affecting production.
+
+**Check:** can you prove the last backup is restorable?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

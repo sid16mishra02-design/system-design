@@ -57,8 +57,16 @@ Below are some disadvantages of N-tier architecture:
 
 ## Make it concrete
 
-A shop can separate presentation, order rules, and persistence. Those are logical responsibilities. A tier usually means a deployment boundary, such as a browser, application server, and database server. Splitting code into three folders does not automatically create three network tiers.
+### Separate responsibilities and deployment
 
-Self-check: which calls become network calls if you deploy the database separately?
+A shop has presentation, order rules, and persistence. These are logical layers. Browser → application server → database server is a three-tier deployment. Three code folders in one process are not automatically three network tiers.
+
+### Apply it
+
+Keep order validation in the application layer and authoritative data in the database. If page rendering becomes busy, you may scale that tier separately, while database capacity remains a separate constraint.
+
+Network boundaries add latency and failure modes. Avoid fetching each order line through a separate round trip; send a bounded request that retrieves the needed set. Measure which tier is saturated before adding instances.
+
+**Check:** which new call can time out after separating the database?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

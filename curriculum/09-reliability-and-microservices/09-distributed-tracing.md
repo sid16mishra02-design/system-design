@@ -20,9 +20,29 @@ Metrics summarize patterns across requests; logs record events; traces connect w
 
 **Check:** a trace helps locate a slow step. It does not automatically explain the underlying cause or fix the bottleneck.
 
+## Where this comes into play
+
+Tracing is especially useful when a user request crosses services, databases, caches, and asynchronous workers. A single “page took two seconds” metric does not identify which dependency or waiting stage consumed that time.
+
+## Work through a slow order page
+
+Suppose the gateway adds 20 ms of its own work, the orders service adds 30 ms of its own work, and a sequential database call takes 950 ms. These are separate contributions, not inclusive parent-span times. A trace points the investigation toward that database operation. Inspect the query and its execution behavior before adding application instances.
+
+Some spans overlap. If the orders service calls inventory and delivery concurrently, adding both durations double-counts overlapping time. Follow the critical path, the chain that determines completion, rather than summing every span in the trace.
+
+## How to make tracing useful and affordable
+
+Propagate trace context through both HTTP calls and message metadata. Record meaningful operation names and bounded attributes, such as an error category. Avoid secrets and unnecessary personal data. Very large or unbounded attribute values increase cost and can make analysis harder.
+
+Sampling means keeping a subset of traces. A small uniform sample reduces volume but may miss rare failures. Where supported, other sampling approaches can prioritize errors or slow traces, at extra collection and processing cost. Sampling is an observability tradeoff, not a guarantee that every problematic request is retained.
+
+## How to verify improvement
+
+Trace a deliberately slow test request across every expected boundary. Check for missing spans and broken parent relationships. Measure instrumentation overhead and confirm you can connect a slow request to relevant metrics and logs before relying on the system during an incident.
+
 ## Optional further reading
 
 - [Additional explanation](https://www.dynatrace.com/news/blog/what-is-distributed-tracing/)
 - [OpenTelemetry: traces](https://opentelemetry.io/docs/concepts/signals/traces/)
 
-The lesson above is complete enough for this curriculum; external links are for deeper study.
+Optional references provide more detail; they are not required to follow this lesson.

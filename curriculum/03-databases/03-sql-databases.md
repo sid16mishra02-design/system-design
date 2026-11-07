@@ -49,8 +49,16 @@ Here are some commonly used relational databases:
 
 ## Make it concrete
 
-Store customers in one table and orders in another. Each order can hold a customer identifier, so a query can combine the related records. SQL is the language used to express operations; the database engine executes them.
+### Use it: orders with explicit relationships
 
-Self-check: why is a customer identifier usually safer for connecting records than a customer’s name?
+Model customers, orders, and order items as related tables. Keys identify rows; constraints can reject invalid relationships or duplicate identifiers. Transactions can group changes that must succeed together.
+
+### Apply and improve
+
+Write the important queries first. For “this customer's newest orders,” consider an index matching the filter and sort, then inspect the query plan. Retrieve only required columns and a bounded number of rows. Keep transactions short to reduce contention, and use parameterized queries for input values.
+
+Relational structure does not mean every query is automatically efficient.
+
+Self-check: which database constraint expresses a rule that application checks alone might race to enforce?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

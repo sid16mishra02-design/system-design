@@ -32,8 +32,12 @@ In this state, the circuit breaker allows a limited number of requests from the 
 
 ## Make it concrete
 
-Closed: calls flow. Repeated failures open the breaker: calls fail fast. After a delay, half-open permits limited probes. A timeout bounds one call; a breaker reacts to a pattern of failures.
+### Stop repeating a failing dependency call
 
-Self-check: what safe fallback exists when the payment breaker is open?
+Suppose payment calls repeatedly time out. Opening a breaker temporarily stops new calls; limited half-open probes later test recovery. A timeout bounds one call, while the breaker reacts to a failure pattern.
+
+Choose thresholds from observed traffic, and separate unrelated dependencies. Use bounded retries and backoff so probes do not become a new flood. A checkout can show payment pending or unavailable; inventing a successful charge is not a safe fallback.
+
+**Check:** which response preserves business correctness while the payment breaker is open?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

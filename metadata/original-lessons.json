@@ -2,121 +2,121 @@
   {
     "topic": "Latency vs Throughput vs Bandwidth",
     "path": "curriculum/01-core-concepts/04-latency-vs-throughput-vs-bandwidth.md",
-    "words": 165,
+    "words": 1047,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Reliability",
     "path": "curriculum/01-core-concepts/05-reliability.md",
-    "words": 170,
+    "words": 434,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "SPOF",
     "path": "curriculum/01-core-concepts/06-spof.md",
-    "words": 153,
+    "words": 405,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "HTTP/HTTPS",
     "path": "curriculum/02-networking/06-httphttps.md",
-    "words": 181,
+    "words": 441,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Checksums",
     "path": "curriculum/02-networking/07-checksums.md",
-    "words": 165,
+    "words": 416,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Bloom Filters",
     "path": "curriculum/03-databases/14-bloom-filters.md",
-    "words": 183,
+    "words": 465,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Caching Strategies",
     "path": "curriculum/05-caching/02-caching-strategies.md",
-    "words": 175,
+    "words": 465,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Cache Eviction Policies",
     "path": "curriculum/05-caching/03-cache-eviction-policies.md",
-    "words": 172,
+    "words": 438,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Distributed Caching",
     "path": "curriculum/05-caching/04-distributed-caching.md",
-    "words": 183,
+    "words": 444,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "APIs",
     "path": "curriculum/06-api-fundamentals/01-apis.md",
-    "words": 161,
+    "words": 437,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Webhooks",
     "path": "curriculum/06-api-fundamentals/07-webhooks.md",
-    "words": 180,
+    "words": 434,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "API Design",
     "path": "curriculum/06-api-fundamentals/08-api-design.md",
-    "words": 176,
+    "words": 430,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Change Data Capture (CDC)",
     "path": "curriculum/07-asynchronous-communication/04-change-data-capture-cdc.md",
-    "words": 164,
+    "words": 425,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Serverless Architecture",
     "path": "curriculum/08-architectural-patterns/08-serverless-architecture.md",
-    "words": 173,
+    "words": 421,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Peer-to-Peer (P2P) Architecture",
     "path": "curriculum/08-architectural-patterns/09-peer-to-peer-p2p-architecture.md",
-    "words": 158,
+    "words": 420,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "HeartBeats",
     "path": "curriculum/09-reliability-and-microservices/02-heartbeats.md",
-    "words": 155,
+    "words": 402,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Consensus Algorithms",
     "path": "curriculum/09-reliability-and-microservices/06-consensus-algorithms.md",
-    "words": 188,
+    "words": 460,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Distributed Locking",
     "path": "curriculum/09-reliability-and-microservices/07-distributed-locking.md",
-    "words": 178,
+    "words": 452,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Gossip Protocol",
     "path": "curriculum/09-reliability-and-microservices/08-gossip-protocol.md",
-    "words": 162,
+    "words": 426,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   },
   {
     "topic": "Distributed Tracing",
     "path": "curriculum/09-reliability-and-microservices/09-distributed-tracing.md",
-    "words": 180,
+    "words": 458,
     "basis": "Original standalone lesson; 30% limit exception approved for the 20 formerly link-only topics."
   }
 ]

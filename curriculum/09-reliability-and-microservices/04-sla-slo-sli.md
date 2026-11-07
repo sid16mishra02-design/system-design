@@ -26,8 +26,12 @@ An SLI, or Service Level Indicator, is a key metric used to determine whether or
 
 ## Make it concrete
 
-SLI: measured successful-request percentage. SLO: internal target, such as 99.9%. SLA: an agreement that may specify consequences. Define what counts as success before measuring.
+### Turn a promise into a measurement
 
-Self-check: do very slow responses count as successful?
+SLI: measured successful-request percentage. SLO: your target, such as 99.9%. SLA: an agreement that may specify consequences.
+
+For checkout, define success and a latency threshold before counting requests. A fast error is not a successful purchase. Track user-visible failures and latency; improve the largest causes rather than optimizing an already fast component. An error budget helps decide whether more reliability work is needed.
+
+**Check:** which slow responses count as failures?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

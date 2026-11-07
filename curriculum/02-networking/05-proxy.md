@@ -62,8 +62,16 @@ Below are some commonly used proxy technologies:
 
 ## Make it concrete
 
-A school proxy acts for students making outgoing requests. A shop’s reverse proxy acts for its servers receiving requests. Follow who each intermediary represents.
+### Use it: place a controlled entry or exit point
 
-Self-check: which one could hide the shop’s internal server addresses?
+A school proxy acts for students making outgoing requests. A shop's reverse proxy acts for its servers receiving requests. Follow who each intermediary represents.
+
+A reverse proxy can route `/orders` to order servers, terminate TLS, and apply request limits. It can also become a bottleneck or single failure point.
+
+### Apply and improve
+
+Measure request duration, connection count, and queueing at the proxy before adding application servers. Set request size and timeout limits deliberately. Use connection reuse to avoid unnecessary setup work. Forward original client information only through a trusted chain; otherwise callers may forge identity-related headers.
+
+Self-check: which checks belong at the entry point, and which business permissions must still be checked by the service?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -14,8 +14,28 @@ Gossip is not the same as consensus: spreading information does not by itself es
 
 **Check:** a cluster can use gossip for membership and a separate mechanism for deciding writes. One protocol need not solve both problems.
 
+## Where this comes into play
+
+Gossip is useful for disseminating membership and health observations in large groups without requiring one node to send every update directly to everyone. Its suitability depends on whether temporary disagreement about that information is acceptable.
+
+## Follow an update
+
+A learns that member D joined. A tells B during a periodic exchange; B later tells C. A and C can therefore have different views for some time. Version information helps a receiver distinguish a newer observation from an older one. The exact conflict-resolution rule belongs to the chosen protocol; simply receiving a message last is not always proof that it describes the newest state.
+
+Gossip is often combined with other mechanisms. A node may learn a peer address through gossip but use another protocol to agree on writes. Gradual information spread does not establish a single safe order for financial transactions.
+
+## How to tune it
+
+Change exchange frequency, number of peers contacted, and message size based on convergence goals and bandwidth. More frequent or wider exchanges can spread updates faster while consuming more network and processing capacity. Sending small differences instead of complete state may help when the protocol supports it.
+
+Use peer selection and resynchronization behavior that eventually reconnect temporarily separated groups. Do not turn a delayed health observation into an unsafe irreversible action without appropriate safeguards.
+
+## How to verify improvement
+
+Measure how long an update takes to reach most or all reachable nodes, plus message volume. Test lost messages, network partitions, joining members, and old state returning after recovery. State convergence assumptions explicitly rather than promising instant agreement.
+
 ## Optional further reading
 
 - [Additional explanation](http://highscalability.com/blog/2023/7/16/gossip-protocol-explained.html)
 
-The lesson above is complete enough for this curriculum; external links are for deeper study.
+Optional references provide more detail; they are not required to follow this lesson.

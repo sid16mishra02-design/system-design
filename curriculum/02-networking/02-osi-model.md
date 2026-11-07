@@ -55,8 +55,16 @@ This layer includes the physical equipment involved in the data transfer, such a
 
 ## Make it concrete
 
-When you open a shop website, the application describes the request, transport carries its data, IP routes packets, and a local link carries frames to the next hop. These are different responsibilities, not seven separate computers. Real protocols do not always fit the model neatly.
+### Use it: locate a failure before changing the design
 
-Self-check: is DNS choosing an address the same job as TCP delivering an ordered byte stream?
+A browser cannot load your product page. Instead of blaming “the network,” separate the steps: reach the destination IP, establish transport, secure the connection, then send the application request. The OSI model gives names to these different responsibilities; real implementations do not always fit perfectly into seven separate boxes.
+
+### Apply and improve
+
+If the machine cannot reach its network, inspect local connectivity and routing. If a TCP connection cannot open, inspect ports, listeners, and filtering. If TLS verification fails, inspect identity and certificate configuration. If the server returns an HTTP error, inspect the application and its dependencies.
+
+Optimize the slow step you measured: reducing database query time does not repair failed routing, and adding network capacity does not fix incorrect application logic. End-to-end latency can include work at several layers.
+
+Self-check: if the server returns HTTP 500, what does that tell you about how far the request traveled?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

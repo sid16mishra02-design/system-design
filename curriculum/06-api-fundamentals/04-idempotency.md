@@ -65,16 +65,26 @@ Idempotency is not free. We need extra storage and lookups for keys, and additio
 
 ## Make it concrete
 
-A payment succeeds, but the response is lost. The client retries using the same idempotency key. The server must atomically associate the key with one operation/result; merely checking then inserting can race. Reusing the key with a different payment body should be rejected.
+### Why retries need a business rule
+
+A ₹500 payment succeeds, but its response is lost. The client retries with the same idempotency key K. The intended result is one payment and a repeatable response, not a second charge.
 
 ```mermaid
 flowchart LR
-  A["Payment request: key K"] --> S["Atomic claim of K"]
-  R["Retry: same K and body"] --> S
+  A["Original request: K"] --> S["Atomic claim of K"]
+  R["Retry: K"] --> S
   S --> O["One payment operation"]
-  O --> V["Stored result for K"]
+  O --> V["Saved result for K"]
 ```
 
-Self-check: what happens if two identical retries arrive simultaneously?
+### Apply it safely
+
+Scope keys to the caller and operation. Record a request fingerprint so the same key with a different amount is rejected. A unique constraint can ensure two concurrent requests cannot both claim K. The loser receives the stored result or a defined in-progress response.
+
+The claim and the side effect must be coordinated. Recording K, crashing, and later skipping the unperformed payment is also wrong. Across an external provider boundary, use its idempotency contract and reconcile uncertain outcomes.
+
+Retain keys for the supported retry period; expiring one too soon permits an old retry to create new work. Track duplicate and in-progress requests to spot retry storms.
+
+**Check:** if two identical requests arrive together, which durable operation chooses the winner?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -62,8 +62,16 @@ As always we should always pick the technology that fits the requirements better
 
 ## Make it concrete
 
-A shopping app might use relational tables for orders and a document store for flexible product attributes. “NoSQL” describes several data models; it does not automatically mean no transactions or no schema.
+### Use it: decide from operations, not labels
 
-Self-check: state an access pattern and consistency requirement before choosing either.
+An order system needs relationships, integrity rules, and multi-record updates. A catalog may need flexible product documents. Either choice still needs evidence about its queries, transaction guarantees, and operational limits.
+
+### Apply and improve
+
+Write a small workload: create an order, list recent orders, and update stock. Compare how each candidate represents these operations and enforces their invariants. Measure representative queries and writes before assuming one category is faster.
+
+Avoid adding two database types simply because each sounds appropriate. Cross-store consistency, backups, and monitoring add work.
+
+Self-check: name the requirement that would make you reconsider your choice.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

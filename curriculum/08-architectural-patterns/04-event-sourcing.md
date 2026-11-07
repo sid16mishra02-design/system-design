@@ -35,8 +35,12 @@ Following are the disadvantages of event sourcing:
 
 ## Make it concrete
 
-Store Deposited(100) then Withdrawn(30); replay gives balance 70. Event sourcing stores the history as the source of truth. Publishing events alone does not make a system event-sourced.
+### Rebuild state from business history
 
-Self-check: how would replay avoid sending the same receipt email again?
+Deposited(100), then Withdrawn(30), produces balance 70. Stored events are authoritative; publishing notifications alone is not event sourcing.
+
+Use it when historical decisions and replay matter. To shorten replay, load a verified snapshot and apply later events. Snapshots do not replace the event history. Version event schemas deliberately, and separate replay from external actions so rebuilding a view does not resend receipts.
+
+**Check:** can you rebuild the balance without charging or emailing anyone again?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

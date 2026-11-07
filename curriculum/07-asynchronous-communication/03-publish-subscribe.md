@@ -64,7 +64,9 @@ Here are some commonly used publish-subscribe technologies:
 
 ## Make it concrete
 
-An OrderPlaced event goes to billing and shipping subscriptions. Each subscription needs its own copy; workers within one subscription may share the work. Distinguish subscribers from competing workers.
+### One event, several independent reactions
+
+An OrderPlaced event must reach both billing and shipping. Each needs its own subscription. Several workers inside the billing subscription may share billing work; that does not mean shipping receives its required copy.
 
 ```mermaid
 flowchart TD
@@ -74,6 +76,12 @@ flowchart TD
   S --> S1["Shipping workers"]
 ```
 
-Self-check: why would putting billing and shipping workers on one work queue be wrong?
+### Apply it
+
+Define the event's meaning and versioned fields so consumers do not depend on incidental database details. Give events identifiers and make consumers tolerate retries. Use durable subscriptions or retained history when a temporarily offline consumer must catch up; ephemeral broadcast alone does not guarantee that.
+
+Scale each subscription against its own backlog and downstream capacity. Partition related events consistently when their ordering matters, and avoid assuming a global order across independent partitions. A slow analytics consumer should not need to block payment processing.
+
+**Check:** if billing and shipping compete on the same work queue, which business action might never happen?
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

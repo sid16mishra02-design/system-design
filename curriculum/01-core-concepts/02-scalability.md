@@ -45,8 +45,6 @@ Horizontal scaling (also known as scaling out) expands a system's scale by addin
 
 ## Make it concrete
 
-One checkout server handles 100 requests/second. A larger server is vertical scaling; adding servers is horizontal scaling. Shared database capacity can still limit both.
-
-Self-check: which component becomes the next bottleneck?
+Checkout handles 100 requests/second. A larger server scales vertically; extra servers scale horizontally. First measure CPU, database, and waiting time. Add capacity at the actual bottleneck; more app servers cannot fix an overloaded database.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

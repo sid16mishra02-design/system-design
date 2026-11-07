@@ -21,8 +21,28 @@ Start at the user and trace each dependency. For each, ask: “If this stops, wh
 
 **Check:** adding a second app server does not remove a single shared database as a possible failure point.
 
+## Where this comes into play
+
+Review a service's request path before promising availability: load balancer, application instances, database, identity service, configuration, and network access. Also inspect shared dependencies such as one region or one credential needed by every instance.
+
+## Worked example: two applications, one database
+
+Two app servers both use database D. Losing an app server can be handled by routing to the other. Losing D stops checkout unless another suitable database instance can take over. A failover plan needs data replication, a promotion decision, a stable address or discovery change, and client reconnection. A diagram with a standby box does not establish that these steps work.
+
+## How to improve it
+
+Identify the failure that matters, then remove that dependency or provide a tested replacement. Place replacements in genuinely different failure domains where appropriate. Designate who may accept writes after promotion; an isolated old primary must not continue accepting conflicting writes without a coordination rule.
+
+For noncritical dependencies, a fallback can be cheaper than duplicating everything. If product recommendations fail, show the product page without recommendations. That helps browsing but is not an acceptable substitute for a required payment confirmation.
+
+Redundancy also introduces cost and coordination. Automatic failover can produce false promotions if health checks confuse a network delay with a dead server.
+
+## How to verify improvement
+
+Fail one dependency at a time and trace a real request. Measure detection time, switchover time, rejected work, and any data loss. Include common-cause failures: both replicas sharing the same broken configuration can fail together.
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/single-point-of-failure-spof)
 
-The lesson above is complete enough for this curriculum; external links are for deeper study.
+Optional references provide more detail; they are not required to follow this lesson.

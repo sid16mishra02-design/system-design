@@ -149,8 +149,22 @@ That's why it's essential to understand in-depth if your business _actually_ nee
 
 ## Make it concrete
 
-An online shop can begin as one deployable application with clear modules. Splitting billing into a service adds network calls, deployment coordination, and partial failures. Independent scaling helps only when the benefit exceeds that cost.
+### Start with a boundary that solves a problem
 
-Self-check: name a concrete boundary or bottleneck that justifies a service split.
+An online shop can begin as one deployable application with catalog, orders, and billing modules. Clear module boundaries let developers reason about responsibilities even though deployment and many calls remain local.
+
+Suppose catalog reads become expensive while billing has independent compliance and release needs. Separating one of these capabilities may allow independent deployment or scaling. Splitting every table into a service would instead turn ordinary operations into a network coordination problem.
+
+### Work through an order
+
+Inside a monolith, related order and stock changes might share a database transaction. After splitting services, an order may exist while inventory reservation fails or a payment result is delayed. Define intermediate states, retries, ownership, and compensation instead of assuming a cross-service transaction behaves like a local function call.
+
+### Improve the system you have
+
+First measure slow queries, expensive synchronous work, and resource contention. A cache, background job, index, or better module boundary may solve the problem without a service split. If splitting helps, extract a capability with clear data ownership and minimize chatty calls across its boundary.
+
+Give network calls deadlines, propagate trace context, and make retried operations safe. Do not let services independently change another service's tables while claiming independent ownership; that preserves hidden coupling.
+
+**Check:** name the concrete scaling, deployment, or ownership benefit, then list the new partial failures the split introduces.
 
 [Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

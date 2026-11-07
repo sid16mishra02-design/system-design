@@ -14,8 +14,30 @@ An HTTP response and a business result are different layers. A network timeout d
 
 **Check:** HTTPS protects a password while it travels over the connection. It does not automatically protect a poorly secured database where the application stores it.
 
+## Where this comes into play
+
+These concepts affect browser APIs, mobile backends, service calls, proxies, and content delivery. Diagnose the request lifecycle rather than assuming that a slow page means slow application code.
+
+## Follow a request
+
+A first visit can require name resolution, connection establishment, TLS negotiation, the request/response, and downloading the body. A later request may reuse an existing connection. A redirect adds another exchange. These stages explain why server processing time and user-observed time can differ substantially.
+
+## How to optimize responsibly
+
+- Reuse connections where supported instead of paying setup costs for every call. Manage idle connections and pool limits so reuse does not exhaust resources.
+- Reduce unnecessary redirects and repeated small requests. A bigger batch can reduce round trips but may increase payload size and delay partial results.
+- Cache responses that can safely be reused, with deliberate freshness and access rules. A personalized response must not accidentally become a shared public cache entry.
+- Compress suitable text responses. Measure CPU cost and do not expect large gains from already compressed images or video.
+- Move static public content closer to users when distance or origin traffic is the bottleneck.
+
+Keep TLS and authorization checks. Removing security is not an acceptable performance shortcut. Likewise, retrying every write after a timeout can repeat a business operation even when the transport request failed to return a response.
+
+## How to verify improvement
+
+Separate connection/setup time, time until the first response byte, and body transfer time. Compare response sizes, error rates, and latency percentiles under equivalent load. Check both new-connection and reused-connection requests.
+
 ## Optional further reading
 
 - [Additional explanation](https://algomaster.io/learn/system-design/http-https)
 
-The lesson above is complete enough for this curriculum; external links are for deeper study.
+Optional references provide more detail; they are not required to follow this lesson.
