@@ -1,0 +1,79 @@
+[
+  {
+    "comparison": "Vertical vs horizontal scaling",
+    "choice": "Larger machine vs more machines.",
+    "example": "Check the shared database bottleneck.",
+    "topic": "Scalability",
+    "words": 14
+  },
+  {
+    "comparison": "Concurrency vs parallelism",
+    "choice": "Managing overlapping tasks vs executing tasks at the same time.",
+    "example": "One cook can alternate tasks; several cooks can work simultaneously.",
+    "topic": "Latency vs Throughput vs Bandwidth",
+    "words": 23
+  },
+  {
+    "comparison": "Long polling vs WebSockets",
+    "choice": "Repeated waiting requests vs a persistent two-way connection.",
+    "example": "Use message direction, frequency, and reconnect behavior to choose.",
+    "topic": "Long polling, WebSockets, Server-Sent Events (SSE)",
+    "words": 21
+  },
+  {
+    "comparison": "Batch vs stream processing",
+    "choice": "Process accumulated records together vs process a continuing flow.",
+    "example": "Nightly sales reports favor batches; live fraud signals need timely updates.",
+    "topic": "Change Data Capture (CDC)",
+    "words": 24
+  },
+  {
+    "comparison": "Stateful vs stateless design",
+    "choice": "Requests depend on server-local session state vs portable request context.",
+    "example": "With an external session store, another app server can handle the next request.",
+    "topic": "APIs",
+    "words": 27
+  },
+  {
+    "comparison": "Strong vs eventual consistency",
+    "choice": "Latest agreed writes vs potentially stale reads.",
+    "example": "Profile display may tolerate lag; stock reservation needs an explicit correctness rule.",
+    "topic": "CAP Theorem",
+    "words": 23
+  },
+  {
+    "comparison": "Read-through vs write-through cache",
+    "choice": "The cache loads missed reads vs the cache layer persists writes synchronously.",
+    "example": "These describe different operations and can be combined.",
+    "topic": "Caching Strategies",
+    "words": 24
+  },
+  {
+    "comparison": "Push vs pull",
+    "choice": "Sender initiates delivery vs receiver requests updates.",
+    "example": "A webhook pushes payment news; polling repeatedly asks for it.",
+    "topic": "Webhooks",
+    "words": 20
+  },
+  {
+    "comparison": "REST vs RPC",
+    "choice": "Resource-oriented interfaces vs calling defined operations.",
+    "example": "An interface style does not determine consistency guarantees.",
+    "topic": "REST, GraphQL, gRPC",
+    "words": 17
+  },
+  {
+    "comparison": "Synchronous vs asynchronous communication",
+    "choice": "Caller waits for completion vs completion is decoupled from the initiating call.",
+    "example": "Queued email can finish after the order confirmation.",
+    "topic": "Message Queues",
+    "words": 24
+  },
+  {
+    "comparison": "Latency vs throughput",
+    "choice": "Time for one operation vs operations completed per unit time.",
+    "example": "More counters can serve more customers without shortening each individual checkout.",
+    "topic": "Latency vs Throughput vs Bandwidth",
+    "words": 24
+  }
+]

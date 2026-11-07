@@ -1,17 +1,52 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN ORIGINAL TOPIC -->
 # Scalability
 
-[← Category](README.md) · [Learning path](../../README.md)
+Scalability is the measure of how well a system responds to changes by adding or removing resources to meet demands.
 
-## Read first
+![scalability](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-I/scalability/scalability.png)
 
-Read [Scalability](../../sources/karan/README.md#scalability) in the unchanged source course.
+Let's discuss different types of scaling:
 
-## Companion example
+## Vertical scaling
+
+Vertical scaling (also known as scaling up) expands a system's scalability by adding more power to an existing machine. In other words, vertical scaling refers to improving an application's capability via increasing hardware capacity.
+
+### Advantages
+
+- Simple to implement
+- Easier to manage
+- Data consistent
+
+### Disadvantages
+
+- Risk of high downtime
+- Harder to upgrade
+- Can be a single point of failure
+
+## Horizontal scaling
+
+Horizontal scaling (also known as scaling out) expands a system's scale by adding more machines. It improves the performance of the server by adding more instances to the existing pool of servers, allowing the load to be distributed more evenly.
+
+### Advantages
+
+- Increased redundancy
+- Better fault tolerance
+- Flexible and efficient
+- Easier to upgrade
+
+### Disadvantages
+
+- Increased complexity
+- Data inconsistency
+- Increased load on downstream services
+<!-- END ORIGINAL TOPIC -->
+
+## Make it concrete
 
 One checkout server handles 100 requests/second. A larger server is vertical scaling; adding servers is horizontal scaling. Shared database capacity can still limit both.
 
 Self-check: which component becomes the next bottleneck?
 
-## Continue
-
-Return to the [category sequence](README.md) and mark your [daily schedule](../../SCHEDULE.md).
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

@@ -1,17 +1,58 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN ORIGINAL TOPIC -->
 # Disaster recovery
 
-[← Category](README.md) · [Learning path](../../README.md)
+Disaster recovery (DR) is a process of regaining access and functionality of the infrastructure after events like a natural disaster, cyber attack, or even business disruptions.
 
-## Read first
+Disaster recovery relies upon the replication of data and computer processing in an off-premises location not affected by the disaster. When servers go down because of a disaster, a business needs to recover lost data from a second location where the data is backed up. Ideally, an organization can transfer its computer processing to that remote location as well in order to continue operations.
 
-Read [Disaster recovery](../../sources/karan/README.md#disaster-recovery) in the unchanged source course.
+_Disaster Recovery is often not actively discussed during system design interviews but it's important to have some basic understanding of this topic. You can learn more about disaster recovery from [AWS Well-Architected Framework](https://docs.aws.amazon.com/wellarchitected/latest/reliability-pillar/plan-for-disaster-recovery-dr.html)._
 
-## Companion example
+## Why is disaster recovery important?
+
+Disaster recovery can have the following benefits:
+
+- Minimize interruption and downtime
+- Limit damages
+- Fast restoration
+- Better customer retention
+
+## Terms
+
+Let's discuss some important terms relevantly for disaster recovery:
+
+![disaster-recovery](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-IV/disaster-recovery/disaster-recovery.png)
+
+### RTO
+
+Recovery Time Objective (RTO) is the maximum acceptable delay between the interruption of service and restoration of service. This determines what is considered an acceptable time window when service is unavailable.
+
+### RPO
+
+Recovery Point Objective (RPO) is the maximum acceptable amount of time since the last data recovery point. This determines what is considered an acceptable loss of data between the last recovery point and the interruption of service.
+
+## Strategies
+
+A variety of disaster recovery (DR) strategies can be part of a disaster recovery plan.
+
+### Back-up
+
+This is the simplest type of disaster recovery and involves storing data off-site or on a removable drive.
+
+### Cold Site
+
+In this type of disaster recovery, an organization sets up basic infrastructure in a second site.
+
+### Hot site
+
+A hot site maintains up-to-date copies of data at all times. Hot sites are time-consuming to set up and more expensive than cold sites, but they dramatically reduce downtime.
+<!-- END ORIGINAL TOPIC -->
+
+## Make it concrete
 
 Backups every hour imply up to roughly one hour of data loss if no newer recoverable log exists: RPO. Restoring in two hours concerns RTO. Backups that have never been restored do not prove recovery works.
 
 Self-check: which target changes when restore automation becomes faster?
 
-## Continue
-
-Return to the [category sequence](README.md) and mark your [daily schedule](../../SCHEDULE.md).
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

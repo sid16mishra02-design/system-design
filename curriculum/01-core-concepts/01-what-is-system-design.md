@@ -1,17 +1,28 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN ORIGINAL TOPIC -->
 # What is system design?
 
-[← Category](README.md) · [Learning path](../../README.md)
+Before we start this course, let's talk about what even is system design.
 
-## Read first
+System design is the process of defining the architecture, interfaces, and data
+for a system that satisfies specific requirements. System design meets the needs
+of your business or organization through coherent and efficient systems. It requires
+a systematic approach to building and engineering systems. A good system design requires
+us to think about everything, from infrastructure all the way down to the data and how it's stored.
 
-Read [What is system design?](../../sources/karan/README.md#what-is-system-design) in the unchanged source course.
+## Why is System Design so important?
 
-## Companion example
+System design helps us define a solution that meets the business requirements. It is
+one of the earliest decisions we can make when building a system. Often it is essential
+to think from a high level as these decisions are very difficult to correct later. It
+also makes it easier to reason about and manage architectural changes as the system evolves.
+<!-- END ORIGINAL TOPIC -->
+
+## Make it concrete
 
 Picture a food-ordering app: customers place orders, restaurants accept them, and couriers collect them. Draw those three flows. Ask what happens if the payment service stops. The design must satisfy requirements even when parts fail.
 
 Self-check: name one requirement before choosing a database.
 
-## Continue
-
-Return to the [category sequence](README.md) and mark your [daily schedule](../../SCHEDULE.md).
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

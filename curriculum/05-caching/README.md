@@ -2,14 +2,14 @@
 
 [← Start here](../../README.md) · [Schedule](../../SCHEDULE.md)
 
-Follow the numbered order. Course readings open local, unchanged source material. Resource links are supplementary lessons where the course has no matching standalone topic; their articles are not reproduced. Access may depend on the provider.
+Follow the numbered order. Every topic opens a lesson in this repository. Read its explanation, work through the example, then use optional article links only for a specific question.
 
 | Order | Topic | Reading |
 | --- | --- | --- |
-| 1 | [Caching](01-caching.md) | Course + example |
-| 2 | [Caching Strategies](https://algomaster.io/learn/system-design/caching-strategies) | Resource link |
-| 3 | [Cache Eviction Policies](https://blog.algomaster.io/p/7-cache-eviction-strategies) | Resource link |
-| 4 | [Distributed Caching](https://blog.algomaster.io/p/distributed-caching) | Resource link |
-| 5 | [Content Delivery Network (CDN)](05-content-delivery-network-cdn.md) | Course + example |
+| 1 | [Caching](01-caching.md) | Full lesson + example |
+| 2 | [Caching Strategies](02-caching-strategies.md) | Original lesson + example |
+| 3 | [Cache Eviction Policies](03-cache-eviction-policies.md) | Original lesson + example |
+| 4 | [Distributed Caching](04-distributed-caching.md) | Original lesson + example |
+| 5 | [Content Delivery Network (CDN)](05-content-delivery-network-cdn.md) | Full lesson + example |
 
 Before moving on: explain the topic without notes, draw its flow, and describe one failure or tradeoff. Use the next review day if you need more time.

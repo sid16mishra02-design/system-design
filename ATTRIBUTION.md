@@ -8,8 +8,8 @@ This is an independent, noncommercial learning collection. It preserves two sour
 - Pinned commit: `6dcea405d41401bfbe4031b6b80f7a2d87b712ba`
 - Original work: [README](sources/karan/README.md), [diagrams](sources/karan/diagrams), and [license](sources/karan/LICENSE).
 - License: [CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
-- Changes to those files: none. The source remains a complete standalone work with its original order and relative diagram paths. Companion documents link to its existing headings and do not replace its explanations.
-- That source is not covered by the root GPL license. Reuse must respect its original noncommercial and no-derivatives conditions.
+- Changes to those files: none. The source remains a complete standalone work with its original order and relative diagram paths. Each topic page now also reproduces its complete, unchanged topic excerpt. New examples and exercises are visibly separate from those excerpts; they do not amend the copied wording.
+- That source, including the verbatim excerpts on lesson pages, is not covered by the root GPL license. Reuse must respect its original noncommercial and no-derivatives conditions.
 
 ## Ashish Pratap Singh — Awesome System Design Resources
 
@@ -29,3 +29,11 @@ Collection assembled and derivative resource indexes created on 2026-11-07. Thei
 ## Preservation limits
 
 The audit compares each course topic from its top-level heading to the next top-level heading. Word counts use the documented script tokenization. All explanatory example text and self-check questions count toward the 30% addition limit. Navigation, source pointers, headings, schedules, and worksheets are documented separately rather than counted as topic prose. Original copied bytes are checked against the recorded SHA-256 hashes.
+
+## Inline lesson edition — 2026-11-07
+
+The learning route contains complete local lesson text, rather than redirecting to an original repository or a separate source README. The 57 verbatim excerpts retain their original headings, prose, code, and illustration URLs. Internal course link destinations are technically relocated to local lessons without changing their link labels. HTML comment markers identify the exact excerpt boundaries for validation. Required origin links are retained here as attribution, not assigned reading.
+
+The 20 former link-only topics now have original lessons, under the root GPL-3.0 license. Their external article links remain direct and optional; those articles have not been copied or quoted. The learner explicitly approved an exception to the 30% addition limit for these 20 new lessons. Existing source-topic examples and practice guidance remain within that limit. Repeated checkpoint text on concept pages is included in the addition count.
+
+Reproduced excerpts retain the original CC BY-NC-ND 4.0 license, including its disclaimer of warranties. See the retained license text. Section 2(a)(1)(A) permits sharing unchanged material in whole or in part for noncommercial purposes; this edition keeps copied passages unchanged and identifies independent material separately.

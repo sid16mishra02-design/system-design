@@ -1,11 +1,64 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN ORIGINAL TOPIC -->
 # N-tier architecture
 
-[← Category](README.md) · [Learning path](../../README.md)
+N-tier architecture divides an application into logical layers and physical tiers. Layers are a way to separate responsibilities and manage dependencies. Each layer has a specific responsibility. A higher layer can use services in a lower layer, but not the other way around.
 
-## Read first
+![n-tier-architecture](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/n-tier-architecture/n-tier-architecture.png)
 
-Read [N-tier architecture](../../sources/karan/README.md#n-tier-architecture) in the unchanged source course.
+Tiers are physically separated, running on separate machines. A tier can call to another tier directly, or use asynchronous messaging. Although each layer might be hosted in its own tier, that's not required. Several layers might be hosted on the same tier. Physically separating the tiers improves scalability and resiliency and adds latency from the additional network communication.
 
-## Continue
+An N-tier architecture can be of two types:
 
-Return to the [category sequence](README.md) and mark your [daily schedule](../../SCHEDULE.md).
+- In a closed layer architecture, a layer can only call the next layer immediately down.
+- In an open layer architecture, a layer can call any of the layers below it.
+
+A closed-layer architecture limits the dependencies between layers. However, it might create unnecessary network traffic, if one layer simply passes requests along to the next layer.
+
+## Types of N-Tier architectures
+
+Let's look at some examples of N-Tier architecture:
+
+### 3-Tier architecture
+
+3-Tier is widely used and consists of the following different layers:
+
+- **Presentation layer**: Handles user interactions with the application.
+- **Business Logic layer**: Accepts the data from the application layer, validates it as per business logic and passes it to the data layer.
+- **Data Access layer**: Receives the data from the business layer and performs the necessary operation on the database.
+
+### 2-Tier architecture
+
+In this architecture, the presentation layer runs on the client and communicates with a data store. There is no business logic layer or immediate layer between client and server.
+
+### Single Tier or 1-Tier architecture
+
+It is the simplest one as it is equivalent to running the application on a personal computer. All of the required components for an application to run are on a single application or server.
+
+## Advantages
+
+Here are some advantages of using N-tier architecture:
+
+- Can improve availability.
+- Better security as layers can behave like a firewall.
+- Separate tiers allow us to scale them as needed.
+- Improve maintenance as different people can manage different tiers.
+
+## Disadvantages
+
+Below are some disadvantages of N-tier architecture:
+
+- Increased complexity of the system as a whole.
+- Increased network latency as the number of tiers increases.
+- Expensive as every tier will have its own hardware cost.
+- Difficult to manage network security.
+<!-- END ORIGINAL TOPIC -->
+
+## Make it concrete
+
+A shop can separate presentation, order rules, and persistence. Those are logical responsibilities. A tier usually means a deployment boundary, such as a browser, application server, and database server. Splitting code into three folders does not automatically create three network tiers.
+
+Self-check: which calls become network calls if you deploy the database separately?
+
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

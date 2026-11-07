@@ -1,11 +1,44 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN ORIGINAL TOPIC -->
 # Enterprise Service Bus (ESB)
 
-[← Category](README.md) · [Learning path](../../README.md)
+An Enterprise Service Bus (ESB) is an architectural pattern whereby a centralized software component performs integrations between applications. It performs transformations of data models, handles connectivity, performs message routing, converts communication protocols, and potentially manages the composition of multiple requests. The ESB can make these integrations and transformations available as a service interface for reuse by new applications.
 
-## Read first
+![enterprise-service-bus](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-III/enterprise-service-bus/enterprise-service-bus.png)
 
-Read [Enterprise Service Bus (ESB)](../../sources/karan/README.md#enterprise-service-bus-esb) in the unchanged source course.
+## Advantages
 
-## Continue
+In theory, a centralized ESB offers the potential to standardize and dramatically simplify communication, messaging, and integration between services across the enterprise. Here are some advantages of using an ESB:
 
-Return to the [category sequence](README.md) and mark your [daily schedule](../../SCHEDULE.md).
+- **Improved developer productivity**: Enables developers to incorporate new technologies into one part of an application without touching the rest of the application.
+- **Simpler, more cost-effective scalability**: Components can be scaled independently of others.
+- **Greater resilience**: Failure of one component does not impact the others, and each microservice can adhere to its own availability requirements without risking the availability of other components in the system.
+
+## Disadvantages
+
+While ESBs were deployed successfully in many organizations, in many other organizations the ESB came to be seen as a bottleneck. Here are some disadvantages of using an ESB:
+
+- Making changes or enhancements to one integration could destabilize others who use that same integration.
+- A single point of failure can bring down all communications.
+- Updates to the ESB often impact existing integrations, so there is significant testing required to perform any update.
+- ESB is centrally managed which makes cross-team collaboration challenging.
+- High configuration and maintenance complexity.
+
+## Examples
+
+Below are some widely used Enterprise Service Bus (ESB) technologies:
+
+- [Azure Service Bus](https://azure.microsoft.com/en-in/services/service-bus)
+- [IBM App Connect](https://www.ibm.com/in-en/cloud/app-connect)
+- [Apache Camel](https://camel.apache.org)
+- [Fuse ESB](https://www.redhat.com/en/technologies/jboss-middleware/fuse)
+<!-- END ORIGINAL TOPIC -->
+
+## Make it concrete
+
+Imagine billing speaks one message format and shipping another. An integration bus can transform and route their messages. A broker primarily moves messages; an ESB commonly adds integration functions. Exact product features vary. Central integration can simplify connections while concentrating operational dependency.
+
+Self-check: if the bus stops, which business flows can continue without it?
+
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

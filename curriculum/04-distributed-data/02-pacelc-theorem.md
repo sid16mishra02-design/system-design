@@ -1,17 +1,25 @@
+[← Category](README.md) · [Schedule](../../SCHEDULE.md)
+
+<!-- BEGIN ORIGINAL TOPIC -->
 # PACELC Theorem
 
-[← Category](README.md) · [Learning path](../../README.md)
+The PACELC theorem is an extension of the CAP theorem. The CAP theorem states that in the case of network partitioning (P) in a distributed system, one has to choose between Availability (A) and Consistency (C).
 
-## Read first
+PACELC extends the CAP theorem by introducing latency (L) as an additional attribute of a distributed system. The theorem states that else (E), even when the system is running normally in the absence of partitions, one has to choose between latency (L) and consistency (C).
 
-Read [PACELC Theorem](../../sources/karan/README.md#pacelc-theorem) in the unchanged source course.
+_The PACELC theorem was first described by [Daniel J. Abadi](https://scholar.google.com/citations?user=zxeEF2gAAAAJ)._
 
-## Companion example
+![pacelc-theorem](https://raw.githubusercontent.com/karanpratapsingh/portfolio/master/public/static/courses/system-design/chapter-II/pacelc-theorem/pacelc-theorem.png)
+
+PACELC theorem was developed to address a key limitation of the CAP theorem as it makes no provision for performance or latency.
+
+For example, according to the CAP theorem, a database can be considered available if a query returns a response after 30 days. Obviously, such latency would be unacceptable for any real-world application.
+<!-- END ORIGINAL TOPIC -->
+
+## Make it concrete
 
 During a partition, choose availability or consistency. Else, replication can trade latency for consistency: waiting for distant replicas costs time.
 
 Self-check: does CAP alone describe normal-operation latency?
 
-## Continue
-
-Return to the [category sequence](README.md) and mark your [daily schedule](../../SCHEDULE.md).
+[Next topic in this category](README.md) · [Credits and license](../../ATTRIBUTION.md)

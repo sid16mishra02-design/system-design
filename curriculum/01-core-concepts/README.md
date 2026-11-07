@@ -2,15 +2,15 @@
 
 [← Start here](../../README.md) · [Schedule](../../SCHEDULE.md)
 
-Follow the numbered order. Course readings open local, unchanged source material. Resource links are supplementary lessons where the course has no matching standalone topic; their articles are not reproduced. Access may depend on the provider.
+Follow the numbered order. Every topic opens a lesson in this repository. Read its explanation, work through the example, then use optional article links only for a specific question.
 
 | Order | Topic | Reading |
 | --- | --- | --- |
-| 1 | [What is system design?](01-what-is-system-design.md) | Course + example |
-| 2 | [Scalability](02-scalability.md) | Course + example |
-| 3 | [Availability](03-availability.md) | Course + example |
-| 4 | [Latency vs Throughput vs Bandwidth](https://algomaster.io/learn/system-design/latency-vs-throughput) | Resource link |
-| 5 | [Reliability](https://algomaster.io/learn/system-design/reliability) | Resource link |
-| 6 | [SPOF](https://algomaster.io/learn/system-design/single-point-of-failure-spof) | Resource link |
+| 1 | [What is system design?](01-what-is-system-design.md) | Full lesson + example |
+| 2 | [Scalability](02-scalability.md) | Full lesson + example |
+| 3 | [Availability](03-availability.md) | Full lesson + example |
+| 4 | [Latency vs Throughput vs Bandwidth](04-latency-vs-throughput-vs-bandwidth.md) | Original lesson + example |
+| 5 | [Reliability](05-reliability.md) | Original lesson + example |
+| 6 | [SPOF](06-spof.md) | Original lesson + example |
 
 Before moving on: explain the topic without notes, draw its flow, and describe one failure or tradeoff. Use the next review day if you need more time.

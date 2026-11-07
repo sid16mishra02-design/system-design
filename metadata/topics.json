@@ -5,7 +5,7 @@
     "title": "What is system design?",
     "resource_only": false,
     "path": "curriculum/01-core-concepts/01-what-is-system-design.md",
-    "url": "sources/karan/README.md#what-is-system-design"
+    "url": "curriculum/01-core-concepts/01-what-is-system-design.md"
   },
   {
     "id": 2,
@@ -13,7 +13,7 @@
     "title": "Scalability",
     "resource_only": false,
     "path": "curriculum/01-core-concepts/02-scalability.md",
-    "url": "sources/karan/README.md#scalability"
+    "url": "curriculum/01-core-concepts/02-scalability.md"
   },
   {
     "id": 3,
@@ -21,31 +21,37 @@
     "title": "Availability",
     "resource_only": false,
     "path": "curriculum/01-core-concepts/03-availability.md",
-    "url": "sources/karan/README.md#availability"
+    "url": "curriculum/01-core-concepts/03-availability.md"
   },
   {
     "id": 4,
     "category": "01-core-concepts",
     "title": "Latency vs Throughput vs Bandwidth",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/latency-vs-throughput"
+    "resource_only": false,
+    "path": "curriculum/01-core-concepts/04-latency-vs-throughput-vs-bandwidth.md",
+    "url": "curriculum/01-core-concepts/04-latency-vs-throughput-vs-bandwidth.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/latency-vs-throughput"
   },
   {
     "id": 5,
     "category": "01-core-concepts",
     "title": "Reliability",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/reliability"
+    "resource_only": false,
+    "path": "curriculum/01-core-concepts/05-reliability.md",
+    "url": "curriculum/01-core-concepts/05-reliability.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/reliability"
   },
   {
     "id": 6,
     "category": "01-core-concepts",
     "title": "SPOF",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/single-point-of-failure-spof"
+    "resource_only": false,
+    "path": "curriculum/01-core-concepts/06-spof.md",
+    "url": "curriculum/01-core-concepts/06-spof.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/single-point-of-failure-spof"
   },
   {
     "id": 7,
@@ -53,7 +59,7 @@
     "title": "IP",
     "resource_only": false,
     "path": "curriculum/02-networking/01-ip.md",
-    "url": "sources/karan/README.md#ip"
+    "url": "curriculum/02-networking/01-ip.md"
   },
   {
     "id": 8,
@@ -61,7 +67,7 @@
     "title": "OSI Model",
     "resource_only": false,
     "path": "curriculum/02-networking/02-osi-model.md",
-    "url": "sources/karan/README.md#osi-model"
+    "url": "curriculum/02-networking/02-osi-model.md"
   },
   {
     "id": 9,
@@ -69,7 +75,7 @@
     "title": "TCP and UDP",
     "resource_only": false,
     "path": "curriculum/02-networking/03-tcp-and-udp.md",
-    "url": "sources/karan/README.md#tcp-and-udp"
+    "url": "curriculum/02-networking/03-tcp-and-udp.md"
   },
   {
     "id": 10,
@@ -77,7 +83,7 @@
     "title": "Domain Name System (DNS)",
     "resource_only": false,
     "path": "curriculum/02-networking/04-domain-name-system-dns.md",
-    "url": "sources/karan/README.md#domain-name-system-dns"
+    "url": "curriculum/02-networking/04-domain-name-system-dns.md"
   },
   {
     "id": 11,
@@ -85,23 +91,27 @@
     "title": "Proxy",
     "resource_only": false,
     "path": "curriculum/02-networking/05-proxy.md",
-    "url": "sources/karan/README.md#proxy"
+    "url": "curriculum/02-networking/05-proxy.md"
   },
   {
     "id": 12,
     "category": "02-networking",
     "title": "HTTP/HTTPS",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/http-https"
+    "resource_only": false,
+    "path": "curriculum/02-networking/06-httphttps.md",
+    "url": "curriculum/02-networking/06-httphttps.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/http-https"
   },
   {
     "id": 13,
     "category": "02-networking",
     "title": "Checksums",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/checksums"
+    "resource_only": false,
+    "path": "curriculum/02-networking/07-checksums.md",
+    "url": "curriculum/02-networking/07-checksums.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/checksums"
   },
   {
     "id": 14,
@@ -109,7 +119,7 @@
     "title": "Load Balancing",
     "resource_only": false,
     "path": "curriculum/02-networking/08-load-balancing.md",
-    "url": "sources/karan/README.md#load-balancing"
+    "url": "curriculum/02-networking/08-load-balancing.md"
   },
   {
     "id": 15,
@@ -117,7 +127,7 @@
     "title": "Clustering",
     "resource_only": false,
     "path": "curriculum/02-networking/09-clustering.md",
-    "url": "sources/karan/README.md#clustering"
+    "url": "curriculum/02-networking/09-clustering.md"
   },
   {
     "id": 16,
@@ -125,7 +135,7 @@
     "title": "Storage",
     "resource_only": false,
     "path": "curriculum/03-databases/01-storage.md",
-    "url": "sources/karan/README.md#storage"
+    "url": "curriculum/03-databases/01-storage.md"
   },
   {
     "id": 17,
@@ -133,7 +143,7 @@
     "title": "Databases and DBMS",
     "resource_only": false,
     "path": "curriculum/03-databases/02-databases-and-dbms.md",
-    "url": "sources/karan/README.md#databases-and-dbms"
+    "url": "curriculum/03-databases/02-databases-and-dbms.md"
   },
   {
     "id": 18,
@@ -141,7 +151,7 @@
     "title": "SQL databases",
     "resource_only": false,
     "path": "curriculum/03-databases/03-sql-databases.md",
-    "url": "sources/karan/README.md#sql-databases"
+    "url": "curriculum/03-databases/03-sql-databases.md"
   },
   {
     "id": 19,
@@ -149,7 +159,7 @@
     "title": "NoSQL databases",
     "resource_only": false,
     "path": "curriculum/03-databases/04-nosql-databases.md",
-    "url": "sources/karan/README.md#nosql-databases"
+    "url": "curriculum/03-databases/04-nosql-databases.md"
   },
   {
     "id": 20,
@@ -157,7 +167,7 @@
     "title": "SQL vs NoSQL databases",
     "resource_only": false,
     "path": "curriculum/03-databases/05-sql-vs-nosql-databases.md",
-    "url": "sources/karan/README.md#sql-vs-nosql-databases"
+    "url": "curriculum/03-databases/05-sql-vs-nosql-databases.md"
   },
   {
     "id": 21,
@@ -165,7 +175,7 @@
     "title": "Indexes",
     "resource_only": false,
     "path": "curriculum/03-databases/06-indexes.md",
-    "url": "sources/karan/README.md#indexes"
+    "url": "curriculum/03-databases/06-indexes.md"
   },
   {
     "id": 22,
@@ -173,7 +183,7 @@
     "title": "Normalization and Denormalization",
     "resource_only": false,
     "path": "curriculum/03-databases/07-normalization-and-denormalization.md",
-    "url": "sources/karan/README.md#normalization-and-denormalization"
+    "url": "curriculum/03-databases/07-normalization-and-denormalization.md"
   },
   {
     "id": 23,
@@ -181,7 +191,7 @@
     "title": "Transactions",
     "resource_only": false,
     "path": "curriculum/03-databases/08-transactions.md",
-    "url": "sources/karan/README.md#transactions"
+    "url": "curriculum/03-databases/08-transactions.md"
   },
   {
     "id": 24,
@@ -189,7 +199,7 @@
     "title": "ACID and BASE consistency models",
     "resource_only": false,
     "path": "curriculum/03-databases/09-acid-and-base-consistency-models.md",
-    "url": "sources/karan/README.md#acid-and-base-consistency-models"
+    "url": "curriculum/03-databases/09-acid-and-base-consistency-models.md"
   },
   {
     "id": 25,
@@ -197,7 +207,7 @@
     "title": "Database Replication",
     "resource_only": false,
     "path": "curriculum/03-databases/10-database-replication.md",
-    "url": "sources/karan/README.md#database-replication"
+    "url": "curriculum/03-databases/10-database-replication.md"
   },
   {
     "id": 26,
@@ -205,7 +215,7 @@
     "title": "Sharding",
     "resource_only": false,
     "path": "curriculum/03-databases/11-sharding.md",
-    "url": "sources/karan/README.md#sharding"
+    "url": "curriculum/03-databases/11-sharding.md"
   },
   {
     "id": 27,
@@ -213,7 +223,7 @@
     "title": "Consistent Hashing",
     "resource_only": false,
     "path": "curriculum/03-databases/12-consistent-hashing.md",
-    "url": "sources/karan/README.md#consistent-hashing"
+    "url": "curriculum/03-databases/12-consistent-hashing.md"
   },
   {
     "id": 28,
@@ -221,15 +231,17 @@
     "title": "Database Federation",
     "resource_only": false,
     "path": "curriculum/03-databases/13-database-federation.md",
-    "url": "sources/karan/README.md#database-federation"
+    "url": "curriculum/03-databases/13-database-federation.md"
   },
   {
     "id": 29,
     "category": "03-databases",
     "title": "Bloom Filters",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/bloom-filters"
+    "resource_only": false,
+    "path": "curriculum/03-databases/14-bloom-filters.md",
+    "url": "curriculum/03-databases/14-bloom-filters.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/bloom-filters"
   },
   {
     "id": 30,
@@ -237,7 +249,7 @@
     "title": "CAP Theorem",
     "resource_only": false,
     "path": "curriculum/04-distributed-data/01-cap-theorem.md",
-    "url": "sources/karan/README.md#cap-theorem"
+    "url": "curriculum/04-distributed-data/01-cap-theorem.md"
   },
   {
     "id": 31,
@@ -245,7 +257,7 @@
     "title": "PACELC Theorem",
     "resource_only": false,
     "path": "curriculum/04-distributed-data/02-pacelc-theorem.md",
-    "url": "sources/karan/README.md#pacelc-theorem"
+    "url": "curriculum/04-distributed-data/02-pacelc-theorem.md"
   },
   {
     "id": 32,
@@ -253,7 +265,7 @@
     "title": "Distributed Transactions",
     "resource_only": false,
     "path": "curriculum/04-distributed-data/03-distributed-transactions.md",
-    "url": "sources/karan/README.md#distributed-transactions"
+    "url": "curriculum/04-distributed-data/03-distributed-transactions.md"
   },
   {
     "id": 33,
@@ -261,31 +273,37 @@
     "title": "Caching",
     "resource_only": false,
     "path": "curriculum/05-caching/01-caching.md",
-    "url": "sources/karan/README.md#caching"
+    "url": "curriculum/05-caching/01-caching.md"
   },
   {
     "id": 34,
     "category": "05-caching",
     "title": "Caching Strategies",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/caching-strategies"
+    "resource_only": false,
+    "path": "curriculum/05-caching/02-caching-strategies.md",
+    "url": "curriculum/05-caching/02-caching-strategies.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/caching-strategies"
   },
   {
     "id": 35,
     "category": "05-caching",
     "title": "Cache Eviction Policies",
-    "resource_only": true,
-    "path": null,
-    "url": "https://blog.algomaster.io/p/7-cache-eviction-strategies"
+    "resource_only": false,
+    "path": "curriculum/05-caching/03-cache-eviction-policies.md",
+    "url": "curriculum/05-caching/03-cache-eviction-policies.md",
+    "original_lesson": true,
+    "external_reference": "https://blog.algomaster.io/p/7-cache-eviction-strategies"
   },
   {
     "id": 36,
     "category": "05-caching",
     "title": "Distributed Caching",
-    "resource_only": true,
-    "path": null,
-    "url": "https://blog.algomaster.io/p/distributed-caching"
+    "resource_only": false,
+    "path": "curriculum/05-caching/04-distributed-caching.md",
+    "url": "curriculum/05-caching/04-distributed-caching.md",
+    "original_lesson": true,
+    "external_reference": "https://blog.algomaster.io/p/distributed-caching"
   },
   {
     "id": 37,
@@ -293,15 +311,17 @@
     "title": "Content Delivery Network (CDN)",
     "resource_only": false,
     "path": "curriculum/05-caching/05-content-delivery-network-cdn.md",
-    "url": "sources/karan/README.md#content-delivery-network-cdn"
+    "url": "curriculum/05-caching/05-content-delivery-network-cdn.md"
   },
   {
     "id": 38,
     "category": "06-api-fundamentals",
     "title": "APIs",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/what-is-an-api"
+    "resource_only": false,
+    "path": "curriculum/06-api-fundamentals/01-apis.md",
+    "url": "curriculum/06-api-fundamentals/01-apis.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/what-is-an-api"
   },
   {
     "id": 39,
@@ -309,7 +329,7 @@
     "title": "REST, GraphQL, gRPC",
     "resource_only": false,
     "path": "curriculum/06-api-fundamentals/02-rest-graphql-grpc.md",
-    "url": "sources/karan/README.md#rest-graphql-grpc"
+    "url": "curriculum/06-api-fundamentals/02-rest-graphql-grpc.md"
   },
   {
     "id": 40,
@@ -317,7 +337,7 @@
     "title": "API Gateway",
     "resource_only": false,
     "path": "curriculum/06-api-fundamentals/03-api-gateway.md",
-    "url": "sources/karan/README.md#api-gateway"
+    "url": "curriculum/06-api-fundamentals/03-api-gateway.md"
   },
   {
     "id": 41,
@@ -325,7 +345,7 @@
     "title": "Idempotency",
     "resource_only": false,
     "path": "curriculum/06-api-fundamentals/04-idempotency.md",
-    "url": "sources/karan/README.md#idempotency"
+    "url": "curriculum/06-api-fundamentals/04-idempotency.md"
   },
   {
     "id": 42,
@@ -333,7 +353,7 @@
     "title": "Rate Limiting",
     "resource_only": false,
     "path": "curriculum/06-api-fundamentals/05-rate-limiting.md",
-    "url": "sources/karan/README.md#rate-limiting"
+    "url": "curriculum/06-api-fundamentals/05-rate-limiting.md"
   },
   {
     "id": 43,
@@ -341,23 +361,27 @@
     "title": "Long polling, WebSockets, Server-Sent Events (SSE)",
     "resource_only": false,
     "path": "curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md",
-    "url": "sources/karan/README.md#long-polling-websockets-server-sent-events-sse"
+    "url": "curriculum/06-api-fundamentals/06-long-polling-websockets-server-sent-events-sse.md"
   },
   {
     "id": 44,
     "category": "06-api-fundamentals",
     "title": "Webhooks",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/webhooks"
+    "resource_only": false,
+    "path": "curriculum/06-api-fundamentals/07-webhooks.md",
+    "url": "curriculum/06-api-fundamentals/07-webhooks.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/webhooks"
   },
   {
     "id": 45,
     "category": "06-api-fundamentals",
     "title": "API Design",
-    "resource_only": true,
-    "path": null,
-    "url": "https://abdulrwahab.medium.com/api-architecture-best-practices-for-designing-rest-apis-bf907025f5f"
+    "resource_only": false,
+    "path": "curriculum/06-api-fundamentals/08-api-design.md",
+    "url": "curriculum/06-api-fundamentals/08-api-design.md",
+    "original_lesson": true,
+    "external_reference": "https://abdulrwahab.medium.com/api-architecture-best-practices-for-designing-rest-apis-bf907025f5f"
   },
   {
     "id": 46,
@@ -365,7 +389,7 @@
     "title": "Message Brokers",
     "resource_only": false,
     "path": "curriculum/07-asynchronous-communication/01-message-brokers.md",
-    "url": "sources/karan/README.md#message-brokers"
+    "url": "curriculum/07-asynchronous-communication/01-message-brokers.md"
   },
   {
     "id": 47,
@@ -373,7 +397,7 @@
     "title": "Message Queues",
     "resource_only": false,
     "path": "curriculum/07-asynchronous-communication/02-message-queues.md",
-    "url": "sources/karan/README.md#message-queues"
+    "url": "curriculum/07-asynchronous-communication/02-message-queues.md"
   },
   {
     "id": 48,
@@ -381,15 +405,17 @@
     "title": "Publish-Subscribe",
     "resource_only": false,
     "path": "curriculum/07-asynchronous-communication/03-publish-subscribe.md",
-    "url": "sources/karan/README.md#publish-subscribe"
+    "url": "curriculum/07-asynchronous-communication/03-publish-subscribe.md"
   },
   {
     "id": 49,
     "category": "07-asynchronous-communication",
     "title": "Change Data Capture (CDC)",
-    "resource_only": true,
-    "path": null,
-    "url": "https://algomaster.io/learn/system-design/change-data-capture-cdc"
+    "resource_only": false,
+    "path": "curriculum/07-asynchronous-communication/04-change-data-capture-cdc.md",
+    "url": "curriculum/07-asynchronous-communication/04-change-data-capture-cdc.md",
+    "original_lesson": true,
+    "external_reference": "https://algomaster.io/learn/system-design/change-data-capture-cdc"
   },
   {
     "id": 50,
@@ -397,7 +423,7 @@
     "title": "N-tier architecture",
     "resource_only": false,
     "path": "curriculum/08-architectural-patterns/01-n-tier-architecture.md",
-    "url": "sources/karan/README.md#n-tier-architecture"
+    "url": "curriculum/08-architectural-patterns/01-n-tier-architecture.md"
   },
   {
     "id": 51,
@@ -405,7 +431,7 @@
     "title": "Monoliths and Microservices",
     "resource_only": false,
     "path": "curriculum/08-architectural-patterns/02-monoliths-and-microservices.md",
-    "url": "sources/karan/README.md#monoliths-and-microservices"
+    "url": "curriculum/08-architectural-patterns/02-monoliths-and-microservices.md"
   },
   {
     "id": 52,
@@ -413,7 +439,7 @@
     "title": "Event-Driven Architecture (EDA)",
     "resource_only": false,
     "path": "curriculum/08-architectural-patterns/03-event-driven-architecture-eda.md",
-    "url": "sources/karan/README.md#event-driven-architecture-eda"
+    "url": "curriculum/08-architectural-patterns/03-event-driven-architecture-eda.md"
   },
   {
     "id": 53,
@@ -421,7 +447,7 @@
     "title": "Event Sourcing",
     "resource_only": false,
     "path": "curriculum/08-architectural-patterns/04-event-sourcing.md",
-    "url": "sources/karan/README.md#event-sourcing"
+    "url": "curriculum/08-architectural-patterns/04-event-sourcing.md"
   },
   {
     "id": 54,
@@ -429,7 +455,7 @@
     "title": "Command and Query Responsibility Segregation (CQRS)",
     "resource_only": false,
     "path": "curriculum/08-architectural-patterns/05-command-and-query-responsibility-segregation-cqrs.md",
-    "url": "sources/karan/README.md#command-and-query-responsibility-segregation-cqrs"
+    "url": "curriculum/08-architectural-patterns/05-command-and-query-responsibility-segregation-cqrs.md"
   },
   {
     "id": 55,
@@ -437,7 +463,7 @@
     "title": "Enterprise Service Bus (ESB)",
     "resource_only": false,
     "path": "curriculum/08-architectural-patterns/06-enterprise-service-bus-esb.md",
-    "url": "sources/karan/README.md#enterprise-service-bus-esb"
+    "url": "curriculum/08-architectural-patterns/06-enterprise-service-bus-esb.md"
   },
   {
     "id": 56,
@@ -445,23 +471,27 @@
     "title": "Virtual Machines (VMs) and Containers",
     "resource_only": false,
     "path": "curriculum/08-architectural-patterns/07-virtual-machines-vms-and-containers.md",
-    "url": "sources/karan/README.md#virtual-machines-vms-and-containers"
+    "url": "curriculum/08-architectural-patterns/07-virtual-machines-vms-and-containers.md"
   },
   {
     "id": 57,
     "category": "08-architectural-patterns",
     "title": "Serverless Architecture",
-    "resource_only": true,
-    "path": null,
-    "url": "https://blog.algomaster.io/p/2edeb23b-cfa5-4b24-845e-3f6f7a39d162"
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/08-serverless-architecture.md",
+    "url": "curriculum/08-architectural-patterns/08-serverless-architecture.md",
+    "original_lesson": true,
+    "external_reference": "https://blog.algomaster.io/p/2edeb23b-cfa5-4b24-845e-3f6f7a39d162"
   },
   {
     "id": 58,
     "category": "08-architectural-patterns",
     "title": "Peer-to-Peer (P2P) Architecture",
-    "resource_only": true,
-    "path": null,
-    "url": "https://www.spiceworks.com/tech/networking/articles/what-is-peer-to-peer/"
+    "resource_only": false,
+    "path": "curriculum/08-architectural-patterns/09-peer-to-peer-p2p-architecture.md",
+    "url": "curriculum/08-architectural-patterns/09-peer-to-peer-p2p-architecture.md",
+    "original_lesson": true,
+    "external_reference": "https://www.spiceworks.com/tech/networking/articles/what-is-peer-to-peer/"
   },
   {
     "id": 59,
@@ -469,15 +499,17 @@
     "title": "Service Discovery",
     "resource_only": false,
     "path": "curriculum/09-reliability-and-microservices/01-service-discovery.md",
-    "url": "sources/karan/README.md#service-discovery"
+    "url": "curriculum/09-reliability-and-microservices/01-service-discovery.md"
   },
   {
     "id": 60,
     "category": "09-reliability-and-microservices",
     "title": "HeartBeats",
-    "resource_only": true,
-    "path": null,
-    "url": "https://blog.algomaster.io/p/heartbeats-in-distributed-systems"
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/02-heartbeats.md",
+    "url": "curriculum/09-reliability-and-microservices/02-heartbeats.md",
+    "original_lesson": true,
+    "external_reference": "https://blog.algomaster.io/p/heartbeats-in-distributed-systems"
   },
   {
     "id": 61,
@@ -485,7 +517,7 @@
     "title": "Circuit breaker",
     "resource_only": false,
     "path": "curriculum/09-reliability-and-microservices/03-circuit-breaker.md",
-    "url": "sources/karan/README.md#circuit-breaker"
+    "url": "curriculum/09-reliability-and-microservices/03-circuit-breaker.md"
   },
   {
     "id": 62,
@@ -493,7 +525,7 @@
     "title": "SLA, SLO, SLI",
     "resource_only": false,
     "path": "curriculum/09-reliability-and-microservices/04-sla-slo-sli.md",
-    "url": "sources/karan/README.md#sla-slo-sli"
+    "url": "curriculum/09-reliability-and-microservices/04-sla-slo-sli.md"
   },
   {
     "id": 63,
@@ -501,39 +533,47 @@
     "title": "Disaster recovery",
     "resource_only": false,
     "path": "curriculum/09-reliability-and-microservices/05-disaster-recovery.md",
-    "url": "sources/karan/README.md#disaster-recovery"
+    "url": "curriculum/09-reliability-and-microservices/05-disaster-recovery.md"
   },
   {
     "id": 64,
     "category": "09-reliability-and-microservices",
     "title": "Consensus Algorithms",
-    "resource_only": true,
-    "path": null,
-    "url": "https://medium.com/@sourabhatta1819/consensus-in-distributed-system-ac79f8ba2b8c"
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/06-consensus-algorithms.md",
+    "url": "curriculum/09-reliability-and-microservices/06-consensus-algorithms.md",
+    "original_lesson": true,
+    "external_reference": "https://medium.com/@sourabhatta1819/consensus-in-distributed-system-ac79f8ba2b8c"
   },
   {
     "id": 65,
     "category": "09-reliability-and-microservices",
     "title": "Distributed Locking",
-    "resource_only": true,
-    "path": null,
-    "url": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/07-distributed-locking.md",
+    "url": "curriculum/09-reliability-and-microservices/07-distributed-locking.md",
+    "original_lesson": true,
+    "external_reference": "https://martin.kleppmann.com/2016/02/08/how-to-do-distributed-locking.html"
   },
   {
     "id": 66,
     "category": "09-reliability-and-microservices",
     "title": "Gossip Protocol",
-    "resource_only": true,
-    "path": null,
-    "url": "http://highscalability.com/blog/2023/7/16/gossip-protocol-explained.html"
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/08-gossip-protocol.md",
+    "url": "curriculum/09-reliability-and-microservices/08-gossip-protocol.md",
+    "original_lesson": true,
+    "external_reference": "http://highscalability.com/blog/2023/7/16/gossip-protocol-explained.html"
   },
   {
     "id": 67,
     "category": "09-reliability-and-microservices",
     "title": "Distributed Tracing",
-    "resource_only": true,
-    "path": null,
-    "url": "https://www.dynatrace.com/news/blog/what-is-distributed-tracing/"
+    "resource_only": false,
+    "path": "curriculum/09-reliability-and-microservices/09-distributed-tracing.md",
+    "url": "curriculum/09-reliability-and-microservices/09-distributed-tracing.md",
+    "original_lesson": true,
+    "external_reference": "https://www.dynatrace.com/news/blog/what-is-distributed-tracing/"
   },
   {
     "id": 68,
@@ -541,7 +581,7 @@
     "title": "SSL, TLS, mTLS",
     "resource_only": false,
     "path": "curriculum/10-security-and-location/01-ssl-tls-mtls.md",
-    "url": "sources/karan/README.md#ssl-tls-mtls"
+    "url": "curriculum/10-security-and-location/01-ssl-tls-mtls.md"
   },
   {
     "id": 69,
@@ -549,7 +589,7 @@
     "title": "OAuth 2.0 and OpenID Connect (OIDC)",
     "resource_only": false,
     "path": "curriculum/10-security-and-location/02-oauth-20-and-openid-connect-oidc.md",
-    "url": "sources/karan/README.md#oauth-20-and-openid-connect-oidc"
+    "url": "curriculum/10-security-and-location/02-oauth-20-and-openid-connect-oidc.md"
   },
   {
     "id": 70,
@@ -557,7 +597,7 @@
     "title": "Single Sign-On (SSO)",
     "resource_only": false,
     "path": "curriculum/10-security-and-location/03-single-sign-on-sso.md",
-    "url": "sources/karan/README.md#single-sign-on-sso"
+    "url": "curriculum/10-security-and-location/03-single-sign-on-sso.md"
   },
   {
     "id": 71,
@@ -565,6 +605,6 @@
     "title": "Geohashing and Quadtrees",
     "resource_only": false,
     "path": "curriculum/10-security-and-location/04-geohashing-and-quadtrees.md",
-    "url": "sources/karan/README.md#geohashing-and-quadtrees"
+    "url": "curriculum/10-security-and-location/04-geohashing-and-quadtrees.md"
   }
 ]
